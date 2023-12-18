@@ -42,8 +42,4 @@ module.exports = {
       },
     ],
   },
-  optimization: {
-    // consider removing this?
-    runtimeChunk: "single",
-  },
 };

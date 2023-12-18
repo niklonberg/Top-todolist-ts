@@ -3,13 +3,16 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   entry: {
-    index: "./src/index.js",
+    index: "./src/index.ts",
   }, // if you need more entrypoints, add them here
   mode: "development",
   output: {
     filename: "[name].bundle.js",
     path: path.resolve(__dirname, "dist"),
     clean: true, // cleans directory when we build
+  },
+  resolve: {
+    extensions: ["", ".webpack.js", ".web.js", ".ts", ".tsx", ".js"],
   },
   plugins: [
     // if you need more entry points, you would add new HtmlWebpackPlugins as needed
@@ -21,13 +24,22 @@ module.exports = {
       // scriptLoading: "defer", | if you set inject to head instead, this will improve page startup perf.
     }),
   ],
-  devtool: "inline-source-map",
+  devtool: "source-map",
   devServer: {
     static: "./dist",
     hot: true,
   },
   module: {
     rules: [
+      {
+        test: /\.tsx?$/,
+        loader: "ts-loader",
+      },
+      {
+        test: /\.js$/,
+        use: ["source-map-loader"],
+        enforce: "pre",
+      },
       {
         test: /\.css$/i,
         use: ["style-loader", "css-loader"],
@@ -39,6 +51,11 @@ module.exports = {
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
         type: "asset/resource",
+      },
+      {
+        test: /\.ts?$/,
+        use: "ts-loader",
+        exclude: /node_modules/,
       },
     ],
   },

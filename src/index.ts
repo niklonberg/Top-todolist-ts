@@ -4,7 +4,7 @@ import sayHi from "./components/modules/sayHi";
 const { log } = console;
 log("hello world");
 
-function component() {
+function component(): void {
   const p = document.createElement("p");
   p.textContent = "Hi there";
 

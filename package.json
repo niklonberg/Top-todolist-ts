@@ -6,7 +6,8 @@
   "scripts": {
     "build": "webpack",
     "watch": "webpack --watch",
-    "serve": "webpack serve --open"
+    "serve": "webpack serve --open",
+    "eslint": "eslint src/index.ts"
   },
   "repository": {
     "type": "git",

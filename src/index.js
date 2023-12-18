@@ -1,5 +1,5 @@
 import "./index.css";
-import sayHi from "./components/js/sayHi";
+import sayHi from "./components/modules/sayHi";
 
 const { log } = console;
 log("hello world");

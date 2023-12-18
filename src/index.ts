@@ -1,18 +1,20 @@
-import "./index.css";
-import sayHi from "./components/modules/sayHi";
+import './index.css';
+import sayHi from './components/modules/sayHi';
 
 const { log } = console;
-log("hello world");
+log('hello world');
 
-function component(): void {
-  const p = document.createElement("p");
-  p.textContent = "Hi there";
+function component() {
+  const p = document.createElement('p');
+  p.textContent = 'Hi there';
 
-  p.classList.add("hello");
+  p.classList.add('hello');
 
   return p;
 }
 
 document.body.appendChild(component());
 
-sayHi("Buddy");
+sayHi('Buddy');
+
+const unusedVariable = 'Hello, world!';

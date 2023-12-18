@@ -1,60 +1,60 @@
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: {
-    index: "./src/index.ts",
+    index: './src/index.ts',
   }, // if you need more entrypoints, add them here
-  mode: "development",
+  mode: 'development',
   output: {
-    filename: "[name].bundle.js",
-    path: path.resolve(__dirname, "dist"),
+    filename: '[name].bundle.js',
+    path: path.resolve(__dirname, 'dist'),
     clean: true, // cleans directory when we build
   },
   resolve: {
-    extensions: ["", ".webpack.js", ".web.js", ".ts", ".tsx", ".js"],
+    extensions: ['', '.webpack.js', '.web.js', '.ts', '.tsx', '.js'],
   },
   plugins: [
     // if you need more entry points, you would add new HtmlWebpackPlugins as needed
     new HtmlWebpackPlugin({
-      title: "Change Me In Webpack.config",
-      template: "./src/index-template.html",
-      filename: "index.html", // specify name om html file
-      inject: "body", // injects js/ts files into end of body,
+      title: 'Todolist Typescript',
+      template: './src/index-template.html',
+      filename: 'index.html', // specify name om html file
+      inject: 'body', // injects js/ts files into end of body,
       // scriptLoading: "defer", | if you set inject to head instead, this will improve page startup perf.
     }),
   ],
-  devtool: "source-map",
+  devtool: 'source-map',
   devServer: {
-    static: "./dist",
+    static: './dist',
     hot: true,
   },
   module: {
     rules: [
       {
         test: /\.tsx?$/,
-        loader: "ts-loader",
+        loader: 'ts-loader',
       },
       {
         test: /\.js$/,
-        use: ["source-map-loader"],
-        enforce: "pre",
+        use: ['source-map-loader'],
+        enforce: 'pre',
       },
       {
         test: /\.css$/i,
-        use: ["style-loader", "css-loader"],
+        use: ['style-loader', 'css-loader'],
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
-        type: "asset/resource",
+        type: 'asset/resource',
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
-        type: "asset/resource",
+        type: 'asset/resource',
       },
       {
         test: /\.ts?$/,
-        use: "ts-loader",
+        use: 'ts-loader',
         exclude: /node_modules/,
       },
     ],

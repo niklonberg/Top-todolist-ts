@@ -16,5 +16,4 @@ function component() {
 document.body.appendChild(component());
 
 sayHi('Buddy');
-
-const unusedVariable = 'Hello, world!';
+sayHi('friend');

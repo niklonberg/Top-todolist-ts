@@ -37,9 +37,8 @@ interface Project {
 // will this module know of the existance of a todo interface if it doesnt import it?
 
 // what is this object it gets below? It has a string title certainly, anything else?
+let projectIDCounter = 0;
 function ProjectFactory(object: { title: string }): Project {
-  let projectIDCounter = 0;
-
   const project: Project = {
     title: object.title,
     projectID: projectIDCounter,

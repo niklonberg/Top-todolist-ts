@@ -4,7 +4,7 @@ const sharedMethods = {
     return this.todos;
   },
 
-  getTodo(todoID) {
+  getTodo(todoID: number) {
     return this.todos.find((todo) => todo.todoID === todoID);
   },
 
@@ -12,11 +12,11 @@ const sharedMethods = {
     this.todos.push(todo);
   },
 
-  removeTodo(todoID): void {
+  removeTodo(todoID: number): void {
     this.todos = this.todos.filter((todo) => todo.todoID !== todoID);
   },
 
-  toggleTodoBoolProperty(todoID, todoProperty): void {
+  toggleTodoBoolProperty(todoID: number, todoProperty): void {
     const targetTodo = this.getTodo(todoID);
     targetTodo[todoProperty] = !targetTodo[todoProperty];
   },
@@ -36,14 +36,15 @@ interface Project {
 // if i define a todo interface in TodoFactory, can i use it in this module?
 // will this module know of the existance of a todo interface if it doesnt import it?
 
-// what is this object it gets below? It has a string title certainly, anything else?
+// templateObj differs when it is fed into projectfactory or todofactory
+
 let projectIDCounter = 0;
 function ProjectFactory(templateObj: { title: string }): Project {
   const project: Project = {
-    title: templateObj.title,
     projectID: projectIDCounter,
+    title: templateObj.title,
     isSelected: false,
-    todos: [], // should be todo object
+    todos: [], // should be todo objects only allowed inside
   };
 
   // use object.setPrototypeOf to assign methods to protoype, to avoid duplication

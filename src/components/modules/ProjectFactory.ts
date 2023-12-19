@@ -36,7 +36,8 @@ interface Project {
 // if i define a todo interface in TodoFactory, can i use it in this module?
 // will this module know of the existance of a todo interface if it doesnt import it?
 
-// templateObj differs when it is fed into projectfactory or todofactory
+// templateObj is different when it is fed into projectfactory or todofactory
+// here it only has a title property
 
 let projectIDCounter = 0;
 function ProjectFactory(templateObj: { title: string }): Project {

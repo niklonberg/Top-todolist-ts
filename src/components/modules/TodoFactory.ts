@@ -6,6 +6,9 @@ interface Todo {
   isCompleted: boolean;
 }
 
+// templateObj is different when it is fed into projectfactory or todofactory
+// here it has title, isImportant, dueDate and optionally a description
+
 let todoIDCounter = 0;
 function TodoFactory(templateObj: {
   title: string;
@@ -29,13 +32,3 @@ function TodoFactory(templateObj: {
 }
 
 export default TodoFactory;
-
-/* loops through each key in argumentobj */
-/* returns {} with key:value pairs */
-/* title */
-/* description */
-/* dueDate */
-/* priority */
-/* notes */
-/* checklist (sub steps) */
-/* maybe add methods to the objects as well? */

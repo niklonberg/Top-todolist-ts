@@ -39,7 +39,7 @@ interface Project {
 // templateObj is different when it is fed into projectfactory or todofactory
 // here it only has a title property
 
-let projectIDCounter = 0;
+let projectIDCounter: number = 0;
 function ProjectFactory(templateObj: { title: string }): Project {
   const project: Project = {
     projectID: projectIDCounter,

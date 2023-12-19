@@ -1,6 +1,10 @@
 import './index.css';
 
+import createElement from './components/modules/createElement.ts';
+
 const { log } = console;
+
+document.body.appendChild(createElement('p', 'p-test', 'p-id'));
 
 /* log(ProjectManager);
 
@@ -21,7 +25,7 @@ ProjectManager.addTodoToCurrSelectedProject({
 });
 ProjectManager.setSelectedProject(1);
 ProjectManager.addTodoToCurrSelectedProject({
-  title: "buy paint",
+  // title: "buy paint",
   description:
     "mix it well before applying super long description just to make life annoying and harder and really push myself to handle extreme edge cases",
 });

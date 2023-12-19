@@ -1,15 +1,22 @@
 interface Todo {
   todoID: number;
+  title: string;
   isCompleted: boolean;
   isImportant: boolean;
 }
 
 let todoIDCounter = 0;
-function TodoFactory(obj): Todo {
-  const todo = {};
-  todo.todoID = todoIDCounter;
-  todo.isCompleted = false;
-  todo.isImportant = false;
+function TodoFactory(templateObj: {
+  title: string;
+  isImportant: boolean;
+  dueDate: string | Date;
+}): Todo {
+  const todo = {
+    todoID: todoIDCounter,
+    title: templateObj.title,
+    isCompleted: false,
+    isImportant: false,
+  };
 
   // how do i make an interface work with optional properties/keys below?
 

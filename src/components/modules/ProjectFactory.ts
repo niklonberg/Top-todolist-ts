@@ -27,8 +27,8 @@ const sharedMethods = {
 };
 
 interface Project {
-  title: string;
   projectID: number;
+  title: string;
   isSelected: boolean;
   todos: object[]; // should be todo object, object seems too vague
 }
@@ -38,9 +38,9 @@ interface Project {
 
 // what is this object it gets below? It has a string title certainly, anything else?
 let projectIDCounter = 0;
-function ProjectFactory(object: { title: string }): Project {
+function ProjectFactory(templateObj: { title: string }): Project {
   const project: Project = {
-    title: object.title,
+    title: templateObj.title,
     projectID: projectIDCounter,
     isSelected: false,
     todos: [], // should be todo object

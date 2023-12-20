@@ -1,5 +1,6 @@
-import ProjectFactory, { Project } from './ProjectFactory';
 import FormTemplateObj from './utils/FormTemplateObjType';
+import ProjectFactory, { Project } from './ProjectFactory';
+import TodoFactory from './TodoFactory';
 /* import parse from "date-fns/parse"; */
 /* import { isToday } from "date-fns"; */
 
@@ -15,27 +16,28 @@ const ProjectManager = (() => {
   };
 
   // am reassigning projects, is that bad practice?
-  const removeSelectedProject = (projectID: number) =>
-    (projects = projects.filter((project) => project.projectID !== projectID));
+  const removeSelectedProject = (projectID: number) => {
+    projects = projects.filter((project) => project.projectID !== projectID);
+  };
 
-  const getProject = (projectID) =>
+  const getProject = (projectID: number) =>
     projects.find((project) => project.projectID === projectID);
 
   const getProjects = () => projects;
 
-  const getProjectFromTodoID = (todoID) =>
+  const getProjectFromTodoID = (todoID: number) =>
     projects.find((project) => project.getTodo(todoID));
 
   /* currSelectedProject operations */
   const getCurrSelectedProjectTodos = () => currSelectedProj.getTodos();
 
-  const setSelectedProject = (projectID) => {
+  const deselectCurrProject = () => currSelectedProj?.toggleSelected();
+
+  const setSelectedProject = (projectID: number) => {
     deselectCurrProject();
     currSelectedProj = getProject(projectID);
     currSelectedProj.toggleSelected();
   };
-
-  const deselectCurrProject = () => currSelectedProj?.toggleSelected();
 
   const addTodoToCurrSelectedProject = (inputElements) => {
     const todo = TodoFactory(inputElements);
@@ -73,10 +75,10 @@ const ProjectManager = (() => {
     }
   };
 
-  const getFilteredTasks = (listGroupSelectionID = 'all-tasks') => {
+  /* const getFilteredTasks = (listGroupSelectionID = 'all-tasks') => {
     if (listGroupSelectionID === 'all-tasks')
       return projects.flatMap((project) => project.getTodos());
-    /* am i even using dates properly? */
+    // am i even using dates properly?
     if (listGroupSelectionID === 'today-tasks') {
       return projects.flatMap((project) =>
         project.getTodos().filter((todo) => {
@@ -96,7 +98,7 @@ const ProjectManager = (() => {
       );
     }
   };
-
+ */
   return {
     addProject,
     removeSelectedProject,
@@ -110,7 +112,7 @@ const ProjectManager = (() => {
     editItem,
     getSelectedItem,
     toggleSelectedTodoProperty,
-    getFilteredTasks,
+    // getFilteredTasks,
   };
 })();
 

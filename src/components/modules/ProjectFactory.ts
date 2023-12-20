@@ -1,4 +1,5 @@
 import { Todo } from './TodoFactory';
+import FormTemplateObj from './utils/FormTemplateObjType';
 
 export interface Project {
   projectID: number;
@@ -6,6 +7,15 @@ export interface Project {
   isSelected: boolean;
   todos: Todo[]; // specify this is an array of only Todo's
 }
+
+/* interface SharedMethods {
+  getTodos(): Todo[];
+  getTodo(todoID: number): Todo | undefined;
+  addTodo(todo: Todo): void;
+  removeTodo(todoID: number): void;
+  toggleTodoBoolProperty(todoID: number, todoProperty: string): void;
+  toggleSelected(): void;
+} */
 
 // TODO: set types for methods
 const sharedMethods = {
@@ -42,7 +52,7 @@ const sharedMethods = {
 // here it only has a title property
 
 let projectIDCounter: number = 0;
-function ProjectFactory(templateObj: { title: string }): Project {
+function ProjectFactory(templateObj: FormTemplateObj): Project {
   const project: Project = {
     projectID: projectIDCounter,
     title: templateObj.title,

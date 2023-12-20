@@ -1,3 +1,5 @@
+import FormTemplateObj from './utils/FormTemplateObjType';
+
 export interface Todo {
   todoID: number;
   title: string;
@@ -10,11 +12,7 @@ export interface Todo {
 // here it has title, isImportant, dueDate and optionally a description
 
 let todoIDCounter: number = 0;
-function TodoFactory(templateObj: {
-  title: string;
-  isImportant: boolean;
-  dueDate: string | Date;
-}): Todo {
+function TodoFactory(templateObj: FormTemplateObj): Todo {
   const todo = {
     todoID: todoIDCounter,
     title: templateObj.title,

@@ -1,11 +1,11 @@
 {
   "compilerOptions": {
-    "allowImportingTsExtensions": true,
-    "noEmit": true,
-    "outDir": "./built",
+    "outDir": "dist",
     "allowJs": true,
-    "target": "es5",
-    "sourceMap": true
+    "target": "ES6",
+    "sourceMap": true,
+    "module": "es2015",
+    "esModuleInterop": true
   },
   "include": ["./src/**/*"]
 }

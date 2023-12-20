@@ -12,7 +12,7 @@ module.exports = {
     clean: true, // cleans directory when we build
   },
   resolve: {
-    extensions: ['', '.webpack.js', '.web.js', '.ts', '.tsx', '.js'],
+    extensions: ['.ts', '.js'],
   },
   plugins: [
     // if you need more entry points, you would add new HtmlWebpackPlugins as needed

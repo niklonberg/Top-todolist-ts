@@ -1,10 +1,30 @@
-import { Project } from './ProjectFactory';
+import ProjectFactory, { Project } from './ProjectFactory';
+import FormTemplateObj from './utils/FormTemplateObjType';
 /* import parse from "date-fns/parse"; */
 /* import { isToday } from "date-fns"; */
 
 const ProjectManager = (() => {
   let projects: Project[] = [];
-  let currSelectedProj;
+  let currSelectedProj: Project;
+
+  /* project operations */
+  const addProject = (templateObj: FormTemplateObj) => {
+    const project = ProjectFactory(templateObj);
+    projects.push(project);
+    return project;
+  };
+
+  // am reassigning projects, is that bad practice?
+  const removeSelectedProject = (projectID: number) =>
+    (projects = projects.filter((project) => project.projectID !== projectID));
+
+  const getProject = (projectID) =>
+    projects.find((project) => project.projectID === projectID);
+
+  const getProjects = () => projects;
+
+  const getProjectFromTodoID = (todoID) =>
+    projects.find((project) => project.getTodo(todoID));
 
   /* currSelectedProject operations */
   const getCurrSelectedProjectTodos = () => currSelectedProj.getTodos();
@@ -22,24 +42,6 @@ const ProjectManager = (() => {
     currSelectedProj.addTodo(todo);
     return todo;
   };
-
-  /* project operations */
-  const addProject = (projectTitle) => {
-    const project = ProjectFactory(projectTitle);
-    projects.push(project);
-    return project;
-  };
-
-  const removeSelectedProject = (projectID) =>
-    (projects = projects.filter((project) => project.projectID !== projectID));
-
-  const getProject = (projectID) =>
-    projects.find((project) => project.projectID === projectID);
-
-  const getProjects = () => projects;
-
-  const getProjectFromTodoID = (todoID) =>
-    projects.find((project) => project.getTodo(todoID));
 
   /* todo operations */
   const getSelectedTodo = (todoID) =>

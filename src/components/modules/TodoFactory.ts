@@ -26,7 +26,7 @@ function TodoFactory(templateObj: {
   // how do i make this work if templateObj has the description key?
   /* if (templateObj.hasOwnProperty('description'))
     todo.description = templateObj.description; */
-  // if i uncomment the above, an error should happen
+  // if i uncomment the above, an error occurs
 
   todoIDCounter += 1;
   return todo;

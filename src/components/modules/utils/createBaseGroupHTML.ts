@@ -1,5 +1,6 @@
 import createElement from './createElement';
 
+// not happy with this. It feels too specific
 function createBaseGroupHTML(listGroupSelection: HTMLLIElement) {
   const h1: HTMLHeadingElement = createElement(
     'h1',

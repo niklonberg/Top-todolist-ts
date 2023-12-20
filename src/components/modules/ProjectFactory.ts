@@ -1,6 +1,6 @@
 import { Todo } from './TodoFactory';
 
-interface Project {
+export interface Project {
   projectID: number;
   title: string;
   isSelected: boolean;

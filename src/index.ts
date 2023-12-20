@@ -1,14 +1,6 @@
 import './index.css';
 
-import createElement from './components/modules/createElement';
-import ProjectFactory from './components/modules/ProjectFactory';
-
-const p = createElement('p', 'p-test', 'p-id');
-p.textContent = 'hello';
 const { log } = console;
-log(p);
-document.body.appendChild(p);
-log(ProjectFactory);
 
 /* log(ProjectManager);
 

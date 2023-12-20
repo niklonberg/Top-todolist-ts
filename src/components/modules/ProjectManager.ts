@@ -1,8 +1,9 @@
+import { Project } from './ProjectFactory';
 /* import parse from "date-fns/parse"; */
 /* import { isToday } from "date-fns"; */
 
 const ProjectManager = (() => {
-  let projects = [];
+  let projects: Project[] = [];
   let currSelectedProj;
 
   /* currSelectedProject operations */

@@ -1,6 +1,7 @@
 import './index.css';
 
 const { log } = console;
+log('hello');
 
 /* log(ProjectManager);
 

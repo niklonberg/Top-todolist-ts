@@ -3,6 +3,7 @@ function createElement(
   classname: string = '',
   id: string = '',
 ) {
+  // missing return type above
   const ele = document.createElement(type);
   if (classname) ele.classList.add(classname);
   if (id) ele.setAttribute('id', id);

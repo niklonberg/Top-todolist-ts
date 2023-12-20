@@ -1,3 +1,12 @@
+import { Todo } from './TodoFactory';
+
+interface Project {
+  projectID: number;
+  title: string;
+  isSelected: boolean;
+  todos: Todo[]; // specify this is an array of only Todo's
+}
+
 // TODO: set types for methods
 const sharedMethods = {
   getTodos() {
@@ -5,15 +14,15 @@ const sharedMethods = {
   },
 
   getTodo(todoID: number) {
-    return this.todos.find((todo) => todo.todoID === todoID);
+    return this.todos.find((todo: Todo) => todo.todoID === todoID);
   },
 
-  addTodo(todo): void {
+  addTodo(todo: Todo): void {
     this.todos.push(todo);
   },
 
   removeTodo(todoID: number): void {
-    this.todos = this.todos.filter((todo) => todo.todoID !== todoID);
+    this.todos = this.todos.filter((todo: Todo) => todo.todoID !== todoID);
   },
 
   toggleTodoBoolProperty(todoID: number, todoProperty): void {
@@ -25,13 +34,6 @@ const sharedMethods = {
     this.isSelected = !this.isSelected;
   },
 };
-
-interface Project {
-  projectID: number;
-  title: string;
-  isSelected: boolean;
-  todos: object[]; // should be todo object, object seems too vague
-}
 
 // if i define a todo interface in TodoFactory, can i use it in this module?
 // will this module know of the existance of a todo interface if it doesnt import it?

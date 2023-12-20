@@ -1,4 +1,4 @@
-interface Todo {
+export interface Todo {
   todoID: number;
   title: string;
   dueDate: string | Date;

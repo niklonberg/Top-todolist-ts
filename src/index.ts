@@ -2,7 +2,6 @@ import './index.css';
 import ProjectManager from './components/modules/ProjectManager';
 
 const { log } = console;
-log('hello');
 
 log(ProjectManager);
 

@@ -5,19 +5,10 @@ export interface Project {
   projectID: number;
   title: string;
   isSelected: boolean;
-  todos: Todo[]; // specify this is an array of only Todo's
+  todos: Todo[];
 }
 
-/* interface SharedMethods {
-  getTodos(): Todo[];
-  getTodo(todoID: number): Todo | undefined;
-  addTodo(todo: Todo): void;
-  removeTodo(todoID: number): void;
-  toggleTodoBoolProperty(todoID: number, todoProperty: string): void;
-  toggleSelected(): void;
-} */
-
-// TODO: set types for methods
+// TODO: set types for all methods
 const sharedMethods = {
   getTodos() {
     return this.todos;
@@ -45,9 +36,6 @@ const sharedMethods = {
   },
 };
 
-// if i define a todo interface in TodoFactory, can i use it in this module?
-// will this module know of the existance of a todo interface if it doesnt import it?
-
 // templateObj is different when it is fed into projectfactory or todofactory
 // here it only has a title property
 
@@ -57,7 +45,7 @@ function ProjectFactory(templateObj: FormTemplateObj): Project {
     projectID: projectIDCounter,
     title: templateObj.title,
     isSelected: false,
-    todos: [], // should be todo objects only allowed inside
+    todos: [],
   };
 
   // use object.setPrototypeOf to assign methods to protoype, to avoid duplication

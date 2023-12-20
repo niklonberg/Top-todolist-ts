@@ -46,10 +46,10 @@ const ProjectManager = (() => {
   };
 
   /* todo operations */
-  const getSelectedTodo = (todoID) =>
+  const getSelectedTodo = (todoID: number) =>
     getProjectFromTodoID(todoID).getTodo(todoID);
 
-  const removeSelectedTodo = (todoID) =>
+  const removeSelectedTodo = (todoID: number) =>
     getProjectFromTodoID(todoID).removeTodo(todoID);
 
   /* edit operations */
@@ -73,6 +73,7 @@ const ProjectManager = (() => {
     if (objectType === 'todo') {
       return getSelectedTodo(ID);
     }
+    return null;
   };
 
   /* const getFilteredTasks = (listGroupSelectionID = 'all-tasks') => {

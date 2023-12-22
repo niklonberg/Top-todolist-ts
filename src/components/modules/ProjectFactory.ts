@@ -1,13 +1,14 @@
 import { Todo } from './TodoFactory';
 import FormTemplateObj from './utils/FormTemplateObjType';
 
+/* eslint-disable */ //eslint complains about unused variables, hence the eslint-disable
 interface SharedMethods {
-  getTodos(): any;
-  getTodo(): any;
+  getTodos(): Todo[];
+  getTodo(todoID: number): Todo;
   addTodo(todo: Todo): void;
-  removeTodo(): any;
-  toggleTodoBoolProperty(): any;
-  toggleSelected(): any;
+  removeTodo(todoID: number): void;
+  toggleTodoBoolProperty(todoID: number, todoProperty: string): void;
+  toggleSelected(): void;
 }
 
 export interface Project extends SharedMethods {
@@ -34,7 +35,7 @@ const sharedMethods: SharedMethods = {
     this.todos = this.todos.filter((todo: Todo) => todo.todoID !== todoID);
   },
 
-  toggleTodoBoolProperty(todoID: number, todoProperty): void {
+  toggleTodoBoolProperty(todoID: number, todoProperty: string): void {
     const targetTodo = this.getTodo(todoID);
     targetTodo[todoProperty] = !targetTodo[todoProperty];
   },
@@ -43,9 +44,6 @@ const sharedMethods: SharedMethods = {
     this.isSelected = !this.isSelected;
   },
 };
-
-// templateObj is different when it is fed into projectfactory or todofactory
-// here it only has a title property
 
 let projectIDCounter: number = 0;
 function ProjectFactory(templateObj: FormTemplateObj): Project {
@@ -62,15 +60,5 @@ function ProjectFactory(templateObj: FormTemplateObj): Project {
   projectIDCounter += 1;
   return project;
 }
-
-const projectOne = ProjectFactory({ title: 'MyTitle' });
-projectOne.addTodo({
-  title: 'Wash floor',
-  todoID: 1,
-  dueDate: 'No due date',
-  isImportant: false,
-  isCompleted: false,
-});
-projectOne.getTodos();
 
 export default ProjectFactory;

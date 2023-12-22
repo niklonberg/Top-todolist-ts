@@ -15,7 +15,6 @@ const ProjectManager = (() => {
     return project;
   };
 
-  // am reassigning projects, is that bad practice?
   const removeSelectedProject = (projectID: number) => {
     projects = projects.filter((project) => project.projectID !== projectID);
   };

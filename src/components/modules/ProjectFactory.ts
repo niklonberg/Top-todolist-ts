@@ -1,15 +1,23 @@
 import { Todo } from './TodoFactory';
 import FormTemplateObj from './utils/FormTemplateObjType';
 
-export interface Project {
+interface SharedMethods {
+  getTodos(): any;
+  getTodo(): any;
+  addTodo(todo: Todo): void;
+  removeTodo(): any;
+  toggleTodoBoolProperty(): any;
+  toggleSelected(): any;
+}
+
+export interface Project extends SharedMethods {
   projectID: number;
   title: string;
   isSelected: boolean;
   todos: Todo[];
 }
 
-// TODO: set types for all methods
-const sharedMethods = {
+const sharedMethods: SharedMethods = {
   getTodos() {
     return this.todos;
   },
@@ -54,5 +62,15 @@ function ProjectFactory(templateObj: FormTemplateObj): Project {
   projectIDCounter += 1;
   return project;
 }
+
+const projectOne = ProjectFactory({ title: 'MyTitle' });
+projectOne.addTodo({
+  title: 'Wash floor',
+  todoID: 1,
+  dueDate: 'No due date',
+  isImportant: false,
+  isCompleted: false,
+});
+projectOne.getTodos();
 
 export default ProjectFactory;

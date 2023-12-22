@@ -11,7 +11,7 @@ export interface Todo {
 
 let todoIDCounter: number = 0;
 function TodoFactory(templateObj: FormTemplateObj): Todo {
-  const todo = {
+  const todo: Todo = {
     todoID: todoIDCounter,
     title: templateObj.title,
     dueDate: templateObj.dueDate,

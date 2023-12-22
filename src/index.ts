@@ -1,5 +1,5 @@
 import './index.css';
-import createElement from './components/modules/createElement';
+import createElement from './components/modules/utils/createElement';
 import ProjectFactory from './components/modules/ProjectFactory';
 import TodoFactory from './components/modules/TodoFactory';
 

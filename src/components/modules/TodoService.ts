@@ -1,5 +1,4 @@
-// TODO: set types for methods
-const sharedMethods = {
+const TodoService = {
   getTodos() {
     return this.todos;
   },

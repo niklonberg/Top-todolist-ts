@@ -1,7 +1,7 @@
 import './index.css';
-
 import createElement from './components/modules/createElement';
 import ProjectFactory from './components/modules/ProjectFactory';
+import TodoFactory from './components/modules/TodoFactory';
 
 const p = createElement('p', 'p-test', 'p-id');
 p.textContent = 'hello';
@@ -9,6 +9,15 @@ const { log } = console;
 log(p);
 document.body.appendChild(p);
 log(ProjectFactory);
+
+const todo = TodoFactory({ title: 'Paint Walls', isImportant: true });
+log(todo);
+const todoTwo = TodoFactory({
+  title: 'Paint Bedroom',
+  isImportant: false,
+  description: 'Hi mom',
+});
+log(todoTwo);
 
 /* log(ProjectManager);
 

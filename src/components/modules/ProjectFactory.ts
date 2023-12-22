@@ -1,55 +1,21 @@
-// TODO: set types for methods
-const sharedMethods = {
-  getTodos() {
-    return this.todos;
-  },
+import { Todo } from './TodoFactory';
+import FormTemplateObj from './utils/FormTemplateObj';
 
-  getTodo(todoID: number) {
-    return this.todos.find((todo) => todo.todoID === todoID);
-  },
-
-  addTodo(todo): void {
-    this.todos.push(todo);
-  },
-
-  removeTodo(todoID: number): void {
-    this.todos = this.todos.filter((todo) => todo.todoID !== todoID);
-  },
-
-  toggleTodoBoolProperty(todoID: number, todoProperty): void {
-    const targetTodo = this.getTodo(todoID);
-    targetTodo[todoProperty] = !targetTodo[todoProperty];
-  },
-
-  toggleSelected(): void {
-    this.isSelected = !this.isSelected;
-  },
-};
-
-interface Project {
+export interface Project {
   projectID: number;
   title: string;
   isSelected: boolean;
-  todos: object[]; // should be todo object, object seems too vague
+  todos: Todo[];
 }
 
-// if i define a todo interface in TodoFactory, can i use it in this module?
-// will this module know of the existance of a todo interface if it doesnt import it?
-
-// templateObj is different when it is fed into projectfactory or todofactory
-// here it only has a title property
-
 let projectIDCounter: number = 0;
-function ProjectFactory(templateObj: { title: string }): Project {
+function ProjectFactory(templateObj: FormTemplateObj): Project {
   const project: Project = {
     projectID: projectIDCounter,
     title: templateObj.title,
     isSelected: false,
-    todos: [], // should be todo objects only allowed inside
+    todos: [],
   };
-
-  // use object.setPrototypeOf to assign methods to protoype, to avoid duplication
-  Object.setPrototypeOf(project, sharedMethods);
 
   projectIDCounter += 1;
   return project;

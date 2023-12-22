@@ -1,32 +1,24 @@
-interface Todo {
+import FormTemplateObj from './utils/FormTemplateObj';
+
+export interface Todo {
   todoID: number;
   title: string;
   dueDate: string | Date;
   isImportant: boolean;
   isCompleted: boolean;
+  description?: string;
 }
 
-// templateObj is different when it is fed into projectfactory or todofactory
-// here it has title, isImportant, dueDate and optionally a description
-
 let todoIDCounter: number = 0;
-function TodoFactory(templateObj: {
-  title: string;
-  isImportant: boolean;
-  dueDate: string | Date;
-}): Todo {
+function TodoFactory(templateObj: FormTemplateObj): Todo {
   const todo = {
     todoID: todoIDCounter,
     title: templateObj.title,
     dueDate: templateObj.dueDate,
     isImportant: templateObj.isImportant,
     isCompleted: false,
+    description: templateObj.description,
   };
-
-  // how do i make this work if templateObj has the description key?
-  /* if (templateObj.hasOwnProperty('description'))
-    todo.description = templateObj.description; */
-  // if i uncomment the above, an error should happen
 
   todoIDCounter += 1;
   return todo;

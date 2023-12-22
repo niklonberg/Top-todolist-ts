@@ -24,7 +24,7 @@ module.exports = {
       // scriptLoading: "defer", | if you set inject to head instead, this will improve page startup perf.
     }),
   ],
-  devtool: 'source-map',
+  devtool: 'inline-source-map',
   devServer: {
     static: './dist',
     hot: true,

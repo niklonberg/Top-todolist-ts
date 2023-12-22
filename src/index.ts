@@ -1,11 +1,19 @@
 import './index.css';
-import ProjectManager from './components/modules/ProjectManager';
+// import ProjectManager from './components/modules/ProjectManager';
+import TodoFactory from './components/modules/TodoFactory';
+import FormTemplateObj from './components/modules/utils/FormTemplateObj';
 
 const { log } = console;
 
-/* log(ProjectManager);
+const templateTodo: FormTemplateObj = {
+  title: 'Wash floor',
+};
 
-ProjectManager.addProject({
+const todoOne = TodoFactory(templateTodo);
+log(todoOne);
+// const todoOne = TodoFactory({ title: 'Wash floor' });
+// console.log(todoOne);
+/* ProjectManager.addProject({
   title: 'Refurnish Homedfgvdfgdfgdfgdfgdfgdfgsdefsdf',
 });
 ProjectManager.addProject({ title: 'Paint Walls' });

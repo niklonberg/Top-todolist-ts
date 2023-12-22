@@ -1,4 +1,4 @@
-import FormTemplateObj from './utils/FormTemplateObjType';
+import FormTemplateObj from './utils/FormTemplateObj';
 
 export interface Todo {
   todoID: number;

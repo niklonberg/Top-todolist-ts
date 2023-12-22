@@ -1,4 +1,4 @@
-import FormTemplateObj from './utils/FormTemplateObjType';
+import FormTemplateObj from './utils/FormTemplateObj';
 import ProjectFactory, { Project } from './ProjectFactory';
 import TodoFactory from './TodoFactory';
 /* import parse from "date-fns/parse"; */

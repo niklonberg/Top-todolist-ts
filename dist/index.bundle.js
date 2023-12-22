@@ -469,31 +469,6 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
        /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_index_css__WEBPACK_IMPORTED_MODULE_6__["default"] && _node_modules_css_loader_dist_cjs_js_index_css__WEBPACK_IMPORTED_MODULE_6__["default"].locals ? _node_modules_css_loader_dist_cjs_js_index_css__WEBPACK_IMPORTED_MODULE_6__["default"].locals : undefined);
 
 
-/***/ }),
-
-/***/ "./src/components/modules/createElement.ts":
-/*!*************************************************!*\
-  !*** ./src/components/modules/createElement.ts ***!
-  \*************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-function createElement(type = 'div', classname = '', id = '') {
-    const ele = document.createElement(type);
-    if (classname)
-        ele.classList.add(classname);
-    if (id)
-        ele.setAttribute('id', id);
-    return ele; // how can i get this to return the correct type?
-    // so if it has an li element we create, the type is set correctly to HTMLLIElement
-    // at the moment it is just HTMLElement returned it looks like
-}
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (createElement);
-
-
 /***/ })
 
 /******/ 	});
@@ -577,42 +552,38 @@ var __webpack_exports__ = {};
   \**********************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _index_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index.css */ "./src/index.css");
-/* harmony import */ var _components_modules_createElement__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/modules/createElement */ "./src/components/modules/createElement.ts");
-
 
 const { log } = console;
-log('hello');
-document.body.appendChild((0,_components_modules_createElement__WEBPACK_IMPORTED_MODULE_1__["default"])('p', 'p-test', 'p-id'));
 /* log(ProjectManager);
 
 ProjectManager.addProject({
-  title: "Refurnish Homedfgvdfgdfgdfgdfgdfgdfgsdefsdf",
+  title: 'Refurnish Homedfgvdfgdfgdfgdfgdfgdfgsdefsdf',
 });
-ProjectManager.addProject({ title: "Paint Walls" });
+ProjectManager.addProject({ title: 'Paint Walls' });
 ProjectManager.setSelectedProject(0);
 ProjectManager.addTodoToCurrSelectedProject({
-  title: "move sofa",
-  description: "lift dont drag",
+  title: 'move sofa',
+  description: 'lift dont drag',
   dueDate: new Date(2023, 11, 15),
 });
 ProjectManager.addTodoToCurrSelectedProject({
-  title: "move table",
-  description: "drag it roughly",
-  dueDate: "No Due Date",
+  title: 'move table',
+  description: 'drag it roughly',
+  dueDate: 'No Due Date',
 });
 ProjectManager.setSelectedProject(1);
 ProjectManager.addTodoToCurrSelectedProject({
   // title: "buy paint",
   description:
-    "mix it well before applying super long description just to make life annoying and harder and really push myself to handle extreme edge cases",
+    'mix it well before applying super long description just to make life annoying and harder and really push myself to handle extreme edge cases',
 });
 ProjectManager.addTodoToCurrSelectedProject({
-  title: "buy brush",
+  title: 'buy brush',
   dueDate: new Date(2023, 11, 12),
 });
-log(ProjectManager.getProjects());
-TodoUIManager.renderProjectsList("projects");
-TodoUIManager.renderSelectedGroup(); */
+log(ProjectManager.getProjects()); */
+// TodoUIManager.renderProjectsList("projects");
+// TodoUIManager.renderSelectedGroup();
 
 })();
 

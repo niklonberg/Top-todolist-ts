@@ -3,7 +3,7 @@ import ProjectManager from './components/modules/ProjectManager';
 
 const { log } = console;
 
-log(ProjectManager);
+/* log(ProjectManager);
 
 ProjectManager.addProject({
   title: 'Refurnish Homedfgvdfgdfgdfgdfgdfgdfgsdefsdf',
@@ -30,6 +30,6 @@ ProjectManager.addTodoToCurrSelectedProject({
   title: 'buy brush',
   dueDate: new Date(2023, 11, 12),
 });
-log(ProjectManager.getProjects());
+log(ProjectManager.getProjects()); */
 // TodoUIManager.renderProjectsList("projects");
 // TodoUIManager.renderSelectedGroup();

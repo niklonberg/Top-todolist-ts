@@ -1,12 +1,4 @@
-import { Todo } from './TodoFactory';
-import FormTemplateObj from './utils/FormTemplateObj';
-
-export interface Project {
-  projectID: number;
-  title: string;
-  isSelected: boolean;
-  todos: Todo[];
-}
+import { FormTemplateObj, Project } from './utils/interfaces';
 
 let projectIDCounter: number = 0;
 function ProjectFactory(templateObj: FormTemplateObj): Project {

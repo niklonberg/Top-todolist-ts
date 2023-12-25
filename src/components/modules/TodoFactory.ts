@@ -1,13 +1,4 @@
-import FormTemplateObj from './utils/FormTemplateObj';
-
-export interface Todo {
-  todoID: number;
-  title: string;
-  dueDate: string | Date;
-  isImportant: boolean;
-  isCompleted: boolean;
-  description?: string;
-}
+import { FormTemplateObj, Todo } from './utils/interfaces';
 
 let todoIDCounter: number = 0;
 function TodoFactory(templateObj: FormTemplateObj): Todo {

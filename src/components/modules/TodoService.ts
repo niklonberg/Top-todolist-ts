@@ -1,13 +1,13 @@
-const TodoService = {
+/* const TodoService = {
   getTodos() {
     return this.todos;
   },
 
   getTodo(todoID: number) {
-    return this.todos.find((todo) => todo.todoID === todoID);
+    return this.todos.find((todo: unknown) => todo.todoID === todoID);
   },
 
-  addTodo(todo): void {
+  addTodo(todo: unknown): void {
     this.todos.push(todo);
   },
 
@@ -24,3 +24,4 @@ const TodoService = {
     this.isSelected = !this.isSelected;
   },
 };
+ */

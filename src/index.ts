@@ -2,22 +2,29 @@ import './index.css';
 import createElement from './components/modules/utils/createElement';
 import ProjectFactory from './components/modules/ProjectFactory';
 import TodoFactory from './components/modules/TodoFactory';
+import FormTemplateObj from './components/modules/utils/FormTemplateObj';
 
 const p = createElement('p', 'p-test', 'p-id');
 p.textContent = 'hello';
 const { log } = console;
 log(p);
 document.body.appendChild(p);
-log(ProjectFactory);
 
-const todo = TodoFactory({ title: 'Paint Walls', isImportant: true });
+const templateObj: FormTemplateObj = {
+  title: 'Paint Walls',
+  isImportant: true,
+};
+
+console.log(templateObj);
+
+const todo = TodoFactory(templateObj);
 log(todo);
-const todoTwo = TodoFactory({
-  title: 'Paint Bedroom',
-  isImportant: false,
-  description: 'Hi mom',
-});
-log(todoTwo);
+// const todoTwo = TodoFactory({
+//   title: 'Paint Bedroom',
+//   isImportant: false,
+//   description: 'Hi mom',
+// });
+// log(todoTwo);
 
 /* log(ProjectManager);
 

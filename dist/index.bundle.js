@@ -471,64 +471,38 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
-/***/ "./src/components/modules/ProjectFactory.ts":
-/*!**************************************************!*\
-  !*** ./src/components/modules/ProjectFactory.ts ***!
-  \**************************************************/
+/***/ "./src/components/modules/TodoFactory.ts":
+/*!***********************************************!*\
+  !*** ./src/components/modules/TodoFactory.ts ***!
+  \***********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-// TODO: set types for methods
-const sharedMethods = {
-    getTodos() {
-        return this.todos;
-    },
-    getTodo(todoID) {
-        return this.todos.find((todo) => todo.todoID === todoID);
-    },
-    addTodo(todo) {
-        this.todos.push(todo);
-    },
-    removeTodo(todoID) {
-        this.todos = this.todos.filter((todo) => todo.todoID !== todoID);
-    },
-    toggleTodoBoolProperty(todoID, todoProperty) {
-        const targetTodo = this.getTodo(todoID);
-        targetTodo[todoProperty] = !targetTodo[todoProperty];
-    },
-    toggleSelected() {
-        this.isSelected = !this.isSelected;
-    },
-};
-// if i define a todo interface in TodoFactory, can i use it in this module?
-// will this module know of the existance of a todo interface if it doesnt import it?
-// templateObj is different when it is fed into projectfactory or todofactory
-// here it only has a title property
-let projectIDCounter = 0;
-function ProjectFactory(templateObj) {
-    const project = {
-        projectID: projectIDCounter,
+let todoIDCounter = 0;
+function TodoFactory(templateObj) {
+    const todo = {
+        todoID: todoIDCounter,
         title: templateObj.title,
-        isSelected: false,
-        todos: [], // should be todo objects only allowed inside
+        dueDate: templateObj.dueDate,
+        isImportant: templateObj.isImportant,
+        isCompleted: false,
+        description: templateObj.description,
     };
-    // use object.setPrototypeOf to assign methods to protoype, to avoid duplication
-    Object.setPrototypeOf(project, sharedMethods);
-    projectIDCounter += 1;
-    return project;
+    todoIDCounter += 1;
+    return todo;
 }
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ProjectFactory);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TodoFactory);
 
 
 /***/ }),
 
-/***/ "./src/components/modules/createElement.ts":
-/*!*************************************************!*\
-  !*** ./src/components/modules/createElement.ts ***!
-  \*************************************************/
+/***/ "./src/components/modules/utils/createElement.ts":
+/*!*******************************************************!*\
+  !*** ./src/components/modules/utils/createElement.ts ***!
+  \*******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -631,17 +605,29 @@ var __webpack_exports__ = {};
   \**********************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _index_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index.css */ "./src/index.css");
-/* harmony import */ var _components_modules_createElement__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/modules/createElement */ "./src/components/modules/createElement.ts");
-/* harmony import */ var _components_modules_ProjectFactory__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/modules/ProjectFactory */ "./src/components/modules/ProjectFactory.ts");
+/* harmony import */ var _components_modules_utils_createElement__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/modules/utils/createElement */ "./src/components/modules/utils/createElement.ts");
+/* harmony import */ var _components_modules_TodoFactory__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/modules/TodoFactory */ "./src/components/modules/TodoFactory.ts");
 
 
 
-const p = (0,_components_modules_createElement__WEBPACK_IMPORTED_MODULE_1__["default"])('p', 'p-test', 'p-id');
+const p = (0,_components_modules_utils_createElement__WEBPACK_IMPORTED_MODULE_1__["default"])('p', 'p-test', 'p-id');
 p.textContent = 'hello';
 const { log } = console;
 log(p);
 document.body.appendChild(p);
-log(_components_modules_ProjectFactory__WEBPACK_IMPORTED_MODULE_2__["default"]);
+const templateObj = {
+    title: 'Paint Walls',
+    isImportant: true,
+};
+console.log(templateObj);
+const todo = (0,_components_modules_TodoFactory__WEBPACK_IMPORTED_MODULE_2__["default"])(templateObj);
+log(todo);
+// const todoTwo = TodoFactory({
+//   title: 'Paint Bedroom',
+//   isImportant: false,
+//   description: 'Hi mom',
+// });
+// log(todoTwo);
 /* log(ProjectManager);
 
 ProjectManager.addProject({

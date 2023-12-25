@@ -20,3 +20,8 @@ export interface Project {
   isSelected: boolean;
   todos: Todo[];
 }
+
+export interface User {
+  name: string;
+  email: string;
+}

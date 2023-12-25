@@ -2,6 +2,7 @@ import './index.css';
 import createElement from './components/modules/utils/createElement';
 import ProjectFactory from './components/modules/ProjectFactory';
 import TodoFactory from './components/modules/TodoFactory';
+import ProjectManager from './components/modules/ProjectManager';
 
 const p = createElement('p', 'p-test', 'p-id');
 p.textContent = 'hello';
@@ -26,11 +27,13 @@ const projectOne = ProjectFactory({
 });
 log(projectOne);
 
-// log(ProjectManager);
+const ProjectManagerOne = new ProjectManager();
+log(ProjectManagerOne);
 
-// ProjectManager.addProject({
-//   title: 'Refurnish Homedfgvdfgdfgdfgdfgdfgdfgsdefsdf',
-// });
+ProjectManager.addProject({
+  title: 'Refurnish Homedfgvdfgdfgdfgdfgdfgdfgsdefsdf',
+});
+
 // ProjectManager.addProject({ title: 'Paint Walls' });
 // ProjectManager.setSelectedProject(0);
 // ProjectManager.addTodoToCurrSelectedProject({

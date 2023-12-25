@@ -1,26 +1,30 @@
-// const TodoService = {
-//   getTodos() {
-//     return this.todos;
-//   },
+import { Project, Todo } from './utils/interfaces';
 
-//   getTodo(todoID: number) {
-//     return this.todos.find((todo: unknown) => todo.todoID === todoID);
-//   },
+const TodoService = {
+  getTodos(project: Project) {
+    return project.todos;
+  },
 
-//   addTodo(todo: unknown): void {
-//     this.todos.push(todo);
-//   },
+  getTodo(project: Project, todoID: number) {
+    return project.todos.find((todo: Todo) => todo.todoID === todoID);
+  },
 
-//   removeTodo(todoID: number): void {
-//     this.todos = this.todos.filter((todo) => todo.todoID !== todoID);
-//   },
+  // addTodo(todo: unknown): void {
+  //   this.todos.push(todo);
+  // },
 
-//   toggleTodoBoolProperty(todoID: number, todoProperty): void {
-//     const targetTodo = this.getTodo(todoID);
-//     targetTodo[todoProperty] = !targetTodo[todoProperty];
-//   },
+  // removeTodo(todoID: number): void {
+  //   this.todos = this.todos.filter((todo) => todo.todoID !== todoID);
+  // },
 
-//   toggleSelected(): void {
-//     this.isSelected = !this.isSelected;
-//   },
-// };
+  // toggleTodoBoolProperty(todoID: number, todoProperty): void {
+  //   const targetTodo = this.getTodo(todoID);
+  //   targetTodo[todoProperty] = !targetTodo[todoProperty];
+  // },
+
+  // toggleSelected(): void {
+  //   this.isSelected = !this.isSelected;
+  // },
+};
+
+export default TodoService;

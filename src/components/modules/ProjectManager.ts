@@ -8,23 +8,23 @@ class ProjectManager {
 
   private projects: Project[];
 
-  currSelectedProj: Project;
+  currSelectedProject: Project;
 
   constructor() {
     // this.user = user;
     this.projects = [];
   }
 
-  findProject(projectID: number) {
+  findProject(projectID: number): Project {
     return this.projects.find((project) => project.projectID === projectID);
   }
 
-  addProject(project: Project) {
+  addProject(project: Project): void {
     this.projects.push(project);
   }
 
-  setSelectedProject(projectID: number) {
-    this.currSelectedProj = this.findProject(projectID);
+  setSelectedProject(projectID: number): void {
+    this.currSelectedProject = this.findProject(projectID);
   }
 }
 

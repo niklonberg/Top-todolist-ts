@@ -1,6 +1,6 @@
 export interface FormTemplateObj {
   title: string;
-  dueDate?: string | Date;
+  dueDate?: null | Date;
   description?: string;
   isImportant?: boolean;
 }

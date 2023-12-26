@@ -26,15 +26,13 @@ const projectOne = ProjectFactory({
   title: 'Paint house',
 });
 log(projectOne);
+const projectTwo = ProjectFactory({ title: 'Paint Walls' });
 
 const ProjectManagerOne = new ProjectManager();
 log(ProjectManagerOne);
 
-ProjectManager.addProject({
-  title: 'Refurnish Homedfgvdfgdfgdfgdfgdfgdfgsdefsdf',
-});
-
-// ProjectManager.addProject({ title: 'Paint Walls' });
+ProjectManagerOne.addProject(projectOne);
+ProjectManagerOne.addProject(projectTwo);
 // ProjectManager.setSelectedProject(0);
 // ProjectManager.addTodoToCurrSelectedProject({
 //   title: 'move sofa',

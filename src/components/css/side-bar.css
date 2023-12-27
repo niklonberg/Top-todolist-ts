@@ -1,0 +1,30 @@
+@layer component {
+  #side-bar {
+    background-color: var(--primary-contrast);
+    overflow-wrap: break-word;
+    max-width: 300px;
+    padding-inline: var(--m-gap);
+  }
+
+  #side-bar ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  #side-bar .list-item {
+    padding-inline: var(--sm-gap);
+  }
+
+  #side-bar .list-item:hover {
+    background-color: var(--primary);
+  }
+
+  #side-bar h2 {
+    border-bottom: 2px solid var(--text-color);
+    letter-spacing: 1.5px;
+  }
+
+  #side-bar .list-details {
+    min-width: 0; /* ensure long words break correctly */
+  }
+}

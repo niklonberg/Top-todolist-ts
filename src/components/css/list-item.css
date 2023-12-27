@@ -1,0 +1,59 @@
+@layer component {
+  .list-item {
+    display: flex;
+    align-items: center;
+    gap: var(--sm-gap);
+    cursor: pointer;
+  }
+
+  .list-item.todo-complete {
+    text-decoration: line-through;
+  }
+
+  .list-details {
+    flex: 1;
+  }
+
+  .toggle-complete-btn {
+    width: 20px;
+    height: 20px;
+    order: -1;
+  }
+
+  .toggle-complete-btn.checked {
+    background-image: url(../images/check-mark.png);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+  }
+
+  .toggle-important-btn {
+    width: 20px;
+    height: 20px;
+    background: url(../images/star-outline.png);
+    background-size: contain;
+    border: none;
+  }
+
+  .toggle-important-btn.checked {
+    background-image: url(../images/star.png);
+    animation: scaleImpBtn 1s ease-out;
+  }
+
+  @keyframes scaleImpBtn {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    25% {
+      transform: rotate(-10deg);
+    }
+    50% {
+      transform: scale(1.5);
+      transform: translateY(-10px);
+    }
+    75% {
+      transform: rotate(10deg);
+    }
+  }
+}

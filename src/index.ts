@@ -6,6 +6,7 @@ import ProjectManager from './components/modules/ProjectManager';
 
 const p = createElement('p', 'p-test', 'p-id');
 p.textContent = 'hello';
+p.classList.add('hello');
 const { log } = console;
 log(p);
 document.body.appendChild(p);

@@ -1,4 +1,4 @@
-import { User, Project } from './utils/interfaces';
+import { User, Project, Todo } from './utils/interfaces';
 import TodoService from './TodoService';
 
 // this would need an interface aswell eventually
@@ -16,13 +16,17 @@ class ProjectManager {
     this.projects = [];
   }
 
+  /* project methods */
   getProject(projectID: number): Project {
     return this.projects.find((project) => project.projectID === projectID);
   }
 
+  getProjects(): Project[] {
+    return this.projects;
+  }
+
   setSelectedProject(projectID: number): void {
     this.currSelectedProject = this.getProject(projectID);
-    console.log('selected proj: ', this.currSelectedProject);
   }
 
   addProject(project: Project): void {
@@ -30,10 +34,23 @@ class ProjectManager {
   }
 
   deleteProject(projectID: number): void {
+    // could also use getProject method maybe?
     this.projects = this.projects.filter(
       (project) => project.projectID !== projectID,
     );
   }
+
+  /* todo methods */
+  addTodo(todo: Todo): void {
+    TodoService.add(this.currSelectedProject, todo);
+  }
+  /* getTodo(todoID:number): Todo {
+    const todo = TodoService.getTodo(todoID)
+  }
+
+  addTodo(todo: Todo):void {
+    
+  } */
 }
 
 export default ProjectManager;

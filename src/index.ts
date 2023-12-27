@@ -6,7 +6,7 @@ import ProjectManager from './components/modules/ProjectManager';
 
 const { log } = console;
 
-const todo = TodoFactory({
+const todoOne = TodoFactory({
   title: 'Paint Walls',
   isImportant: true,
 });
@@ -24,35 +24,29 @@ const todoFour = TodoFactory({
   title: 'Move closet',
   description: 'scrape it along the floor',
 });
+const todoFive = TodoFactory({
+  title: 'Buy Paintbrush',
+  description: 'less than 5$',
+});
 const projectOne = ProjectFactory({ title: 'Paint house' });
 const projectTwo = ProjectFactory({ title: 'Refurnish Bedroom' });
+const projectThree = ProjectFactory({ title: 'Clean Laboratory' });
 
 const ProjectManagerOne = new ProjectManager();
 log(ProjectManagerOne);
 
 ProjectManagerOne.addProject(projectOne);
 ProjectManagerOne.addProject(projectTwo);
+ProjectManagerOne.addProject(projectThree);
 ProjectManagerOne.setSelectedProject(0);
-// ProjectManager.addTodoToCurrSelectedProject({
-//   title: 'move sofa',
-//   description: 'lift dont drag',
-//   dueDate: new Date(2023, 11, 15),
-// });
-// ProjectManager.addTodoToCurrSelectedProject({
-//   title: 'move table',
-//   description: 'drag it roughly',
-//   dueDate: 'No Due Date',
-// });
-// ProjectManager.setSelectedProject(1);
-// ProjectManager.addTodoToCurrSelectedProject({
-//   // title: "buy paint",
-//   description:
-//     'mix it well before applying super long description just to make life annoying and harder and really push myself to handle extreme edge cases',
-// });
-// ProjectManager.addTodoToCurrSelectedProject({
-//   title: 'buy brush',
-//   dueDate: new Date(2023, 11, 12),
-// });
+ProjectManagerOne.deleteProject(2);
+ProjectManagerOne.addTodo(todoOne);
+ProjectManagerOne.addTodo(todoTwo);
+ProjectManagerOne.addTodo(todoFive);
+ProjectManagerOne.setSelectedProject(1);
+ProjectManagerOne.addTodo(todoThree);
+ProjectManagerOne.addTodo(todoFour);
 // log(ProjectManager.getProjects());
 // TodoUIManager.renderProjectsList('projects');
 // TodoUIManager.renderSelectedGroup();
+log(ProjectManagerOne);

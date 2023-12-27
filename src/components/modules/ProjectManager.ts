@@ -1,4 +1,5 @@
 import { User, Project } from './utils/interfaces';
+import TodoService from './TodoService';
 
 // this would need an interface aswell eventually
 // refactor ProjectManager into an entity that can be duplicated,
@@ -15,16 +16,23 @@ class ProjectManager {
     this.projects = [];
   }
 
-  findProject(projectID: number): Project {
+  getProject(projectID: number): Project {
     return this.projects.find((project) => project.projectID === projectID);
+  }
+
+  setSelectedProject(projectID: number): void {
+    this.currSelectedProject = this.getProject(projectID);
+    console.log('selected proj: ', this.currSelectedProject);
   }
 
   addProject(project: Project): void {
     this.projects.push(project);
   }
 
-  setSelectedProject(projectID: number): void {
-    this.currSelectedProject = this.findProject(projectID);
+  deleteProject(projectID: number): void {
+    this.projects = this.projects.filter(
+      (project) => project.projectID !== projectID,
+    );
   }
 }
 

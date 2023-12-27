@@ -5,7 +5,7 @@ function ProjectFactory(templateObj: FormTemplateObj): Project {
   const project: Project = {
     projectID: projectIDCounter,
     title: templateObj.title,
-    isSelected: false,
+    isSelected: false, // do we actually need this?
     todos: [],
   };
 

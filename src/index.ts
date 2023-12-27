@@ -4,37 +4,35 @@ import ProjectFactory from './components/modules/ProjectFactory';
 import TodoFactory from './components/modules/TodoFactory';
 import ProjectManager from './components/modules/ProjectManager';
 
-const p = createElement('p', 'p-test', 'p-id');
-p.textContent = 'hello';
-p.classList.add('hello');
 const { log } = console;
-log(p);
-document.body.appendChild(p);
 
 const todo = TodoFactory({
   title: 'Paint Walls',
   isImportant: true,
 });
-log(todo);
 const todoTwo = TodoFactory({
   title: 'Paint Bedroom',
   isImportant: false,
   description: 'Hi mom',
 });
-log(todoTwo);
-
-const projectOne = ProjectFactory({
-  title: 'Paint house',
+const todoThree = TodoFactory({
+  title: 'Move Bed',
+  isImportant: true,
+  description: 'lift it properly',
 });
-log(projectOne);
-const projectTwo = ProjectFactory({ title: 'Paint Walls' });
+const todoFour = TodoFactory({
+  title: 'Move closet',
+  description: 'scrape it along the floor',
+});
+const projectOne = ProjectFactory({ title: 'Paint house' });
+const projectTwo = ProjectFactory({ title: 'Refurnish Bedroom' });
 
 const ProjectManagerOne = new ProjectManager();
 log(ProjectManagerOne);
 
 ProjectManagerOne.addProject(projectOne);
 ProjectManagerOne.addProject(projectTwo);
-// ProjectManager.setSelectedProject(0);
+ProjectManagerOne.setSelectedProject(0);
 // ProjectManager.addTodoToCurrSelectedProject({
 //   title: 'move sofa',
 //   description: 'lift dont drag',

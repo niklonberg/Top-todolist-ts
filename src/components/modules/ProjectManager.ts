@@ -34,21 +34,20 @@ class ProjectManager {
   //   return this.projects.find((project) => TodoService.get(project, todoID));
   // }
 
-  // getItems<T>(): T[] {
-
-  // }
-
-  // getProjects(): Project[] {
-  //   return this.projects;
-  // }
-
-  // getSelectedProjectTodos(): Todo[] {
-  //   return TodoService.getAll(this.currSelectedProject);
-  // }
-
-  // getAllTodos(): Todo[] {
-  //   return this.projects.flatMap((project) => TodoService.getAll(project));
-  // }
+  getItems<T>(itemsToGet: string): T[] {
+    if (itemsToGet === 'projects') {
+      return this.projects as T[];
+    }
+    if (itemsToGet === 'todos') {
+      return TodoService.getAll(this.currSelectedProject) as T[];
+    }
+    if (itemsToGet === 'allTodos') {
+      return this.projects.flatMap((project) =>
+        TodoService.getAll(project),
+      ) as T[];
+    }
+    throw new Error('Invalid items to get');
+  }
 
   setSelectedProject(projectID: number): void {
     this.currSelectedProject = this.getItem(projectID, 'project');

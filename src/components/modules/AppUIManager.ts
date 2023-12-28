@@ -1,20 +1,37 @@
-import ProjectManager from './ProjectManager';
+import { ProjectManagerInterface } from './utils/interfaces';
 
-/* class AppUIManager {
-  constructor(ProjectManager) {
+class AppUIManager {
+  appContent: HTMLDivElement;
+
+  mainContent: HTMLDivElement;
+
+  projectsList: HTMLUListElement;
+
+  sideBar: HTMLElement;
+
+  hideSideBarBtn: HTMLButtonElement;
+
+  previousProjectSelection: null | HTMLLIElement;
+
+  ProjectManager: ProjectManagerInterface;
+
+  constructor(ProjectManager: ProjectManagerInterface) {
     this.appContent = document.querySelector('#app-content') as HTMLDivElement;
-    this.mainContent = document.querySelector('#main-content') as HTMLDivElement;
-    this.projectsList = document.querySelector('#projects-list') as HTMLUListElement;
+    this.mainContent = document.querySelector(
+      '#main-content',
+    ) as HTMLDivElement;
+    this.projectsList = document.querySelector(
+      '#projects-list',
+    ) as HTMLUListElement;
     this.sideBar = document.querySelector('#side-bar') as HTMLElement;
-    this.hideSideBarBtn = document.querySelector('#hide-sidebar') as HTMLButtonElement;
-    this.previousListGroupSelection = null;
-    ProjectManager;
+    this.hideSideBarBtn = document.querySelector(
+      '#hide-sidebar',
+    ) as HTMLButtonElement;
+    this.previousProjectSelection = null;
+    this.ProjectManager = ProjectManager;
   }
 
   renderProjectsList() {
-    this.projectsList.innerHTML = ""
-    const projects = ProjectManager
-    
-  },
-};
- */
+    this.projectsList.innerHTML = '';
+  }
+}

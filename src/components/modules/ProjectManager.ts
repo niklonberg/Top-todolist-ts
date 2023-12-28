@@ -1,13 +1,14 @@
-import { User, Project, Todo } from './utils/interfaces';
+import {
+  User,
+  Project,
+  Todo,
+  ProjectManagerInterface,
+} from './utils/interfaces';
 import TodoService from './TodoService';
 
-// this would need an interface aswell eventually
 // refactor ProjectManager into an entity that can be duplicated,
 // so each user could have an instance of ProjectManager to manage their projects & todos
-
-/* MERGE get'X', add'X', delete'X' methods into singular methods, 
-that do different things according to whether a project or todo is passed in */
-class ProjectManager {
+class ProjectManager implements ProjectManagerInterface {
   // private user: User;
 
   private projects: Project[];

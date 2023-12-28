@@ -60,20 +60,15 @@ class ProjectManager {
   }
 
   /* Delete methods */
-  deleteProject(projectID: number): void {
-    this.projects = this.projects.filter(
-      (project) => project.projectID !== projectID,
-    );
+  deleteItem(itemID: number, itemType: string = 'todo'): void {
+    if (itemType === 'project') {
+      this.projects = this.projects.filter(
+        (project) => project.projectID !== itemID,
+      );
+    } else {
+      TodoService.delete(this.projects, itemID);
+    }
   }
-
-  // deleteTodo(todoID: number): void {
-  //   const projectToDeleteFrom = this.getProjectFromTodoID(todoID);
-  //   projectToDeleteFrom.todos = TodoService.deleteTodo(
-  //     projectToDeleteFrom,
-  //     todoID,
-  //   );
-  // }
-
   /* Edit methods */
 }
 

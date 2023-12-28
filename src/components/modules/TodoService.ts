@@ -26,8 +26,17 @@ const TodoService = {
     project.todos.push(todo);
   },
 
-  deleteTodo(project: Project, todoID: number): Todo[] {
-    return project.todos.filter((todo) => todo.todoID !== todoID);
+  delete(projects: Project[], todoID: number): void {
+    for (let i = 0; i < projects.length; i += 1) {
+      const project = projects[i];
+      for (let j = 0; j < project.todos.length; j += 1) {
+        const todo = project.todos[j];
+        if (todo.todoID === todoID) {
+          project.todos.splice(j, 1);
+          j -= 1;
+        }
+      }
+    }
   },
 
   // toggleTodoBoolProperty(todoID: number, todoProperty): void {

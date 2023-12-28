@@ -1,4 +1,4 @@
-import { ProjectManagerInterface } from './utils/interfaces';
+import { ProjectManagerInterface, Project, Todo } from './utils/interfaces';
 
 class AppUIManager {
   appContent: HTMLDivElement;
@@ -33,5 +33,11 @@ class AppUIManager {
 
   renderProjectsList() {
     this.projectsList.innerHTML = '';
+
+    const projects = this.ProjectManager.getItems<Project>('projects');
+
+    // projects.forEach((project) =>
+    //   this.projectsList.appendChild(createListItemFromObject(project)),
+    // );
   }
 }

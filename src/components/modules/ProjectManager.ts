@@ -60,7 +60,7 @@ class ProjectManager {
   }
 
   /* Delete methods */
-  deleteItem(itemID: number, itemType: string = 'todo'): void {
+  deleteItem(itemID: number, itemType: string): void {
     if (itemType === 'project') {
       this.projects = this.projects.filter(
         (project) => project.projectID !== itemID,
@@ -69,7 +69,24 @@ class ProjectManager {
       TodoService.delete(this.projects, itemID);
     }
   }
+
   /* Edit methods */
+  toggleProperty(
+    itemID: number,
+    itemType: string,
+    propertyToToggle: string,
+  ): void {
+    if (itemType === 'project') {
+      // const project = this.getItem<Project>(itemID, itemType);
+      console.log('toggle some property');
+    } else {
+      TodoService.toggleTodoBoolProperty(
+        this.projects,
+        propertyToToggle,
+        itemID,
+      );
+    }
+  }
 }
 
 export default ProjectManager;

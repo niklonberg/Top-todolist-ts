@@ -49,7 +49,7 @@ log(ProjectManagerOne.getItems('projects'));
 log(ProjectManagerOne.getItem(0, 'project'));
 log(ProjectManagerOne.getItem(3, 'todo'));
 log(ProjectManagerOne.getItems('todos'));
-ProjectManagerOne.deleteItem(4);
+ProjectManagerOne.deleteItem(4, 'todo');
 log(ProjectManagerOne.getItems('allTodos'));
 // TodoUIManager.renderProjectsList('projects');
 // TodoUIManager.renderSelectedGroup();

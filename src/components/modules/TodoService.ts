@@ -39,10 +39,15 @@ const TodoService = {
     }
   },
 
-  // toggleTodoBoolProperty(todoID: number, todoProperty): void {
-  //   const targetTodo = this.getTodo(todoID);
-  //   targetTodo[todoProperty] = !targetTodo[todoProperty];
-  // },
+  // I dont think this works
+  toggleTodoBoolProperty(
+    projects: Project[],
+    todoProperty: string,
+    todoID: number,
+  ): void {
+    const targetTodo = this.get(projects, todoID);
+    targetTodo[todoProperty] = !targetTodo[todoProperty];
+  },
 
   // toggleSelected(): void {
   //   this.isSelected = !this.isSelected;

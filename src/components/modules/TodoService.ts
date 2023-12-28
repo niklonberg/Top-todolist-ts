@@ -3,12 +3,14 @@ import { Project, Todo } from './utils/interfaces';
 const TodoService = {
   /**
    * Get a specific Todo from the project.
-   * @param project - The project containing the Todos.
+   * @param projects - The project containing the Todos.
    * @param todoID - The ID of the Todo to retrieve.
    * @returns The Todo with the specified ID.
    */
-  get(project: Project, todoID: number): Todo {
-    return project.todos.find((todo: Todo) => todo.todoID === todoID);
+  get(projects: Project[], todoID: number): Todo {
+    return projects
+      .flatMap((project) => project.todos)
+      .find((todo) => todo.todoID === todoID);
   },
 
   /**

@@ -19,21 +19,39 @@ class ProjectManager {
     this.projects = [];
   }
 
-  /* project methods */
-  getProject(projectID: number): Project {
-    return this.projects.find((project) => project.projectID === projectID);
+  /* get methods */
+  getItem<T>(itemID: number, itemType: string): T {
+    if (itemType === 'project') {
+      return this.projects.find((project) => project.projectID === itemID) as T;
+    }
+    if (itemType === 'todo') {
+      return TodoService.get(this.projects, itemID) as T;
+    }
+    throw new Error('Invalid item type');
   }
 
-  getProjectFromTodoID(todoID: number): Project {
-    return this.projects.find((project) => TodoService.get(project, todoID));
-  }
+  // getProjectFromTodoID(todoID: number): Project {
+  //   return this.projects.find((project) => TodoService.get(project, todoID));
+  // }
 
-  getProjects(): Project[] {
-    return this.projects;
-  }
+  // getItems<T>(): T[] {
+
+  // }
+
+  // getProjects(): Project[] {
+  //   return this.projects;
+  // }
+
+  // getSelectedProjectTodos(): Todo[] {
+  //   return TodoService.getAll(this.currSelectedProject);
+  // }
+
+  // getAllTodos(): Todo[] {
+  //   return this.projects.flatMap((project) => TodoService.getAll(project));
+  // }
 
   setSelectedProject(projectID: number): void {
-    this.currSelectedProject = this.getProject(projectID);
+    this.currSelectedProject = this.getItem(projectID, 'project');
   }
 
   addProject(project: Project): void {
@@ -46,30 +64,17 @@ class ProjectManager {
     );
   }
 
-  /* todo methods */
-  getTodo(todoID: number): Todo {
-    return TodoService.get(this.getProjectFromTodoID(todoID), todoID);
-  }
-
-  getSelectedProjectTodos(): Todo[] {
-    return TodoService.getAll(this.currSelectedProject);
-  }
-
-  getAllTodos(): Todo[] {
-    return this.projects.flatMap((project) => TodoService.getAll(project));
-  }
-
   addTodo(todo: Todo): void {
     TodoService.add(this.currSelectedProject, todo);
   }
 
-  deleteTodo(todoID: number): void {
-    const projectToDeleteFrom = this.getProjectFromTodoID(todoID);
-    projectToDeleteFrom.todos = TodoService.deleteTodo(
-      projectToDeleteFrom,
-      todoID,
-    );
-  }
+  // deleteTodo(todoID: number): void {
+  //   const projectToDeleteFrom = this.getProjectFromTodoID(todoID);
+  //   projectToDeleteFrom.todos = TodoService.deleteTodo(
+  //     projectToDeleteFrom,
+  //     todoID,
+  //   );
+  // }
 }
 
 export default ProjectManager;

@@ -19,7 +19,7 @@ class ProjectManager {
     this.projects = [];
   }
 
-  /* get methods */
+  /* Get methods */
   getItem<T>(itemID: number, itemType: string): T {
     if (itemType === 'project') {
       return this.projects.find((project) => project.projectID === itemID) as T;
@@ -29,10 +29,6 @@ class ProjectManager {
     }
     throw new Error('Invalid item type');
   }
-
-  // getProjectFromTodoID(todoID: number): Project {
-  //   return this.projects.find((project) => TodoService.get(project, todoID));
-  // }
 
   getItems<T>(itemsToGet: string): T[] {
     if (itemsToGet === 'projects') {
@@ -49,22 +45,25 @@ class ProjectManager {
     throw new Error('Invalid items to get');
   }
 
+  /* Set methods */
   setSelectedProject(projectID: number): void {
     this.currSelectedProject = this.getItem(projectID, 'project');
   }
 
-  addProject(project: Project): void {
-    this.projects.push(project);
+  /* Add methods */
+  addItem(item: Project | Todo): void {
+    if ('projectID' in item) {
+      this.projects.push(item);
+    } else {
+      TodoService.add(this.currSelectedProject, item);
+    }
   }
 
+  /* Delete methods */
   deleteProject(projectID: number): void {
     this.projects = this.projects.filter(
       (project) => project.projectID !== projectID,
     );
-  }
-
-  addTodo(todo: Todo): void {
-    TodoService.add(this.currSelectedProject, todo);
   }
 
   // deleteTodo(todoID: number): void {
@@ -74,6 +73,12 @@ class ProjectManager {
   //     todoID,
   //   );
   // }
+
+  /* Edit methods */
 }
 
 export default ProjectManager;
+
+// getProjectFromTodoID(todoID: number): Project {
+//   return this.projects.find((project) => TodoService.get(project, todoID));
+// }

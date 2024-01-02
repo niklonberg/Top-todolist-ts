@@ -24,7 +24,7 @@
     letter-spacing: 1.5px;
   }
 
-  #side-bar .list-details {
+  #side-bar .list-item-details {
     min-width: 0; /* ensure long words break correctly */
   }
 }

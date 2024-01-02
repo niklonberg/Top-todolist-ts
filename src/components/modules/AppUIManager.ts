@@ -42,7 +42,9 @@ class AppUIManager {
     );
   }
 
-  renderSelectedGroup() {}
+  renderSelectedGroup() {
+    this.mainContent.innerHTML = '';
+  }
 }
 
 export default AppUIManager;

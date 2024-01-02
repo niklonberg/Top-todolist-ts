@@ -31,7 +31,9 @@ const todoFive = TodoFactory({
   description: 'less than 5$',
 });
 const projectOne = ProjectFactory({ title: 'Paint house' });
-const projectTwo = ProjectFactory({ title: 'Refurnish Bedroom' });
+const projectTwo = ProjectFactory({
+  title: 'Refurnish Bedroomdkfsksdfkjsdfksdkfksdfdskf',
+});
 const projectThree = ProjectFactory({ title: 'Clean Laboratory' });
 
 const ProjectManagerOne = new ProjectManager();

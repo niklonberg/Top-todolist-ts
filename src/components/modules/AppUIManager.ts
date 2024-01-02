@@ -41,6 +41,8 @@ class AppUIManager {
       this.projectsList.appendChild(createListItemFromObject<Project>(project)),
     );
   }
+
+  renderSelectedGroup() {}
 }
 
 export default AppUIManager;

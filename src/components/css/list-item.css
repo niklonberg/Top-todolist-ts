@@ -21,7 +21,7 @@
   }
 
   .toggle-complete-btn.checked {
-    background-image: url(../images/check-mark.png);
+    background-image: url(/src/images/check-mark.png);
     background-size: 100%;
     background-repeat: no-repeat;
     border-radius: 50%;
@@ -30,13 +30,13 @@
   .toggle-important-btn {
     width: 20px;
     height: 20px;
-    background: url(../images/star-outline.png);
+    background: url(/src/images/star-outline.png);
     background-size: contain;
     border: none;
   }
 
   .toggle-important-btn.checked {
-    background-image: url(../images/star.png);
+    background-image: url(/src/images/star.png);
     animation: scaleImpBtn 1s ease-out;
   }
 

@@ -4,6 +4,8 @@ import TodoFactory from './components/modules/TodoFactory';
 import ProjectManager from './components/modules/ProjectManager';
 import AppUIManager from './components/modules/AppUIManager';
 
+/* CREATE initAPP() that does all the below */
+
 const { log } = console;
 
 const todoOne = TodoFactory({

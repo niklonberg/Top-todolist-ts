@@ -22,6 +22,8 @@ class ProjectManager implements ProjectManagerInterface {
   }
 
   /* Get methods */
+  // hang on, is this right? do i need itemType variable, if
+  // when we call it we specify <Project> or <Todo>?
   getItem<T>(itemID: number, itemType: string): T {
     if (itemType === 'project') {
       return this.projects.find((project) => project.projectID === itemID) as T;

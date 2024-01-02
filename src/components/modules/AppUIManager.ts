@@ -1,4 +1,5 @@
 import { ProjectManagerInterface, Project, Todo } from './utils/interfaces';
+import createListItemFromObject from './utils/createListItemFromObject';
 
 class AppUIManager {
   appContent: HTMLDivElement;
@@ -36,8 +37,10 @@ class AppUIManager {
 
     const projects = this.ProjectManager.getItems<Project>('projects');
 
-    // projects.forEach((project) =>
-    //   this.projectsList.appendChild(createListItemFromObject(project)),
-    // );
+    projects.forEach((project) =>
+      this.projectsList.appendChild(createListItemFromObject<Project>(project)),
+    );
   }
 }
+
+export default AppUIManager;

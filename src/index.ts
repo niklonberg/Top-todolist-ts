@@ -2,6 +2,7 @@ import './index.css';
 import ProjectFactory from './components/modules/ProjectFactory';
 import TodoFactory from './components/modules/TodoFactory';
 import ProjectManager from './components/modules/ProjectManager';
+import AppUIManager from './components/modules/AppUIManager';
 
 const { log } = console;
 
@@ -32,6 +33,7 @@ const projectTwo = ProjectFactory({ title: 'Refurnish Bedroom' });
 const projectThree = ProjectFactory({ title: 'Clean Laboratory' });
 
 const ProjectManagerOne = new ProjectManager();
+const UIManager = new AppUIManager(ProjectManagerOne);
 log(ProjectManagerOne);
 
 ProjectManagerOne.addItem(projectOne);
@@ -51,6 +53,6 @@ log(ProjectManagerOne.getItem(3, 'todo'));
 log(ProjectManagerOne.getItems('todos'));
 ProjectManagerOne.deleteItem(4, 'todo');
 log(ProjectManagerOne.getItems('allTodos'));
-// TodoUIManager.renderProjectsList('projects');
-// TodoUIManager.renderSelectedGroup();
+UIManager.renderProjectsList();
+// UIManager.renderSelectedGroup();
 log(ProjectManagerOne);

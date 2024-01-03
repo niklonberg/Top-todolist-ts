@@ -1,10 +1,11 @@
 @layer component {
-  #main-content {
+  #todo-content {
     box-shadow: 5px 4px 10px 0px rgba(0, 0, 0, 0.2) inset;
     padding: var(--l-gap);
+    flex: 1;
   }
 
-  #main-content h1 {
+  #todo-content h1 {
     text-align: center;
     background-color: var(--secondary);
     color: var(--primary-contrast);
@@ -13,16 +14,16 @@
     word-break: break-all;
   }
 
-  #main-content ul {
+  #todo-content ul {
     padding: 0;
   }
 
-  #main-content .list-item {
+  #todo-content .list-item {
     gap: var(--m-gap);
     padding: var(--sm-gap);
   }
 
-  #main-content .list-item:hover {
+  #todo-content .list-item:hover {
     background-color: var(--primary-contrast);
   }
 }

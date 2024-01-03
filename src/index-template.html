@@ -8,12 +8,12 @@
   <body>
     <div id="todo-wrapper">
       <header id="main-header">
-        <button id="hide-sidebar">Hide Sidebar</button>
+        <button id="hide-navbar">Hide Navbar</button>
         <h2>Task<span>Alchemy</span></h2>
         <button id="toggle-theme">Toggle Theme</button>
       </header>
       <main id="app-content">
-        <nav id="side-bar">
+        <nav id="nav-bar">
           <h2>Home</h2>
           <ul id="home">
             <li id="all-tasks" class="list-item">
@@ -57,9 +57,8 @@
           <ul id="projects-list"></ul>
           <button id="create-new-project">Create project</button>
         </nav>
-        <section>
-          <!-- change below id name from main to not confuse people -->
-          <div id="main-content"></div>
+        <section id="todo-content">
+          <div id="todo-content"></div>
           <button id="create-new-todo">Create todo</button>
         </section>
       </main>

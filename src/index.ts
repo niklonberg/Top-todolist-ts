@@ -1,7 +1,7 @@
 import './index.css';
 import TodoFactory from './components/modules/TodoFactory';
 import TodoManager from './components/modules/TodoManager';
-import AppUIManager from './components/modules/AppUIManager';
+import AppUIManager from './components/modules/UIManager';
 
 /* CREATE initAPP() that does all the below */
 
@@ -39,7 +39,6 @@ const topLevelTodoThree = TodoFactory({ title: 'Clean Laboratory' });
 
 const MyTodoManager = new TodoManager();
 // const UIManager = new AppUIManager(MyTodoManager);
-// log(UIManager.sideBar);
 MyTodoManager.addTopLevelTodo(topLevelTodoOne);
 MyTodoManager.addTopLevelTodo(topLevelTodoTwo);
 MyTodoManager.addTopLevelTodo(topLevelTodoThree);

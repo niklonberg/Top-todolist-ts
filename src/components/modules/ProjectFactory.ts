@@ -1,5 +1,7 @@
 import { FormTemplateObj, Project } from './utils/interfaces';
 
+/* delete me */
+
 let projectIDCounter: number = 0;
 function ProjectFactory(templateObj: FormTemplateObj): Project {
   const project: Project = {

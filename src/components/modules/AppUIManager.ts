@@ -1,6 +1,7 @@
 import { ProjectManagerInterface, Project, Todo } from './utils/interfaces';
 import createListItemFromObject from './utils/createListItemFromObject';
 
+/* split me into smaller classes, that each control a component */
 class AppUIManager {
   appContent: HTMLDivElement;
 

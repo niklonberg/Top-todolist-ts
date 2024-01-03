@@ -39,7 +39,7 @@ const projectThree = ProjectFactory({ title: 'Clean Laboratory' });
 const ProjectManagerOne = new ProjectManager();
 const UIManager = new AppUIManager(ProjectManagerOne);
 log(ProjectManagerOne);
-
+log(UIManager.sideBar);
 ProjectManagerOne.addItem(projectOne);
 ProjectManagerOne.addItem(projectTwo);
 ProjectManagerOne.addItem(projectThree);

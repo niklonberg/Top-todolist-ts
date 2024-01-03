@@ -1,6 +1,5 @@
 import createElement from './createElement';
 import { Project, Todo } from './interfaces';
-// how can i use my Project and Todo interface in the createListItemFromObject function
 
 function createListDetailsContainer(object) {
   const listDetails = createElement<HTMLDivElement>('DIV', 'list-item-details');
@@ -36,12 +35,14 @@ function createDragIcon() {
   return img;
 }
 
-function createListItemFromObject<T extends Project>(object: T): HTMLLIElement {
+// how can i get this function to understand when it has a Project or a Todo
+function createListItemFromObject<T>(object: T): HTMLLIElement {
   const li = createElement<HTMLLIElement>('LI', 'list-item');
   const [listDetails, editActions] = createListContainers(object);
 
   // do project specific things
   if ('projectID' in object) {
+    // now we know we have a project
     li.dataset.project = object.projectID.toString();
 
     li.appendChild(createDragIcon());
@@ -49,7 +50,17 @@ function createListItemFromObject<T extends Project>(object: T): HTMLLIElement {
 
   // do todo specific things
   if ('todoID' in object) {
+    // now we know we have a todo
     li.dataset.todo = object.todoID.toString();
+    // if (object.description) {
+    //   const p = createElement('p');
+    //   p.textContent = object.description;
+    //   listDetails.append(p)
+    // }
+
+    // if (object.dueDate) {
+
+    // }
   }
 
   li.append(listDetails, editActions);

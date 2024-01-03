@@ -5,21 +5,25 @@ export interface FormTemplateObj {
   isImportant?: boolean;
 }
 
+// remove Project interface and just have todo
+// that can have children which are child todos
 export interface Todo {
   todoID: number;
   title: string;
-  dueDate: string | Date;
+  dueDate?: null | Date;
   isImportant: boolean;
   isCompleted: boolean;
+  // dateCompleted: null | Date;
   description?: string;
+  children: Todo[];
 }
 
-export interface Project {
+/* export interface Project {
   projectID: number;
   title: string;
   isSelected: boolean;
   todos: Todo[];
-}
+} */
 
 /* eslint-disable no-unused-vars */
 export interface ProjectManagerInterface {

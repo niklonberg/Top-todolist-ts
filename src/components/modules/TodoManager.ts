@@ -1,15 +1,13 @@
-import {
-  User,
-  Project,
-  Todo,
-  ProjectManagerInterface,
-} from './utils/interfaces';
+import { User, Todo, ProjectManagerInterface } from './utils/interfaces';
 import TodoService from './TodoService';
+
+/* convert ProjectManager into TodoManager */
+
 // should i be storing TodoService inside the class instead?
 
 // refactor ProjectManager into an entity that can be duplicated,
 // so each user could have an instance of ProjectManager to manage their projects & todos
-class ProjectManager implements ProjectManagerInterface {
+class TodoManager implements TodoManagerInterface {
   // private user: User;
 
   private projects: Project[];

@@ -12,25 +12,28 @@ class TodoManager implements TodoManagerInterface {
 
   currSelectedTodo: Todo;
 
+  parentTodo: Todo | null;
+
   constructor() {
     // this.user = user;
     this.topLevelTodos = [];
   }
 
   /* Get methods */
-  getTopLevelTodo(todoID: number): Todo {
-    return this.topLevelTodos.find((todo) => todo.todoID === todoID);
-  }
-
-  getTodo(todoArray: Todo[], todoID: number): Todo {
+  getTodo(todoID: number, todoArray: Todo[] = this.topLevelTodos): Todo {
     let todoWeAreSearchingFor: Todo = null;
+
     todoArray.forEach((childTodo) => {
       if (childTodo.todoID === todoID) {
         todoWeAreSearchingFor = childTodo;
+        this.parentTodo = null;
       } else {
-        const foundTodo = this.getTodo(childTodo.children, todoID);
+        const foundTodo = this.getTodo(todoID, childTodo.children);
         if (foundTodo) {
           todoWeAreSearchingFor = foundTodo;
+          this.parentTodo = childTodo;
+          console.log('parent todo is: ', this.parentTodo);
+          console.log('todo we searched for is: ', todoWeAreSearchingFor);
         }
       }
     });
@@ -40,7 +43,7 @@ class TodoManager implements TodoManagerInterface {
 
   /* Set methods */
   setSelectedTodo(todoID: number): void {
-    this.currSelectedTodo = this.getTodo(this.topLevelTodos, todoID);
+    this.currSelectedTodo = this.getTodo(todoID);
     console.log('curr selected todo: ', this.currSelectedTodo);
   }
 
@@ -54,15 +57,12 @@ class TodoManager implements TodoManagerInterface {
   }
 
   /* Delete methods */
-  // deleteItem(itemID: number, itemType: string): void {
-  //   if (itemType === 'project') {
-  //     this.projects = this.projects.filter(
-  //       (project) => project.projectID !== itemID,
-  //     );
-  //   } else {
-  //     TodoService.delete(this.projects, itemID);
-  //   }
-  // }
+  deleteItem(itemID: number): void {
+    const todo = this.getTodo(itemID);
+    this.parentTodo.children = this.parentTodo.children.filter(
+      (childTodo) => childTodo !== todo,
+    );
+  }
 
   /* Edit methods */
   // toggleProperty(

@@ -20,6 +20,7 @@ export interface Todo {
 export interface TodoManagerInterface {
   // topLevelTodos: Todo[];
   currSelectedTodo: Todo;
+  parentTodo: Todo | null;
   // getItem<T>(itemID: number, itemType: string): T;
   // getItems<T>(itemsToGet: string): T[];
   // setSelectedProject(projectID: number): void;

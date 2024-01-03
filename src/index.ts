@@ -48,9 +48,10 @@ MyTodoManager.setSelectedTodo(5);
 MyTodoManager.addChildTodoToCurrSelectedTodo(childTodoOne);
 MyTodoManager.addChildTodoToCurrSelectedTodo(childTodoTwo);
 MyTodoManager.addChildTodoToCurrSelectedTodo(childTodoThree);
-// MyTodoManager.setSelectedProject(1hree
-// MyTodoManager.addItem(todoThree);
-// MyTodoManager.addItem(todoFour);
+MyTodoManager.setSelectedTodo(6);
+MyTodoManager.addChildTodoToCurrSelectedTodo(childTodoFour);
+MyTodoManager.addChildTodoToCurrSelectedTodo(childTodoFive);
+MyTodoManager.deleteItem(2);
 // log(MyTodoManager.getItems('projects'));
 // log(MyTodoManager.getItem(0, 'project'));
 // log(MyTodoManager.getItem(3, 'todo'));

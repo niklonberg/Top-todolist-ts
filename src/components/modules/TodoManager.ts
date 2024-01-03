@@ -1,10 +1,7 @@
 import { User, Todo, TodoManagerInterface } from './utils/interfaces';
-import TodoService from './TodoService';
 
-// should i be storing TodoService inside the class instead?
-
-// refactor ProjectManager into an entity that can be duplicated,
-// so each user could have an instance of ProjectManager to manage their projects & todos
+// refactor TodoManager into an entity that can be duplicated,
+// so each user could have an instance of TodoManager to manage their todos
 class TodoManager implements TodoManagerInterface {
   // private user: User;
 
@@ -20,9 +17,12 @@ class TodoManager implements TodoManagerInterface {
   }
 
   /* Get methods */
+  getTopLevelTodos(): Todo[] {
+    return this.topLevelTodos;
+  }
+
   getTodo(todoID: number, todoArray: Todo[] = this.topLevelTodos): Todo {
     let todoWeAreSearchingFor: Todo = null;
-
     todoArray.forEach((childTodo) => {
       if (childTodo.todoID === todoID) {
         todoWeAreSearchingFor = childTodo;
@@ -57,8 +57,9 @@ class TodoManager implements TodoManagerInterface {
   }
 
   /* Delete methods */
-  deleteItem(itemID: number): void {
-    const todo = this.getTodo(itemID);
+  deleteTodo(todoID: number): void {
+    const todo = this.getTodo(todoID);
+    console.log('todo to delete: ', todo);
     this.parentTodo.children = this.parentTodo.children.filter(
       (childTodo) => childTodo !== todo,
     );

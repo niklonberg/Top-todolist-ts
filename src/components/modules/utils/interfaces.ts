@@ -21,11 +21,12 @@ export interface TodoManagerInterface {
   // topLevelTodos: Todo[];
   currSelectedTodo: Todo;
   parentTodo: Todo | null;
-  // getItem<T>(itemID: number, itemType: string): T;
-  // getItems<T>(itemsToGet: string): T[];
-  // setSelectedProject(projectID: number): void;
-  // addItem(item: Todo): void;
-  // deleteItem(itemID: number, itemType: string): void;
+  getTopLevelTodos(): Todo[];
+  getTodo(todoID: number, todoArray: Todo[]): Todo;
+  setSelectedTodo(todoID: number): void;
+  addTopLevelTodo(item: Todo): void;
+  addChildTodoToCurrSelectedTodo(item: Todo): void;
+  deleteTodo(todoID: number): void;
   // toggleProperty(
   //   itemID: number,
   //   itemType: string,

@@ -7,28 +7,32 @@ import AppUIManager from './components/modules/AppUIManager';
 
 const { log } = console;
 
-const todoOne = TodoFactory({
+const childTodoOne = TodoFactory({
   title: 'Paint Walls',
-  isImportant: true,
+  isUrgent: true,
+  dueDate: new Date(2023, 11, 15),
 });
-const todoTwo = TodoFactory({
+const childTodoTwo = TodoFactory({
   title: 'Paint Bedroom',
-  isImportant: false,
+  isUrgent: false,
   description: 'Hi mom',
 });
-const todoThree = TodoFactory({
+const childTodoThree = TodoFactory({
   title: 'Move Bed',
-  isImportant: true,
+  isUrgent: true,
   description: 'lift it properly',
 });
-const todoFour = TodoFactory({
+const childTodoFour = TodoFactory({
   title: 'Move closet',
   description: 'scrape it along the floor',
 });
-const todoFive = TodoFactory({
+const childTodoFive = TodoFactory({
   title: 'Buy Paintbrush',
   description: 'less than 5$',
 });
+
+log(childTodoOne);
+log(childTodoTwo);
 // const projectOne = ProjectFactory({ title: 'Paint house' });
 // const projectTwo = ProjectFactory({
 //   title: 'Refurnish Bedroomdkfsksdfkjsdfksdkfksdfdskf',

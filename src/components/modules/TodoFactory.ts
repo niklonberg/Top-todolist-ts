@@ -5,7 +5,7 @@ function TodoFactory(templateObj: FormTemplateObj): Todo {
   const todo: Todo = {
     todoID: todoIDCounter,
     title: templateObj.title,
-    isImportant: templateObj.isImportant,
+    isUrgent: templateObj.isUrgent,
     isCompleted: false,
     dateCompleted: null,
     dueDate: templateObj.dueDate,

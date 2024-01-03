@@ -1,17 +1,17 @@
 export interface FormTemplateObj {
   title: string;
   dueDate?: null | Date;
-  description?: string;
-  isImportant?: boolean;
+  description?: string; // should these be optional?
+  isUrgent?: boolean;
 }
 
 export interface Todo {
   todoID: number;
   title: string;
-  isImportant: boolean;
+  isUrgent: boolean;
   isCompleted: boolean;
   dateCompleted: null | Date;
-  dueDate?: null | Date;
+  dueDate?: null | Date; // should these be optional?
   description?: string;
   children: Todo[];
 }

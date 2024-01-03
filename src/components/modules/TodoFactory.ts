@@ -5,10 +5,12 @@ function TodoFactory(templateObj: FormTemplateObj): Todo {
   const todo: Todo = {
     todoID: todoIDCounter,
     title: templateObj.title,
-    dueDate: templateObj.dueDate,
     isImportant: templateObj.isImportant,
     isCompleted: false,
+    dateCompleted: null,
+    dueDate: templateObj.dueDate,
     description: templateObj.description,
+    children: [],
   };
 
   todoIDCounter += 1;

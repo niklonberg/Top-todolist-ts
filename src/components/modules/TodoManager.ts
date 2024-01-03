@@ -1,4 +1,4 @@
-import { User, Todo, ProjectManagerInterface } from './utils/interfaces';
+import { User, Todo, TodoManagerInterface } from './utils/interfaces';
 import TodoService from './TodoService';
 
 /* convert ProjectManager into TodoManager */
@@ -53,7 +53,7 @@ class TodoManager implements TodoManagerInterface {
   }
 
   /* Add methods */
-  addItem(item: Project | Todo): void {
+  addItem(item: Todo): void {
     if ('projectID' in item) {
       this.projects.push(item);
     } else {
@@ -91,7 +91,7 @@ class TodoManager implements TodoManagerInterface {
   }
 }
 
-export default ProjectManager;
+export default TodoManager;
 
 // getProjectFromTodoID(todoID: number): Project {
 //   return this.projects.find((project) => TodoService.get(project, todoID));

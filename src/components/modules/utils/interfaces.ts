@@ -10,23 +10,16 @@ export interface FormTemplateObj {
 export interface Todo {
   todoID: number;
   title: string;
-  dueDate?: null | Date;
   isImportant: boolean;
   isCompleted: boolean;
-  // dateCompleted: null | Date;
+  dateCompleted: null | Date;
+  dueDate?: null | Date;
   description?: string;
   children: Todo[];
 }
 
-/* export interface Project {
-  projectID: number;
-  title: string;
-  isSelected: boolean;
-  todos: Todo[];
-} */
-
 /* eslint-disable no-unused-vars */
-export interface ProjectManagerInterface {
+export interface TodoManagerInterface {
   // projects: Project[];
   currSelectedProject: Project;
   getItem<T>(itemID: number, itemType: string): T;

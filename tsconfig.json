@@ -5,8 +5,8 @@
     "target": "ES6",
     "sourceMap": true,
     "module": "es2015",
-    "esModuleInterop": true
-    /* "noImplicitAny": true */
+    "esModuleInterop": true,
+    "noImplicitAny": true
   },
   "include": ["./src/**/*"]
 }

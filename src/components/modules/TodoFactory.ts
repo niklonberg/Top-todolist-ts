@@ -11,8 +11,6 @@ function TodoFactory(templateObj: FormTemplateObj): Todo {
     description: templateObj.description,
   };
 
-  // add incrementing of TodoID method
-
   todoIDCounter += 1;
   return todo;
 }

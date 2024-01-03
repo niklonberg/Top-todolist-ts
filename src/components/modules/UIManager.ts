@@ -1,40 +1,43 @@
-// import { TodoManagerInterface, Todo } from './utils/interfaces';
-// import createListItemFromObject from './utils/createListItemFromObject';
+// import createElement from './utils/createElement';
 
-// /* split me into smaller classes, that each control a component */
-class AppUIManager {
-  //   appContent: HTMLDivElement;
-  //   mainContent: HTMLDivElement;
-  //   projectsList: HTMLUListElement;
-  //   sideBar: HTMLElement;
-  //   hideSideBarBtn: HTMLButtonElement;
-  //   previousProjectSelection: null | HTMLLIElement;
-  //   ProjectManager: ProjectManagerInterface;
-  //   constructor(ProjectManager: ProjectManagerInterface) {
-  //     this.appContent = document.querySelector('#app-content') as HTMLDivElement;
-  //     this.mainContent = document.querySelector(
-  //       '#main-content',
-  //     ) as HTMLDivElement;
-  //     this.projectsList = document.querySelector(
-  //       '#projects-list',
-  //     ) as HTMLUListElement;
-  //     this.sideBar = document.querySelector('#side-bar') as HTMLElement;
-  //     this.hideSideBarBtn = document.querySelector(
-  //       '#hide-sidebar',
-  //     ) as HTMLButtonElement;
-  //     this.previousProjectSelection = null;
-  //     this.ProjectManager = ProjectManager;
-  //   }
-  //   renderProjectsList() {
-  //     this.projectsList.innerHTML = '';
-  //     const projects = this.ProjectManager.getItems<Project>('projects');
-  //     projects.forEach((project) =>
-  //       this.projectsList.appendChild(createListItemFromObject<Project>(project)),
-  //     );
-  //   }
-  //   renderSelectedGroup() {
-  //     this.mainContent.innerHTML = '';
-  //   }
+class UIManager {
+  // createElement;
+
+  // constructor() {
+  // this.createElement = createElement;
+  // }
+
+  static createElement<T extends HTMLElement>(
+    type: string = 'div',
+    classname: string = '',
+    id: string = '',
+  ) {
+    const ele = document.createElement(type) as T;
+    if (classname) ele.classList.add(classname);
+    if (id) ele.setAttribute('id', id);
+    return ele;
+  }
 }
 
-export default AppUIManager;
+export default UIManager;
+
+//   appContent: HTMLDivElement;
+//   mainContent: HTMLDivElement;
+
+//   hideSideBarBtn: HTMLButtonElement;
+//   ProjectManager: ProjectManagerInterface;
+//   constructor(ProjectManager: ProjectManagerInterface) {
+//     this.appContent = document.querySelector('#app-content') as HTMLDivElement;
+//     this.mainContent = document.querySelector(
+//       '#main-content',
+//     ) as HTMLDivElement;
+
+//     this.hideSideBarBtn = document.querySelector(
+//       '#hide-sidebar',
+//     ) as HTMLButtonElement;
+//     this.previousProjectSelection = null;
+//     this.ProjectManager = ProjectManager;
+//   }
+//   renderSelectedGroup() {
+//     this.mainContent.innerHTML = '';
+//   }

@@ -2,6 +2,14 @@ import { User, Todo, TodoManagerInterface } from './utils/interfaces';
 
 // refactor TodoManager into an entity that can be duplicated,
 // so each user could have an instance of TodoManager to manage their todos
+
+// add documentation to below class like this:
+/**
+ * Get a specific Todo from the project.
+ * @param projects - The project containing the Todos.
+ * @param todoID - The ID of the Todo to retrieve.
+ * @returns The Todo with the specified ID.
+ */
 class TodoManager implements TodoManagerInterface {
   // private user: User;
 

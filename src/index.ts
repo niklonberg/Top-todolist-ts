@@ -31,35 +31,32 @@ const childTodoFive = TodoFactory({
   description: 'less than 5$',
 });
 
-log(childTodoOne);
-log(childTodoTwo);
-// const projectOne = ProjectFactory({ title: 'Paint house' });
-// const projectTwo = ProjectFactory({
-//   title: 'Refurnish Bedroomdkfsksdfkjsdfksdkfksdfdskf',
-// });
-// const projectThree = ProjectFactory({ title: 'Clean Laboratory' });
+const topLevelTodoOne = TodoFactory({ title: 'Paint house' });
+const topLevelTodoTwo = TodoFactory({
+  title: 'Refurnish Bedroomdkfsksdfkjsdfksdkfksdfdskf',
+});
+const topLevelTodoThree = TodoFactory({ title: 'Clean Laboratory' });
 
-// const ProjectManagerOne = new ProjectManager();
-// const UIManager = new AppUIManager(ProjectManagerOne);
-// log(ProjectManagerOne);
+const MyTodoManager = new TodoManager();
+// const UIManager = new AppUIManager(MyTodoManager);
+log(MyTodoManager);
 // log(UIManager.sideBar);
-// ProjectManagerOne.addItem(projectOne);
-// ProjectManagerOne.addItem(projectTwo);
-// ProjectManagerOne.addItem(projectThree);
-// ProjectManagerOne.setSelectedProject(0);
-// ProjectManagerOne.deleteItem(2, 'project');
-// ProjectManagerOne.addItem(todoOne);
-// ProjectManagerOne.addItem(todoTwo);
-// ProjectManagerOne.addItem(todoFive);
-// ProjectManagerOne.setSelectedProject(1);
-// ProjectManagerOne.addItem(todoThree);
-// ProjectManagerOne.addItem(todoFour);
-// log(ProjectManagerOne.getItems('projects'));
-// log(ProjectManagerOne.getItem(0, 'project'));
-// log(ProjectManagerOne.getItem(3, 'todo'));
-// log(ProjectManagerOne.getItems('todos'));
-// ProjectManagerOne.deleteItem(4, 'todo');
-// log(ProjectManagerOne.getItems('allTodos'));
+MyTodoManager.addTopLevelTodo(topLevelTodoOne);
+MyTodoManager.addTopLevelTodo(topLevelTodoTwo);
+MyTodoManager.addTopLevelTodo(topLevelTodoThree);
+MyTodoManager.setSelectedTodo(5);
+MyTodoManager.addChildTodoToCurrSelectedTodo(childTodoOne);
+MyTodoManager.addChildTodoToCurrSelectedTodo(childTodoTwo);
+MyTodoManager.addChildTodoToCurrSelectedTodo(childTodoThree);
+// MyTodoManager.setSelectedProject(1hree
+// MyTodoManager.addItem(todoThree);
+// MyTodoManager.addItem(todoFour);
+// log(MyTodoManager.getItems('projects'));
+// log(MyTodoManager.getItem(0, 'project'));
+// log(MyTodoManager.getItem(3, 'todo'));
+// log(MyTodoManager.getItems('todos'));
+// MyTodoManager.deleteItem(4, 'todo');
+// log(MyTodoManager.getItems('allTodos'));
 // UIManager.renderProjectsList();
 // // UIManager.renderSelectedGroup();
-// log(ProjectManagerOne);
+// log(MyTodoManager);

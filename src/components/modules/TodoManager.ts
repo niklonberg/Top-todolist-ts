@@ -18,46 +18,40 @@ class TodoManager implements TodoManagerInterface {
   }
 
   /* Get methods */
-  // hang on, is this right? do i need itemType variable, if
-  // when we call it we specify <Project> or <Todo>?
-  // getItem<T>(itemID: number, itemType: string): T {
-  //   if (itemType === 'project') {
-  //     return this.projects.find((project) => project.projectID === itemID) as T;
-  //   }
-  //   if (itemType === 'todo') {
-  //     return TodoService.get(this.projects, itemID) as T;
-  //   }
-  //   throw new Error('Invalid item type');
-  // }
+  getTopLevelTodo(todoID: number): Todo {
+    return this.topLevelTodos.find((todo) => todo.todoID === todoID);
+  }
 
-  // getItems<T>(itemsToGet: string): T[] {
-  //   if (itemsToGet === 'projects') {
-  //     return this.projects as T[];
-  //   }
-  //   if (itemsToGet === 'todos') {
-  //     return TodoService.getAll(this.currSelectedProject) as T[];
-  //   }
-  //   if (itemsToGet === 'allTodos') {
-  //     return this.projects.flatMap((project) =>
-  //       TodoService.getAll(project),
-  //     ) as T[];
-  //   }
-  //   throw new Error('Invalid items to get');
-  // }
+  getTodo(todoArray: Todo[], todoID: number): Todo {
+    let todoWeAreSearchingFor: Todo = null;
+    todoArray.forEach((childTodo) => {
+      if (childTodo.todoID === todoID) {
+        todoWeAreSearchingFor = childTodo;
+      } else {
+        const foundTodo = this.getTodo(childTodo.children, todoID);
+        if (foundTodo) {
+          todoWeAreSearchingFor = foundTodo;
+        }
+      }
+    });
+
+    return todoWeAreSearchingFor;
+  }
 
   /* Set methods */
-  // setSelectedProject(projectID: number): void {
-  //   this.currSelectedProject = this.getItem(projectID, 'project');
-  // }
+  setSelectedTodo(todoID: number): void {
+    this.currSelectedTodo = this.getTodo(this.topLevelTodos, todoID);
+    console.log('curr selected todo: ', this.currSelectedTodo);
+  }
 
   /* Add methods */
-  // addItem(item: Todo): void {
-  //   if ('projectID' in item) {
-  //     this.projects.push(item);
-  //   } else {
-  //     TodoService.add(this.currSelectedProject, item);
-  //   }
-  // }
+  addTopLevelTodo(item: Todo): void {
+    this.topLevelTodos.push(item);
+  }
+
+  addChildTodoToCurrSelectedTodo(item: Todo): void {
+    this.currSelectedTodo.children.push(item);
+  }
 
   /* Delete methods */
   // deleteItem(itemID: number, itemType: string): void {
@@ -90,6 +84,21 @@ class TodoManager implements TodoManagerInterface {
 }
 
 export default TodoManager;
+
+// getItems<T>(itemsToGet: string): T[] {
+//   if (itemsToGet === 'projects') {
+//     return this.projects as T[];
+//   }
+//   if (itemsToGet === 'todos') {
+//     return TodoService.getAll(this.currSelectedProject) as T[];
+//   }
+//   if (itemsToGet === 'allTodos') {
+//     return this.projects.flatMap((project) =>
+//       TodoService.getAll(project),
+//     ) as T[];
+//   }
+//   throw new Error('Invalid items to get');
+// }
 
 // getProjectFromTodoID(todoID: number): Project {
 //   return this.projects.find((project) => TodoService.get(project, todoID));

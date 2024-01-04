@@ -45,7 +45,7 @@ function createListItemFromObject(
 
   // do top level todos specific things
   if (destination === 'top-level') {
-    // now we know we have a project
+    // make element draggable
 
     li.appendChild(createDragIcon());
   }

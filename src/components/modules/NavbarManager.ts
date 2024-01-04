@@ -9,7 +9,7 @@ class NavbarManager extends UIManager {
 
   topLevelTodosList: HTMLUListElement;
 
-  previousProjectSelection: null | HTMLLIElement;
+  previousTopLevelTodoSelection: null | HTMLLIElement;
 
   constructor(TodoManager: TodoManagerInterface) {
     super();
@@ -18,6 +18,7 @@ class NavbarManager extends UIManager {
       '#top-level-todos-list',
     ) as HTMLUListElement;
     this.navBar = document.querySelector('#nav-bar') as HTMLElement;
+    this.previousTopLevelTodoSelection = null;
   }
 
   renderTopLevelTodosList() {
@@ -28,6 +29,11 @@ class NavbarManager extends UIManager {
         createListItemFromObject(todo, 'top-level'),
       ),
     );
+  }
+
+  selectNavListItem(event: Event) {
+    const target = event.target as Element;
+    console.log(target.closest('li'));
   }
 }
 

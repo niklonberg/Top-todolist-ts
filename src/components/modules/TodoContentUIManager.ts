@@ -3,21 +3,43 @@ import createListItemFromObject from './utils/createListItemFromObject';
 import { TodoManagerInterface } from './utils/interfaces';
 
 class TodoContentUIManager extends UIManager {
-  TodoManager: TodoManagerInterface;
-
   todoContentSection: HTMLElement;
 
   selectedTodoGrouping: HTMLUListElement;
 
-  constructor(TodoManager: TodoManagerInterface) {
+  constructor(public TodoManager: TodoManagerInterface) {
     super();
     this.TodoManager = TodoManager;
     this.todoContentSection = document.querySelector('#todo-content');
     this.selectedTodoGrouping = document.querySelector('#selected-grouping');
   }
 
-  renderSelectedGroup() {
+  renderSelectedGroup(navListItem: HTMLLIElement) {
     this.selectedTodoGrouping.innerHTML = '';
+    if (navListItem.id === 'all-tasks') {
+    }
+
+    if (navListItem.id === 'today-tasks') {
+    }
+
+    if (navListItem.id === 'week-tasks') {
+    }
+
+    if (navListItem.id === 'urgent-tasks') {
+    }
+
+    if (navListItem.dataset.todo) {
+      const todoToRender = this.TodoManager.getTodo(
+        Number(navListItem.dataset.todo),
+        this.TodoManager.getTopLevelTodos(), // why does this need 2nd argument when it has default val
+      );
+
+      todoToRender.children.forEach((childTodo) => {
+        this.selectedTodoGrouping.append(
+          createListItemFromObject(childTodo, 'todo-list'),
+        );
+      });
+    }
   }
 }
 

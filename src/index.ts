@@ -2,6 +2,7 @@ import './index.css';
 import TodoFactory from './components/modules/TodoFactory';
 import TodoManager from './components/modules/TodoManager';
 import NavbarUIManager from './components/modules/NavbarUIManager';
+import TodoContentUIManager from './components/modules/TodoContentUIManager';
 
 /* CREATE initAPP() that does all the below */
 
@@ -27,8 +28,8 @@ const childTodoFour = TodoFactory({
   description: 'scrape it along the floor',
 });
 const childTodoFive = TodoFactory({
-  title: 'Buy Paintbrush',
-  description: 'less than 5$',
+  title: 'Move bed',
+  description: 'lift gently',
 });
 
 const topLevelTodoOne = TodoFactory({ title: 'Paint house' });
@@ -38,7 +39,11 @@ const topLevelTodoTwo = TodoFactory({
 const topLevelTodoThree = TodoFactory({ title: 'Clean Laboratory' });
 
 const MyTodoManager = new TodoManager();
-const MyNavbarManager = new NavbarUIManager(MyTodoManager);
+const MyTodoContentUIManager = new TodoContentUIManager(MyTodoManager);
+const MyNavbarManager = new NavbarUIManager(
+  MyTodoManager,
+  MyTodoContentUIManager,
+);
 MyTodoManager.addTopLevelTodo(topLevelTodoOne);
 MyTodoManager.addTopLevelTodo(topLevelTodoTwo);
 MyTodoManager.addTopLevelTodo(topLevelTodoThree);
@@ -50,12 +55,7 @@ MyTodoManager.setSelectedTodo(6);
 MyTodoManager.addChildTodoToCurrSelectedTodo(childTodoFour);
 MyTodoManager.addChildTodoToCurrSelectedTodo(childTodoFive);
 MyTodoManager.deleteChildTodo(2);
-
 MyNavbarManager.renderTopLevelTodosList();
-MyNavbarManager.navBar.addEventListener(
-  'click',
-  MyNavbarManager.selectNavListItem,
-);
 
 /* make init functions, for the adding of event listeners
 for the different UIManagers */

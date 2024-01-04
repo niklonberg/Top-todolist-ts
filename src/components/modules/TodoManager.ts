@@ -51,6 +51,7 @@ class TodoManager implements TodoManagerInterface {
 
   /* Set methods */
   setSelectedTodo(todoID: number): void {
+    console.log('todoID is: ', todoID);
     this.currSelectedTodo = this.getTodo(todoID);
     console.log('curr selected todo: ', this.currSelectedTodo);
   }
@@ -99,22 +100,3 @@ class TodoManager implements TodoManagerInterface {
 }
 
 export default TodoManager;
-
-// getItems<T>(itemsToGet: string): T[] {
-//   if (itemsToGet === 'projects') {
-//     return this.projects as T[];
-//   }
-//   if (itemsToGet === 'todos') {
-//     return TodoService.getAll(this.currSelectedProject) as T[];
-//   }
-//   if (itemsToGet === 'allTodos') {
-//     return this.projects.flatMap((project) =>
-//       TodoService.getAll(project),
-//     ) as T[];
-//   }
-//   throw new Error('Invalid items to get');
-// }
-
-// getProjectFromTodoID(todoID: number): Project {
-//   return this.projects.find((project) => TodoService.get(project, todoID));
-// }

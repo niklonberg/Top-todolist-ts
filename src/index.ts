@@ -1,7 +1,7 @@
 import './index.css';
 import TodoFactory from './components/modules/TodoFactory';
 import TodoManager from './components/modules/TodoManager';
-import NavbarManager from './components/modules/NavbarManager';
+import NavbarUIManager from './components/modules/NavbarUIManager';
 
 /* CREATE initAPP() that does all the below */
 
@@ -38,7 +38,7 @@ const topLevelTodoTwo = TodoFactory({
 const topLevelTodoThree = TodoFactory({ title: 'Clean Laboratory' });
 
 const MyTodoManager = new TodoManager();
-const MyNavbarManager = new NavbarManager(MyTodoManager);
+const MyNavbarManager = new NavbarUIManager(MyTodoManager);
 MyTodoManager.addTopLevelTodo(topLevelTodoOne);
 MyTodoManager.addTopLevelTodo(topLevelTodoTwo);
 MyTodoManager.addTopLevelTodo(topLevelTodoThree);

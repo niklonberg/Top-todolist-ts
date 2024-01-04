@@ -1,12 +1,5 @@
-// import createElement from './utils/createElement';
-
 class UIManager {
-  // createElement;
-
-  // constructor() {
-  // this.createElement = createElement;
-  // }
-
+  // do our child classes actually use this static method??
   static createElement<T extends HTMLElement>(
     type: string = 'div',
     classname: string = '',
@@ -20,24 +13,3 @@ class UIManager {
 }
 
 export default UIManager;
-
-//   appContent: HTMLDivElement;
-//   mainContent: HTMLDivElement;
-
-//   hideSideBarBtn: HTMLButtonElement;
-//   ProjectManager: ProjectManagerInterface;
-//   constructor(ProjectManager: ProjectManagerInterface) {
-//     this.appContent = document.querySelector('#app-content') as HTMLDivElement;
-//     this.mainContent = document.querySelector(
-//       '#main-content',
-//     ) as HTMLDivElement;
-
-//     this.hideSideBarBtn = document.querySelector(
-//       '#hide-sidebar',
-//     ) as HTMLButtonElement;
-//     this.previousProjectSelection = null;
-//     this.ProjectManager = ProjectManager;
-//   }
-//   renderSelectedGroup() {
-//     this.mainContent.innerHTML = '';
-//   }

@@ -1,10 +1,10 @@
 import createElement from './createElement';
 import { Todo } from './interfaces';
 
-function createListDetailsContainer(object: any) {
+function createListDetailsContainer(todo: Todo) {
   const listDetails = createElement<HTMLDivElement>('DIV', 'list-item-details');
   const title = createElement<HTMLHeadingElement>('H3', 'list-item-title');
-  title.textContent = object.title;
+  title.textContent = todo.title;
   listDetails.append(title);
   return listDetails;
 }
@@ -19,16 +19,10 @@ function createEditActionsContainer() {
   return editActions;
 }
 
-function createListContainers(todo: Todo) {
-  const listDetails = createListDetailsContainer(todo);
-  const editActions = createEditActionsContainer();
-
-  return [listDetails, editActions];
-}
-
+// would like this to always find the img
 function createDragIcon() {
   const img = createElement<HTMLImageElement>('img');
-  img.src = './src/images/drag.png'; // would like this to always find the img
+  img.src = './src/images/drag.png';
   img.alt = '';
   img.height = 25;
   img.width = 25;
@@ -37,11 +31,12 @@ function createDragIcon() {
 
 function createListItemFromObject(
   todo: Todo,
-  destination: string,
+  destination: 'top-level' | 'todo-list',
 ): HTMLLIElement {
   const li = createElement<HTMLLIElement>('LI', 'list-item');
   li.dataset.todo = todo.todoID.toString();
-  const [listDetails, editActions] = createListContainers(todo);
+  const listDetails = createListDetailsContainer(todo);
+  const editActions = createEditActionsContainer();
 
   // do top level todos specific things
   if (destination === 'top-level') {

@@ -19,8 +19,8 @@ function createEditActionsContainer() {
   return editActions;
 }
 
-function createListContainers(object: any) {
-  const listDetails = createListDetailsContainer(object);
+function createListContainers(todo: Todo) {
+  const listDetails = createListDetailsContainer(todo);
   const editActions = createEditActionsContainer();
 
   return [listDetails, editActions];
@@ -35,36 +35,32 @@ function createDragIcon() {
   return img;
 }
 
-// how can i get this function to understand when it has a Project or a Todo
 function createListItemFromObject(
   todo: Todo,
   destination: string,
 ): HTMLLIElement {
   const li = createElement<HTMLLIElement>('LI', 'list-item');
+  li.dataset.todo = todo.todoID.toString();
   const [listDetails, editActions] = createListContainers(todo);
 
-  // do project specific things
+  // do top level todos specific things
   if (destination === 'top-level') {
     // now we know we have a project
-    li.dataset.project = todo.todoID.toString();
 
     li.appendChild(createDragIcon());
   }
 
   // do todo specific things
-  // if ('todoID' in object) {
-  // now we know we have a todo
-  // li.dataset.todo = object.todoID.toString();
-  // if (object.description) {
-  //   const p = createElement('p');
-  //   p.textContent = object.description;
-  //   listDetails.append(p)
-  // }
+  if (destination === 'todo-list') {
+    if (todo.description) {
+      const p = createElement('p');
+      p.textContent = todo.description;
+      listDetails.append(p);
+    }
 
-  // if (object.dueDate) {
-
-  // }
-  // }
+    if (todo.dueDate) {
+    }
+  }
 
   li.append(listDetails, editActions);
 

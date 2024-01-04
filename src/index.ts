@@ -38,7 +38,7 @@ const topLevelTodoTwo = TodoFactory({
 const topLevelTodoThree = TodoFactory({ title: 'Clean Laboratory' });
 
 const MyTodoManager = new TodoManager();
-const MyNavbarManager = new NavbarManager(/* MyTodoManager */);
+const MyNavbarManager = new NavbarManager(MyTodoManager);
 MyTodoManager.addTopLevelTodo(topLevelTodoOne);
 MyTodoManager.addTopLevelTodo(topLevelTodoTwo);
 MyTodoManager.addTopLevelTodo(topLevelTodoThree);
@@ -49,8 +49,8 @@ MyTodoManager.addChildTodoToCurrSelectedTodo(childTodoThree);
 MyTodoManager.setSelectedTodo(6);
 MyTodoManager.addChildTodoToCurrSelectedTodo(childTodoFour);
 MyTodoManager.addChildTodoToCurrSelectedTodo(childTodoFive);
-MyTodoManager.deleteTodo(2);
-// MyNavbarManager.renderProjectsList();
+MyTodoManager.deleteChildTodo(2);
+MyNavbarManager.renderTopLevelTodosList();
 // // UIManager.renderSelectedGroup();
 log(MyTodoManager);
 log(MyNavbarManager);

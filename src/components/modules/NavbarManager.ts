@@ -1,27 +1,33 @@
 import UIManager from './UIManager';
-// import createListItemFromObject
+import createListItemFromObject from './utils/createListItemFromObject';
+import { TodoManagerInterface } from './utils/interfaces';
 
 class NavbarManager extends UIManager {
+  TodoManager: TodoManagerInterface;
+
   navBar: HTMLElement;
 
   topLevelTodosList: HTMLUListElement;
 
   previousProjectSelection: null | HTMLLIElement;
 
-  constructor() {
+  constructor(TodoManager: TodoManagerInterface) {
     super();
+    this.TodoManager = TodoManager;
     this.topLevelTodosList = document.querySelector(
       '#top-level-todos-list',
     ) as HTMLUListElement;
     this.navBar = document.querySelector('#nav-bar') as HTMLElement;
   }
 
-  renderProjectsList() {
+  renderTopLevelTodosList() {
     this.topLevelTodosList.innerHTML = '';
-    // const projects = this.ProjectManager.getItems<Project>('projects');
-    // projects.forEach((project) =>
-    //   this.topLevelTodosList.appendChild(createListItemFromObject<Project>(project)),
-    // );
+    const topLevelTodos = this.TodoManager.getTopLevelTodos();
+    topLevelTodos.forEach((todo) =>
+      this.topLevelTodosList.appendChild(
+        createListItemFromObject(todo, 'top-level'),
+      ),
+    );
   }
 }
 

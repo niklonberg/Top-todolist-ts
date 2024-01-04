@@ -65,7 +65,13 @@ class TodoManager implements TodoManagerInterface {
   }
 
   /* Delete methods */
-  deleteTodo(todoID: number): void {
+  deleteTopLevelTodo(todoID: number): void {
+    this.topLevelTodos = this.topLevelTodos.filter(
+      (todo) => todo.todoID !== todoID,
+    );
+  }
+
+  deleteChildTodo(todoID: number): void {
     const todo = this.getTodo(todoID);
     console.log('todo to delete: ', todo);
     this.parentTodo.children = this.parentTodo.children.filter(

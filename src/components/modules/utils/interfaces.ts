@@ -26,7 +26,8 @@ export interface TodoManagerInterface {
   setSelectedTodo(todoID: number): void;
   addTopLevelTodo(item: Todo): void;
   addChildTodoToCurrSelectedTodo(item: Todo): void;
-  deleteTodo(todoID: number): void;
+  deleteTopLevelTodo(todoID: number): void;
+  deleteChildTodo(todoID: number): void;
   // toggleProperty(
   //   itemID: number,
   //   itemType: string,

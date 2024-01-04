@@ -14,10 +14,8 @@ class NavbarManager extends UIManager {
   constructor(TodoManager: TodoManagerInterface) {
     super();
     this.TodoManager = TodoManager;
-    this.topLevelTodosList = document.querySelector(
-      '#top-level-todos-list',
-    ) as HTMLUListElement;
-    this.navBar = document.querySelector('#nav-bar') as HTMLElement;
+    this.topLevelTodosList = document.querySelector('#top-level-todos-list');
+    this.navBar = document.querySelector('#nav-bar');
     this.previousTopLevelTodoSelection = null;
   }
 

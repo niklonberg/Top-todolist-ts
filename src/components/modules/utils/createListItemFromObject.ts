@@ -47,11 +47,13 @@ function createListItemFromObject(
   if (destination === 'top-level') {
     // make element draggable
 
-    li.appendChild(createDragIcon());
+    li.append(createDragIcon());
+    li.append(listDetails);
   }
 
-  // do todo specific things
+  // do child todo specific things
   if (destination === 'todo-list') {
+    let timeEle: HTMLTimeElement | HTMLParagraphElement;
     if (todo.description) {
       const p = createElement('p');
       p.textContent = todo.description;
@@ -59,10 +61,17 @@ function createListItemFromObject(
     }
 
     if (todo.dueDate) {
+      // timeEle.setAttribute('datetime', todo.dueDate)
+      // timeEle.textContent = format(value, "MMMM do, ccc - yyyy");
+    } else {
+      timeEle = createElement<HTMLParagraphElement>('p');
+      timeEle.textContent = 'No Due Date';
     }
+    li.append(listDetails);
+    li.append(timeEle);
   }
 
-  li.append(listDetails, editActions);
+  li.append(editActions);
 
   return li;
 }

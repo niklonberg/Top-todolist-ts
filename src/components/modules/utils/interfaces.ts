@@ -11,7 +11,7 @@ export interface Todo {
   isUrgent: boolean;
   isCompleted: boolean;
   dateCompleted: null | Date;
-  dueDate?: null | Date; // should these be optional?
+  dueDate?: null | Date;
   description?: string;
   children: Todo[];
 }

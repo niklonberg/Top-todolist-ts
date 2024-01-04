@@ -31,7 +31,7 @@ class TodoContentUIManager extends UIManager {
     if (navListItem.dataset.todo) {
       const todoToRender = this.TodoManager.getTodo(
         Number(navListItem.dataset.todo),
-        this.TodoManager.getTopLevelTodos(), // why does this need 2nd argument when it has default val
+        this.TodoManager.getTopLevelTodos(),
       );
 
       todoToRender.children.forEach((childTodo) => {

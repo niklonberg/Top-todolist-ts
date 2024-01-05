@@ -19,6 +19,7 @@ class TodoContentUIManager extends UIManager {
   }
 
   showCreateChildTodoBtn() {
+    // do we even need this function
     this.createChildTodoBtn.classList.remove('hidden');
   }
 

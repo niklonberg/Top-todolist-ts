@@ -3,16 +3,27 @@
     background-color: var(--primary-contrast);
     overflow-wrap: break-word;
     max-width: 300px;
-    padding-inline: var(--m-gap);
   }
 
   #nav-bar ul {
     list-style: none;
     padding: 0;
+    margin: 0;
   }
 
   #nav-bar .list-item {
-    padding-inline: var(--sm-gap);
+    margin-inline: var(--m-gap);
+    position: relative;
+  }
+
+  #nav-bar .list-item:not(:last-child)::after {
+    position: absolute;
+    content: '';
+    background-color: rgb(82, 82, 82);
+    width: 100%;
+    height: 1px;
+    bottom: 0;
+    left: 0;
   }
 
   #nav-bar .list-item:hover {
@@ -20,8 +31,20 @@
   }
 
   #nav-bar h2 {
-    border-bottom: 2px solid var(--text-color);
     letter-spacing: 1.5px;
+    position: relative;
+    padding-inline: var(--m-gap);
+    margin-bottom: 0;
+  }
+
+  #nav-bar h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: black;
   }
 
   #nav-bar .list-item-details {

@@ -16,6 +16,11 @@ class TodoContentUIManager extends UIManager {
 
   renderSelectedGroup(navListItem: HTMLLIElement) {
     this.selectedTodoGrouping.innerHTML = '';
+    const todoParentTitle = this.createElement<HTMLHeadingElement>('H1');
+    todoParentTitle.textContent =
+      navListItem.querySelector('.list-item-title').textContent;
+    this.selectedTodoGrouping.append(todoParentTitle);
+
     if (navListItem.id === 'all-tasks') {
     }
 

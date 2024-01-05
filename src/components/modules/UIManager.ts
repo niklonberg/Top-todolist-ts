@@ -1,6 +1,6 @@
 class UIManager {
-  // do our child classes actually use this static method??
-  static createElement<T extends HTMLElement>(
+  // eslint-disable-next-line class-methods-use-this
+  createElement<T extends HTMLElement>(
     type: string = 'div',
     classname: string = '',
     id: string = '',

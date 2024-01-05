@@ -23,7 +23,7 @@
                 width="25px"
                 alt=""
               />
-              <h3>All Tasks</h3>
+              <h3 class="list-item-title">All Tasks</h3>
             </li>
             <li id="today-tasks" class="list-item">
               <img
@@ -32,7 +32,7 @@
                 width="25px"
                 alt=""
               />
-              <h3>Today</h3>
+              <h3 class="list-item-title">Today</h3>
             </li>
             <li id="week-tasks" class="list-item">
               <img
@@ -41,7 +41,7 @@
                 width="25px"
                 alt=""
               />
-              <h3>Next 7 days</h3>
+              <h3 class="list-item-title">Next 7 days</h3>
             </li>
             <li id="urgent-tasks" class="list-item">
               <img
@@ -50,17 +50,19 @@
                 width="25px"
                 alt=""
               />
-              <h3>Urgent</h3>
+              <h3 class="list-item-title">Urgent</h3>
             </li>
           </ul>
-          <h2>Projects</h2>
+          <h2>Todos</h2>
           <ul id="top-level-todos-list"></ul>
-          <button id="create-new-project">Create project</button>
+          <button id="create-new-todo">Create todo</button>
         </nav>
         <section id="todo-content">
           <!-- find good id name for below -->
-          <div id="selected-grouping"></div>
-          <button id="create-new-todo">Create todo</button>
+          <div id="selected-grouping">
+            <p>Select or create a new todo in the navbar!</p>
+          </div>
+          <button id="create-new-todo" class="hidden">Create todo</button>
         </section>
       </main>
     </div>

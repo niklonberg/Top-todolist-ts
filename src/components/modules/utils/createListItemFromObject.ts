@@ -67,7 +67,6 @@ function createListItemFromObject(
   }
 
   li.append(editActions);
-
   return li;
 }
 

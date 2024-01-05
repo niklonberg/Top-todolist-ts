@@ -1,9 +1,20 @@
 @layer component {
   .list-item {
+    position: relative;
     display: flex;
     align-items: center;
     gap: var(--sm-gap);
     cursor: pointer;
+  }
+
+  .list-item:not(:last-child)::after {
+    position: absolute;
+    content: '';
+    background-color: rgb(82, 82, 82);
+    width: 100%;
+    height: 1px;
+    bottom: 0;
+    left: 0;
   }
 
   .list-item.todo-complete {

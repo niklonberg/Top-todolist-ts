@@ -1,6 +1,6 @@
 @layer component {
   #todo-content {
-    box-shadow: 5px 4px 10px 0px rgba(0, 0, 0, 0.2) inset;
+    box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.2) inset;
     padding: var(--l-gap);
     flex: 1;
   }
@@ -12,6 +12,8 @@
     margin: 0;
     padding: var(--m-gap);
     word-break: break-all;
+    border-radius: 10px;
+    margin-bottom: 10px;
   }
 
   #todo-content ul {
@@ -20,7 +22,7 @@
 
   #todo-content .list-item {
     gap: var(--m-gap);
-    padding: var(--sm-gap);
+    padding-inline: var(--sm-gap);
   }
 
   #todo-content .list-item:hover {

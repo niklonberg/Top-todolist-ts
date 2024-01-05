@@ -57,9 +57,6 @@ MyTodoManager.addChildTodoToCurrSelectedTodo(childTodoFive);
 MyTodoManager.deleteChildTodo(2);
 MyNavbarManager.renderTopLevelTodosList();
 
-/* make init functions, for the adding of event listeners
-for the different UIManagers */
-
 // // UIManager.renderSelectedGroup();
 log(MyTodoManager);
 log(MyNavbarManager);

@@ -7,11 +7,19 @@ class TodoContentUIManager extends UIManager {
 
   selectedTodoGrouping: HTMLUListElement;
 
+  createChildTodoBtn: HTMLButtonElement;
+
   constructor(public TodoManager: TodoManagerInterface) {
     super();
     this.TodoManager = TodoManager;
     this.todoContentSection = document.querySelector('#todo-content');
     this.selectedTodoGrouping = document.querySelector('#selected-grouping');
+    this.createChildTodoBtn = document.querySelector('#create-child-todo');
+    this.createChildTodoBtn.addEventListener('click', this.addChildTodoForm);
+  }
+
+  showCreateChildTodoBtn() {
+    this.createChildTodoBtn.classList.remove('hidden');
   }
 
   renderSelectedGroup(navListItem: HTMLLIElement) {
@@ -45,6 +53,12 @@ class TodoContentUIManager extends UIManager {
         );
       });
     }
+
+    this.showCreateChildTodoBtn();
+  }
+
+  addChildTodoForm() {
+    // call FormManagers addChildTodoForm()
   }
 }
 

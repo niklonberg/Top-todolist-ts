@@ -8,7 +8,7 @@ function TodoFactory(templateObj: FormTemplateObj): Todo {
     isUrgent: templateObj.isUrgent || false,
     isCompleted: false,
     dateCompleted: null,
-    dueDate: templateObj.dueDate || null,
+    dueDate: templateObj.dueDate || null, // ensure correct creation of date object
     description: templateObj.description,
     children: [],
   };

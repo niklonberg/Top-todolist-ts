@@ -59,31 +59,27 @@ class NavbarManager extends UIManager {
   addParentTodoForm() {
     if (!this.topLevelTodosList.querySelector('form')) {
       const form = TodoFormFactory();
-      form.addEventListener(
-        'submit',
-        (e) => {
-          e.preventDefault();
-          const formData = new FormData(form);
-          const tempObj: any = {};
-          formData.forEach((value, key) => {
-            tempObj[key] = value;
-          });
-          const FormTemplateObject: FormTemplateObj = tempObj;
-          const todo = TodoFactory(FormTemplateObject);
-          this.TodoManager.addTopLevelTodo(todo);
-          form.remove();
-          this.renderTopLevelTodosList(); // make renderLatestTopLevelTodo
-        },
-        { once: true },
-      );
+      form.addEventListener('submit', (e) => this.submitForm(e, form), {
+        once: true,
+      });
       this.topLevelTodosList.append(form);
       // hide create new btn
     }
   }
 
   // inherit this method from UIManager
-  submitForm() {
-    // implementation can be different
+  submitForm(e: Event, form: HTMLFormElement) {
+    e.preventDefault();
+    const formData = new FormData(form);
+    const tempObj: any = {};
+    formData.forEach((value, key) => {
+      tempObj[key] = value;
+    });
+    const FormTemplateObject: FormTemplateObj = tempObj;
+    const todo = TodoFactory(FormTemplateObject);
+    this.TodoManager.addTopLevelTodo(todo);
+    form.remove();
+    this.renderTopLevelTodosList(); // make renderLatestTopLevelTodo
   }
 }
 

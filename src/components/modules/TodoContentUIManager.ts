@@ -1,6 +1,8 @@
 import UIManager from './UIManager';
+import TodoFormFactory from './utils/TodoFormCreator';
 import createListItemFromObject from './utils/createListItemFromObject';
-import { TodoManagerInterface } from './utils/interfaces';
+import { TodoManagerInterface, FormTemplateObj } from './utils/interfaces';
+import TodoFactory from './TodoFactory';
 
 class TodoContentUIManager extends UIManager {
   todoContentSection: HTMLElement;
@@ -15,14 +17,13 @@ class TodoContentUIManager extends UIManager {
     this.todoContentSection = document.querySelector('#todo-content');
     this.selectedTodoGrouping = document.querySelector('#selected-grouping');
     this.createChildTodoBtn = document.querySelector('#create-child-todo');
-    this.createChildTodoBtn.addEventListener('click', this.addChildTodoForm);
+    this.createChildTodoBtn.addEventListener('click', () =>
+      this.addChildTodoForm(),
+    );
   }
 
-  showCreateChildTodoBtn() {
-    // do we even need this function
-    this.createChildTodoBtn.classList.remove('hidden');
-  }
-
+  /* revisit me. how can we reRender selected group when
+  we add a new childTodo?? */
   renderSelectedGroup(navListItem: HTMLLIElement) {
     this.selectedTodoGrouping.innerHTML = '';
     const todoParentTitle = this.createElement<HTMLHeadingElement>('H1');
@@ -55,16 +56,33 @@ class TodoContentUIManager extends UIManager {
       });
     }
 
-    this.showCreateChildTodoBtn();
+    this.showElement(this.createChildTodoBtn);
   }
 
   addChildTodoForm() {
-    //
+    if (!this.todoContentSection.querySelector('form')) {
+      const form = TodoFormFactory();
+      form.addEventListener('submit', (e) => this.submitForm(e, form), {
+        once: true,
+      });
+      this.todoContentSection.append(form);
+      this.hideElement(this.createChildTodoBtn);
+    }
   }
 
-  // inherit this method from UIManager
-  submitForm() {
-    // implementation can be different
+  submitForm(e: Event, form: HTMLFormElement) {
+    e.preventDefault();
+    const formData = new FormData(form);
+    const tempObj: any = {};
+    formData.forEach((value, key) => {
+      tempObj[key] = value;
+    });
+    const FormTemplateObject: FormTemplateObj = tempObj;
+    const todo = TodoFactory(FormTemplateObject);
+    this.TodoManager.addChildTodoToCurrSelectedTodo(todo);
+    form.remove();
+    // this.renderSelectedGroup();
+    this.showElement(this.createChildTodoBtn);
   }
 }
 

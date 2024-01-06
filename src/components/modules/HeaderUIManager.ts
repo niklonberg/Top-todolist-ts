@@ -1,14 +1,19 @@
 import UIManager from './UIManager';
 
 class HeaderManager extends UIManager {
-  hideSideBarBtn: HTMLButtonElement;
+  hideNavBarBtn: HTMLButtonElement;
 
   toggleThemeBtn: HTMLButtonElement;
 
   constructor() {
     super();
-    this.hideSideBarBtn = document.querySelector('#hide-sidebar');
+    this.hideNavBarBtn = document.querySelector('#hide-navbar');
+    this.hideNavBarBtn.addEventListener('click', this.toggleSidebarVisibility);
     this.toggleThemeBtn = document.querySelector('#toggle-theme');
+  }
+
+  toggleSidebarVisibility() {
+    // this.
   }
 }
 

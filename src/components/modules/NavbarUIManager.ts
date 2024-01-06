@@ -1,8 +1,9 @@
 import UIManager from './UIManager';
 import createListItemFromObject from './utils/createListItemFromObject';
 import TodoContentUIManager from './TodoContentUIManager';
-import { TodoManagerInterface } from './utils/interfaces';
+import { TodoManagerInterface, FormTemplateObj } from './utils/interfaces';
 import TodoFormFactory from './utils/TodoFormCreator';
+import TodoFactory from './TodoFactory';
 
 class NavbarManager extends UIManager {
   navBar: HTMLElement;
@@ -28,7 +29,6 @@ class NavbarManager extends UIManager {
     );
     this.createTodoBtn = document.querySelector('#create-todo');
     this.createTodoBtn.addEventListener('click', () => {
-      console.log('iran');
       this.addParentTodoForm();
     });
   }
@@ -58,10 +58,32 @@ class NavbarManager extends UIManager {
 
   addParentTodoForm() {
     if (!this.topLevelTodosList.querySelector('form')) {
-      const form = this.createElement<HTMLFormElement>('form', 'todo-form');
-      form.innerHTML = TodoFormFactory();
+      const form = TodoFormFactory();
+      form.addEventListener(
+        'submit',
+        (e) => {
+          e.preventDefault();
+          const formData = new FormData(form);
+          const tempObj: any = {};
+          formData.forEach((value, key) => {
+            tempObj[key] = value;
+          });
+          const FormTemplateObject: FormTemplateObj = tempObj;
+          const todo = TodoFactory(FormTemplateObject);
+          this.TodoManager.addTopLevelTodo(todo);
+          form.remove();
+          this.renderTopLevelTodosList(); // make renderLatestTopLevelTodo
+        },
+        { once: true },
+      );
       this.topLevelTodosList.append(form);
+      // hide create new btn
     }
+  }
+
+  // inherit this method from UIManager
+  submitForm() {
+    // implementation can be different
   }
 }
 

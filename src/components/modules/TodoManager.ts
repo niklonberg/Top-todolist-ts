@@ -57,12 +57,12 @@ class TodoManager implements TodoManagerInterface {
   }
 
   /* Add methods */
-  addTopLevelTodo(item: Todo): void {
-    this.topLevelTodos.push(item);
+  addTopLevelTodo(todo: Todo): void {
+    this.topLevelTodos.push(todo);
   }
 
-  addChildTodoToCurrSelectedTodo(item: Todo): void {
-    this.currSelectedTodo.children.push(item);
+  addChildTodoToCurrSelectedTodo(todo: Todo): void {
+    this.currSelectedTodo.children.push(todo);
   }
 
   /* Delete methods */

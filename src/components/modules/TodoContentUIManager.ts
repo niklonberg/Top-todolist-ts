@@ -59,7 +59,12 @@ class TodoContentUIManager extends UIManager {
   }
 
   addChildTodoForm() {
-    // call FormManagers addChildTodoForm()
+    //
+  }
+
+  // inherit this method from UIManager
+  submitForm() {
+    // implementation can be different
   }
 }
 

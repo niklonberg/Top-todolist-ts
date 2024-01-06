@@ -63,11 +63,10 @@ class NavbarManager extends UIManager {
         once: true,
       });
       this.topLevelTodosList.append(form);
-      // hide create new btn
+      this.hideElement(this.createTodoBtn);
     }
   }
 
-  // inherit this method from UIManager
   submitForm(e: Event, form: HTMLFormElement) {
     e.preventDefault();
     const formData = new FormData(form);
@@ -80,6 +79,7 @@ class NavbarManager extends UIManager {
     this.TodoManager.addTopLevelTodo(todo);
     form.remove();
     this.renderTopLevelTodosList(); // make renderLatestTopLevelTodo
+    this.showElement(this.createTodoBtn);
   }
 }
 

@@ -12,7 +12,7 @@
   }
 
   #nav-bar .list-item {
-    margin-inline: var(--m-gap);
+    padding-inline: var(--m-gap);
   }
 
   #nav-bar .list-item:hover {

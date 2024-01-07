@@ -1,6 +1,7 @@
 .filled-btn-container {
   display: flex;
   justify-content: center;
+  margin-block: var(--m-gap);
 }
 
 .filled-btn {

@@ -67,6 +67,47 @@
           <ul id="selected-grouping">
             <p>Select or create a new todo in the navbar!</p>
           </ul>
+          <!-- TEMP FORM -->
+          <form action="" class="todo-form">
+            <div class="input-container">
+              <label for="title" class="text-input-label">Title</label>
+              <span class="required-input">Required</span>
+              <input
+                class="text-input"
+                type="text"
+                name="title"
+                id="title"
+                required
+              />
+            </div>
+            <div class="input-container">
+              <label for="description" class="text-input-label"
+                >Description
+              </label>
+              <input
+                type="text"
+                name="description"
+                id="description"
+                class="text-input"
+              />
+            </div>
+            <div class="input-container">
+              <label for="isUrgent">Urgent</label>
+              <input
+                type="checkbox"
+                name="isUrgent"
+                id="isUrgent"
+                value="true"
+              />
+            </div>
+            <div class="input-container">
+              <label for="dueDate">Duedate</label>
+              <input type="date" name="dueDate" id="dueDate" />
+            </div>
+            <button type="submit">Confirm</button>
+            <button type="button" class="cancel-form">Cancel</button>
+          </form>
+          <!-- TEMP FORM -->
           <div class="filled-btn-container">
             <button id="create-child-todo" class="hidden filled-btn">
               Create sub-task

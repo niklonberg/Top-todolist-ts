@@ -1,5 +1,6 @@
 @layer component {
   #main-header {
+    background-color: var(--primary-darker);
     padding-inline: var(--m-gap);
     display: flex;
     justify-content: space-between;

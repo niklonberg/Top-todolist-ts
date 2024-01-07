@@ -9,7 +9,10 @@
     <div id="todo-wrapper">
       <header id="main-header">
         <button id="hide-navbar">Hide Navbar</button>
-        <h2>Task<span>Alchemy</span></h2>
+        <h2>
+          Task<span>Alchemy</span>
+          <img src="./images/TaskAlchemy.png" width="25" height="25" alt="" />
+        </h2>
         <button id="toggle-theme">Toggle Theme</button>
       </header>
       <main id="app-content">
@@ -55,14 +58,20 @@
           </ul>
           <h2>Todos</h2>
           <ul id="top-level-todos-list"></ul>
-          <button id="create-todo">Create new</button>
+          <div class="filled-btn-container">
+            <button id="create-todo" class="filled-btn">Create new</button>
+          </div>
         </nav>
         <section id="todo-content">
           <!-- find good id name for below -->
           <ul id="selected-grouping">
             <p>Select or create a new todo in the navbar!</p>
           </ul>
-          <button id="create-child-todo" class="hidden">Create sub-task</button>
+          <div class="filled-btn-container">
+            <button id="create-child-todo" class="hidden filled-btn">
+              Create sub-task
+            </button>
+          </div>
         </section>
       </main>
     </div>

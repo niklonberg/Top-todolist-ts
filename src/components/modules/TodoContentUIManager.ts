@@ -61,16 +61,19 @@ class TodoContentUIManager extends UIManager {
 
   addChildTodoForm() {
     if (!this.todoContentSection.querySelector('form')) {
+      // abstract into fn?
       const form = TodoFormFactory();
       form.addEventListener('submit', (e) => this.submitForm(e, form), {
         once: true,
       });
+      // abstract into fn?
       this.todoContentSection.append(form);
       this.hideElement(this.createChildTodoBtn);
     }
   }
 
   submitForm(e: Event, form: HTMLFormElement) {
+    // abstract into fn?
     e.preventDefault();
     const formData = new FormData(form);
     const tempObj: any = {};
@@ -79,9 +82,10 @@ class TodoContentUIManager extends UIManager {
     });
     const FormTemplateObject: FormTemplateObj = tempObj;
     const todo = TodoFactory(FormTemplateObject);
-    this.TodoManager.addChildTodoToCurrSelectedTodo(todo);
     form.remove();
-    // this.renderSelectedGroup();
+    // abstract into fn?
+    this.TodoManager.addChildTodoToCurrSelectedTodo(todo);
+    // this.renderSelectedGroup()
     this.showElement(this.createChildTodoBtn);
   }
 }

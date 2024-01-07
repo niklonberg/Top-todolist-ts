@@ -59,10 +59,12 @@ class NavbarManager extends UIManager {
   addParentTodoForm() {
     // ?below if statement needed when we hide the create new btn?
     if (!this.navBar.querySelector('form')) {
+      // abstract into fn?
       const form = TodoFormFactory();
       form.addEventListener('submit', (e) => this.submitForm(e, form), {
         once: true,
       });
+      // abstract into fn?
       this.navBar.append(form);
       this.hideElement(this.createTodoBtn);
     }
@@ -70,6 +72,7 @@ class NavbarManager extends UIManager {
 
   // maybe make the contents of this into a utility function
   submitForm(e: Event, form: HTMLFormElement) {
+    // abstract into fn?
     e.preventDefault();
     const formData = new FormData(form);
     const tempObj: any = {};
@@ -78,9 +81,10 @@ class NavbarManager extends UIManager {
     });
     const FormTemplateObject: FormTemplateObj = tempObj;
     const todo = TodoFactory(FormTemplateObject);
-    this.TodoManager.addTopLevelTodo(todo);
     form.remove();
-    this.renderTopLevelTodosList(); // make into this.renderLatestParentTodo?
+    // abstract into fn?
+    this.TodoManager.addTopLevelTodo(todo);
+    this.renderTopLevelTodosList();
     this.showElement(this.createTodoBtn);
   }
 }

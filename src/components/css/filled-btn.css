@@ -1,0 +1,14 @@
+.filled-btn-container {
+  display: flex;
+  justify-content: center;
+}
+
+.filled-btn {
+  border: none;
+  background-color: var(--complementary);
+  color: white;
+  padding: 1rem 1.5rem;
+  border-radius: 10px;
+  margin: auto;
+  cursor: pointer;
+}

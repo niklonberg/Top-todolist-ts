@@ -1,6 +1,6 @@
 @layer component {
   #nav-bar {
-    background-color: var(--primary-contrast);
+    /* background-color:; */
     overflow-wrap: break-word;
     max-width: 300px;
   }
@@ -20,10 +20,12 @@
   }
 
   #nav-bar h2 {
+    background-color: var(--primary);
     letter-spacing: 1.5px;
     position: relative;
     padding-inline: var(--m-gap);
-    margin-bottom: 0;
+    margin: 0;
+    padding: var(--sm-gap);
   }
 
   #nav-bar h2::after {

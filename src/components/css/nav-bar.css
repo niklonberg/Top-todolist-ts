@@ -2,7 +2,6 @@
   #nav-bar {
     background-color: var(--primary-lighter);
     overflow-wrap: break-word;
-    max-width: 300px;
   }
 
   #nav-bar ul {

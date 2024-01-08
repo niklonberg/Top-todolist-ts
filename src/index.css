@@ -1,11 +1,11 @@
 @layer component, base;
 
 @import url(./components/css/base.css);
-@import url(./components/css/todo-wrapper.css);
-@import url(./components/css/app-content.css);
+@import url(./components/css/main-wrapper.css);
+@import url(./components/css/main-content.css);
 @import url(./components/css/nav-bar.css);
 @import url(./components/css/list-item.css);
 @import url(./components/css/header.css);
-@import url(./components/css/todo-content.css);
+@import url(./components/css/content-section.css);
 @import url(./components/css/filled-btn.css);
 @import url(./components/css/todo-form.css);

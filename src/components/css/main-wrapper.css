@@ -1,0 +1,6 @@
+@layer component {
+  #main-wrapper {
+    display: flex;
+    min-height: 100vh;
+  }
+}

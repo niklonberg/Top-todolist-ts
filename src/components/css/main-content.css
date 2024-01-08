@@ -1,0 +1,5 @@
+@layer component {
+  #main-content {
+    flex-grow: 1;
+  }
+}

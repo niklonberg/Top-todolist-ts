@@ -1,12 +1,22 @@
 .todo-form {
+  background-color: var(--primary-lighter);
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: var(--m-gap);
+  max-width: 300px;
+  margin-inline: auto;
+  padding: var(--l-gap);
+  border-radius: 20px;
 }
 
 .input-container {
+  display: flex;
+  gap: var(--sm-gap);
+  align-items: center;
+  justify-content: center;
   position: relative;
+  width: 100%;
 }
 
 .text-input-label {
@@ -17,29 +27,34 @@
   transition: all 0.3s ease-in-out;
 }
 
-.text-input {
-  border: 1px solid black;
-  padding-block: 10px;
-  padding-inline: 10px;
-  border-radius: 5px;
-  width: 100%;
-}
-
-.input-container:focus-within .text-input-label {
-  top: -2px;
-  left: 10px;
-  scale: 0.8;
-}
-
-.input-container:focus-within .text-input-label::after {
+.text-input-label::after {
   content: '';
   position: absolute;
-  background-color: white;
   top: 0;
   left: -5px;
   right: -5px;
   bottom: 0;
   z-index: -1;
+}
+
+.input-container:focus-within .text-input-label {
+  top: -2px;
+  left: 5px;
+  scale: 0.8;
+}
+
+.input-container:focus-within .text-input-label::after {
+  background-color: var(--primary-lighter);
+}
+
+.text-input {
+  background-color: var(--primary);
+  color: var(--primary-contrast);
+  border: 1px solid black;
+  padding-block: 10px;
+  padding-inline: 10px;
+  border-radius: 5px;
+  flex: 1;
 }
 
 .required-input {
@@ -51,4 +66,7 @@
 
 .required-input::after {
   content: '*';
+}
+
+.submit-form-btn {
 }

@@ -1,10 +1,9 @@
 @layer base {
   :root {
-    --primary: #29ba65;
-    --primary-darker: #008d35;
-    --complementary: #ba297e;
-    --analogous: #29baae;
-    --text-color: rgb(52, 52, 52);
+    --primary: #000000;
+    --primary-lighter: #26292a;
+    --primary-contrast: #ffffff;
+    --secondary: #9621fb;
 
     --sm-gap: 10px;
     --m-gap: 20px;
@@ -22,8 +21,8 @@
 
   body {
     font-family: system-ui, sans-serif;
-    background-color: white;
-    color: var(--text-color);
+    background-color: var(--primary);
+    color: var(--primary-contrast);
     margin: 0;
   }
 

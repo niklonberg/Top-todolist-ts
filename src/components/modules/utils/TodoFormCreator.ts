@@ -5,6 +5,7 @@ function TodoFormFactory() {
   const formTemplate = `
   <div class="input-container">
     <label for="title" class="text-input-label">Title</label>
+    <span class="required-input">Required</span>
     <input
       class="text-input"
       type="text"
@@ -37,8 +38,8 @@ function TodoFormFactory() {
     <label for="dueDate">Duedate</label>
     <input type="date" name="dueDate" id="dueDate" />
   </div>
-  <button type="submit">Confirm</button>
-  <button type="button" class="cancel-form">Cancel</button>
+  <button type="submit" class="submit-form-btn">Confirm</button>
+  <button type="button" class="cancel-form-btn">Cancel</button>
   `;
   form.innerHTML = formTemplate;
   return form;

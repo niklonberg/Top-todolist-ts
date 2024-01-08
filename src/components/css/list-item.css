@@ -5,16 +5,18 @@
     align-items: center;
     gap: var(--sm-gap);
     cursor: pointer;
+    padding-inline: var(--m-gap);
   }
 
   .list-item:not(:last-child)::after {
     position: absolute;
     content: '';
     background-color: rgb(82, 82, 82);
-    width: 100%;
+    width: 90%;
     height: 1px;
     bottom: 0;
-    left: 0;
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   .list-item.todo-complete {
@@ -32,7 +34,7 @@
   }
 
   .toggle-complete-btn.checked {
-    background-image: url(/src/images/check-mark.png);
+    /* background-image: url(/src/images/check-mark.png); */
     background-size: 100%;
     background-repeat: no-repeat;
     border-radius: 50%;
@@ -41,13 +43,13 @@
   .toggle-important-btn {
     width: 20px;
     height: 20px;
-    background: url(/src/images/star-outline.png);
+    /* background: url(/src/images/star-outline.png); */
     background-size: contain;
     border: none;
   }
 
   .toggle-important-btn.checked {
-    background-image: url(/src/images/star.png);
+    /* background-image: url(/src/images/star.png); */
     animation: scaleImpBtn 1s ease-out;
   }
 

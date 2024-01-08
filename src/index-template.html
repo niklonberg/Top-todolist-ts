@@ -8,12 +8,11 @@
   <body>
     <div id="todo-wrapper">
       <header id="main-header">
-        <button id="hide-navbar">Hide Navbar</button>
-        <h2>
-          Task<span>Alchemy</span>
-          <img src="./images/TaskAlchemy.png" width="25" height="25" alt="" />
-        </h2>
-        <button id="toggle-theme">Toggle Theme</button>
+        <h2>Task<span>Master</span></h2>
+        <button
+          id="toggle-theme-btn"
+          aria-label="Toggle light/dark theme"
+        ></button>
       </header>
       <main id="app-content">
         <nav id="nav-bar">
@@ -82,8 +81,8 @@
             </div>
             <div class="input-container">
               <label for="description" class="text-input-label"
-                >Description
-              </label>
+                >Description</label
+              >
               <input
                 type="text"
                 name="description"

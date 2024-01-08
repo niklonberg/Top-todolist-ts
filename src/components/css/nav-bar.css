@@ -11,10 +11,6 @@
     margin: 0;
   }
 
-  #nav-bar .list-item {
-    padding-inline: var(--m-gap);
-  }
-
   #nav-bar .list-item:hover {
     background-color: var(--primary);
   }

@@ -7,11 +7,10 @@
 
   #todo-content h1 {
     text-align: center;
-    background-color: var(--secondary);
+    background-color: var(--primary);
     color: var(--primary-contrast);
     margin: 0;
     padding: var(--m-gap);
-    word-break: break-all;
     border-radius: 10px;
     margin-bottom: 10px;
   }
@@ -21,8 +20,7 @@
   }
 
   #todo-content .list-item {
-    gap: var(--m-gap);
-    padding-inline: var(--sm-gap);
+    padding: 0;
   }
 
   #todo-content .list-item:hover {

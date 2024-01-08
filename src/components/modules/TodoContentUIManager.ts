@@ -5,7 +5,9 @@ import { TodoManagerInterface, FormTemplateObj } from './utils/interfaces';
 import TodoFactory from './TodoFactory';
 
 class TodoContentUIManager extends UIManager {
-  todoContentSection: HTMLElement;
+  mainContentSection: HTMLElement;
+
+  topLevelTodosList: HTMLUListElement;
 
   selectedTodoGrouping: HTMLUListElement;
 
@@ -14,7 +16,8 @@ class TodoContentUIManager extends UIManager {
   constructor(public TodoManager: TodoManagerInterface) {
     super();
     this.TodoManager = TodoManager;
-    this.todoContentSection = document.querySelector('#todo-content');
+    this.mainContentSection = document.querySelector('#main-content');
+    this.topLevelTodosList = document.querySelector('#top-level-todos-list');
     this.selectedTodoGrouping = document.querySelector('#selected-grouping');
     this.createChildTodoBtn = document.querySelector('#create-child-todo');
     this.createChildTodoBtn.addEventListener('click', () =>
@@ -22,9 +25,53 @@ class TodoContentUIManager extends UIManager {
     );
   }
 
+  renderTopLevelTodosList() {
+    this.topLevelTodosList.innerHTML = '';
+    const topLevelTodos = this.TodoManager.getTopLevelTodos();
+    topLevelTodos.forEach((todo) =>
+      this.topLevelTodosList.appendChild(
+        createListItemFromObject(todo, 'top-level'),
+      ),
+    );
+  }
+
   /* revisit me. how can we reRender selected group when
   we add a new childTodo?? */
-  renderSelectedGroup(navListItem: HTMLLIElement) {
+  renderSelectedGroup(navListItem: HTMLLIElement) {}
+
+  addChildTodoForm() {
+    if (!this.mainContentSection.querySelector('form')) {
+      const form = TodoFormFactory();
+      form.addEventListener('submit', (e) => this.submitForm(e, form), {
+        once: true,
+      });
+
+      this.mainContentSection.append(form);
+      this.hideElement(this.createChildTodoBtn);
+    }
+  }
+
+  submitForm(e: Event, form: HTMLFormElement) {
+    e.preventDefault();
+    const formData = new FormData(form);
+    const tempObj: any = {};
+    formData.forEach((value, key) => {
+      tempObj[key] = value;
+    });
+    const FormTemplateObject: FormTemplateObj = tempObj;
+    const todo = TodoFactory(FormTemplateObject);
+    form.remove();
+
+    this.TodoManager.addChildTodoToCurrSelectedTodo(todo);
+    // this.renderSelectedGroup()
+    this.showElement(this.createChildTodoBtn);
+  }
+}
+
+export default TodoContentUIManager;
+
+/* 
+renderSelectedGroup(navListItem: HTMLLIElement) {
     this.selectedTodoGrouping.innerHTML = '';
     const todoParentTitle = this.createElement<HTMLHeadingElement>('H1');
     todoParentTitle.textContent =
@@ -58,36 +105,4 @@ class TodoContentUIManager extends UIManager {
 
     this.showElement(this.createChildTodoBtn);
   }
-
-  addChildTodoForm() {
-    if (!this.todoContentSection.querySelector('form')) {
-      // abstract into fn?
-      const form = TodoFormFactory();
-      form.addEventListener('submit', (e) => this.submitForm(e, form), {
-        once: true,
-      });
-      // abstract into fn?
-      this.todoContentSection.append(form);
-      this.hideElement(this.createChildTodoBtn);
-    }
-  }
-
-  submitForm(e: Event, form: HTMLFormElement) {
-    // abstract into fn?
-    e.preventDefault();
-    const formData = new FormData(form);
-    const tempObj: any = {};
-    formData.forEach((value, key) => {
-      tempObj[key] = value;
-    });
-    const FormTemplateObject: FormTemplateObj = tempObj;
-    const todo = TodoFactory(FormTemplateObject);
-    form.remove();
-    // abstract into fn?
-    this.TodoManager.addChildTodoToCurrSelectedTodo(todo);
-    // this.renderSelectedGroup()
-    this.showElement(this.createChildTodoBtn);
-  }
-}
-
-export default TodoContentUIManager;
+   */

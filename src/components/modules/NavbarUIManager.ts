@@ -1,16 +1,11 @@
 import UIManager from './UIManager';
-import createListItemFromObject from './utils/createListItemFromObject';
 import TodoContentUIManager from './TodoContentUIManager';
-import { TodoManagerInterface, FormTemplateObj } from './utils/interfaces';
+import { TodoManagerInterface } from './utils/interfaces';
 
 class NavbarManager extends UIManager {
   navBar: HTMLElement;
 
-  topLevelTodosList: HTMLUListElement;
-
   previousListSelection: null | HTMLLIElement;
-
-  createTodoBtn: HTMLButtonElement;
 
   constructor(
     public TodoManager: TodoManagerInterface,
@@ -20,20 +15,9 @@ class NavbarManager extends UIManager {
     this.TodoManager = TodoManager;
     this.TodoContentUIManager = TodoContentUIManager;
     this.previousListSelection = null;
-    this.topLevelTodosList = document.querySelector('#top-level-todos-list');
     this.navBar = document.querySelector('#nav-bar');
     this.navBar.addEventListener('click', (event) =>
       this.selectNavListItem(event),
-    );
-  }
-
-  renderTopLevelTodosList() {
-    this.topLevelTodosList.innerHTML = '';
-    const topLevelTodos = this.TodoManager.getTopLevelTodos();
-    topLevelTodos.forEach((todo) =>
-      this.topLevelTodosList.appendChild(
-        createListItemFromObject(todo, 'top-level'),
-      ),
     );
   }
 
@@ -44,9 +28,9 @@ class NavbarManager extends UIManager {
 
     if (navListItem !== this.previousListSelection && navListItem) {
       this.previousListSelection = navListItem;
-      // if navListItem has data.todo attr do below line
-      this.TodoManager.setSelectedTodo(Number(navListItem.dataset.todo));
-      this.TodoContentUIManager.renderSelectedGroup(navListItem);
+      if (navListItem.id === 'all-tasks')
+        // this will eventually be a "renderTodoSection()"
+        this.TodoContentUIManager.renderTopLevelTodosList();
     }
   }
 }

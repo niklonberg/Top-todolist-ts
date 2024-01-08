@@ -3,6 +3,7 @@ import TodoFactory from './components/modules/TodoFactory';
 import TodoManager from './components/modules/TodoManager';
 import NavbarUIManager from './components/modules/NavbarUIManager';
 import TodoContentUIManager from './components/modules/TodoContentUIManager';
+import HeaderManager from './components/modules/HeaderUIManager';
 
 /* CREATE initAPP() that does all the below */
 
@@ -40,10 +41,11 @@ const topLevelTodoThree = TodoFactory({ title: 'Clean Laboratory' });
 
 const MyTodoManager = new TodoManager();
 const MyTodoContentUIManager = new TodoContentUIManager(MyTodoManager);
-const MyNavbarManager = new NavbarUIManager(
+/* const MyNavbarManager = new NavbarUIManager(
   MyTodoManager,
   MyTodoContentUIManager,
-);
+); */
+const MyHeaderManager = new HeaderManager();
 MyTodoManager.addTopLevelTodo(topLevelTodoOne);
 MyTodoManager.addTopLevelTodo(topLevelTodoTwo);
 MyTodoManager.addTopLevelTodo(topLevelTodoThree);
@@ -55,8 +57,4 @@ MyTodoManager.setSelectedTodo(6);
 MyTodoManager.addChildTodoToCurrSelectedTodo(childTodoFour);
 MyTodoManager.addChildTodoToCurrSelectedTodo(childTodoFive);
 MyTodoManager.deleteChildTodo(2);
-MyNavbarManager.renderTopLevelTodosList();
-
-// // UIManager.renderSelectedGroup();
 log(MyTodoManager);
-log(MyNavbarManager);

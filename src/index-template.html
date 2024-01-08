@@ -16,56 +16,25 @@
       </header>
       <main id="app-content">
         <nav id="nav-bar">
-          <h2>Home</h2>
           <ul id="home">
             <li id="all-tasks" class="list-item">
-              <img
-                src="../src/images/inbox.png"
-                height="25px"
-                width="25px"
-                alt=""
-              />
-              <h3 class="list-item-title">All Tasks</h3>
+              <h3 class="list-item-title">Tasks</h3>
             </li>
             <li id="today-tasks" class="list-item">
-              <img
-                src="../src/images/today.png"
-                height="25px"
-                width="25px"
-                alt=""
-              />
               <h3 class="list-item-title">Today</h3>
             </li>
             <li id="week-tasks" class="list-item">
-              <img
-                src="../src/images/week.png"
-                height="25px"
-                width="25px"
-                alt=""
-              />
               <h3 class="list-item-title">Next 7 days</h3>
             </li>
             <li id="urgent-tasks" class="list-item">
-              <img
-                src="../src/images/star.png"
-                height="25px"
-                width="25px"
-                alt=""
-              />
-              <h3 class="list-item-title">Urgent</h3>
+              <h3 class="list-item-title">Priority</h3>
             </li>
           </ul>
-          <h2>Todos</h2>
-          <ul id="top-level-todos-list"></ul>
-          <div class="filled-btn-container">
-            <button id="create-todo" class="filled-btn">Create new</button>
-          </div>
         </nav>
         <section id="todo-content">
+          <ul id="top-level-todos-list"></ul>
           <!-- find good id name for below -->
-          <ul id="selected-grouping">
-            <p>Select or create a new todo in the navbar!</p>
-          </ul>
+          <ul id="selected-grouping"></ul>
           <!-- TEMP FORM -->
           <form action="" class="todo-form">
             <div class="input-container">
@@ -91,13 +60,12 @@
               />
             </div>
             <div class="input-container">
-              <label for="isUrgent">Urgent</label>
-              <input
-                type="checkbox"
-                name="isUrgent"
-                id="isUrgent"
-                value="true"
-              />
+              <label for="priority">Priority</label>
+              <select id="priority" name="priority">
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+              </select>
             </div>
             <div class="input-container">
               <label for="dueDate">Duedate</label>

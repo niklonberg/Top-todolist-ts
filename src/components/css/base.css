@@ -1,8 +1,8 @@
 @layer base {
   :root {
-    --primary: #000000;
+    --primary: #111111;
     --primary-lighter: #26292a;
-    --primary-contrast: #ffffff;
+    --primary-contrast: #e4e4e4;
     --secondary: #9621fb;
 
     --sm-gap: 10px;
@@ -26,6 +26,12 @@
     margin: 0;
   }
 
+  body.light-theme {
+    --primary: #e4e4e4;
+    --primary-lighter: #c5c5c5;
+    --primary-contrast: #111111;
+  }
+
   input,
   textarea,
   button,
@@ -45,5 +51,9 @@
 
   .hidden {
     display: none;
+  }
+
+  .dark-bg {
+    background-color: var(--primary-lighter);
   }
 }

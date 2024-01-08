@@ -1,6 +1,6 @@
 @layer component {
   #nav-bar {
-    /* background-color:; */
+    background-color: var(--primary-lighter);
     overflow-wrap: break-word;
     max-width: 300px;
   }

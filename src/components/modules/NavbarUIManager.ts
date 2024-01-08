@@ -2,8 +2,6 @@ import UIManager from './UIManager';
 import createListItemFromObject from './utils/createListItemFromObject';
 import TodoContentUIManager from './TodoContentUIManager';
 import { TodoManagerInterface, FormTemplateObj } from './utils/interfaces';
-import TodoFormFactory from './utils/TodoFormCreator';
-import TodoFactory from './TodoFactory';
 
 class NavbarManager extends UIManager {
   navBar: HTMLElement;
@@ -27,10 +25,6 @@ class NavbarManager extends UIManager {
     this.navBar.addEventListener('click', (event) =>
       this.selectNavListItem(event),
     );
-    this.createTodoBtn = document.querySelector('#create-todo');
-    this.createTodoBtn.addEventListener('click', () => {
-      this.addParentTodoForm();
-    });
   }
 
   renderTopLevelTodosList() {
@@ -54,38 +48,6 @@ class NavbarManager extends UIManager {
       this.TodoManager.setSelectedTodo(Number(navListItem.dataset.todo));
       this.TodoContentUIManager.renderSelectedGroup(navListItem);
     }
-  }
-
-  addParentTodoForm() {
-    // ?below if statement needed when we hide the create new btn?
-    if (!this.navBar.querySelector('form')) {
-      // abstract into fn?
-      const form = TodoFormFactory();
-      form.addEventListener('submit', (e) => this.submitForm(e, form), {
-        once: true,
-      });
-      // abstract into fn?
-      this.navBar.append(form);
-      this.hideElement(this.createTodoBtn);
-    }
-  }
-
-  // maybe make the contents of this into a utility function
-  submitForm(e: Event, form: HTMLFormElement) {
-    // abstract into fn?
-    e.preventDefault();
-    const formData = new FormData(form);
-    const tempObj: any = {};
-    formData.forEach((value, key) => {
-      tempObj[key] = value;
-    });
-    const FormTemplateObject: FormTemplateObj = tempObj;
-    const todo = TodoFactory(FormTemplateObject);
-    form.remove();
-    // abstract into fn?
-    this.TodoManager.addTopLevelTodo(todo);
-    this.renderTopLevelTodosList();
-    this.showElement(this.createTodoBtn);
   }
 }
 

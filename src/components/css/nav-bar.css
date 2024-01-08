@@ -4,12 +4,6 @@
     overflow-wrap: break-word;
   }
 
-  #nav-bar ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
   #nav-bar .list-item:hover {
     background-color: var(--primary);
   }

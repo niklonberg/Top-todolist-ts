@@ -1,7 +1,11 @@
 import UIManager from './UIManager';
 import TodoFormFactory from './utils/TodoFormCreator';
 import createListItemFromObject from './utils/createListItemFromObject';
-import { TodoManagerInterface, FormTemplateObj } from './utils/interfaces';
+import {
+  TodoManagerInterface,
+  FormTemplateObj,
+  TodoListItemWithDataset,
+} from './utils/interfaces';
 import TodoFactory from './TodoFactory';
 
 class TodoContentUIManager extends UIManager {
@@ -17,48 +21,55 @@ class TodoContentUIManager extends UIManager {
     super();
     this.TodoManager = TodoManager;
     this.mainContentSection = document.querySelector('#main-content');
+    this.mainContentSection.addEventListener('click', (e) => {
+      const li = (e.target as Element).closest('LI');
+      if (li.parentElement.id === 'top-level-todos') {
+        this.updateSubTodoList(li as TodoListItemWithDataset); // why do i gotta say as
+      }
+
+      if (li.parentElement.id === 'selected-sub-todos') {
+        // do something else
+      }
+    });
   }
 
   createList(listID: string) {
-    return this.createElement<HTMLUListElement>('ul', '', listID);
-  }
-
-  renderTasksSection() {
-    this.mainContentSection.innerHTML = '';
-    const tasksLayoutContainer = this.createElement('div', '', 'todos-layout');
-    const topLevelTodosList = this.renderTopLevelTodosList();
-    const selectedSubTodosList = this.createList('selected-sub-todos');
-    topLevelTodosList.addEventListener('click', (e) =>
-      this.renderSelectedSubTodosList(e),
-    ); // do we need event listeners for each list?
-    // add eventListeners
-    tasksLayoutContainer.append(topLevelTodosList, selectedSubTodosList);
-    this.mainContentSection.append(tasksLayoutContainer);
+    return this.createElement<HTMLUListElement>('ul', 'todos-list', listID);
   }
 
   renderTopLevelTodosList() {
-    const topLevelTodosList = this.createList('top-level-todos-list');
+    const topLevelTodosList = this.createList('top-level-todos');
     this.TodoManager.getTopLevelTodos().forEach((todo) =>
       topLevelTodosList.append(createListItemFromObject(todo, 'top-level')),
     );
     return topLevelTodosList;
   }
 
-  renderSelectedSubTodosList(e: Event) {
-    const todoItem = (e.target as Element).closest('LI') as HTMLLIElement;
-    // i break if you dont click an li inside this topLevelTodosList
-    // if (todoItem.dataset.todo) {
-    //   this.selectedSubTodosList.innerHTML = '';
-    //   this.TodoManager.getTodo(
-    //     Number(todoItem.dataset.todo),
-    //     this.TodoManager.getTopLevelTodos(),
-    //   ).children.forEach((childTodo) => {
-    //     this.selectedSubTodosList.append(
-    //       createListItemFromObject(childTodo, 'todo-list'),
-    //     );
-    //   });
-    // }
+  renderSelectedSubTodosList(todoItem: TodoListItemWithDataset) {
+    const selectedSubTodosList = this.createList('selected-sub-todos');
+    this.TodoManager.getTodo(
+      Number(todoItem.dataset.todo),
+      this.TodoManager.getTopLevelTodos(),
+    ).children.forEach((childTodo) => {
+      selectedSubTodosList.append(
+        createListItemFromObject(childTodo, 'todo-list'),
+      );
+    });
+    return selectedSubTodosList;
   }
+
+  renderTasksSection() {
+    this.mainContentSection.innerHTML = '';
+    const tasksLayoutContainer = this.createElement('div', '', 'todos-layout');
+    const topLevelTodosList = this.renderTopLevelTodosList();
+    const selectedSubTodosList = this.renderSelectedSubTodosList(
+      topLevelTodosList.firstElementChild as TodoListItemWithDataset,
+    ); // why do i gotta say as
+    tasksLayoutContainer.append(topLevelTodosList, selectedSubTodosList);
+    this.mainContentSection.append(tasksLayoutContainer);
+  }
+
+  updateSubTodoList(todoItem: TodoListItemWithDataset) {}
 
   // put form management into seperate class??
   addChildTodoForm() {
@@ -90,40 +101,3 @@ class TodoContentUIManager extends UIManager {
 }
 
 export default TodoContentUIManager;
-
-/* 
-renderSelectedGroup(navListItem: HTMLLIElement) {
-    this.selectedTodoGrouping.innerHTML = '';
-    const todoParentTitle = this.createElement<HTMLHeadingElement>('H1');
-    todoParentTitle.textContent =
-      navListItem.querySelector('.list-item-title').textContent;
-    this.selectedTodoGrouping.append(todoParentTitle);
-
-    if (navListItem.id === 'all-tasks') {
-    }
-
-    if (navListItem.id === 'today-tasks') {
-    }
-
-    if (navListItem.id === 'week-tasks') {
-    }
-
-    if (navListItem.id === 'urgent-tasks') {
-    }
-
-    if (navListItem.dataset.todo) {
-      const todoToRender = this.TodoManager.getTodo(
-        Number(navListItem.dataset.todo),
-        this.TodoManager.getTopLevelTodos(),
-      );
-
-      todoToRender.children.forEach((childTodo) => {
-        this.selectedTodoGrouping.append(
-          createListItemFromObject(childTodo, 'todo-list'),
-        );
-      });
-    }
-
-    this.showElement(this.createChildTodoBtn);
-  }
-   */

@@ -1,9 +1,0 @@
-/* this needs to be shared by all the todo list containers */
-
-#top-level-todos-container {
-  display: flex;
-}
-
-#top-level-todos-list {
-  flex: 1;
-}

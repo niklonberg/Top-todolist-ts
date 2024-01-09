@@ -36,6 +36,12 @@ export interface TodoManagerInterface {
 }
 /* eslint-disable no-unused-vars */
 
+export interface TodoListItemWithDataset extends HTMLElement {
+  dataset: {
+    todo: string;
+  };
+}
+
 export interface User {
   name: string;
   email: string;

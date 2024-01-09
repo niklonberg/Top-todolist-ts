@@ -7,9 +7,9 @@ import TodoFactory from './TodoFactory';
 class TodoContentUIManager extends UIManager {
   mainContentSection: HTMLElement;
 
-  topLevelTodosList: HTMLUListElement;
+  // topLevelTodosList: HTMLUListElement;
 
-  selectedSubTodosList: HTMLUListElement;
+  // selectedSubTodosList: HTMLUListElement;
 
   // createChildTodoBtn: HTMLButtonElement;
 
@@ -17,54 +17,50 @@ class TodoContentUIManager extends UIManager {
     super();
     this.TodoManager = TodoManager;
     this.mainContentSection = document.querySelector('#main-content');
-    this.topLevelTodosList = document.querySelector('#top-level-todos-list');
-    this.topLevelTodosList.addEventListener('click', (e) =>
-      this.renderSelectedTodoChildrenList(e),
-    );
-    this.selectedSubTodosList = document.querySelector('#selected-sub-todos');
-    // this.createChildTodoBtn = document.querySelector('#create-child-todo');
-    // this.createChildTodoBtn.addEventListener('click', () =>
-    //   this.addChildTodoForm(),
-    // );
+  }
+
+  createList(listID: string) {
+    return this.createElement<HTMLUListElement>('ul', '', listID);
   }
 
   renderTasksSection() {
-    // this fn fires when "Tasks" li is clicked in navbar
-    // empty mainContentSection
-    // create topLevelTodosList
-    // create selectedSubTodosList
+    this.mainContentSection.innerHTML = '';
+    const tasksLayoutContainer = this.createElement('div', '', 'todos-layout');
+    const topLevelTodosList = this.renderTopLevelTodosList();
+    const selectedSubTodosList = this.createList('selected-sub-todos');
+    topLevelTodosList.addEventListener('click', (e) =>
+      this.renderSelectedSubTodosList(e),
+    ); // do we need event listeners for each list?
     // add eventListeners
-    // append to mainContentSection
+    tasksLayoutContainer.append(topLevelTodosList, selectedSubTodosList);
+    this.mainContentSection.append(tasksLayoutContainer);
   }
 
   renderTopLevelTodosList() {
-    // maybe this could render the ul as well??
-    // then this list could be rendered wherever we want...
-    this.topLevelTodosList.innerHTML = '';
+    const topLevelTodosList = this.createList('top-level-todos-list');
     this.TodoManager.getTopLevelTodos().forEach((todo) =>
-      this.topLevelTodosList.append(
-        createListItemFromObject(todo, 'top-level'),
-      ),
+      topLevelTodosList.append(createListItemFromObject(todo, 'top-level')),
     );
+    return topLevelTodosList;
   }
-  // fn above and below are very similar, refactor
 
-  renderSelectedTodoChildrenList(e: Event) {
+  renderSelectedSubTodosList(e: Event) {
     const todoItem = (e.target as Element).closest('LI') as HTMLLIElement;
     // i break if you dont click an li inside this topLevelTodosList
-    if (todoItem.dataset.todo) {
-      this.selectedSubTodosList.innerHTML = '';
-      this.TodoManager.getTodo(
-        Number(todoItem.dataset.todo),
-        this.TodoManager.getTopLevelTodos(),
-      ).children.forEach((childTodo) => {
-        this.selectedSubTodosList.append(
-          createListItemFromObject(childTodo, 'todo-list'),
-        );
-      });
-    }
+    // if (todoItem.dataset.todo) {
+    //   this.selectedSubTodosList.innerHTML = '';
+    //   this.TodoManager.getTodo(
+    //     Number(todoItem.dataset.todo),
+    //     this.TodoManager.getTopLevelTodos(),
+    //   ).children.forEach((childTodo) => {
+    //     this.selectedSubTodosList.append(
+    //       createListItemFromObject(childTodo, 'todo-list'),
+    //     );
+    //   });
+    // }
   }
 
+  // put form management into seperate class??
   addChildTodoForm() {
     if (!this.mainContentSection.querySelector('form')) {
       const form = TodoFormFactory();
@@ -76,6 +72,7 @@ class TodoContentUIManager extends UIManager {
     }
   }
 
+  // put form management into seperate class??
   submitForm(e: Event, form: HTMLFormElement) {
     e.preventDefault();
     const formData = new FormData(form);

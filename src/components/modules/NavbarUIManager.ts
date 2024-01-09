@@ -21,7 +21,7 @@ class NavbarManager extends UIManager {
       this.previousListSelection = navListItem;
       if (navListItem.id === 'all-tasks')
         // this will eventually be a "renderTodoSection()"
-        this.TodoContentUIManager.renderTopLevelTodosList();
+        this.TodoContentUIManager.renderTasksSection();
     }
   }
 }

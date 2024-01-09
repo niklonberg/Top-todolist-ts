@@ -23,53 +23,72 @@ class TodoContentUIManager extends UIManager {
     this.mainContentSection = document.querySelector('#main-content');
     this.mainContentSection.addEventListener('click', (e) => {
       const li = (e.target as Element).closest('LI');
-      if (li.parentElement.id === 'top-level-todos') {
-        this.updateSubTodoList(li as TodoListItemWithDataset); // why do i gotta say as
+      if (li?.parentElement.id === 'top-level-todos') {
+        this.mainContentSection
+          .querySelector('#selected-sub-todos')
+          .parentElement.replaceWith(
+            this.renderSelectedSubTodosList(li as TodoListItemWithDataset),
+          );
       }
 
-      if (li.parentElement.id === 'selected-sub-todos') {
+      if (li?.parentElement.id === 'selected-sub-todos') {
         // do something else
       }
     });
   }
 
-  createList(listID: string) {
-    return this.createElement<HTMLUListElement>('ul', 'todos-list', listID);
+  createList(listIDName: string) {
+    return this.createElement<HTMLUListElement>('ul', '', listIDName);
+  }
+
+  createTodosListContainer(title: string) {
+    const todosListContainer = this.createElement<HTMLDivElement>(
+      'div',
+      'todos-list-container',
+    );
+    const h2 = this.createElement<HTMLHeadingElement>('H2');
+    h2.textContent = title;
+    todosListContainer.append(h2);
+    return todosListContainer;
   }
 
   renderTopLevelTodosList() {
-    const topLevelTodosList = this.createList('top-level-todos');
+    const todosListContainer = this.createTodosListContainer('To Do');
+    const ul = this.createList('top-level-todos');
     this.TodoManager.getTopLevelTodos().forEach((todo) =>
-      topLevelTodosList.append(createListItemFromObject(todo, 'top-level')),
+      ul.append(createListItemFromObject(todo, 'top-level')),
     );
-    return topLevelTodosList;
+    todosListContainer.append(ul);
+    return todosListContainer;
   }
 
   renderSelectedSubTodosList(todoItem: TodoListItemWithDataset) {
-    const selectedSubTodosList = this.createList('selected-sub-todos');
+    const todosListContainer = this.createTodosListContainer('Subtasks');
+    const ul = this.createList('selected-sub-todos');
     this.TodoManager.getTodo(
       Number(todoItem.dataset.todo),
       this.TodoManager.getTopLevelTodos(),
     ).children.forEach((childTodo) => {
-      selectedSubTodosList.append(
-        createListItemFromObject(childTodo, 'todo-list'),
-      );
+      ul.append(createListItemFromObject(childTodo, 'todo-list'));
     });
-    return selectedSubTodosList;
+
+    todosListContainer.append(ul);
+
+    return todosListContainer;
   }
 
-  renderTasksSection() {
+  // this only runs once, do we really need it?
+  renderTodosSection() {
     this.mainContentSection.innerHTML = '';
-    const tasksLayoutContainer = this.createElement('div', '', 'todos-layout');
+    const todosLayoutContainer = this.createElement('div', '', 'todos-layout');
     const topLevelTodosList = this.renderTopLevelTodosList();
     const selectedSubTodosList = this.renderSelectedSubTodosList(
-      topLevelTodosList.firstElementChild as TodoListItemWithDataset,
-    ); // why do i gotta say as
-    tasksLayoutContainer.append(topLevelTodosList, selectedSubTodosList);
-    this.mainContentSection.append(tasksLayoutContainer);
+      topLevelTodosList.querySelector('ul')
+        .firstChild as TodoListItemWithDataset,
+    );
+    todosLayoutContainer.append(topLevelTodosList, selectedSubTodosList);
+    this.mainContentSection.append(todosLayoutContainer);
   }
-
-  updateSubTodoList(todoItem: TodoListItemWithDataset) {}
 
   // put form management into seperate class??
   addChildTodoForm() {

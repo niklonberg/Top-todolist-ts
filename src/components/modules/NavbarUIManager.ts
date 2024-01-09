@@ -1,30 +1,21 @@
 import UIManager from './UIManager';
 import TodoContentUIManager from './TodoContentUIManager';
-import { TodoManagerInterface } from './utils/interfaces';
 
 class NavbarManager extends UIManager {
   navBar: HTMLElement;
 
   previousListSelection: null | HTMLLIElement;
 
-  constructor(
-    public TodoManager: TodoManagerInterface,
-    public TodoContentUIManager: TodoContentUIManager,
-  ) {
+  constructor(public TodoContentUIManager: TodoContentUIManager) {
     super();
-    this.TodoManager = TodoManager;
     this.TodoContentUIManager = TodoContentUIManager;
     this.previousListSelection = null;
     this.navBar = document.querySelector('#nav-bar');
-    this.navBar.addEventListener('click', (event) =>
-      this.selectNavListItem(event),
-    );
+    this.navBar.addEventListener('click', (e) => this.selectNavListItem(e));
   }
 
-  selectNavListItem(event: Event) {
-    const navListItem = (event.target as Element).closest(
-      'LI',
-    ) as HTMLLIElement;
+  selectNavListItem(e: Event) {
+    const navListItem = (e.target as Element).closest('LI') as HTMLLIElement;
 
     if (navListItem !== this.previousListSelection && navListItem) {
       this.previousListSelection = navListItem;

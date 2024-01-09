@@ -9,35 +9,61 @@ class TodoContentUIManager extends UIManager {
 
   topLevelTodosList: HTMLUListElement;
 
-  selectedTodoGrouping: HTMLUListElement;
+  selectedSubTodosList: HTMLUListElement;
 
-  createChildTodoBtn: HTMLButtonElement;
+  // createChildTodoBtn: HTMLButtonElement;
 
   constructor(public TodoManager: TodoManagerInterface) {
     super();
     this.TodoManager = TodoManager;
     this.mainContentSection = document.querySelector('#main-content');
     this.topLevelTodosList = document.querySelector('#top-level-todos-list');
-    this.selectedTodoGrouping = document.querySelector('#selected-grouping');
-    this.createChildTodoBtn = document.querySelector('#create-child-todo');
-    this.createChildTodoBtn.addEventListener('click', () =>
-      this.addChildTodoForm(),
+    this.topLevelTodosList.addEventListener('click', (e) =>
+      this.renderSelectedTodoChildrenList(e),
     );
+    this.selectedSubTodosList = document.querySelector('#selected-sub-todos');
+    // this.createChildTodoBtn = document.querySelector('#create-child-todo');
+    // this.createChildTodoBtn.addEventListener('click', () =>
+    //   this.addChildTodoForm(),
+    // );
+  }
+
+  renderTasksSection() {
+    // this fn fires when "Tasks" li is clicked in navbar
+    // empty mainContentSection
+    // create topLevelTodosList
+    // create selectedSubTodosList
+    // add eventListeners
+    // append to mainContentSection
   }
 
   renderTopLevelTodosList() {
+    // maybe this could render the ul as well??
+    // then this list could be rendered wherever we want...
     this.topLevelTodosList.innerHTML = '';
-    const topLevelTodos = this.TodoManager.getTopLevelTodos();
-    topLevelTodos.forEach((todo) =>
-      this.topLevelTodosList.appendChild(
+    this.TodoManager.getTopLevelTodos().forEach((todo) =>
+      this.topLevelTodosList.append(
         createListItemFromObject(todo, 'top-level'),
       ),
     );
   }
+  // fn above and below are very similar, refactor
 
-  /* revisit me. how can we reRender selected group when
-  we add a new childTodo?? */
-  renderSelectedGroup(navListItem: HTMLLIElement) {}
+  renderSelectedTodoChildrenList(e: Event) {
+    const todoItem = (e.target as Element).closest('LI') as HTMLLIElement;
+    // i break if you dont click an li inside this topLevelTodosList
+    if (todoItem.dataset.todo) {
+      this.selectedSubTodosList.innerHTML = '';
+      this.TodoManager.getTodo(
+        Number(todoItem.dataset.todo),
+        this.TodoManager.getTopLevelTodos(),
+      ).children.forEach((childTodo) => {
+        this.selectedSubTodosList.append(
+          createListItemFromObject(childTodo, 'todo-list'),
+        );
+      });
+    }
+  }
 
   addChildTodoForm() {
     if (!this.mainContentSection.querySelector('form')) {
@@ -47,7 +73,6 @@ class TodoContentUIManager extends UIManager {
       });
 
       this.mainContentSection.append(form);
-      this.hideElement(this.createChildTodoBtn);
     }
   }
 
@@ -63,8 +88,7 @@ class TodoContentUIManager extends UIManager {
     form.remove();
 
     this.TodoManager.addChildTodoToCurrSelectedTodo(todo);
-    // this.renderSelectedGroup()
-    this.showElement(this.createChildTodoBtn);
+    // reRender whatever was edited
   }
 }
 

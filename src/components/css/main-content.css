@@ -1,7 +1,16 @@
 @layer component {
+  /* now main-content is always styled this way, you dont want that */
   #main-content {
     flex-grow: 1;
-    display: flex;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    gap: var(--m-gap);
     margin: var(--l-gap);
+  }
+
+  #main-content ul {
+    background-color: var(--primary-lighter);
+    border-radius: 20px;
   }
 }

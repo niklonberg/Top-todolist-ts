@@ -19,16 +19,6 @@ function createEditActionsContainer() {
   return editActions;
 }
 
-// would like this to always find the img
-function createDragIcon() {
-  const img = createElement<HTMLImageElement>('img');
-  img.src = './src/images/drag.png';
-  img.alt = '';
-  img.height = 25;
-  img.width = 25;
-  return img;
-}
-
 function createListItemFromObject(
   todo: Todo,
   destination: 'top-level' | 'todo-list',
@@ -42,7 +32,6 @@ function createListItemFromObject(
   if (destination === 'top-level') {
     // make element draggable
 
-    li.append(createDragIcon());
     li.append(listDetails);
   }
 

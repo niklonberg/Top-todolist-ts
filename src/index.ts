@@ -41,10 +41,7 @@ const topLevelTodoThree = TodoFactory({ title: 'Clean Laboratory' });
 
 const MyTodoManager = new TodoManager();
 const MyTodoContentUIManager = new TodoContentUIManager(MyTodoManager);
-const MyNavbarManager = new NavbarUIManager(
-  MyTodoManager,
-  MyTodoContentUIManager,
-);
+const MyNavbarManager = new NavbarUIManager(MyTodoContentUIManager);
 const MyHeaderManager = new HeaderManager();
 MyTodoManager.addTopLevelTodo(topLevelTodoOne);
 MyTodoManager.addTopLevelTodo(topLevelTodoTwo);

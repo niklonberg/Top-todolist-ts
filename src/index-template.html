@@ -31,9 +31,14 @@
         </ul>
       </nav>
       <main id="main-content">
-        <ul id="top-level-todos-list"></ul>
-        <!-- find good id name for below -->
-        <ul id="selected-sub-todos"></ul>
+        <div id="top-level-todos-container">
+          <ul id="top-level-todos-list"></ul>
+          <!-- place add new btn here -->
+        </div>
+        <div id="selected-sub-todos-container">
+          <ul id="selected-sub-todos"></ul>
+          <!-- place add new btn here -->
+        </div>
         <!-- TEMP FORM -->
         <!-- <form action="" class="todo-form">
           <div class="input-container">
@@ -74,11 +79,6 @@
           <button type="button" class="cancel-form">Cancel</button>
         </form> -->
         <!-- TEMP FORM -->
-        <div class="filled-btn-container">
-          <button id="create-child-todo" class="hidden filled-btn">
-            Create sub-task
-          </button>
-        </div>
       </main>
     </div>
   </body>

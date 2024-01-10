@@ -15,13 +15,12 @@ class TodoContentUIManager extends UIManager {
     this.TodoManager = TodoManager;
     this.mainContentSection = document.querySelector('#main-content');
     this.mainContentSection.addEventListener('click', (e) => {
-      const li = (e.target as Element).closest('LI');
+      const li = (e.target as Element).closest('LI') as TodoListItemWithDataset;
       if (li?.parentElement.id === 'top-level-todos') {
+        this.TodoManager.setSelectedTodo(Number(li.dataset.todo));
         this.mainContentSection
           .querySelector('#selected-sub-todos')
-          .parentElement.replaceWith(
-            this.renderSelectedSubTodosList(li as TodoListItemWithDataset),
-          );
+          .parentElement.replaceWith(this.renderSelectedSubTodosList(li));
       }
       if (li?.parentElement.id === 'selected-sub-todos') {
         // do something else

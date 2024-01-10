@@ -8,8 +8,6 @@ import TodoFormUIManager from './components/modules/TodoFormUIManager';
 
 /* CREATE initAPP() that does all the below */
 
-const { log } = console;
-
 const MyTodoManager = new TodoManager();
 const MyTodoContentUIManager = new TodoContentUIManager(MyTodoManager);
 const MyNavbarManager = new NavbarUIManager(MyTodoContentUIManager);
@@ -54,4 +52,4 @@ MyTodoManager.addTodo(childTodoThree);
 MyTodoManager.setSelectedTodo(6);
 MyTodoManager.addTodo(childTodoFour);
 MyTodoManager.addTodo(childTodoFive);
-log(MyTodoManager);
+console.log(MyTodoManager);

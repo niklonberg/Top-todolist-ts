@@ -16,6 +16,7 @@ class TodoContentUIManager extends UIManager {
     super();
     this.TodoManager = TodoManager;
     this.mainContentSection = document.querySelector('#main-content'); // static
+    // can we move eventListener outside?
     this.mainContentSection.addEventListener('click', (e) => {
       const li = (e.target as Element).closest('LI') as TodoListItemWithDataset;
       if (li?.parentElement.id === 'top-level-todos') {

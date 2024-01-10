@@ -6,6 +6,7 @@ import TodoFactory from './TodoFactory';
 class TodoFormUIManager extends UIManager {
   mainContentSection: HTMLElement;
 
+  // i think it is okay for this to have a dependency on TodoManager, but nothing else
   constructor(private TodoManager: TodoManagerInterface) {
     super();
     this.TodoManager = TodoManager;
@@ -41,7 +42,8 @@ class TodoFormUIManager extends UIManager {
     const todo = TodoFactory(FormTemplateObject);
     form.remove();
     this.TodoManager.addTodo(todo);
-    // reRender whatever was edited
+    // so find way to reRender without having
+    // TodoContentUIManager inside here.
   }
 }
 

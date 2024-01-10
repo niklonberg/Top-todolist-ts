@@ -1,5 +1,4 @@
 import UIManager from './UIManager';
-import TodoFormFactory from './utils/TodoFormCreator';
 import createListItemFromObject from './utils/createListItemFromObject';
 import emptyListFallbackItem from './utils/emptyListFallbackItem';
 import {
@@ -31,7 +30,6 @@ class TodoContentUIManager extends UIManager {
             this.renderSelectedSubTodosList(li as TodoListItemWithDataset),
           );
       }
-
       if (li?.parentElement.id === 'selected-sub-todos') {
         // do something else
       }
@@ -54,7 +52,7 @@ class TodoContentUIManager extends UIManager {
   }
 
   createNewChildTodoBtn(btnID: string) {
-    const btn = this.createElement('button', '', btnID);
+    const btn = this.createElement('button', 'add-todo-btn', btnID);
     btn.textContent = 'Add Task';
     return btn;
   }
@@ -80,12 +78,10 @@ class TodoContentUIManager extends UIManager {
       ul.append(createListItemFromObject(childTodo, 'todo-list'));
     });
     if (ul.childNodes.length === 0) ul.append(emptyListFallbackItem());
-
     const addNewTodoBtn = this.createNewChildTodoBtn(
       'add-child-level-todo-btn',
     );
     todosListContainer.append(ul, addNewTodoBtn);
-
     return todosListContainer;
   }
 
@@ -99,34 +95,6 @@ class TodoContentUIManager extends UIManager {
     );
     todosLayoutContainer.append(topLevelTodosList, selectedSubTodosList);
     this.mainContentSection.append(todosLayoutContainer);
-  }
-
-  // put form management into seperate class??
-  addChildTodoForm() {
-    if (!this.mainContentSection.querySelector('form')) {
-      const form = TodoFormFactory();
-      form.addEventListener('submit', (e) => this.submitForm(e, form), {
-        once: true,
-      });
-
-      this.mainContentSection.append(form);
-    }
-  }
-
-  // put form management into seperate class??
-  submitForm(e: Event, form: HTMLFormElement) {
-    e.preventDefault();
-    const formData = new FormData(form);
-    const tempObj: any = {};
-    formData.forEach((value, key) => {
-      tempObj[key] = value;
-    });
-    const FormTemplateObject: FormTemplateObj = tempObj;
-    const todo = TodoFactory(FormTemplateObject);
-    form.remove();
-
-    this.TodoManager.addChildTodoToCurrSelectedTodo(todo);
-    // reRender whatever was edited
   }
 }
 

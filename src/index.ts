@@ -4,6 +4,7 @@ import TodoManager from './components/modules/TodoManager';
 import NavbarUIManager from './components/modules/NavbarUIManager';
 import TodoContentUIManager from './components/modules/TodoContentUIManager';
 import HeaderManager from './components/modules/HeaderUIManager';
+import TodoFormUIManager from './components/modules/TodoFormUIManager';
 
 /* CREATE initAPP() that does all the below */
 
@@ -13,6 +14,7 @@ const MyTodoManager = new TodoManager();
 const MyTodoContentUIManager = new TodoContentUIManager(MyTodoManager);
 const MyNavbarManager = new NavbarUIManager(MyTodoContentUIManager);
 const MyHeaderManager = new HeaderManager();
+const MyTodoFormUIManager = new TodoFormUIManager();
 
 const childTodoOne = TodoFactory({
   title: 'Paint Walls',

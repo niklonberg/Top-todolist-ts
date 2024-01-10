@@ -1,6 +1,6 @@
 import createElement from './createElement';
 
-function TodoFormFactory() {
+function createTodoForm() {
   const form = createElement<HTMLFormElement>('form', 'todo-form');
   const formTemplate = `
   <div class="input-container">
@@ -45,4 +45,4 @@ function TodoFormFactory() {
   return form;
 }
 
-export default TodoFormFactory;
+export default createTodoForm;

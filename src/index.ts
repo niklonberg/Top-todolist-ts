@@ -11,27 +11,24 @@ import TodoFormUIManager from './components/modules/TodoFormUIManager';
 const { log } = console;
 
 const MyTodoManager = new TodoManager();
-const MyTodoContentUIManager = new TodoContentUIManager(
-  MyTodoManager,
-  '#main-content',
-);
+const MyTodoContentUIManager = new TodoContentUIManager(MyTodoManager);
 const MyNavbarManager = new NavbarUIManager(MyTodoContentUIManager);
 const MyHeaderManager = new HeaderManager();
 const MyTodoFormUIManager = new TodoFormUIManager(MyTodoManager);
 
 const childTodoOne = TodoFactory({
   title: 'Paint Walls',
-  isUrgent: true,
+  priority: 'High',
   dueDate: new Date(2023, 11, 15),
 });
 const childTodoTwo = TodoFactory({
   title: 'Paint Bedroom',
-  isUrgent: false,
+  priority: 'Medium',
   description: 'Hi mom',
 });
 const childTodoThree = TodoFactory({
   title: 'Move Bed',
-  isUrgent: true,
+  priority: 'Low',
   description: 'lift it properly',
 });
 const childTodoFour = TodoFactory({

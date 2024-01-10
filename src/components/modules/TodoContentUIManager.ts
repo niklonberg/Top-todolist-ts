@@ -8,20 +8,19 @@ import {
 import TodoFactory from './TodoFactory';
 
 class TodoContentUIManager extends UIManager {
-  containerElement: HTMLElement;
+  // should mainContentSection be a str in the constructor, so the element
+  // we work in side of can change?
+  mainContentSection: HTMLElement;
 
-  constructor(
-    private TodoManager: TodoManagerInterface,
-    containerElementStr: string,
-  ) {
+  constructor(private TodoManager: TodoManagerInterface) {
     super();
     this.TodoManager = TodoManager;
-    this.containerElement = document.querySelector(containerElementStr);
-    this.containerElement.addEventListener('click', (e) => {
+    this.mainContentSection = document.querySelector('#main-content'); // static
+    this.mainContentSection.addEventListener('click', (e) => {
       const li = (e.target as Element).closest('LI') as TodoListItemWithDataset;
       if (li?.parentElement.id === 'top-level-todos') {
         this.TodoManager.setSelectedTodo(Number(li.dataset.todo));
-        this.containerElement
+        this.mainContentSection
           .querySelector('#selected-sub-todos')
           .parentElement.replaceWith(
             this.renderSelectedSubTodosList(Number(li.dataset.todo)),
@@ -81,7 +80,7 @@ class TodoContentUIManager extends UIManager {
   }
 
   renderTodosSection() {
-    this.containerElement.innerHTML = '';
+    this.mainContentSection.innerHTML = '';
     const todosLayoutContainer = this.createElement('div', '', 'todos-layout');
     const topLevelTodosList = this.renderTopLevelTodosList();
     const firstLi = topLevelTodosList.querySelector('ul')
@@ -90,7 +89,7 @@ class TodoContentUIManager extends UIManager {
       Number(firstLi.dataset.todo),
     );
     todosLayoutContainer.append(topLevelTodosList, selectedSubTodosList);
-    this.containerElement.append(todosLayoutContainer);
+    this.mainContentSection.append(todosLayoutContainer);
   }
 }
 

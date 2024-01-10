@@ -10,6 +10,7 @@ class TodoFormUIManager extends UIManager {
     super();
     this.TodoManager = TodoManager;
     this.mainContentSection = document.querySelector('#main-content');
+    // can we move eventListener outside?
     this.mainContentSection.addEventListener('click', (e) => {
       if ((e.target as Element).classList.contains('add-todo-btn')) {
         if ((e.target as Element).id === 'add-top-level-todo-btn') {

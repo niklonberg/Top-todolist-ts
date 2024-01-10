@@ -1,14 +1,16 @@
+type PriorityLevel = 'Low' | 'Medium' | 'High';
+
 export interface FormTemplateObj {
   title: string;
+  priority?: PriorityLevel;
   dueDate?: null | Date;
   description?: string; // should these be optional?
-  isUrgent?: boolean;
 }
 
 export interface Todo {
   todoID: number;
   title: string;
-  isUrgent: boolean;
+  priority: PriorityLevel;
   isCompleted: boolean;
   dateCompleted: null | Date;
   dueDate: null | Date;

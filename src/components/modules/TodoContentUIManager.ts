@@ -97,8 +97,6 @@ class TodoContentUIManager extends UIManager {
       topLevelTodosList.querySelector('ul')
         .firstChild as TodoListItemWithDataset,
     );
-    // append buttons
-
     todosLayoutContainer.append(topLevelTodosList, selectedSubTodosList);
     this.mainContentSection.append(todosLayoutContainer);
   }

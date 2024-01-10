@@ -9,6 +9,11 @@ import HeaderManager from './components/modules/HeaderUIManager';
 
 const { log } = console;
 
+const MyTodoManager = new TodoManager();
+const MyTodoContentUIManager = new TodoContentUIManager(MyTodoManager);
+const MyNavbarManager = new NavbarUIManager(MyTodoContentUIManager);
+const MyHeaderManager = new HeaderManager();
+
 const childTodoOne = TodoFactory({
   title: 'Paint Walls',
   isUrgent: true,
@@ -32,17 +37,11 @@ const childTodoFive = TodoFactory({
   title: 'Move bed',
   description: 'lift gently',
 });
-
 const topLevelTodoOne = TodoFactory({ title: 'Paint house' });
 const topLevelTodoTwo = TodoFactory({
   title: 'Refurnish Bedroomdkfsksdfkjsdfksdkfksdfdskf',
 });
 const topLevelTodoThree = TodoFactory({ title: 'Clean Laboratory' });
-
-const MyTodoManager = new TodoManager();
-const MyTodoContentUIManager = new TodoContentUIManager(MyTodoManager);
-const MyNavbarManager = new NavbarUIManager(MyTodoContentUIManager);
-const MyHeaderManager = new HeaderManager();
 MyTodoManager.addTopLevelTodo(topLevelTodoOne);
 MyTodoManager.addTopLevelTodo(topLevelTodoTwo);
 MyTodoManager.addTopLevelTodo(topLevelTodoThree);
@@ -53,5 +52,4 @@ MyTodoManager.addChildTodoToCurrSelectedTodo(childTodoThree);
 MyTodoManager.setSelectedTodo(6);
 MyTodoManager.addChildTodoToCurrSelectedTodo(childTodoFour);
 MyTodoManager.addChildTodoToCurrSelectedTodo(childTodoFive);
-MyTodoManager.deleteChildTodo(2);
 log(MyTodoManager);

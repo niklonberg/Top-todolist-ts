@@ -26,10 +26,8 @@ class TodoContentUIManager extends UIManager {
       if (li?.parentElement.id === 'top-level-todos') {
         this.mainContentSection
           .querySelector('#selected-sub-todos')
-          .replaceWith(
-            this.renderSelectedSubTodosList(
-              li as TodoListItemWithDataset,
-            ).querySelector('ul'),
+          .parentElement.replaceWith(
+            this.renderSelectedSubTodosList(li as TodoListItemWithDataset),
           );
       }
 
@@ -54,13 +52,20 @@ class TodoContentUIManager extends UIManager {
     return todosListContainer;
   }
 
+  createNewChildTodoBtn(btnID: string) {
+    const btn = this.createElement('button', '', btnID);
+    btn.textContent = 'Add Task';
+    return btn;
+  }
+
   renderTopLevelTodosList() {
     const todosListContainer = this.createTodosListContainer('To Do');
     const ul = this.createList('top-level-todos');
     this.TodoManager.getTopLevelTodos().forEach((todo) =>
       ul.append(createListItemFromObject(todo, 'top-level')),
     );
-    todosListContainer.append(ul);
+    const addNewTodoBtn = this.createNewChildTodoBtn('add-top-level-todo-btn');
+    todosListContainer.append(ul, addNewTodoBtn);
     return todosListContainer;
   }
 
@@ -74,9 +79,11 @@ class TodoContentUIManager extends UIManager {
       ul.append(createListItemFromObject(childTodo, 'todo-list'));
     });
 
-    // if ul has no children... APPEND single li to it with 'No subtasks' title
-
-    todosListContainer.append(ul);
+    // if ul has no children... APPEND single li with 'No subtasks' title
+    const addNewTodoBtn = this.createNewChildTodoBtn(
+      'add-child-level-todo-btn',
+    );
+    todosListContainer.append(ul, addNewTodoBtn);
 
     return todosListContainer;
   }

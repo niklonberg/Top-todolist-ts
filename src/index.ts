@@ -11,7 +11,10 @@ import TodoFormUIManager from './components/modules/TodoFormUIManager';
 const { log } = console;
 
 const MyTodoManager = new TodoManager();
-const MyTodoContentUIManager = new TodoContentUIManager(MyTodoManager);
+const MyTodoContentUIManager = new TodoContentUIManager(
+  MyTodoManager,
+  '#main-content',
+);
 const MyNavbarManager = new NavbarUIManager(MyTodoContentUIManager);
 const MyHeaderManager = new HeaderManager();
 const MyTodoFormUIManager = new TodoFormUIManager(MyTodoManager);

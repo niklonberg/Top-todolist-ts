@@ -8,17 +8,20 @@ import {
 import TodoFactory from './TodoFactory';
 
 class TodoContentUIManager extends UIManager {
-  mainContentSection: HTMLElement;
+  containerElement: HTMLElement;
 
-  constructor(private TodoManager: TodoManagerInterface) {
+  constructor(
+    private TodoManager: TodoManagerInterface,
+    containerElementStr: string,
+  ) {
     super();
     this.TodoManager = TodoManager;
-    this.mainContentSection = document.querySelector('#main-content');
-    this.mainContentSection.addEventListener('click', (e) => {
+    this.containerElement = document.querySelector(containerElementStr);
+    this.containerElement.addEventListener('click', (e) => {
       const li = (e.target as Element).closest('LI') as TodoListItemWithDataset;
       if (li?.parentElement.id === 'top-level-todos') {
         this.TodoManager.setSelectedTodo(Number(li.dataset.todo));
-        this.mainContentSection
+        this.containerElement
           .querySelector('#selected-sub-todos')
           .parentElement.replaceWith(
             this.renderSelectedSubTodosList(Number(li.dataset.todo)),
@@ -78,7 +81,7 @@ class TodoContentUIManager extends UIManager {
   }
 
   renderTodosSection() {
-    this.mainContentSection.innerHTML = '';
+    this.containerElement.innerHTML = '';
     const todosLayoutContainer = this.createElement('div', '', 'todos-layout');
     const topLevelTodosList = this.renderTopLevelTodosList();
     const firstLi = topLevelTodosList.querySelector('ul')
@@ -87,7 +90,7 @@ class TodoContentUIManager extends UIManager {
       Number(firstLi.dataset.todo),
     );
     todosLayoutContainer.append(topLevelTodosList, selectedSubTodosList);
-    this.mainContentSection.append(todosLayoutContainer);
+    this.containerElement.append(todosLayoutContainer);
   }
 }
 

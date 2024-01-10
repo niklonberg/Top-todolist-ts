@@ -12,11 +12,11 @@ class TodoFormUIManager extends UIManager {
     this.mainContentSection = document.querySelector('#main-content');
     this.mainContentSection.addEventListener('click', (e) => {
       if ((e.target as Element).classList.contains('add-todo-btn'))
-        this.addChildTodoForm();
+        this.addTodoForm();
     });
   }
 
-  addChildTodoForm() {
+  addTodoForm() {
     this.mainContentSection.innerHTML = '';
     const form = createTodoForm();
     form.addEventListener('submit', (e) => this.submitForm(e, form), {
@@ -35,7 +35,7 @@ class TodoFormUIManager extends UIManager {
     const FormTemplateObject: FormTemplateObj = tempObj;
     const todo = TodoFactory(FormTemplateObject);
     form.remove();
-    this.TodoManager.addChildTodoToCurrSelectedTodo(todo);
+    // this.TodoManager.addChildTodoToCurrSelectedTodo(todo);
     // reRender whatever was edited
   }
 }

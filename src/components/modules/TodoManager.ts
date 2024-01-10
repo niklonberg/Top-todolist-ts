@@ -17,7 +17,7 @@ class TodoManager implements TodoManagerInterface {
 
   currSelectedTodo: Todo;
 
-  parentTodo: Todo | null;
+  parentTodo: Todo | null; // we need me?
 
   constructor() {
     // this.user = user;
@@ -57,12 +57,12 @@ class TodoManager implements TodoManagerInterface {
   }
 
   /* Add methods */
-  addTopLevelTodo(todo: Todo): void {
-    this.topLevelTodos.push(todo);
-  }
-
-  addChildTodoToCurrSelectedTodo(todo: Todo): void {
-    this.currSelectedTodo.children.push(todo);
+  addTodo(todo: Todo): void {
+    if (this.currSelectedTodo) {
+      this.currSelectedTodo.children.push(todo);
+    } else {
+      this.topLevelTodos.push(todo);
+    }
   }
 
   /* Delete methods */

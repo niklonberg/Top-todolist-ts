@@ -44,14 +44,14 @@ const topLevelTodoTwo = TodoFactory({
   title: 'Refurnish Bedroomdkfsksdfkjsdfksdkfksdfdskf',
 });
 const topLevelTodoThree = TodoFactory({ title: 'Clean Laboratory' });
-MyTodoManager.addTopLevelTodo(topLevelTodoOne);
-MyTodoManager.addTopLevelTodo(topLevelTodoTwo);
-MyTodoManager.addTopLevelTodo(topLevelTodoThree);
+MyTodoManager.addTodo(topLevelTodoOne);
+MyTodoManager.addTodo(topLevelTodoTwo);
+MyTodoManager.addTodo(topLevelTodoThree);
 MyTodoManager.setSelectedTodo(5);
-MyTodoManager.addChildTodoToCurrSelectedTodo(childTodoOne);
-MyTodoManager.addChildTodoToCurrSelectedTodo(childTodoTwo);
-MyTodoManager.addChildTodoToCurrSelectedTodo(childTodoThree);
+MyTodoManager.addTodo(childTodoOne);
+MyTodoManager.addTodo(childTodoTwo);
+MyTodoManager.addTodo(childTodoThree);
 MyTodoManager.setSelectedTodo(6);
-MyTodoManager.addChildTodoToCurrSelectedTodo(childTodoFour);
-MyTodoManager.addChildTodoToCurrSelectedTodo(childTodoFive);
+MyTodoManager.addTodo(childTodoFour);
+MyTodoManager.addTodo(childTodoFive);
 log(MyTodoManager);

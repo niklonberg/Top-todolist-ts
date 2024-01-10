@@ -1,6 +1,7 @@
 import UIManager from './UIManager';
 import TodoFormFactory from './utils/TodoFormCreator';
 import createListItemFromObject from './utils/createListItemFromObject';
+import emptyListFallbackItem from './utils/emptyListFallbackItem';
 import {
   TodoManagerInterface,
   FormTemplateObj,
@@ -78,8 +79,8 @@ class TodoContentUIManager extends UIManager {
     ).children.forEach((childTodo) => {
       ul.append(createListItemFromObject(childTodo, 'todo-list'));
     });
+    if (ul.childNodes.length === 0) ul.append(emptyListFallbackItem());
 
-    // if ul has no children... APPEND single li with 'No subtasks' title
     const addNewTodoBtn = this.createNewChildTodoBtn(
       'add-child-level-todo-btn',
     );

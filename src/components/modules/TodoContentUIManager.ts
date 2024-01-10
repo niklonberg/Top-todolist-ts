@@ -20,10 +20,12 @@ class TodoContentUIManager extends UIManager {
         this.TodoManager.setSelectedTodo(Number(li.dataset.todo));
         this.mainContentSection
           .querySelector('#selected-sub-todos')
-          .parentElement.replaceWith(this.renderSelectedSubTodosList(li));
+          .parentElement.replaceWith(
+            this.renderSelectedSubTodosList(Number(li.dataset.todo)),
+          );
       }
       if (li?.parentElement.id === 'selected-sub-todos') {
-        // do something else
+        // we can do something else
       }
     });
   }
@@ -43,7 +45,7 @@ class TodoContentUIManager extends UIManager {
     return todosListContainer;
   }
 
-  createNewChildTodoBtn(btnID: string) {
+  createNewTodoBtn(btnID: string) {
     const btn = this.createElement('button', 'add-todo-btn', btnID);
     btn.textContent = 'Add Task';
     return btn;
@@ -55,24 +57,22 @@ class TodoContentUIManager extends UIManager {
     this.TodoManager.getTopLevelTodos().forEach((todo) =>
       ul.append(createListItemFromObject(todo, 'top-level')),
     );
-    const addNewTodoBtn = this.createNewChildTodoBtn('add-top-level-todo-btn');
+    const addNewTodoBtn = this.createNewTodoBtn('add-top-level-todo-btn');
     todosListContainer.append(ul, addNewTodoBtn);
     return todosListContainer;
   }
 
-  renderSelectedSubTodosList(todoItem: TodoListItemWithDataset) {
+  renderSelectedSubTodosList(todoID: number) {
     const todosListContainer = this.createTodosListContainer('Subtasks');
     const ul = this.createUList('selected-sub-todos');
     this.TodoManager.getTodo(
-      Number(todoItem.dataset.todo),
+      todoID,
       this.TodoManager.getTopLevelTodos(),
     ).children.forEach((childTodo) => {
       ul.append(createListItemFromObject(childTodo, 'todo-list'));
     });
     if (ul.childNodes.length === 0) ul.append(emptyListFallbackItem());
-    const addNewTodoBtn = this.createNewChildTodoBtn(
-      'add-child-level-todo-btn',
-    );
+    const addNewTodoBtn = this.createNewTodoBtn('add-child-level-todo-btn');
     todosListContainer.append(ul, addNewTodoBtn);
     return todosListContainer;
   }
@@ -81,9 +81,10 @@ class TodoContentUIManager extends UIManager {
     this.mainContentSection.innerHTML = '';
     const todosLayoutContainer = this.createElement('div', '', 'todos-layout');
     const topLevelTodosList = this.renderTopLevelTodosList();
+    const firstLi = topLevelTodosList.querySelector('ul')
+      .firstChild as TodoListItemWithDataset;
     const selectedSubTodosList = this.renderSelectedSubTodosList(
-      topLevelTodosList.querySelector('ul')
-        .firstChild as TodoListItemWithDataset,
+      Number(firstLi.dataset.todo),
     );
     todosLayoutContainer.append(topLevelTodosList, selectedSubTodosList);
     this.mainContentSection.append(todosLayoutContainer);

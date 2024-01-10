@@ -24,6 +24,7 @@ export interface TodoManagerInterface {
   getTopLevelTodos(): Todo[];
   getTodo(todoID: number, todoArray: Todo[]): Todo;
   setSelectedTodo(todoID: number): void;
+  resetSelectedTodo(): void;
   addTodo(todo: Todo, parentTodo?: Todo): void;
   deleteTopLevelTodo(todoID: number): void;
   deleteChildTodo(todoID: number): void;

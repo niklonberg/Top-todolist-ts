@@ -15,7 +15,7 @@ class TodoManager implements TodoManagerInterface {
 
   private topLevelTodos: Todo[];
 
-  currSelectedTodo: Todo;
+  currSelectedTodo: null | Todo;
 
   parentTodo: Todo | null; // we need me?
 
@@ -54,6 +54,10 @@ class TodoManager implements TodoManagerInterface {
     console.log('todoID is: ', todoID);
     this.currSelectedTodo = this.getTodo(todoID);
     console.log('curr selected todo: ', this.currSelectedTodo);
+  }
+
+  resetSelectedTodo(): void {
+    this.currSelectedTodo = null;
   }
 
   /* Add methods */

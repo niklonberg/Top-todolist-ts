@@ -11,12 +11,16 @@ class TodoFormUIManager extends UIManager {
     this.TodoManager = TodoManager;
     this.mainContentSection = document.querySelector('#main-content');
     this.mainContentSection.addEventListener('click', (e) => {
-      if ((e.target as Element).classList.contains('add-todo-btn'))
-        this.addTodoForm();
+      if ((e.target as Element).classList.contains('add-todo-btn')) {
+        if ((e.target as Element).id === 'add-top-level-todo-btn') {
+          this.TodoManager.resetSelectedTodo();
+        }
+        this.insertTodoForm();
+      }
     });
   }
 
-  addTodoForm() {
+  insertTodoForm() {
     this.mainContentSection.innerHTML = '';
     const form = createTodoForm();
     form.addEventListener('submit', (e) => this.submitForm(e, form), {
@@ -35,7 +39,7 @@ class TodoFormUIManager extends UIManager {
     const FormTemplateObject: FormTemplateObj = tempObj;
     const todo = TodoFactory(FormTemplateObject);
     form.remove();
-    // this.TodoManager.addChildTodoToCurrSelectedTodo(todo);
+    this.TodoManager.addTodo(todo);
     // reRender whatever was edited
   }
 }

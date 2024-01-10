@@ -1,13 +1,14 @@
 import UIManager from './UIManager';
 import createTodoForm from './utils/createTodoForm';
-import { FormTemplateObj } from './utils/interfaces';
+import { FormTemplateObj, TodoManagerInterface } from './utils/interfaces';
 import TodoFactory from './TodoFactory';
 
 class TodoFormUIManager extends UIManager {
   mainContentSection: HTMLElement;
 
-  constructor() {
+  constructor(private TodoManager: TodoManagerInterface) {
     super();
+    this.TodoManager = TodoManager;
     this.mainContentSection = document.querySelector('#main-content');
     this.mainContentSection.addEventListener('click', (e) => {
       if ((e.target as Element).classList.contains('add-todo-btn'))
@@ -25,16 +26,16 @@ class TodoFormUIManager extends UIManager {
   }
 
   submitForm(e: Event, form: HTMLFormElement) {
-    // e.preventDefault();
-    // const formData = new FormData(form);
-    // const tempObj: any = {};
-    // formData.forEach((value, key) => {
-    //   tempObj[key] = value;
-    // });
-    // const FormTemplateObject: FormTemplateObj = tempObj;
-    // const todo = TodoFactory(FormTemplateObject);
-    // form.remove();
-    // this.TodoManager.addChildTodoToCurrSelectedTodo(todo);
+    e.preventDefault();
+    const formData = new FormData(form);
+    const tempObj: any = {};
+    formData.forEach((value, key) => {
+      tempObj[key] = value;
+    });
+    const FormTemplateObject: FormTemplateObj = tempObj;
+    const todo = TodoFactory(FormTemplateObject);
+    form.remove();
+    this.TodoManager.addChildTodoToCurrSelectedTodo(todo);
     // reRender whatever was edited
   }
 }

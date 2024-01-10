@@ -3,7 +3,6 @@ import createListItemFromObject from './utils/createListItemFromObject';
 import emptyListFallbackItem from './utils/emptyListFallbackItem';
 import {
   TodoManagerInterface,
-  FormTemplateObj,
   TodoListItemWithDataset,
 } from './utils/interfaces';
 import TodoFactory from './TodoFactory';
@@ -11,13 +10,7 @@ import TodoFactory from './TodoFactory';
 class TodoContentUIManager extends UIManager {
   mainContentSection: HTMLElement;
 
-  // topLevelTodosList: HTMLUListElement;
-
-  // selectedSubTodosList: HTMLUListElement;
-
-  // createChildTodoBtn: HTMLButtonElement;
-
-  constructor(public TodoManager: TodoManagerInterface) {
+  constructor(private TodoManager: TodoManagerInterface) {
     super();
     this.TodoManager = TodoManager;
     this.mainContentSection = document.querySelector('#main-content');
@@ -36,7 +29,7 @@ class TodoContentUIManager extends UIManager {
     });
   }
 
-  createList(listIDName: string) {
+  createUList(listIDName: string) {
     return this.createElement<HTMLUListElement>('ul', '', listIDName);
   }
 
@@ -59,7 +52,7 @@ class TodoContentUIManager extends UIManager {
 
   renderTopLevelTodosList() {
     const todosListContainer = this.createTodosListContainer('To Do');
-    const ul = this.createList('top-level-todos');
+    const ul = this.createUList('top-level-todos');
     this.TodoManager.getTopLevelTodos().forEach((todo) =>
       ul.append(createListItemFromObject(todo, 'top-level')),
     );
@@ -70,7 +63,7 @@ class TodoContentUIManager extends UIManager {
 
   renderSelectedSubTodosList(todoItem: TodoListItemWithDataset) {
     const todosListContainer = this.createTodosListContainer('Subtasks');
-    const ul = this.createList('selected-sub-todos');
+    const ul = this.createUList('selected-sub-todos');
     this.TodoManager.getTodo(
       Number(todoItem.dataset.todo),
       this.TodoManager.getTopLevelTodos(),

@@ -2,7 +2,7 @@ import createElement from './createElement';
 
 function createTodoForm() {
   const form = createElement<HTMLFormElement>('form', 'todo-form');
-  const formTemplate = `
+  const templateStr = `
   <div class="input-container">
     <label for="title" class="text-input-label">Title</label>
     <span class="required-input">Required</span>
@@ -41,7 +41,7 @@ function createTodoForm() {
   <button type="submit" class="submit-form-btn">Confirm</button>
   <button type="button" class="cancel-form-btn">Cancel</button>
   `;
-  form.innerHTML = formTemplate;
+  form.innerHTML = templateStr;
   return form;
 }
 

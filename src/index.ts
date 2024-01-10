@@ -14,7 +14,7 @@ const MyTodoManager = new TodoManager();
 const MyTodoContentUIManager = new TodoContentUIManager(MyTodoManager);
 const MyNavbarManager = new NavbarUIManager(MyTodoContentUIManager);
 const MyHeaderManager = new HeaderManager();
-const MyTodoFormUIManager = new TodoFormUIManager();
+const MyTodoFormUIManager = new TodoFormUIManager(MyTodoManager);
 
 const childTodoOne = TodoFactory({
   title: 'Paint Walls',

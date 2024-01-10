@@ -26,8 +26,10 @@ class TodoContentUIManager extends UIManager {
       if (li?.parentElement.id === 'top-level-todos') {
         this.mainContentSection
           .querySelector('#selected-sub-todos')
-          .parentElement.replaceWith(
-            this.renderSelectedSubTodosList(li as TodoListItemWithDataset),
+          .replaceWith(
+            this.renderSelectedSubTodosList(
+              li as TodoListItemWithDataset,
+            ).querySelector('ul'),
           );
       }
 
@@ -41,13 +43,13 @@ class TodoContentUIManager extends UIManager {
     return this.createElement<HTMLUListElement>('ul', '', listIDName);
   }
 
-  createTodosListContainer(title: string) {
+  createTodosListContainer(headingTitle: string) {
     const todosListContainer = this.createElement<HTMLDivElement>(
       'div',
       'todos-list-container',
     );
     const h2 = this.createElement<HTMLHeadingElement>('H2');
-    h2.textContent = title;
+    h2.textContent = headingTitle;
     todosListContainer.append(h2);
     return todosListContainer;
   }
@@ -72,12 +74,13 @@ class TodoContentUIManager extends UIManager {
       ul.append(createListItemFromObject(childTodo, 'todo-list'));
     });
 
+    // if ul has no children... APPEND single li to it with 'No subtasks' title
+
     todosListContainer.append(ul);
 
     return todosListContainer;
   }
 
-  // this only runs once, do we really need it?
   renderTodosSection() {
     this.mainContentSection.innerHTML = '';
     const todosLayoutContainer = this.createElement('div', '', 'todos-layout');
@@ -86,6 +89,8 @@ class TodoContentUIManager extends UIManager {
       topLevelTodosList.querySelector('ul')
         .firstChild as TodoListItemWithDataset,
     );
+    // append buttons
+
     todosLayoutContainer.append(topLevelTodosList, selectedSubTodosList);
     this.mainContentSection.append(todosLayoutContainer);
   }

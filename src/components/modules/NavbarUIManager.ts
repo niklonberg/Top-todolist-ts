@@ -6,9 +6,9 @@ class NavbarManager extends UIManager {
 
   previousListSelection: null | HTMLLIElement;
 
-  constructor(public TodoContentUIManager: TodoContentUIManager) {
+  constructor(public todoContentUIManager: TodoContentUIManager) {
     super();
-    this.TodoContentUIManager = TodoContentUIManager;
+    this.todoContentUIManager = todoContentUIManager;
     this.previousListSelection = null;
     this.navBar = document.querySelector('#nav-bar');
     this.navBar.addEventListener('click', (e) => this.selectNavListItem(e));
@@ -21,7 +21,7 @@ class NavbarManager extends UIManager {
       this.previousListSelection = navListItem;
       if (navListItem.id === 'all-tasks')
         // this will eventually be a "renderTodoSection()"
-        this.TodoContentUIManager.renderTodosSection();
+        this.todoContentUIManager.renderTodosSection();
     }
   }
 }

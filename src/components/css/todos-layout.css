@@ -4,8 +4,3 @@
   grid-auto-columns: 1fr;
   gap: var(--l-gap);
 }
-
-.todos-list {
-  background-color: var(--primary-lighter);
-  border-radius: 20px;
-}

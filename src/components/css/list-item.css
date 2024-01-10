@@ -23,6 +23,10 @@
     text-decoration: line-through;
   }
 
+  .list-item-title {
+    word-break: break-all;
+  }
+
   .list-item-details {
     flex: 1;
   }

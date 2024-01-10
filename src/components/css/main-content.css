@@ -1,5 +1,6 @@
 @layer component {
   #main-content {
+    flex: 1;
     margin: var(--l-gap);
   }
 }

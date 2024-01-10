@@ -1,5 +1,15 @@
 .todos-list-container {
+  display: flex;
+  flex-direction: column;
   background-color: var(--primary-lighter);
   border-radius: 20px;
   padding: var(--l-gap);
+}
+
+.todos-list-container > :nth-last-child(2) {
+  margin-bottom: var(--l-gap);
+}
+
+.todos-list-container button {
+  margin-top: auto;
 }

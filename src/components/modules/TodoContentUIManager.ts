@@ -23,11 +23,11 @@ class TodoContentUIManager extends UIManager {
     this.containerElement.addEventListener('click', (e) => {
       const li = (e.target as Element).closest('LI') as TodoListItemWithDataset;
       if (li?.parentElement.id === 'top-level-todos') {
-        this.TodoManager.setSelectedTodo(Number(li.dataset.todo));
         [...li.parentElement.children].forEach((child) =>
           child.classList.remove('selected-list-item'),
         );
         li.classList.add('selected-list-item');
+        this.TodoManager.setSelectedTodo(Number(li.dataset.todo));
         this.containerElement
           .querySelector('#selected-sub-todos')
           .parentElement.replaceWith(
@@ -73,10 +73,13 @@ class TodoContentUIManager extends UIManager {
   renderTopLevelTodosList() {
     const todosListContainer = this.createTodosListContainer('To Do');
     const ul = this.createElement('ul', '', 'top-level-todos');
-    this.TodoManager.getTopLevelTodos().forEach((todo) =>
-      ul.append(createListItemFromObject(todo, 'top-level')),
-    );
-    ul.children[0].classList.add('selected-list-item');
+    this.TodoManager.getTopLevelTodos().forEach((todo) => {
+      const li = createListItemFromObject(todo, 'top-level');
+      if (this.TodoManager.currSelectedTodo === todo)
+        li.classList.add('selected-list-item');
+      ul.append(li);
+    });
+    // ul.children[0].classList.add('selected-list-item');
     const addNewTodoBtn = this.createNewTodoBtn('add-top-level-todo-btn');
     todosListContainer.append(ul, addNewTodoBtn);
     return todosListContainer;
@@ -101,10 +104,8 @@ class TodoContentUIManager extends UIManager {
     this.containerElement.innerHTML = '';
     const todosLayoutContainer = this.createElement('div', '', 'todos-layout');
     const topLevelTodosList = this.renderTopLevelTodosList();
-    const firstLi = topLevelTodosList.querySelector('ul')
-      .firstChild as TodoListItemWithDataset;
     const selectedSubTodosList = this.renderSelectedSubTodosList(
-      Number(firstLi.dataset.todo),
+      this.TodoManager.currSelectedTodo.todoID,
     );
     todosLayoutContainer.append(topLevelTodosList, selectedSubTodosList);
     this.containerElement.append(todosLayoutContainer);

@@ -57,6 +57,7 @@ function init() {
   MyTodoManager.setSelectedTodo(6);
   MyTodoManager.addTodo(childTodoFour);
   MyTodoManager.addTodo(childTodoFive);
+  MyTodoManager.setSelectedTodo(MyTodoManager.getTopLevelTodos()[0].todoID);
   console.log(MyTodoManager);
 }
 

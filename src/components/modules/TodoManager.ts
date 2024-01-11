@@ -67,6 +67,7 @@ class TodoManager implements TodoManagerInterface {
     } else {
       this.topLevelTodos.push(todo);
     }
+    console.log(this.topLevelTodos);
   }
 
   /* Delete methods */

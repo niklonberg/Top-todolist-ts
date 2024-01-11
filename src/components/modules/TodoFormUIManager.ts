@@ -1,7 +1,12 @@
 import UIManager from './abstract/UIManager';
 import createTodoForm from './utils/createTodoForm';
 import TodoContentUIManager from './TodoContentUIManager';
-import { FormTemplateObj, TodoManagerInterface } from './utils/interfaces';
+import {
+  FormTemplateObj,
+  Todo,
+  TodoManagerInterface,
+  TodoListItemWithDataset,
+} from './utils/interfaces';
 import TodoFactory from './TodoFactory';
 
 // think on how this could become a general FormManager
@@ -17,15 +22,17 @@ class TodoFormUIManager extends UIManager {
     this.ListUIManager = ListUIManager;
     this.mainContentSection = document.querySelector('#main-content');
     this.mainContentSection.addEventListener('click', (e) => {
-      if ((e.target as Element).classList.contains('add-todo-btn')) {
-        if ((e.target as Element).id === 'add-top-level-todo-btn') {
+      const target = e.target as Element;
+      if (target.classList.contains('add-todo-btn')) {
+        if (target.id === 'add-top-level-todo-btn') {
           this.TodoManager.resetSelectedTodo();
         }
         this.insertTodoForm();
       }
-
-      if ((e.target as Element).classList.contains('edit-item')) {
-        this.insertTodoForm(true);
+      /* pick up from here */
+      if (target.classList.contains('edit-item')) {
+        const li = target.closest('LI') as TodoListItemWithDataset;
+        this.insertTodoForm(this.TodoManager.getTodo(Number(li.dataset.todo)));
       }
 
       if ((e.target as Element).classList.contains('cancel-form-btn')) {
@@ -34,12 +41,17 @@ class TodoFormUIManager extends UIManager {
     });
   }
 
-  insertTodoForm(isEditAction: boolean = false) {
+  insertTodoForm(itemToEdit: Todo = null) {
     this.mainContentSection.innerHTML = '';
-    const form = createTodoForm();
+    let form: HTMLFormElement;
+    if (itemToEdit) {
+      form = createTodoForm(itemToEdit);
+    } else {
+      form = createTodoForm();
+    }
     form.addEventListener(
       'submit',
-      (e) => this.submitForm(e, form, isEditAction),
+      (e) => this.submitForm(e, form, itemToEdit),
       {
         once: true,
       },
@@ -47,7 +59,7 @@ class TodoFormUIManager extends UIManager {
     this.mainContentSection.append(form);
   }
 
-  submitForm(e: Event, form: HTMLFormElement, isEditAction: boolean) {
+  submitForm(e: Event, form: HTMLFormElement, itemToEdit: Todo | null) {
     e.preventDefault();
     const formData = new FormData(form);
     const tempObj: any = {};
@@ -57,7 +69,7 @@ class TodoFormUIManager extends UIManager {
     const FormTemplateObject: FormTemplateObj = tempObj;
     const todo = TodoFactory(FormTemplateObject);
     form.remove();
-    if (isEditAction) {
+    if (itemToEdit) {
       this.TodoManager.editTodo(todo);
     } else {
       this.TodoManager.addTodo(todo);

@@ -13,3 +13,7 @@
 .todos-list-container button {
   margin-top: auto;
 }
+
+.selected-list-item {
+  background-color: var(--secondary);
+}

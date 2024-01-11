@@ -18,7 +18,15 @@ export interface Todo {
   children: Todo[];
 }
 
+export interface DataManagerInterface<T> {
+  addItem(): void;
+  getItem(): T;
+  editItem(): T;
+  deleteItem(): void;
+}
+
 /* eslint-disable no-unused-vars */
+// this could extend DataManagerInterface?
 export interface TodoManagerInterface {
   // topLevelTodos: Todo[];
   currSelectedTodo: Todo;

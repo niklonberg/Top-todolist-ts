@@ -1,4 +1,4 @@
-import UIManager from './UIManager';
+import UIManager from './abstract/UIManager';
 import TodoContentUIManager from './TodoContentUIManager';
 
 class HeaderNavbarUIManager extends UIManager {

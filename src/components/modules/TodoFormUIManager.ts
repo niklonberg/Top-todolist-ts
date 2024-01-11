@@ -1,8 +1,9 @@
-import UIManager from './UIManager';
+import UIManager from './abstract/UIManager';
 import createTodoForm from './utils/createTodoForm';
 import { FormTemplateObj, TodoManagerInterface } from './utils/interfaces';
 import TodoFactory from './TodoFactory';
 
+// think on how this could become a general FormManager
 class TodoFormUIManager extends UIManager {
   mainContentSection: HTMLElement;
 

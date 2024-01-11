@@ -1,4 +1,4 @@
-class UIManager {
+abstract class UIManager {
   // eslint-disable-next-line class-methods-use-this
   createElement<T extends HTMLElement>(
     type: string = 'div',

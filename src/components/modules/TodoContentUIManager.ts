@@ -1,4 +1,4 @@
-import UIManager from './UIManager';
+import UIManager from './abstract/UIManager';
 import createListItemFromObject from './utils/createListItemFromObject';
 import emptyListFallbackItem from './utils/emptyListFallbackItem';
 import {
@@ -7,17 +7,20 @@ import {
 } from './utils/interfaces';
 import TodoFactory from './TodoFactory';
 
+// think on how this class could be a ListContentUIManager instead
+// then we could have different types of lists instead of only Todos!
 class TodoContentUIManager extends UIManager {
-  // should mainContentSection be a str in the constructor, so the element
-  // we work inside of can change?
-  mainContentSection: HTMLElement;
+  containerElement: HTMLElement;
 
-  constructor(private TodoManager: TodoManagerInterface) {
+  constructor(
+    private TodoManager: TodoManagerInterface,
+    containerID: string,
+  ) {
     super();
     this.TodoManager = TodoManager;
-    this.mainContentSection = document.querySelector('#main-content'); // static
+    this.containerElement = document.querySelector(`#${containerID}`); // static
     // can we move eventListener outside?
-    this.mainContentSection.addEventListener('click', (e) => {
+    this.containerElement.addEventListener('click', (e) => {
       const li = (e.target as Element).closest('LI') as TodoListItemWithDataset;
       if (li?.parentElement.id === 'top-level-todos') {
         this.TodoManager.setSelectedTodo(Number(li.dataset.todo));
@@ -25,7 +28,7 @@ class TodoContentUIManager extends UIManager {
           child.classList.remove('selected-list-item'),
         );
         li.classList.add('selected-list-item');
-        this.mainContentSection
+        this.containerElement
           .querySelector('#selected-sub-todos')
           .parentElement.replaceWith(
             this.renderSelectedSubTodosList(Number(li.dataset.todo)),
@@ -86,7 +89,7 @@ class TodoContentUIManager extends UIManager {
   }
 
   renderTodosSection() {
-    this.mainContentSection.innerHTML = '';
+    this.containerElement.innerHTML = '';
     const todosLayoutContainer = this.createElement('div', '', 'todos-layout');
     const topLevelTodosList = this.renderTopLevelTodosList();
     const firstLi = topLevelTodosList.querySelector('ul')
@@ -95,7 +98,7 @@ class TodoContentUIManager extends UIManager {
       Number(firstLi.dataset.todo),
     );
     todosLayoutContainer.append(topLevelTodosList, selectedSubTodosList);
-    this.mainContentSection.append(todosLayoutContainer);
+    this.containerElement.append(todosLayoutContainer);
   }
 }
 

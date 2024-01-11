@@ -2,7 +2,7 @@ import './index.css';
 import TodoFactory from './components/modules/TodoFactory';
 import TodoManager from './components/modules/TodoManager';
 import TodoContentUIManager from './components/modules/TodoContentUIManager';
-import HeaderNavbarUIManager from './components/modules/NavbarUIManager';
+import HeaderNavbarUIManager from './components/modules/HeaderNavbarUIManager';
 import TodoFormUIManager from './components/modules/TodoFormUIManager';
 /* CREATE initAPP() that does all the below */
 

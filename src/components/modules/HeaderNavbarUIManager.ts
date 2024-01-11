@@ -30,6 +30,10 @@ class HeaderNavbarUIManager extends UIManager {
 
     // smarter way to do this?
     if (navListItem !== this.previousListSelection && navListItem) {
+      this.navBar
+        .querySelectorAll('li')
+        .forEach((li) => li.classList.remove('selected-nav-item'));
+      navListItem.classList.add('selected-nav-item');
       this.previousListSelection = navListItem;
       if (navListItem.id === 'all-tasks')
         // can we maybe query the dom instead and if the element this works

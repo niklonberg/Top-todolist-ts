@@ -6,6 +6,7 @@
   #nav-bar .list-item {
     margin-inline: var(--m-gap);
     border-radius: 2rem;
+    transition: background-color 0.2s ease-in;
   }
 
   #nav-bar .list-item-title {
@@ -13,6 +14,10 @@
   }
 
   #nav-bar .list-item:hover {
+    background-color: var(--primary);
+  }
+
+  .selected-nav-item {
     background-color: var(--primary);
   }
 }

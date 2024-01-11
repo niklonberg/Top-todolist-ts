@@ -37,6 +37,15 @@ class TodoContentUIManager extends UIManager {
       if (li?.parentElement.id === 'selected-sub-todos') {
         // we can do something else
       }
+
+      if ((e.target as Element).classList.contains('delete-item')) {
+        if (li?.parentElement.id === 'top-level-todos') {
+          this.TodoManager.deleteTopLevelTodo(Number(li.dataset.todo));
+        } else {
+          this.TodoManager.deleteChildTodo(Number(li.dataset.todo));
+        }
+        this.renderTodosSection();
+      }
     });
   }
 

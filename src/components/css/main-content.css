@@ -1,6 +1,7 @@
 @layer component {
   #main-content {
     flex: 1;
-    margin: var(--l-gap);
+    box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.2) inset;
+    padding: var(--l-gap);
   }
 }

@@ -11,11 +11,13 @@ function createListDetailsContainer(todo: Todo) {
 
 function createEditActionsContainer() {
   const editActions = createElement<HTMLDivElement>('DIV', 'list-item-edits');
-  const editBtn = createElement('button', 'edit-item');
+  const options = createElement<HTMLDivElement>('DIV', 'item-options');
+  const editBtn = createElement<HTMLButtonElement>('button', 'edit-item');
   editBtn.textContent = 'Edit';
-  const deleteBtn = createElement('button', 'delete-item');
+  const deleteBtn = createElement<HTMLButtonElement>('button', 'delete-item');
   deleteBtn.textContent = 'Delete';
-  editActions.append(editBtn, deleteBtn);
+  options.append(editBtn, deleteBtn);
+  editActions.append(options);
   return editActions;
 }
 
@@ -39,7 +41,7 @@ function createListItemFromObject(
   if (destination === 'todo-list') {
     let timeEle: HTMLTimeElement | HTMLParagraphElement;
     if (todo.description) {
-      const p = createElement('p');
+      const p = createElement<HTMLParagraphElement>('p');
       p.textContent = todo.description;
       listDetails.append(p);
     }

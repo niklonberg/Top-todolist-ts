@@ -17,3 +17,16 @@
 .selected-list-item {
   background-color: var(--secondary);
 }
+
+.list-item-edits {
+  position: relative;
+  width: 25px;
+  height: 25px;
+  background-image: url(/src/images/icons/flat-dots.svg);
+  background-repeat: no-repeat;
+}
+
+.item-options {
+  position: absolute;
+  bottom: 25px;
+}

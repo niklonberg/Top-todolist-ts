@@ -52,7 +52,11 @@ class TodoContentUIManager extends UIManager {
   }
 
   createNewTodoBtn(btnID: string) {
-    const btn = this.createElement('button', 'add-todo-btn', btnID);
+    const btn = this.createElement<HTMLButtonElement>(
+      'button',
+      'add-todo-btn',
+      btnID,
+    );
     btn.textContent = 'Add Task';
     return btn;
   }

@@ -40,10 +40,6 @@ class TodoContentUIManager extends UIManager {
     });
   }
 
-  createUList(listIDName: string) {
-    return this.createElement<HTMLUListElement>('ul', '', listIDName);
-  }
-
   createTodosListContainer(headingTitle: string) {
     const todosListContainer = this.createElement<HTMLDivElement>(
       'div',
@@ -63,7 +59,7 @@ class TodoContentUIManager extends UIManager {
 
   renderTopLevelTodosList() {
     const todosListContainer = this.createTodosListContainer('To Do');
-    const ul = this.createUList('top-level-todos');
+    const ul = this.createElement('ul', '', 'top-level-todos');
     this.TodoManager.getTopLevelTodos().forEach((todo) =>
       ul.append(createListItemFromObject(todo, 'top-level')),
     );
@@ -75,7 +71,7 @@ class TodoContentUIManager extends UIManager {
 
   renderSelectedSubTodosList(todoID: number) {
     const todosListContainer = this.createTodosListContainer('Subtasks');
-    const ul = this.createUList('selected-sub-todos');
+    const ul = this.createElement('ul', '', 'selected-sub-todos');
     this.TodoManager.getTodo(
       todoID,
       this.TodoManager.getTopLevelTodos(),

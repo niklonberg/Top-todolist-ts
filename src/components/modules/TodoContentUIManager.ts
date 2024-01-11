@@ -2,6 +2,7 @@ import UIManager from './abstract/UIManager';
 import createListItemFromObject from './utils/createListItemFromObject';
 import emptyListFallbackItem from './utils/emptyListFallbackItem';
 import {
+  Todo,
   TodoManagerInterface,
   TodoListItemWithDataset,
 } from './utils/interfaces';
@@ -31,7 +32,7 @@ class TodoContentUIManager extends UIManager {
         this.containerElement
           .querySelector('#selected-sub-todos')
           .parentElement.replaceWith(
-            this.renderSelectedSubTodosList(Number(li.dataset.todo)),
+            this.renderSelectedSubTodosList(this.TodoManager.currSelectedTodo),
           );
       }
       if (li?.parentElement.id === 'selected-sub-todos') {
@@ -41,6 +42,7 @@ class TodoContentUIManager extends UIManager {
       if ((e.target as Element).classList.contains('delete-item')) {
         if (li?.parentElement.id === 'top-level-todos') {
           this.TodoManager.deleteTopLevelTodo(Number(li.dataset.todo));
+          this.TodoManager.resetSelectedTodo();
         } else {
           this.TodoManager.deleteChildTodo(Number(li.dataset.todo));
         }
@@ -79,21 +81,20 @@ class TodoContentUIManager extends UIManager {
         li.classList.add('selected-list-item');
       ul.append(li);
     });
-    // ul.children[0].classList.add('selected-list-item');
+    if (ul.childNodes.length === 0) ul.append(emptyListFallbackItem());
     const addNewTodoBtn = this.createNewTodoBtn('add-top-level-todo-btn');
     todosListContainer.append(ul, addNewTodoBtn);
     return todosListContainer;
   }
 
-  renderSelectedSubTodosList(todoID: number) {
+  renderSelectedSubTodosList(todo: Todo) {
     const todosListContainer = this.createTodosListContainer('Subtasks');
     const ul = this.createElement('ul', '', 'selected-sub-todos');
-    this.TodoManager.getTodo(
-      todoID,
-      this.TodoManager.getTopLevelTodos(),
-    ).children.forEach((childTodo) => {
+
+    todo?.children.forEach((childTodo) => {
       ul.append(createListItemFromObject(childTodo, 'todo-list'));
     });
+
     if (ul.childNodes.length === 0) ul.append(emptyListFallbackItem());
     const addNewTodoBtn = this.createNewTodoBtn('add-child-level-todo-btn');
     todosListContainer.append(ul, addNewTodoBtn);
@@ -105,7 +106,7 @@ class TodoContentUIManager extends UIManager {
     const todosLayoutContainer = this.createElement('div', '', 'todos-layout');
     const topLevelTodosList = this.renderTopLevelTodosList();
     const selectedSubTodosList = this.renderSelectedSubTodosList(
-      this.TodoManager.currSelectedTodo.todoID,
+      this.TodoManager.currSelectedTodo,
     );
     todosLayoutContainer.append(topLevelTodosList, selectedSubTodosList);
     this.containerElement.append(todosLayoutContainer);

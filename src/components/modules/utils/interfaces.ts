@@ -38,6 +38,7 @@ export interface TodoManagerInterface {
   addTodo(todo: Todo, parentTodo?: Todo): void;
   deleteTopLevelTodo(todoID: number): void;
   deleteChildTodo(todoID: number): void;
+  editTodo(todo: Todo): void;
   // toggleProperty
 }
 /* eslint-disable no-unused-vars */

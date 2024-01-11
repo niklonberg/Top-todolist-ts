@@ -86,6 +86,9 @@ class TodoManager implements TodoManagerInterface {
   }
 
   /* Edit methods */
+  editTodo() {
+    console.log('hi');
+  }
   // toggleProperty(
   //   itemID: number,
   //   itemType: string,

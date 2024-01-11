@@ -48,6 +48,9 @@ class TodoContentUIManager extends UIManager {
         }
         this.renderTodosSection();
       }
+
+      if ((e.target as Element).classList.contains('edit-item')) {
+      }
     });
   }
 

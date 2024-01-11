@@ -24,22 +24,30 @@ class TodoFormUIManager extends UIManager {
         this.insertTodoForm();
       }
 
+      if ((e.target as Element).classList.contains('edit-item')) {
+        this.insertTodoForm(true);
+      }
+
       if ((e.target as Element).classList.contains('cancel-form-btn')) {
         this.ListUIManager.renderTodosSection();
       }
     });
   }
 
-  insertTodoForm() {
+  insertTodoForm(isEditAction: boolean = false) {
     this.mainContentSection.innerHTML = '';
     const form = createTodoForm();
-    form.addEventListener('submit', (e) => this.submitForm(e, form), {
-      once: true,
-    });
+    form.addEventListener(
+      'submit',
+      (e) => this.submitForm(e, form, isEditAction),
+      {
+        once: true,
+      },
+    );
     this.mainContentSection.append(form);
   }
 
-  submitForm(e: Event, form: HTMLFormElement) {
+  submitForm(e: Event, form: HTMLFormElement, isEditAction: boolean) {
     e.preventDefault();
     const formData = new FormData(form);
     const tempObj: any = {};
@@ -49,7 +57,12 @@ class TodoFormUIManager extends UIManager {
     const FormTemplateObject: FormTemplateObj = tempObj;
     const todo = TodoFactory(FormTemplateObject);
     form.remove();
-    this.TodoManager.addTodo(todo);
+    if (isEditAction) {
+      this.TodoManager.editTodo(todo);
+    } else {
+      this.TodoManager.addTodo(todo);
+    }
+
     this.ListUIManager.renderTodosSection();
   }
 }

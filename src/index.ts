@@ -1,17 +1,14 @@
 import './index.css';
 import TodoFactory from './components/modules/TodoFactory';
 import TodoManager from './components/modules/TodoManager';
-import NavbarUIManager from './components/modules/NavbarUIManager';
 import TodoContentUIManager from './components/modules/TodoContentUIManager';
-import HeaderManager from './components/modules/HeaderUIManager';
+import HeaderNavbarUIManager from './components/modules/NavbarUIManager';
 import TodoFormUIManager from './components/modules/TodoFormUIManager';
-
 /* CREATE initAPP() that does all the below */
 
 const MyTodoManager = new TodoManager();
 const MyTodoContentUIManager = new TodoContentUIManager(MyTodoManager);
-const MyNavbarManager = new NavbarUIManager(MyTodoContentUIManager);
-const MyHeaderManager = new HeaderManager();
+const MyHeaderNavbarManager = new HeaderNavbarUIManager(MyTodoContentUIManager);
 const MyTodoFormUIManager = new TodoFormUIManager(MyTodoManager);
 
 const childTodoOne = TodoFactory({

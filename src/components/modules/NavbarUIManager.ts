@@ -1,10 +1,12 @@
 import UIManager from './UIManager';
 import TodoContentUIManager from './TodoContentUIManager';
 
-class NavbarManager extends UIManager {
+class HeaderNavbarUIManager extends UIManager {
   navBar: HTMLElement;
 
   previousListSelection: null | HTMLLIElement;
+
+  toggleThemeBtn: HTMLButtonElement;
 
   constructor(public todoContentUIManager: TodoContentUIManager) {
     super();
@@ -12,6 +14,15 @@ class NavbarManager extends UIManager {
     this.previousListSelection = null;
     this.navBar = document.querySelector('#nav-bar');
     this.navBar.addEventListener('click', (e) => this.selectNavListItem(e));
+    this.toggleThemeBtn = document.querySelector('#toggle-theme-btn');
+    this.toggleThemeBtn.addEventListener('click', () =>
+      this.toggleColorTheme(),
+    );
+  }
+
+  toggleColorTheme() {
+    document.body.classList.toggle('light-theme');
+    this.toggleThemeBtn.classList.toggle('dark-bg');
   }
 
   selectNavListItem(e: Event) {
@@ -28,4 +39,4 @@ class NavbarManager extends UIManager {
   }
 }
 
-export default NavbarManager;
+export default HeaderNavbarUIManager;

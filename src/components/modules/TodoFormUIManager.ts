@@ -1,5 +1,6 @@
 import UIManager from './abstract/UIManager';
 import createTodoForm from './utils/createTodoForm';
+import TodoContentUIManager from './TodoContentUIManager';
 import { FormTemplateObj, TodoManagerInterface } from './utils/interfaces';
 import TodoFactory from './TodoFactory';
 
@@ -7,10 +8,13 @@ import TodoFactory from './TodoFactory';
 class TodoFormUIManager extends UIManager {
   mainContentSection: HTMLElement;
 
-  // i think it is okay for this to have a dependency on TodoManager, but nothing else
-  constructor(private TodoManager: TodoManagerInterface) {
+  constructor(
+    private TodoManager: TodoManagerInterface,
+    private ListUIManager: TodoContentUIManager,
+  ) {
     super();
     this.TodoManager = TodoManager;
+    this.ListUIManager = ListUIManager;
     this.mainContentSection = document.querySelector('#main-content');
     // can we move eventListener outside?
     this.mainContentSection.addEventListener('click', (e) => {
@@ -19,6 +23,10 @@ class TodoFormUIManager extends UIManager {
           this.TodoManager.resetSelectedTodo();
         }
         this.insertTodoForm();
+      }
+
+      if ((e.target as Element).classList.contains('cancel-form-btn')) {
+        this.ListUIManager.renderTodosSection();
       }
     });
   }
@@ -43,8 +51,7 @@ class TodoFormUIManager extends UIManager {
     const todo = TodoFactory(FormTemplateObject);
     form.remove();
     this.TodoManager.addTodo(todo);
-    // so find way to reRender without having
-    // TodoContentUIManager inside here.
+    this.ListUIManager.renderTodosSection();
   }
 }
 

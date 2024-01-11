@@ -9,7 +9,7 @@ import TodoFactory from './TodoFactory';
 
 class TodoContentUIManager extends UIManager {
   // should mainContentSection be a str in the constructor, so the element
-  // we work in side of can change?
+  // we work inside of can change?
   mainContentSection: HTMLElement;
 
   constructor(private TodoManager: TodoManagerInterface) {

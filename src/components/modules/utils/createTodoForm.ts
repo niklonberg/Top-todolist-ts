@@ -26,13 +26,12 @@ function createTodoForm() {
     />
   </div>
   <div class="input-container">
-    <label for="isUrgent">Urgent</label>
-    <input
-      type="checkbox"
-      name="isUrgent"
-      id="isUrgent"
-      value="true"
-    />
+    <label for="priority">Priority</label>
+    <select id="priority" name="priority">
+      <option value="low">Low</option>
+      <option value="medium">Medium</option>
+      <option value="high">High</option>
+    </select>
   </div>
   <div class="input-container">
     <label for="dueDate">Duedate</label>

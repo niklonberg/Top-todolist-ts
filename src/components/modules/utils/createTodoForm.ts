@@ -1,6 +1,7 @@
 import createElement from './createElement';
+import { Todo } from './interfaces';
 
-function createTodoForm() {
+function createTodoForm(todoToEdit?: Todo) {
   const form = createElement<HTMLFormElement>('form', 'todo-form');
   const templateStr = `
   <div class="input-container">
@@ -11,6 +12,7 @@ function createTodoForm() {
       type="text"
       name="title"
       id="title"
+      value="${todoToEdit.title}"
       required
     />
   </div>
@@ -23,14 +25,21 @@ function createTodoForm() {
       name="description"
       id="description"
       class="text-input"
+      value="${todoToEdit.description}"
     />
   </div>
   <div class="input-container">
     <label for="priority">Priority</label>
     <select id="priority" name="priority">
-      <option value="low">Low</option>
-      <option value="medium">Medium</option>
-      <option value="high">High</option>
+      <option value="low" ${
+        todoToEdit.priority === 'Low' ? 'selected' : ''
+      } >Low</option>
+      <option value="medium" ${
+        todoToEdit.priority === 'Medium' ? 'selected' : ''
+      }>Medium</option>
+      <option value="high" ${
+        todoToEdit.priority === 'High' ? 'selected' : ''
+      }>High</option>
     </select>
   </div>
   <div class="input-container">

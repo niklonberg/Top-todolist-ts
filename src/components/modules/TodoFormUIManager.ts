@@ -41,17 +41,17 @@ class TodoFormUIManager extends UIManager {
     });
   }
 
-  insertTodoForm(itemToEdit: Todo = null) {
+  insertTodoForm(todoToEdit: Todo = null) {
     this.mainContentSection.innerHTML = '';
     let form: HTMLFormElement;
-    if (itemToEdit) {
-      form = createTodoForm(itemToEdit);
+    if (todoToEdit) {
+      form = createTodoForm(todoToEdit);
     } else {
       form = createTodoForm();
     }
     form.addEventListener(
       'submit',
-      (e) => this.submitForm(e, form, itemToEdit),
+      (e) => this.submitForm(e, form, todoToEdit),
       {
         once: true,
       },
@@ -59,7 +59,7 @@ class TodoFormUIManager extends UIManager {
     this.mainContentSection.append(form);
   }
 
-  submitForm(e: Event, form: HTMLFormElement, itemToEdit: Todo | null) {
+  submitForm(e: Event, form: HTMLFormElement, todoToEdit: Todo | null) {
     e.preventDefault();
     const formData = new FormData(form);
     const tempObj: any = {};
@@ -69,7 +69,7 @@ class TodoFormUIManager extends UIManager {
     const FormTemplateObject: FormTemplateObj = tempObj;
     const todo = TodoFactory(FormTemplateObject);
     form.remove();
-    if (itemToEdit) {
+    if (todoToEdit) {
       this.TodoManager.editTodo(todo);
     } else {
       this.TodoManager.addTodo(todo);

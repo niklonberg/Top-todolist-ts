@@ -72,12 +72,12 @@ class TodoFormUIManager extends UIManager {
       tempObj[key] = value;
     });
     const FormTemplateObject: FormTemplateObj = tempObj;
-    const todo = TodoFactory(FormTemplateObject);
+    const newTodo = TodoFactory(FormTemplateObject);
     form.remove();
     if (todoToEdit) {
-      this.TodoManager.editTodo(todo);
+      this.TodoManager.editTodo(todoToEdit, newTodo);
     } else {
-      this.TodoManager.addTodo(todo);
+      this.TodoManager.addTodo(newTodo);
     }
 
     this.ListUIManager.renderTodosSection();

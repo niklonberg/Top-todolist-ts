@@ -31,13 +31,13 @@ function createTodoForm(todoToEdit?: Todo) {
   <div class="input-container">
     <label for="priority">Priority</label>
     <select id="priority" name="priority">
-      <option value="low" ${
+      <option value="Low" ${
         todoToEdit?.priority === 'Low' ? 'selected' : ''
       } >Low</option>
-      <option value="medium" ${
+      <option value="Medium" ${
         todoToEdit?.priority === 'Medium' ? 'selected' : ''
       }>Medium</option>
-      <option value="high" ${
+      <option value="High" ${
         todoToEdit?.priority === 'High' ? 'selected' : ''
       }>High</option>
     </select>

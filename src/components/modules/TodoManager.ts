@@ -49,6 +49,24 @@ class TodoManager implements TodoManagerInterface {
     return todoWeAreSearchingFor;
   }
 
+  /* Edit methods */
+
+  editTodo(
+    todoToEdit: Todo,
+    newTodo: Todo,
+    todoArray: Todo[] = this.topLevelTodos,
+  ) {
+    todoArray.forEach((todo) => {
+      if (todo.todoID === todoToEdit.todoID) {
+        Object.keys(todo).forEach((key) => {
+          todo[key as keyof Todo] = newTodo[key as keyof Todo];
+        });
+      } else {
+        this.editTodo(todoToEdit, newTodo, todo.children);
+      }
+    });
+  }
+
   /* Set methods */
   setSelectedTodo(todoID: number): void {
     console.log('todoID is: ', todoID);
@@ -85,10 +103,6 @@ class TodoManager implements TodoManagerInterface {
     );
   }
 
-  /* Edit methods */
-  editTodo() {
-    console.log('hi');
-  }
   // toggleProperty(
   //   itemID: number,
   //   itemType: string,

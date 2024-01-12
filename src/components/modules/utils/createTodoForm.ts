@@ -12,7 +12,7 @@ function createTodoForm(todoToEdit?: Todo) {
       type="text"
       name="title"
       id="title"
-      value="${todoToEdit.title}"
+      value="${todoToEdit?.title || ''}"
       required
     />
   </div>
@@ -25,20 +25,20 @@ function createTodoForm(todoToEdit?: Todo) {
       name="description"
       id="description"
       class="text-input"
-      value="${todoToEdit.description}"
+      value="${todoToEdit?.description || ''}"
     />
   </div>
   <div class="input-container">
     <label for="priority">Priority</label>
     <select id="priority" name="priority">
       <option value="low" ${
-        todoToEdit.priority === 'Low' ? 'selected' : ''
+        todoToEdit?.priority === 'Low' ? 'selected' : ''
       } >Low</option>
       <option value="medium" ${
-        todoToEdit.priority === 'Medium' ? 'selected' : ''
+        todoToEdit?.priority === 'Medium' ? 'selected' : ''
       }>Medium</option>
       <option value="high" ${
-        todoToEdit.priority === 'High' ? 'selected' : ''
+        todoToEdit?.priority === 'High' ? 'selected' : ''
       }>High</option>
     </select>
   </div>

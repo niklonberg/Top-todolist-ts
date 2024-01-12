@@ -42,11 +42,18 @@ function init() {
     title: 'Move bed',
     description: 'lift gently',
   });
-  const topLevelTodoOne = TodoFactory({ title: 'Paint house' });
+  const topLevelTodoOne = TodoFactory({
+    title: 'Paint house',
+    priority: 'Low',
+  });
   const topLevelTodoTwo = TodoFactory({
     title: 'Refurnish Bedroomdkfsksdfkjsdfksdkfksdfdskf',
+    priority: 'Medium',
   });
-  const topLevelTodoThree = TodoFactory({ title: 'Clean Laboratory' });
+  const topLevelTodoThree = TodoFactory({
+    title: 'Clean Laboratory',
+    priority: 'High',
+  });
   MyTodoManager.addTodo(topLevelTodoOne);
   MyTodoManager.addTodo(topLevelTodoTwo);
   MyTodoManager.addTodo(topLevelTodoThree);

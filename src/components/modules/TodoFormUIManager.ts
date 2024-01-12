@@ -32,7 +32,12 @@ class TodoFormUIManager extends UIManager {
       /* pick up from here */
       if (target.classList.contains('edit-item')) {
         const li = target.closest('LI') as TodoListItemWithDataset;
-        this.insertTodoForm(this.TodoManager.getTodo(Number(li.dataset.todo)));
+        this.insertTodoForm(
+          this.TodoManager.getTodo(
+            Number(li.dataset.todo),
+            this.TodoManager.getTopLevelTodos(),
+          ),
+        );
       }
 
       if ((e.target as Element).classList.contains('cancel-form-btn')) {

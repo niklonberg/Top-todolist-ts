@@ -56,15 +56,16 @@ class TodoManager implements TodoManagerInterface {
     newTodo: Todo,
     todoArray: Todo[] = this.topLevelTodos,
   ) {
-    todoArray.forEach((todo) => {
-      if (todo.todoID === todoToEdit.todoID) {
-        Object.keys(todo).forEach((key) => {
-          todo[key as keyof Todo] = newTodo[key as keyof Todo];
-        });
-      } else {
-        this.editTodo(todoToEdit, newTodo, todo.children);
-      }
-    });
+    const foundTodo = todoArray.find(
+      (currTodo) => currTodo.todoID === todoToEdit.todoID,
+    );
+    if (foundTodo) {
+      Object.assign(foundTodo, { ...newTodo, children: foundTodo.children });
+    } else {
+      todoArray.forEach((childTodo) =>
+        this.editTodo(todoToEdit, newTodo, childTodo.children),
+      );
+    }
   }
 
   /* Set methods */

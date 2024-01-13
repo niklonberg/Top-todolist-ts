@@ -9,6 +9,8 @@ import {
 } from './utils/interfaces';
 import TodoFactory from './TodoFactory';
 
+// MOVE ME INSIDE OF TODOCONTENTUIMANAGER
+
 // think on how this could become a general FormManager
 class TodoFormUIManager extends UIManager {
   mainContentSection: HTMLElement;

@@ -21,6 +21,7 @@ class TodoContentUIManager extends UIManager {
     super();
     this.TodoManager = TodoManager;
     this.FormManager = FormManager;
+    // add error handling for below line? what happens if dev gets id wrong
     this.containerElement = document.querySelector(`#${containerElementID}`); // static
     this.containerElement.addEventListener('click', (e) => {
       const target = e.target as Element;
@@ -60,13 +61,17 @@ class TodoContentUIManager extends UIManager {
           // reset currSelected to null, so addTodo inserts into topLevelTodos
         }
         this.containerElement.innerHTML = '';
-        this.containerElement.append(this.FormManager?.insertTodoForm());
+        this.containerElement.append(
+          this.FormManager?.insertTodoForm(this, this.TodoManager),
+        );
       }
 
       if (target.classList.contains('edit-item')) {
         this.containerElement.innerHTML = '';
         this.containerElement.append(
           this.FormManager?.insertTodoForm(
+            this,
+            this.TodoManager,
             this.TodoManager.getTodo(
               Number(targetParentli.dataset.todo),
               this.TodoManager.getTopLevelTodos(),

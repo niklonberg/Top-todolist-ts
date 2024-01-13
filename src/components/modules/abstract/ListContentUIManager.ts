@@ -1,6 +1,7 @@
 import UIManager from './UIManager';
 import { DataManagerInterface } from '../utils/interfaces';
 
+// rename to ListUIController
 abstract class ListContentUIManager extends UIManager {
   containerElement: HTMLElement;
 

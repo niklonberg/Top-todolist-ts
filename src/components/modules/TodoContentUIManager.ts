@@ -1,12 +1,12 @@
 import UIManager from './abstract/UIManager';
 import createListItemFromObject from './utils/createListItemFromObject';
 import emptyListFallbackItem from './utils/emptyListFallbackItem';
+import TodoFormUIManager from './TodoFormUIManager';
 import {
   Todo,
   TodoManagerInterface,
   TodoListItemWithDataset,
 } from './utils/interfaces';
-import TodoFactory from './TodoFactory';
 
 // think on how this class could be a ListContentUIManager instead
 // then we could have different types of lists instead of only Todos!
@@ -15,14 +15,16 @@ class TodoContentUIManager extends UIManager {
 
   constructor(
     private TodoManager: TodoManagerInterface,
-    containerID: string,
+    containerElementID: string,
+    private FormManager?: TodoFormUIManager,
   ) {
     super();
     this.TodoManager = TodoManager;
-    this.containerElement = document.querySelector(`#${containerID}`); // static
-    // can we move eventListener outside?
+    this.FormManager = FormManager;
+    this.containerElement = document.querySelector(`#${containerElementID}`); // static
     this.containerElement.addEventListener('click', (e) => {
-      const li = (e.target as Element).closest('LI') as TodoListItemWithDataset;
+      const target = e.target as Element;
+      const li = target.closest('LI') as TodoListItemWithDataset;
       if (li?.parentElement.id === 'top-level-todos') {
         [...li.parentElement.children].forEach((child) =>
           child.classList.remove('selected-list-item'),
@@ -39,13 +41,35 @@ class TodoContentUIManager extends UIManager {
         // we can do something else
       }
 
-      if ((e.target as Element).classList.contains('delete-item')) {
+      if (target.classList.contains('delete-item')) {
         if (li?.parentElement.id === 'top-level-todos') {
           this.TodoManager.deleteTopLevelTodo(Number(li.dataset.todo));
           this.TodoManager.resetSelectedTodo();
         } else {
           this.TodoManager.deleteChildTodo(Number(li.dataset.todo));
         }
+        this.renderTodosSection();
+      }
+
+      if (target.classList.contains('add-todo-btn')) {
+        if (target.id === 'add-top-level-todo-btn') {
+          this.TodoManager.resetSelectedTodo();
+          // reset currSelected to null, so addTodo inserts into topLevelTodos
+        }
+        this.containerElement.innerHTML = '';
+        this.containerElement.append(this.FormManager?.insertTodoForm());
+      }
+
+      if (target.classList.contains('edit-item')) {
+        this.FormManager?.insertTodoForm(
+          this.TodoManager.getTodo(
+            Number(li.dataset.todo),
+            this.TodoManager.getTopLevelTodos(),
+          ),
+        );
+      }
+
+      if (target.classList.contains('cancel-form-btn')) {
         this.renderTodosSection();
       }
     });

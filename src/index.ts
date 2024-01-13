@@ -14,10 +14,7 @@ function init() {
   const MyHeaderNavbarManager = new HeaderNavbarUIManager(
     MyTodoContentUIManager,
   );
-  const MyTodoFormUIManager = new TodoFormUIManager(
-    MyTodoManager,
-    MyTodoContentUIManager,
-  );
+  const MyTodoFormUIManager = new TodoFormUIManager();
 
   const childTodoOne = TodoFactory({
     title: 'Paint Walls',

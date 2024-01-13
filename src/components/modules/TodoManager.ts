@@ -15,7 +15,8 @@ class TodoManager implements TodoManagerInterface {
 
   private topLevelTodos: Todo[];
 
-  currSelectedTodo: null | Todo;
+  currSelectedTodo: null | Todo; // Should we bother with this?
+  // could just split addTodo into two functions.
 
   parentTodo: Todo | null; // we need me?
 

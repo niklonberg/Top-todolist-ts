@@ -10,11 +10,11 @@ function init() {
   const MyTodoContentUIManager = new TodoContentUIManager(
     MyTodoManager,
     'main-content',
+    new TodoFormUIManager(),
   );
   const MyHeaderNavbarManager = new HeaderNavbarUIManager(
     MyTodoContentUIManager,
   );
-  const MyTodoFormUIManager = new TodoFormUIManager();
 
   const childTodoOne = TodoFactory({
     title: 'Paint Walls',

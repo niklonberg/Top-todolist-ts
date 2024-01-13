@@ -24,29 +24,32 @@ class TodoContentUIManager extends UIManager {
     this.containerElement = document.querySelector(`#${containerElementID}`); // static
     this.containerElement.addEventListener('click', (e) => {
       const target = e.target as Element;
-      const li = target.closest('LI') as TodoListItemWithDataset;
-      if (li?.parentElement.id === 'top-level-todos') {
-        [...li.parentElement.children].forEach((child) =>
+      const targetParentli = target.closest('LI') as TodoListItemWithDataset;
+      if (targetParentli?.parentElement.id === 'top-level-todos') {
+        [...targetParentli.parentElement.children].forEach((child) =>
           child.classList.remove('selected-list-item'),
         );
-        li.classList.add('selected-list-item');
-        this.TodoManager.setSelectedTodo(Number(li.dataset.todo));
+        targetParentli.classList.add('selected-list-item');
+        this.TodoManager.setSelectedTodo(Number(targetParentli.dataset.todo));
         this.containerElement
           .querySelector('#selected-sub-todos')
           .parentElement.replaceWith(
             this.renderSelectedSubTodosList(this.TodoManager.currSelectedTodo),
           );
       }
-      if (li?.parentElement.id === 'selected-sub-todos') {
+
+      if (targetParentli?.parentElement.id === 'selected-sub-todos') {
         // we can do something else
       }
 
       if (target.classList.contains('delete-item')) {
-        if (li?.parentElement.id === 'top-level-todos') {
-          this.TodoManager.deleteTopLevelTodo(Number(li.dataset.todo));
+        if (targetParentli?.parentElement.id === 'top-level-todos') {
+          this.TodoManager.deleteTopLevelTodo(
+            Number(targetParentli.dataset.todo),
+          );
           this.TodoManager.resetSelectedTodo();
         } else {
-          this.TodoManager.deleteChildTodo(Number(li.dataset.todo));
+          this.TodoManager.deleteChildTodo(Number(targetParentli.dataset.todo));
         }
         this.renderTodosSection();
       }
@@ -61,10 +64,13 @@ class TodoContentUIManager extends UIManager {
       }
 
       if (target.classList.contains('edit-item')) {
-        this.FormManager?.insertTodoForm(
-          this.TodoManager.getTodo(
-            Number(li.dataset.todo),
-            this.TodoManager.getTopLevelTodos(),
+        this.containerElement.innerHTML = '';
+        this.containerElement.append(
+          this.FormManager?.insertTodoForm(
+            this.TodoManager.getTodo(
+              Number(targetParentli.dataset.todo),
+              this.TodoManager.getTopLevelTodos(),
+            ),
           ),
         );
       }
@@ -100,10 +106,10 @@ class TodoContentUIManager extends UIManager {
     const todosListContainer = this.createTodosListContainer('To Do');
     const ul = this.createElement('ul', '', 'top-level-todos');
     this.TodoManager.getTopLevelTodos().forEach((todo) => {
-      const li = createListItemFromObject(todo, 'top-level');
+      const targetParentli = createListItemFromObject(todo, 'top-level');
       if (this.TodoManager.currSelectedTodo === todo)
-        li.classList.add('selected-list-item');
-      ul.append(li);
+        targetParentli.classList.add('selected-list-item');
+      ul.append(targetParentli);
     });
     if (ul.childNodes.length === 0) ul.append(emptyListFallbackItem());
     const addNewTodoBtn = this.createNewTodoBtn('add-top-level-todo-btn');

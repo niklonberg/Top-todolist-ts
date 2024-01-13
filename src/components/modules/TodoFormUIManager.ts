@@ -1,24 +1,15 @@
 import UIManager from './abstract/UIManager';
 import createTodoForm from './utils/createTodoForm';
-import {
-  FormTemplateObj,
-  Todo,
-  TodoManagerInterface,
-  TodoListItemWithDataset,
-} from './utils/interfaces';
+import { FormTemplateObj, Todo } from './utils/interfaces';
 import TodoFactory from './TodoFactory';
 
 // think on how this could become a general FormManager
 class TodoFormUIManager extends UIManager {
-  mainContentSection: HTMLElement;
-
   constructor() {
     super();
-    this.mainContentSection = document.querySelector('#main-content');
   }
 
   insertTodoForm(todoToEdit: Todo = null) {
-    this.mainContentSection.innerHTML = '';
     let form: HTMLFormElement;
     if (todoToEdit) {
       form = createTodoForm(todoToEdit);
@@ -36,21 +27,21 @@ class TodoFormUIManager extends UIManager {
   }
 
   submitForm(e: Event, form: HTMLFormElement, todoToEdit: Todo | null) {
-    //   e.preventDefault();
-    //   const formData = new FormData(form);
-    //   const tempObj: any = {};
-    //   formData.forEach((value, key) => {
-    //     tempObj[key] = value;
-    //   });
-    //   const FormTemplateObject: FormTemplateObj = tempObj;
-    //   const newTodo = TodoFactory(FormTemplateObject);
-    //   form.remove();
-    //   if (todoToEdit) {
-    //     this.TodoManager.editTodo(todoToEdit, newTodo);
-    //   } else {
-    //     this.TodoManager.addTodo(newTodo);
-    //   }
-    //   this.ListUIManager.renderTodosSection();
+    // e.preventDefault();
+    // const formData = new FormData(form);
+    // const tempObj: any = {};
+    // formData.forEach((value, key) => {
+    //   tempObj[key] = value;
+    // });
+    // const FormTemplateObject: FormTemplateObj = tempObj;
+    // const newTodo = TodoFactory(FormTemplateObject);
+    // form.remove();
+    // if (todoToEdit) {
+    //   this.TodoManager.editTodo(todoToEdit, newTodo);
+    // } else {
+    //   this.TodoManager.addTodo(newTodo);
+    // }
+    // this.ListUIManager.renderTodosSection();
   }
 }
 

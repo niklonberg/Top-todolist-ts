@@ -105,22 +105,7 @@ class TodoManager implements TodoManagerInterface {
     );
   }
 
-  // toggleProperty(
-  //   itemID: number,
-  //   itemType: string,
-  //   propertyToToggle: string,
-  // ): void {
-  //   if (itemType === 'project') {
-  //     const project = this.getItem<Project>(itemID, itemType);
-  //     console.log('toggle some property');
-  //   } else {
-  //     TodoService.toggleTodoBoolProperty(
-  //       this.projects,
-  //       propertyToToggle,
-  //       itemID,
-  //     );
-  //   }
-  // }
+  // toggleProperty() {}
 }
 
 export default TodoManager;

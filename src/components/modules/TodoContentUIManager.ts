@@ -22,68 +22,75 @@ class TodoContentUIManager extends UIManager {
     this.TodoManager = TodoManager;
     this.FormManager = FormManager;
     // add error handling for below line? what happens if dev gets id wrong
-    this.containerElement = document.querySelector(`#${containerElementID}`); // static
+    this.containerElement = document.querySelector(`#${containerElementID}`);
     this.containerElement.addEventListener('click', (e) => {
       const target = e.target as Element;
-      const targetParentli = target.closest('LI') as TodoListItemWithDataset;
-      if (targetParentli?.parentElement.id === 'top-level-todos') {
-        [...targetParentli.parentElement.children].forEach((child) =>
-          child.classList.remove('selected-list-item'),
-        );
-        targetParentli.classList.add('selected-list-item');
-        this.TodoManager.setSelectedTodo(Number(targetParentli.dataset.todo));
-        this.containerElement
-          .querySelector('#selected-sub-todos')
-          .parentElement.replaceWith(
-            this.renderSelectedSubTodosList(this.TodoManager.currSelectedTodo),
-          );
-      }
+      const targetParentLi = target.closest('LI') as TodoListItemWithDataset;
+      if (targetParentLi?.parentElement.id === 'top-level-todos')
+        this.selectItem(targetParentLi);
 
-      if (targetParentli?.parentElement.id === 'selected-sub-todos') {
+      if (targetParentLi?.parentElement.id === 'selected-sub-todos') {
         // we can do something else
       }
 
-      if (target.classList.contains('delete-item')) {
-        if (targetParentli?.parentElement.id === 'top-level-todos') {
-          this.TodoManager.deleteTopLevelTodo(
-            Number(targetParentli.dataset.todo),
-          );
-          this.TodoManager.resetSelectedTodo();
-        } else {
-          this.TodoManager.deleteChildTodo(Number(targetParentli.dataset.todo));
-        }
+      if (target.classList.contains('delete-item'))
+        this.deleteItem(targetParentLi);
+
+      if (target.classList.contains('add-todo-btn')) this.addItem(target);
+
+      if (target.classList.contains('edit-item')) this.editItem(targetParentLi);
+
+      if (target.classList.contains('cancel-form-btn'))
         this.renderTodosSection();
-      }
-
-      if (target.classList.contains('add-todo-btn')) {
-        if (target.id === 'add-top-level-todo-btn') {
-          this.TodoManager.resetSelectedTodo();
-          // reset currSelected to null, so addTodo inserts into topLevelTodos
-        }
-        this.containerElement.innerHTML = '';
-        this.containerElement.append(
-          this.FormManager?.insertTodoForm(this, this.TodoManager),
-        );
-      }
-
-      if (target.classList.contains('edit-item')) {
-        this.containerElement.innerHTML = '';
-        this.containerElement.append(
-          this.FormManager?.insertTodoForm(
-            this,
-            this.TodoManager,
-            this.TodoManager.getTodo(
-              Number(targetParentli.dataset.todo),
-              this.TodoManager.getTopLevelTodos(),
-            ),
-          ),
-        );
-      }
-
-      if (target.classList.contains('cancel-form-btn')) {
-        this.renderTodosSection();
-      }
     });
+  }
+
+  selectItem(parentLi: TodoListItemWithDataset) {
+    [...parentLi.parentElement.children].forEach((child) =>
+      child.classList.remove('selected-list-item'),
+    );
+    parentLi.classList.add('selected-list-item');
+    this.TodoManager.setSelectedTodo(Number(parentLi.dataset.todo));
+    this.containerElement
+      .querySelector('#selected-sub-todos')
+      .parentElement.replaceWith(
+        this.renderSelectedSubTodosList(this.TodoManager.currSelectedTodo),
+      );
+  }
+
+  deleteItem(parentLi: TodoListItemWithDataset) {
+    if (parentLi?.parentElement.id === 'top-level-todos') {
+      this.TodoManager.deleteTopLevelTodo(Number(parentLi.dataset.todo));
+      this.TodoManager.resetSelectedTodo();
+    } else {
+      this.TodoManager.deleteChildTodo(Number(parentLi.dataset.todo));
+    }
+    this.renderTodosSection();
+  }
+
+  addItem(target: Element) {
+    if (target.id === 'add-top-level-todo-btn') {
+      this.TodoManager.resetSelectedTodo();
+      // reset currSelected to null, so addTodo inserts into topLevelTodos
+    }
+    this.containerElement.innerHTML = '';
+    this.containerElement.append(
+      this.FormManager?.insertTodoForm(this, this.TodoManager),
+    );
+  }
+
+  editItem(parentLi: TodoListItemWithDataset) {
+    this.containerElement.innerHTML = '';
+    this.containerElement.append(
+      this.FormManager?.insertTodoForm(
+        this,
+        this.TodoManager,
+        this.TodoManager.getTodo(
+          Number(parentLi.dataset.todo),
+          this.TodoManager.getTopLevelTodos(),
+        ),
+      ),
+    );
   }
 
   createTodosListContainer(headingTitle: string) {
@@ -111,10 +118,10 @@ class TodoContentUIManager extends UIManager {
     const todosListContainer = this.createTodosListContainer('To Do');
     const ul = this.createElement('ul', '', 'top-level-todos');
     this.TodoManager.getTopLevelTodos().forEach((todo) => {
-      const targetParentli = createListItemFromObject(todo, 'top-level');
+      const targetParentLi = createListItemFromObject(todo, 'top-level');
       if (this.TodoManager.currSelectedTodo === todo)
-        targetParentli.classList.add('selected-list-item');
-      ul.append(targetParentli);
+        targetParentLi.classList.add('selected-list-item');
+      ul.append(targetParentLi);
     });
     if (ul.childNodes.length === 0) ul.append(emptyListFallbackItem());
     const addNewTodoBtn = this.createNewTodoBtn('add-top-level-todo-btn');

@@ -54,7 +54,7 @@ function createListItemFromObject(
         'datetime',
         formatISO(todo.dueDate, { representation: 'date' }),
       );
-      timeEle.textContent = format(todo.dueDate, 'MMMM do, ccc - yyyy');
+      timeEle.textContent = format(todo.dueDate, 'MMM do, ccc - yy');
     } else {
       timeEle = createElement<HTMLParagraphElement>('p');
       timeEle.textContent = 'No Due Date';

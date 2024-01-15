@@ -42,6 +42,9 @@ class TodoFormUIManager extends UIManager {
     const formData = new FormData(this.form);
     const tempObj: any = {};
     formData.forEach((value, key) => {
+      if (key === 'dueDate') {
+        tempObj[key] = new Date(value as string);
+      }
       tempObj[key] = value;
     });
     const FormTemplateObject: FormTemplateObj = tempObj;

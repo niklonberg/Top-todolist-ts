@@ -1,4 +1,5 @@
 import './index.css';
+import { addDays } from 'date-fns';
 import TodoFactory from './components/modules/TodoFactory';
 import TodoManager from './components/modules/TodoManager';
 import TodoContentUIManager from './components/modules/TodoContentUIManager';
@@ -19,7 +20,7 @@ function init() {
   const childTodoOne = TodoFactory({
     title: 'Paint Walls',
     priority: 'High',
-    dueDate: new Date(2023, 11, 15),
+    dueDate: addDays(new Date(), 3),
   });
   const childTodoTwo = TodoFactory({
     title: 'Paint Bedroom',

@@ -14,7 +14,16 @@
   margin-top: auto;
 }
 
-.selected-list-item {
+.todos-list-container .list-item {
+  display: flex;
+  align-items: center;
+  gap: var(--sm-gap);
+  background-color: var(--primary);
+  border-radius: 20px;
+  padding: var(--m-gap);
+}
+
+.todos-list-container .selected-list-item {
   background-color: var(--secondary);
 }
 

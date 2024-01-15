@@ -39,7 +39,7 @@ export interface TodoManagerInterface {
   deleteTopLevelTodo(todoID: number): void;
   deleteChildTodo(todoID: number): void;
   editTodo(todoToEdit: Todo, newTodo: Todo): void;
-  // toggleProperty
+  toggleComplete(todoID: number): void;
 }
 /* eslint-disable no-unused-vars */
 

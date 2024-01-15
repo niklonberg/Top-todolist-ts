@@ -42,7 +42,17 @@ class TodoContentUIManager extends UIManager {
 
       if (target.classList.contains('cancel-form-btn'))
         this.renderTodosSection();
+
+      if (target.classList.contains('toggle-complete-btn')) {
+        this.toggleItemComplete(target, targetParentLi);
+      }
     });
+  }
+
+  toggleItemComplete(target: Element, parentLi: TodoListItemWithDataset) {
+    target.classList.toggle('checked');
+    parentLi.classList.toggle('todo-complete');
+    this.TodoManager.toggleComplete(Number(parentLi.dataset.todo));
   }
 
   selectItem(parentLi: TodoListItemWithDataset) {

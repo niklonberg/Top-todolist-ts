@@ -105,7 +105,11 @@ class TodoManager implements TodoManagerInterface {
     );
   }
 
-  // toggleProperty() {}
+  toggleComplete(todoID: number): void {
+    const todo = this.getTodo(todoID);
+    todo.isCompleted = !todo.isCompleted;
+    console.log('Todo complete: ', todo.isCompleted);
+  }
 }
 
 export default TodoManager;

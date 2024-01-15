@@ -1,4 +1,4 @@
-import { format } from 'date-fns';
+import { format, formatISO } from 'date-fns';
 import createElement from './createElement';
 import { Todo } from './interfaces';
 
@@ -40,6 +40,7 @@ function createListItemFromObject(
 
   // do child todo specific things
   if (destination === 'todo-list') {
+    // make element draggable
     let timeEle: HTMLTimeElement | HTMLParagraphElement;
     if (todo.description) {
       const p = createElement<HTMLParagraphElement>('p');
@@ -48,14 +49,17 @@ function createListItemFromObject(
     }
 
     if (todo.dueDate) {
-      // timeEle.setAttribute('datetime', todo.dueDate)
-      // timeEle.textContent = format(value, "MMMM do, ccc - yyyy");
+      timeEle = createElement<HTMLTimeElement>('time');
+      timeEle.setAttribute(
+        'datetime',
+        formatISO(todo.dueDate, { representation: 'date' }),
+      );
+      timeEle.textContent = format(todo.dueDate, 'MMMM do, ccc - yyyy');
     } else {
       timeEle = createElement<HTMLParagraphElement>('p');
       timeEle.textContent = 'No Due Date';
     }
-    li.append(listDetails);
-    li.append(timeEle);
+    li.append(listDetails, timeEle);
   }
 
   li.append(editActions);

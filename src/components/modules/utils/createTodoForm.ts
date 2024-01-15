@@ -1,3 +1,4 @@
+import { format } from 'date-fns';
 import createElement from './createElement';
 import { Todo } from './interfaces';
 
@@ -44,7 +45,11 @@ function createTodoForm(todoToEdit?: Todo) {
   </div>
   <div class="input-container">
     <label for="dueDate">Duedate</label>
-    <input type="date" name="dueDate" id="dueDate" />
+    <input type="date" name="dueDate" id="dueDate" ${
+      todoToEdit.dueDate instanceof Date
+        ? `value=${format(todoToEdit.dueDate, 'yyyy-MM-dd')}`
+        : `value=''`
+    } />
   </div>
   <button type="submit" class="submit-form-btn">Confirm</button>
   <button type="button" class="cancel-form-btn">Cancel</button>

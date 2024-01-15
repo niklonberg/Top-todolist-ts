@@ -1,10 +1,10 @@
-type PriorityLevel = 'Low' | 'Medium' | 'High';
+type PriorityLevel = 'Low' | 'Medium' | 'High'; // convert to enum?
 
 export interface FormTemplateObj {
   title: string;
   priority?: PriorityLevel;
   dueDate?: null | Date;
-  description?: string; // should these be optional?
+  description?: string;
 }
 
 export interface Todo {

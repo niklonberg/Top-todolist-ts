@@ -64,25 +64,28 @@ function createListItemFromObject(
   // do child todo specific things
   if (destination === 'todo-list') {
     // make element draggable
-    let timeEle: HTMLTimeElement | HTMLParagraphElement;
     if (todo.description) {
       const p = createElement<HTMLParagraphElement>('p');
+      p.setAttribute('aria-label', 'item description');
       p.textContent = todo.description;
       listDetails.append(p);
     }
 
+    let timeEle: HTMLTimeElement | HTMLParagraphElement;
     if (todo.dueDate) {
       timeEle = createElement<HTMLTimeElement>('time');
       timeEle.setAttribute(
         'datetime',
         formatISO(todo.dueDate, { representation: 'date' }),
       );
-      timeEle.textContent = format(todo.dueDate, 'MMM do, ccc - yy');
+      timeEle.textContent = format(todo.dueDate, "MMM do, ccc - ''yy");
     } else {
       timeEle = createElement<HTMLParagraphElement>('p');
       timeEle.textContent = 'No Due Date';
     }
-    li.append(listDetails, timeEle);
+
+    const checkCompleteBtn = createCheckCompleteBtn(todo);
+    li.append(listDetails, timeEle, checkCompleteBtn);
   }
 
   li.append(editActions);

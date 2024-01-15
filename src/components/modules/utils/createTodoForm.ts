@@ -46,7 +46,7 @@ function createTodoForm(todoToEdit?: Todo) {
   <div class="input-container">
     <label for="dueDate">Duedate</label>
     <input type="date" name="dueDate" id="dueDate" ${
-      todoToEdit.dueDate instanceof Date
+      todoToEdit?.dueDate instanceof Date
         ? `value=${format(todoToEdit.dueDate, 'yyyy-MM-dd')}`
         : `value=''`
     } />

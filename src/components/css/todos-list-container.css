@@ -23,6 +23,10 @@
   padding: var(--m-gap);
 }
 
+.todos-list-container .list-item-title {
+  margin-top: 0;
+}
+
 .todos-list-container .selected-list-item {
   background-color: var(--secondary);
 }

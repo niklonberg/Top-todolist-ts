@@ -2,11 +2,24 @@ import { format, formatISO } from 'date-fns';
 import createElement from './createElement';
 import { Todo } from './interfaces';
 
+function createPriorityContainer(todo: Todo) {
+  const priorityContainer = createElement('div', 'list-item-priority');
+  const img = createElement('img', 'list-item-priority-icon');
+  // img.src = icon source
+  const text = createElement('span');
+  text.textContent = `${todo.priority} Priority`;
+  priorityContainer.append(img, text);
+  return priorityContainer;
+}
+
 function createListDetailsContainer(todo: Todo) {
   const listDetails = createElement<HTMLDivElement>('DIV', 'list-item-details');
+  const titleDetails = createElement<HTMLDivElement>('DIV');
   const title = createElement<HTMLHeadingElement>('H3', 'list-item-title');
   title.textContent = todo.title;
-  listDetails.append(title);
+  const priority = createPriorityContainer(todo);
+  titleDetails.append(title, priority);
+  listDetails.append(titleDetails);
   return listDetails;
 }
 

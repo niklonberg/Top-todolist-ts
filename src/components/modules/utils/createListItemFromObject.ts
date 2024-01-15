@@ -36,6 +36,15 @@ function createEditActionsContainer() {
   return editActions;
 }
 
+function createCheckCompleteBtn(todo: Todo) {
+  const checkCompleteBtn = createElement('button', 'toggle-complete-btn');
+  checkCompleteBtn.setAttribute('aria-label', 'Toggle complete');
+  if (todo.isCompleted) {
+    checkCompleteBtn.classList.add('checked');
+  }
+  return checkCompleteBtn;
+}
+
 function createListItemFromObject(
   todo: Todo,
   destination: 'top-level' | 'todo-list',

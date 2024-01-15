@@ -52,7 +52,7 @@ class TodoContentUIManager extends UIManager {
   toggleItemComplete(target: Element, parentLi: TodoListItemWithDataset) {
     target.classList.toggle('checked');
     parentLi.classList.toggle('todo-complete');
-    this.TodoManager.toggleComplete(Number(parentLi.dataset.todo));
+    this.TodoManager.toggleIsCompleted(Number(parentLi.dataset.todo));
   }
 
   selectItem(parentLi: TodoListItemWithDataset) {

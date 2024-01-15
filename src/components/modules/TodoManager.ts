@@ -105,10 +105,22 @@ class TodoManager implements TodoManagerInterface {
     );
   }
 
-  toggleComplete(todoID: number): void {
+  toggleIsCompleted(todoID: number): void {
     const todo = this.getTodo(todoID);
     todo.isCompleted = !todo.isCompleted;
     console.log('Todo complete: ', todo.isCompleted);
+    this.toggleCompletedDate(todo);
+  }
+
+  // make static, as it does not use this?
+  toggleCompletedDate(todo: Todo): void {
+    if (!todo.dateCompleted) {
+      todo.dateCompleted = new Date();
+    } else {
+      todo.dateCompleted = null;
+    }
+    console.log(todo.dateCompleted);
+    console.log(todo);
   }
 }
 

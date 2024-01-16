@@ -1,12 +1,10 @@
 import { format, formatISO } from 'date-fns';
 import createElement from './createElement';
 import { Todo } from './interfaces';
-// import circleIcon from '../../../images/icons/circle.svg';
 
 function createPriorityContainer(todo: Todo) {
   const priorityContainer = createElement('div', 'list-item-priority');
-  const img = createElement('img', 'list-item-priority-icon');
-  // img.src = icon source
+  const img = createElement('div', 'list-item-priority-icon');
   const text = createElement('span');
   text.textContent = `${todo.priority} Priority`;
   priorityContainer.append(img, text);

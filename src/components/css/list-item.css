@@ -4,6 +4,7 @@
     cursor: pointer;
     padding-inline: var(--m-gap);
     margin: var(--l-gap);
+    transition: background-color 0.5s;
   }
 
   .list-item:not(:last-child)::after {
@@ -19,6 +20,7 @@
 
   .list-item.todo-complete {
     text-decoration: line-through;
+    background-color: var(--complementary) !important;
   }
 
   .list-item-title {
@@ -40,5 +42,19 @@
     background-size: 100%;
     background-repeat: no-repeat;
     border-radius: 50%;
+  }
+
+  .list-item-priority {
+    display: flex;
+    align-items: center;
+    gap: var(--sm-gap);
+  }
+
+  .list-item-priority-icon {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--primary-contrast);
   }
 }

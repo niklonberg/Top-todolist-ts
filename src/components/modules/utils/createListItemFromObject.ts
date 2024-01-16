@@ -2,6 +2,15 @@ import { format, formatISO } from 'date-fns';
 import createElement from './createElement';
 import { Todo } from './interfaces';
 
+function createListContainer(todo: Todo) {
+  const li = createElement<HTMLLIElement>('LI', 'list-item');
+  li.setAttribute('draggable', 'true');
+  li.classList.add('draggable');
+  if (todo.isCompleted) li.classList.add('todo-complete');
+  li.dataset.todo = todo.todoID.toString();
+  return li;
+}
+
 function createPriorityContainer(todo: Todo) {
   const priorityContainer = createElement('div', 'list-item-priority');
   const img = createElement('div', 'list-item-priority-icon');
@@ -47,10 +56,7 @@ function createListItemFromObject(
   todo: Todo,
   destination: 'top-level' | 'todo-list',
 ): HTMLLIElement {
-  const li = createElement<HTMLLIElement>('LI', 'list-item');
-  li.setAttribute('draggable', 'true');
-  li.classList.add('draggable');
-  li.dataset.todo = todo.todoID.toString();
+  const li = createListContainer(todo);
   const listDetails = createListDetailsContainer(todo);
   const editActions = createEditActionsContainer();
 

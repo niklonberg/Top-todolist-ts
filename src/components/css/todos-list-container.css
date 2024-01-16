@@ -1,46 +1,52 @@
-.todos-list-container {
-  display: flex;
-  flex-direction: column;
-  background-color: var(--primary-lighter);
-  border-radius: 20px;
-  padding: var(--l-gap);
-}
+@layer component {
+  .todos-list-container {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--primary-lighter);
+    border-radius: 20px;
+    padding: var(--l-gap);
+  }
 
-.todos-list-container > :nth-last-child(2) {
-  margin-bottom: var(--l-gap);
-}
+  .todos-list-container > :nth-last-child(2) {
+    margin-bottom: var(--l-gap);
+  }
 
-.todos-list-container button {
-  margin-top: auto;
-}
+  .todos-list-container button {
+    margin-top: auto;
+  }
 
-.todos-list-container .list-item {
-  cursor: grab;
-  display: flex;
-  align-items: center;
-  gap: var(--sm-gap);
-  background-color: var(--primary);
-  border-radius: 20px;
-  padding: var(--m-gap);
-}
+  .todos-list-container .list-item {
+    cursor: grab;
+    display: flex;
+    align-items: center;
+    gap: var(--sm-gap);
+    background-color: var(--primary);
+    border-radius: 20px;
+    padding: var(--m-gap);
+  }
 
-.todos-list-container .list-item-title {
-  margin-top: 0;
-}
+  .todos-list-container .list-item-title {
+    margin-top: 0;
+  }
 
-.todos-list-container .selected-list-item {
-  background-color: var(--secondary);
-}
+  .todos-list-container .selected-list-item {
+    background-color: var(--secondary);
+  }
 
-.list-item-edits {
-  position: relative;
-  width: 25px;
-  height: 25px;
-  background-image: url(/src/images/icons/flat-dots.svg);
-  background-repeat: no-repeat;
-}
+  .list-item-edits {
+    position: relative;
+    width: 25px;
+    height: 25px;
+    background-image: url(/src/images/icons/flat-dots.svg);
+    background-repeat: no-repeat;
+  }
 
-.item-options {
-  position: absolute;
-  bottom: 25px;
+  .item-options {
+    position: absolute;
+    bottom: 25px;
+  }
+
+  .dragging {
+    opacity: 0.7;
+  }
 }

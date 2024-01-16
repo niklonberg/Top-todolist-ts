@@ -145,15 +145,52 @@ class TodoContentUIManager extends UIManager {
   }
 
   addDragFunctionality(ul: HTMLUListElement) {
-    const draggables = ul.querySelectorAll('.draggable');
-    draggables.forEach((draggable) => {
-      draggable.addEventListener('dragstart', () => {
-        draggable.classList.add('dragging');
-      });
-      draggable.addEventListener('dragend', () => {
-        draggable.classList.remove('dragging');
-      });
+    ul.addEventListener('dragstart', (e) => {
+      const target = e.target as HTMLElement;
+      if (target.classList.contains('draggable'))
+        target.classList.add('dragging');
     });
+
+    ul.addEventListener('dragend', (e) => {
+      const target = e.target as HTMLElement;
+      if (target.classList.contains('draggable'))
+        target.classList.remove('dragging');
+    });
+
+    ul.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      const afterElement = this.getDragAfterElement(ul, e.clientY);
+      const dragElement = ul.querySelector('.dragging');
+      if (afterElement == null) {
+        ul.appendChild(dragElement);
+      } else {
+        ul.insertBefore(dragElement, afterElement);
+      }
+    });
+  }
+
+  getDragAfterElement(container: HTMLElement, y: number) {
+    const draggableElements = [
+      ...container.querySelectorAll('.draggable:not(.dragging)'),
+    ];
+
+    return draggableElements.reduce(
+      (closest, child) => {
+        const boundingBox = child.getBoundingClientRect();
+        const offset = y - boundingBox.top - boundingBox.height / 2;
+        if (offset < 0 && offset > closest.offset) {
+          return { offset, element: child } as {
+            offset: number;
+            element: Element;
+          };
+        }
+        return closest;
+      },
+      { offset: Number.NEGATIVE_INFINITY } as {
+        offset: number;
+        element: Element;
+      },
+    ).element;
   }
 
   renderSelectedSubTodosList(todo: Todo) {

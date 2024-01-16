@@ -49,6 +49,7 @@ function createListItemFromObject(
 ): HTMLLIElement {
   const li = createElement<HTMLLIElement>('LI', 'list-item');
   li.setAttribute('draggable', 'true');
+  li.classList.add('draggable');
   li.dataset.todo = todo.todoID.toString();
   const listDetails = createListDetailsContainer(todo);
   const editActions = createEditActionsContainer();

@@ -126,7 +126,11 @@ class TodoContentUIManager extends UIManager {
 
   renderTopLevelTodosList() {
     const todosListContainer = this.createTodosListContainer('To Do');
-    const ul = this.createElement('ul', '', 'top-level-todos');
+    const ul = this.createElement<HTMLUListElement>(
+      'ul',
+      '',
+      'top-level-todos',
+    );
     this.TodoManager.getTopLevelTodos().forEach((todo) => {
       const targetParentLi = createListItemFromObject(todo, 'top-level');
       if (this.TodoManager.currSelectedTodo === todo)
@@ -136,12 +140,29 @@ class TodoContentUIManager extends UIManager {
     if (ul.childNodes.length === 0) ul.append(emptyListFallbackItem());
     const addNewTodoBtn = this.createNewTodoBtn('add-top-level-todo-btn');
     todosListContainer.append(ul, addNewTodoBtn);
+    this.addDragFunctionality(ul);
     return todosListContainer;
+  }
+
+  addDragFunctionality(ul: HTMLUListElement) {
+    const draggables = ul.querySelectorAll('.draggable');
+    draggables.forEach((draggable) => {
+      draggable.addEventListener('dragstart', () => {
+        draggable.classList.add('dragging');
+      });
+      draggable.addEventListener('dragend', () => {
+        draggable.classList.remove('dragging');
+      });
+    });
   }
 
   renderSelectedSubTodosList(todo: Todo) {
     const todosListContainer = this.createTodosListContainer('Subtasks');
-    const ul = this.createElement('ul', '', 'selected-sub-todos');
+    const ul = this.createElement<HTMLUListElement>(
+      'ul',
+      '',
+      'selected-sub-todos',
+    );
 
     todo?.children.forEach((childTodo) => {
       ul.append(createListItemFromObject(childTodo, 'todo-list'));

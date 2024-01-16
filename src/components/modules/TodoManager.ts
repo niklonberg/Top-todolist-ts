@@ -51,7 +51,6 @@ class TodoManager implements TodoManagerInterface {
   }
 
   /* Edit methods */
-
   editTodo(
     todoToEdit: Todo,
     newTodo: Todo,
@@ -67,6 +66,24 @@ class TodoManager implements TodoManagerInterface {
         this.editTodo(todoToEdit, newTodo, childTodo.children),
       );
     }
+  }
+
+  toggleIsCompleted(todoID: number): void {
+    const todo = this.getTodo(todoID);
+    todo.isCompleted = !todo.isCompleted;
+    console.log('Todo complete: ', todo.isCompleted);
+    this.toggleCompletedDate(todo);
+  }
+
+  // make static, as it does not use this?
+  toggleCompletedDate(todo: Todo): void {
+    if (!todo.dateCompleted) {
+      todo.dateCompleted = new Date();
+    } else {
+      todo.dateCompleted = null;
+    }
+    console.log(todo.dateCompleted);
+    console.log(todo);
   }
 
   /* Set methods */
@@ -103,24 +120,6 @@ class TodoManager implements TodoManagerInterface {
     this.parentTodo.children = this.parentTodo.children.filter(
       (childTodo) => childTodo !== todo,
     );
-  }
-
-  toggleIsCompleted(todoID: number): void {
-    const todo = this.getTodo(todoID);
-    todo.isCompleted = !todo.isCompleted;
-    console.log('Todo complete: ', todo.isCompleted);
-    this.toggleCompletedDate(todo);
-  }
-
-  // make static, as it does not use this?
-  toggleCompletedDate(todo: Todo): void {
-    if (!todo.dateCompleted) {
-      todo.dateCompleted = new Date();
-    } else {
-      todo.dateCompleted = null;
-    }
-    console.log(todo.dateCompleted);
-    console.log(todo);
   }
 }
 

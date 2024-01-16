@@ -15,6 +15,7 @@
 }
 
 .todos-list-container .list-item {
+  cursor: grab;
   display: flex;
   align-items: center;
   gap: var(--sm-gap);

@@ -48,6 +48,7 @@ function createListItemFromObject(
   destination: 'top-level' | 'todo-list',
 ): HTMLLIElement {
   const li = createElement<HTMLLIElement>('LI', 'list-item');
+  li.setAttribute('draggable', 'true');
   li.dataset.todo = todo.todoID.toString();
   const listDetails = createListDetailsContainer(todo);
   const editActions = createEditActionsContainer();
@@ -81,7 +82,7 @@ function createListItemFromObject(
       timeEle = createElement<HTMLParagraphElement>('p');
       timeEle.textContent = 'No Due Date';
     }
-
+    timeEle.classList.add('completion-date');
     const checkCompleteBtn = createCheckCompleteBtn(todo);
     li.append(listDetails, timeEle, checkCompleteBtn);
   }

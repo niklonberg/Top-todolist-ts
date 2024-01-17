@@ -23,6 +23,7 @@ function init() {
     dueDate: addDays(new Date(), 3),
   });
   childTodoOne.isCompleted = true;
+  childTodoOne.dateCompleted = new Date();
   const childTodoTwo = TodoFactory({
     title: 'Paint Bedroom',
     priority: 'Medium',

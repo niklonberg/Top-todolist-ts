@@ -119,6 +119,10 @@ function createListItemFromObject(
     timeEle.setAttribute('aria-label', 'deadline date');
     editActions.prepend(timeEle);
 
+    if (todo.dateCompleted) {
+      li.append(createDateCompleted(todo));
+    }
+
     editActions.lastElementChild.prepend(createCheckCompleteBtn(todo));
 
     li.append(listDetails);

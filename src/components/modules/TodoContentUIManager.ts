@@ -34,12 +34,13 @@ class TodoContentUIManager extends UIManager {
         // we can do something else
       }
 
-      if (target.classList.contains('delete-item'))
-        this.deleteItem(targetParentLi);
-
       if (target.classList.contains('add-todo-btn')) this.addItem(target);
 
-      if (target.classList.contains('edit-item')) this.editItem(targetParentLi);
+      if (target.closest('button').classList.contains('edit-item-btn'))
+        this.editItem(targetParentLi);
+
+      if (target.closest('button').classList.contains('delete-item-btn'))
+        this.deleteItem(targetParentLi);
 
       if (target.classList.contains('cancel-form-btn'))
         this.renderTodosSection();

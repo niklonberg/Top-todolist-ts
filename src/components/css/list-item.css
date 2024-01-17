@@ -65,6 +65,7 @@
 
   .completion-date {
     font-size: 0.85rem;
+    font-weight: bold;
     letter-spacing: 0.4px;
     padding: calc(var(--sm-gap) / 2);
     margin-block: 0;

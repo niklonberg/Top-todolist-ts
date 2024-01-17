@@ -109,7 +109,7 @@ class TodoContentUIManager extends UIManager {
       'div',
       'todos-list-container',
     );
-    const h2 = this.createElement<HTMLHeadingElement>('H2');
+    const h2 = this.createElement<HTMLHeadingElement>('H2', 'list-item-title');
     h2.textContent = headingTitle;
     todosListContainer.append(h2);
     return todosListContainer;
@@ -147,7 +147,7 @@ class TodoContentUIManager extends UIManager {
 
   renderSelectedSubTodosList(todo: Todo) {
     const todosListContainer = this.createTodosListContainer(
-      `${todo.title} - Subtasks`,
+      `Subtasks - ${todo.title}`,
     );
     const ul = this.createElement<HTMLUListElement>(
       'ul',

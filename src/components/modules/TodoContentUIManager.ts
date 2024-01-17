@@ -1,5 +1,7 @@
+import createListItemFromObject, {
+  createDateCompleted,
+} from './utils/createListItemFromObject';
 import UIManager from './abstract/UIManager';
-import createListItemFromObject from './utils/createListItemFromObject';
 import emptyListFallbackItem from './utils/emptyListFallbackItem';
 import addDragFunctionality from './utils/addDragFunctionality';
 import TodoFormUIManager from './TodoFormUIManager';
@@ -36,10 +38,10 @@ class TodoContentUIManager extends UIManager {
 
       if (target.classList.contains('add-todo-btn')) this.addItem(target);
 
-      if (target.closest('button').classList.contains('edit-item-btn'))
+      if (target.closest('button')?.classList.contains('edit-item-btn'))
         this.editItem(targetParentLi);
 
-      if (target.closest('button').classList.contains('delete-item-btn'))
+      if (target.closest('button')?.classList.contains('delete-item-btn'))
         this.deleteItem(targetParentLi);
 
       if (target.classList.contains('cancel-form-btn'))
@@ -54,7 +56,14 @@ class TodoContentUIManager extends UIManager {
   toggleItemComplete(target: Element, parentLi: TodoListItemWithDataset) {
     target.classList.toggle('checked');
     parentLi.classList.toggle('todo-complete');
-    this.TodoManager.toggleIsCompleted(Number(parentLi.dataset.todo));
+    const todo = this.TodoManager.toggleIsCompleted(
+      Number(parentLi.dataset.todo),
+    );
+    if (todo.isCompleted) {
+      parentLi.append(createDateCompleted(todo));
+    } else {
+      parentLi.querySelector('.completion-date').remove();
+    }
   }
 
   selectItem(parentLi: TodoListItemWithDataset) {

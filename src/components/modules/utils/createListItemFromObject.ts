@@ -1,4 +1,4 @@
-import { format, formatISO } from 'date-fns';
+import { format, formatISO, differenceInDays, addDays } from 'date-fns';
 import createElement from './createElement';
 import { Todo } from './interfaces';
 
@@ -58,10 +58,35 @@ function createCheckCompleteBtn(todo: Todo) {
   return checkCompleteBtn;
 }
 
+export function createDateCompleted(todo: Todo) {
+  const dateCompleted = createElement<HTMLTimeElement>(
+    'time',
+    'completion-date',
+  );
+  const now = new Date();
+  const dayDifference = differenceInDays(todo.dateCompleted, now);
+  let dateText = 'Completed: ';
+  if (dayDifference < 1) {
+    dateText += 'Today';
+  } else if (dayDifference < 2) {
+    dateText += '1 day ago';
+  } else if (dayDifference < 7) {
+    dateText += `${dayDifference} days ago`;
+  } else {
+    dateText += 'Over 1 week ago';
+  }
+  dateCompleted.textContent = dateText;
+  dateCompleted.setAttribute(
+    'datetime',
+    formatISO(todo.dateCompleted, { representation: 'date' }),
+  );
+  return dateCompleted;
+}
+
 function createListItemFromObject(
   todo: Todo,
   destination: 'top-level' | 'todo-list',
-): HTMLLIElement {
+) {
   const li = createListContainer(todo);
   const listDetails = createListDetailsContainer(todo);
   const editActions = createEditActionsContainer();
@@ -90,7 +115,7 @@ function createListItemFromObject(
       timeEle = createElement<HTMLParagraphElement>('p');
       timeEle.textContent = 'No Due Date';
     }
-    timeEle.classList.add('completion-date');
+    timeEle.classList.add('deadline-date');
     timeEle.setAttribute('aria-label', 'deadline date');
     editActions.prepend(timeEle);
 

@@ -68,11 +68,14 @@ class TodoManager implements TodoManagerInterface {
     }
   }
 
-  toggleIsCompleted(todoID: number): void {
+  toggleIsCompleted(todoID: number): Todo {
     const todo = this.getTodo(todoID);
     todo.isCompleted = !todo.isCompleted;
     console.log('Todo complete: ', todo.isCompleted);
     this.toggleCompletedDate(todo);
+    if (this.parentTodo.children.every((childTodo) => childTodo.isCompleted)) {
+    }
+    return todo;
   }
 
   // make static, as it does not use this?
@@ -83,7 +86,6 @@ class TodoManager implements TodoManagerInterface {
       todo.dateCompleted = null;
     }
     console.log(todo.dateCompleted);
-    console.log(todo);
   }
 
   /* Set methods */

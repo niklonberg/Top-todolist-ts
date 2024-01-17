@@ -1,0 +1,9 @@
+@layer component {
+  .add-todo-btn {
+    border-radius: 25px;
+    border: 0;
+    padding-block: var(--m-gap);
+    /* background-color: var(--primary-contrast);
+    color: var(--primary); */
+  }
+}

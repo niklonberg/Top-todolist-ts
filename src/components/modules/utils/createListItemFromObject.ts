@@ -22,12 +22,10 @@ function createPriorityContainer(todo: Todo) {
 
 function createListDetailsContainer(todo: Todo) {
   const listDetails = createElement<HTMLDivElement>('DIV', 'list-item-details');
-  const titleDetails = createElement<HTMLDivElement>('DIV');
   const title = createElement<HTMLHeadingElement>('H3', 'list-item-title');
   title.textContent = todo.title;
   const priority = createPriorityContainer(todo);
-  titleDetails.append(title, priority);
-  listDetails.append(titleDetails);
+  listDetails.append(title, priority);
   return listDetails;
 }
 
@@ -90,6 +88,7 @@ function createListItemFromObject(
       timeEle.textContent = 'No Due Date';
     }
     timeEle.classList.add('completion-date');
+    timeEle.setAttribute('aria-label', 'deadline date');
     editActions.prepend(timeEle);
 
     editActions.lastElementChild.prepend(createCheckCompleteBtn(todo));

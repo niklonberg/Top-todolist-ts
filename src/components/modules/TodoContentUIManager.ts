@@ -121,7 +121,7 @@ class TodoContentUIManager extends UIManager {
       'add-todo-btn',
       btnID,
     );
-    btn.textContent = 'Add Task';
+    btn.textContent = '+ Add Task';
     return btn;
   }
 

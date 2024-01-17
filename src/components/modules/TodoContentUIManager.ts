@@ -146,7 +146,9 @@ class TodoContentUIManager extends UIManager {
   }
 
   renderSelectedSubTodosList(todo: Todo) {
-    const todosListContainer = this.createTodosListContainer('Subtasks');
+    const todosListContainer = this.createTodosListContainer(
+      `${todo.title} - Subtasks`,
+    );
     const ul = this.createElement<HTMLUListElement>(
       'ul',
       '',

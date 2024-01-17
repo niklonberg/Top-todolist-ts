@@ -19,7 +19,6 @@
   }
 
   .list-item.todo-complete {
-    text-decoration: line-through;
     background-color: var(--complementary) !important;
   }
 

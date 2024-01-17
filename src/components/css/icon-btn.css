@@ -1,0 +1,12 @@
+@layer component {
+  .icon-btn {
+    /* display: flex; */
+    background: none;
+    border: 0;
+    fill: var(--primary-contrast);
+  }
+
+  .icon-btn:hover {
+    opacity: 0.6;
+  }
+}

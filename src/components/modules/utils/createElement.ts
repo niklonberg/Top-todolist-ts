@@ -1,4 +1,3 @@
-// is this no longer needed? perhaps
 function createElement<T extends HTMLElement>(
   type: string = 'div',
   classname: string = '',

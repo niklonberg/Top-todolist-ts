@@ -42,10 +42,11 @@ class TodoContentUIManager extends UIManager {
         this.editItem(targetParentLi);
 
       if (target.closest('button')?.classList.contains('delete-item-btn'))
-        this.deleteItem(targetParentLi);
+        if (target.classList.contains('cancel-form-btn'))
+          // this.confirmDeleteAction(targetParentLi);
+          // this.deleteItem(targetParentLi);
 
-      if (target.classList.contains('cancel-form-btn'))
-        this.renderTodosSection();
+          this.renderTodosSection();
 
       if (target.classList.contains('toggle-complete-btn')) {
         this.toggleItemComplete(target, targetParentLi);

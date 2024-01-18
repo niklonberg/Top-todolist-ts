@@ -16,7 +16,7 @@
   }
 
   .todos-list-container .list-item {
-    cursor: grab;
+    cursor: move;
     display: flex;
     align-items: center;
     gap: var(--sm-gap);
@@ -27,6 +27,7 @@
 
   .todos-list-container .list-item-title {
     margin-top: 0;
+    cursor: pointer;
   }
 
   .todos-list-container .selected-list-item {

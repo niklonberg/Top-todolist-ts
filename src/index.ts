@@ -71,16 +71,22 @@ function init() {
 
 init();
 
-async function getData() {
-  console.log('i ran');
+async function getUsersData() {
   const url = 'http://localhost:3000/users';
-  const response = await fetch(url);
-  const users = await response.json();
-  console.log(users);
+  try {
+    const response = await fetch(url);
+    console.log(response);
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    const users = await response.json();
+    console.log(users);
+  } catch (error) {
+    console.error(error.message);
+  }
 }
 
 const getUsersDataBtn = document.querySelector('#get-users-data');
 getUsersDataBtn.addEventListener('click', () => {
-  console.log('event listener ran');
-  getData();
+  getUsersData();
 });

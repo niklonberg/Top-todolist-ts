@@ -70,3 +70,17 @@ function init() {
 }
 
 init();
+
+async function getData() {
+  console.log('i ran');
+  const url = 'http://localhost:3000/users';
+  const response = await fetch(url);
+  const users = await response.json();
+  console.log(users);
+}
+
+const getUsersDataBtn = document.querySelector('#get-users-data');
+getUsersDataBtn.addEventListener('click', () => {
+  console.log('event listener ran');
+  getData();
+});

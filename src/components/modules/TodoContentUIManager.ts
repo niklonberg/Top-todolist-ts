@@ -5,6 +5,7 @@ import UIManager from './abstract/UIManager';
 import emptyListFallbackItem from './utils/emptyListFallbackItem';
 import addDragFunctionality from './utils/addDragFunctionality';
 import TodoFormUIManager from './TodoFormUIManager';
+import createDeleteWarningContainer from './utils/createWarningContainer';
 import {
   Todo,
   TodoManagerInterface,
@@ -41,12 +42,20 @@ class TodoContentUIManager extends UIManager {
       if (target.closest('button')?.classList.contains('edit-item-btn'))
         this.editItem(targetParentLi);
 
-      if (target.closest('button')?.classList.contains('delete-item-btn'))
-        if (target.classList.contains('cancel-form-btn'))
-          // this.confirmDeleteAction(targetParentLi);
-          // this.deleteItem(targetParentLi);
+      if (target.closest('button')?.classList.contains('delete-item-btn')) {
+        if (!this.containerElement.querySelector('.warning-container'))
+          targetParentLi.append(createDeleteWarningContainer());
+      }
 
-          this.renderTodosSection();
+      if (target.classList.contains('confirm-delete-btn')) {
+        this.deleteItem(targetParentLi);
+      }
+
+      if (target.classList.contains('cancel-delete-btn'))
+        targetParentLi.querySelector('.warning-container').remove();
+
+      if (target.classList.contains('cancel-form-btn'))
+        this.renderTodosSection();
 
       if (target.classList.contains('toggle-complete-btn')) {
         this.toggleItemComplete(target, targetParentLi);
@@ -158,7 +167,7 @@ class TodoContentUIManager extends UIManager {
 
   renderSelectedSubTodosList(todo: Todo) {
     const todosListContainer = this.createTodosListContainer(
-      `Subtasks - ${todo.title}`,
+      `Subtasks - ${todo ? todo.title : 'No todo selected'}`,
     );
     const ul = this.createElement<HTMLUListElement>(
       'ul',

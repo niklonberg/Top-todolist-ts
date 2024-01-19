@@ -2,7 +2,7 @@
   .warning-container {
     position: relative;
     background-color: var(--primary);
-    padding: var(--m-gap);
+    padding: var(--l-gap);
     border-radius: 5px;
     position: absolute;
     right: -35px;
@@ -22,7 +22,7 @@
     transform: rotate(45deg);
   }
 
-  .cancel-delete-btn {
+  #cancel-delete-btn {
     position: absolute;
     top: 0;
     right: 0;

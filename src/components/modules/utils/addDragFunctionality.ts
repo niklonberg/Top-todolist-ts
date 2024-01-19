@@ -41,7 +41,7 @@ function addDragFunctionality(
     const todoItems = [...ul.querySelectorAll('.list-item')];
     console.log('target: ', target);
     console.log(todoItems.indexOf(target));
-    dataManager.reorderTodo(
+    dataManager?.reorderTodo(
       todoItems.indexOf(target),
       target as TodoListItemWithDataset,
     );

@@ -33,33 +33,24 @@ class TodoContentUIManager extends UIManager {
       if (targetParentLi?.parentElement.id === 'top-level-todos')
         this.selectItem(targetParentLi);
 
-      if (targetParentLi?.parentElement.id === 'selected-sub-todos') {
-        // we can do something else
-      }
-
       if (target.classList.contains('add-todo-btn')) this.addItem(target);
 
       if (target.closest('button')?.classList.contains('edit-item-btn'))
         this.editItem(targetParentLi);
 
-      if (target.closest('button')?.classList.contains('delete-item-btn')) {
+      if (target.closest('button')?.classList.contains('delete-item-btn'))
         if (!this.containerElement.querySelector('.warning-container'))
           targetParentLi.append(createDeleteWarningContainer());
-      }
 
-      if (target.classList.contains('confirm-delete-btn')) {
-        this.deleteItem(targetParentLi);
-      }
+      if (target.id === 'confirm-delete-btn') this.deleteItem(targetParentLi);
 
-      if (target.classList.contains('cancel-delete-btn'))
+      if (target.id === 'cancel-delete-btn')
         targetParentLi.querySelector('.warning-container').remove();
 
-      if (target.classList.contains('cancel-form-btn'))
-        this.renderTodosSection();
+      if (target.id === 'cancel-form-btn') this.renderTodosSection();
 
-      if (target.classList.contains('toggle-complete-btn')) {
+      if (target.classList.contains('toggle-complete-btn'))
         this.toggleItemComplete(target, targetParentLi);
-      }
     });
   }
 

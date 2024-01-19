@@ -51,8 +51,8 @@ function createTodoForm(todoToEdit?: Todo) {
         : `value=''`
     } />
   </div>
-  <button type="submit" class="submit-form-btn">Confirm</button>
-  <button type="button" class="cancel-form-btn">Cancel</button>
+  <button type="submit" class="filled-btn">Confirm</button>
+  <button type="button" class="filled-btn" id="cancel-form-btn">Cancel</button>
   `;
   form.innerHTML = templateStr;
   return form;

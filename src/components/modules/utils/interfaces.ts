@@ -25,6 +25,12 @@ export interface DataManagerInterface<T> {
   deleteItem(): void;
 }
 
+export interface TodoListItemWithDataset extends HTMLElement {
+  dataset: {
+    todo: string;
+  };
+}
+
 /* eslint-disable no-unused-vars */
 // this could extend DataManagerInterface?
 export interface TodoManagerInterface {
@@ -41,14 +47,9 @@ export interface TodoManagerInterface {
   editTodo(todoToEdit: Todo, newTodo: Todo): void;
   toggleIsCompleted(todoID: number): Todo;
   toggleCompletedDate(todo: Todo): void;
+  reorderTodo(index: number, todoListItem: TodoListItemWithDataset): void;
 }
 /* eslint-disable no-unused-vars */
-
-export interface TodoListItemWithDataset extends HTMLElement {
-  dataset: {
-    todo: string;
-  };
-}
 
 export interface User {
   name: string;

@@ -1,3 +1,5 @@
+import { TodoManagerInterface, TodoListItemWithDataset } from './interfaces';
+
 function getDragAfterElement(container: HTMLElement, y: number) {
   const draggableElements = [
     ...container.querySelectorAll('.draggable:not(.dragging)'),
@@ -22,7 +24,10 @@ function getDragAfterElement(container: HTMLElement, y: number) {
   ).element;
 }
 
-function addDragFunctionality(ul: HTMLUListElement) {
+function addDragFunctionality(
+  ul: HTMLUListElement,
+  dataManager?: TodoManagerInterface,
+) {
   ul.addEventListener('dragstart', (e) => {
     const target = e.target as HTMLElement;
     if (target.classList.contains('draggable'))
@@ -33,6 +38,13 @@ function addDragFunctionality(ul: HTMLUListElement) {
     const target = e.target as HTMLElement;
     if (target.classList.contains('draggable'))
       target.classList.remove('dragging');
+    const todoItems = [...ul.querySelectorAll('.list-item')];
+    console.log('target: ', target);
+    console.log(todoItems.indexOf(target));
+    dataManager.reorderTodo(
+      todoItems.indexOf(target),
+      target as TodoListItemWithDataset,
+    );
   });
 
   ul.addEventListener('dragover', (e) => {

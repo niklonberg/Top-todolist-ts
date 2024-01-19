@@ -1,4 +1,9 @@
-import { User, Todo, TodoManagerInterface } from './utils/interfaces';
+import {
+  User,
+  Todo,
+  TodoManagerInterface,
+  TodoListItemWithDataset,
+} from './utils/interfaces';
 
 // refactor TodoManager into an entity that can be duplicated,
 // so each user could have an instance of TodoManager to manage their todos
@@ -74,6 +79,7 @@ class TodoManager implements TodoManagerInterface {
     console.log('Todo complete: ', todo.isCompleted);
     this.toggleCompletedDate(todo);
     if (this.parentTodo.children.every((childTodo) => childTodo.isCompleted)) {
+      // toggle parent complete
     }
     return todo;
   }
@@ -86,6 +92,22 @@ class TodoManager implements TodoManagerInterface {
       todo.dateCompleted = null;
     }
     console.log(todo.dateCompleted);
+  }
+
+  reorderTodo(
+    indexToReorderTodoTo: number,
+    todoItem: TodoListItemWithDataset,
+  ): void {
+    const todoToReorder = this.getTodo(Number(todoItem.dataset.todo));
+    this.topLevelTodos = this.topLevelTodos.filter(
+      (todo) => todo.todoID !== todoToReorder.todoID,
+    );
+    this.topLevelTodos.splice(indexToReorderTodoTo, 0, todoToReorder);
+
+    setTimeout(
+      () => console.log('Toplevel Todos after: ', this.topLevelTodos),
+      0,
+    );
   }
 
   /* Set methods */

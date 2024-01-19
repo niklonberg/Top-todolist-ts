@@ -161,7 +161,7 @@ class TodoContentUIManager extends UIManager {
     if (ul.childNodes.length === 0) ul.append(emptyListFallbackItem());
     const addNewTodoBtn = this.createNewTodoBtn('add-top-level-todo-btn');
     todosListContainer.append(ul, addNewTodoBtn);
-    addDragFunctionality(ul);
+    addDragFunctionality(ul, this.TodoManager);
     return todosListContainer;
   }
 

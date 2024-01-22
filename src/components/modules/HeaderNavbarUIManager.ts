@@ -28,7 +28,6 @@ class HeaderNavbarUIManager extends UIManager {
   selectNavListItem(e: Event) {
     const navListItem = (e.target as Element).closest('LI') as HTMLLIElement;
 
-    // smarter way to do this?
     if (navListItem !== this.previousListSelection && navListItem) {
       this.navBar
         .querySelectorAll('li')
@@ -36,9 +35,11 @@ class HeaderNavbarUIManager extends UIManager {
       navListItem.classList.add('selected-nav-item');
       this.previousListSelection = navListItem;
       if (navListItem.id === 'all-tasks')
-        // can we maybe query the dom instead and if the element this works
-        // with already exists, dont run the following? or the opposite
         this.todoContentUIManager.renderTodosSection();
+
+      if (navListItem.id === 'today-tasks') {
+        this.todoContentUIManager.renderTodayTasks();
+      }
     }
   }
 }

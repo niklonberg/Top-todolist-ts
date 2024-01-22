@@ -55,12 +55,29 @@ class TodoManager implements TodoManagerInterface {
     return todoWeAreSearchingFor;
   }
 
+  getTodayTasks(): Todo[] {
+    const todos = this.getTopLevelTodos();
+    return todos.reduce(
+      (acc, curr) => [
+        ...acc,
+        ...curr.children.filter((childTodo) => {
+          const todaysDate = new Date();
+          todaysDate.setHours(0, 0, 0, 0);
+          const childTodoDueDate = childTodo.dueDate;
+          childTodoDueDate?.setHours(0, 0, 0, 0);
+          return childTodoDueDate?.getTime() === todaysDate.getTime();
+        }),
+      ],
+      [],
+    );
+  }
+
   /* Edit methods */
   editTodo(
     todoToEdit: Todo,
     newTodo: Todo,
     todoArray: Todo[] = this.topLevelTodos,
-  ) {
+  ): void {
     const foundTodo = todoArray.find(
       (currTodo) => currTodo.todoID === todoToEdit.todoID,
     );
@@ -86,6 +103,8 @@ class TodoManager implements TodoManagerInterface {
 
   // make static, as it does not use this?
   toggleCompletedDate(todo: Todo): void {
+    // avoid param-reassign, get todo inside here instead
+    // have argument be todoID
     if (!todo.dateCompleted) {
       todo.dateCompleted = new Date();
     } else {

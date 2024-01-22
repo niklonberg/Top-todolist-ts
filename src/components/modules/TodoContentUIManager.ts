@@ -187,6 +187,12 @@ class TodoContentUIManager extends UIManager {
     todosLayoutContainer.append(topLevelTodosList, selectedSubTodosList);
     this.containerElement.append(todosLayoutContainer);
   }
+
+  renderTodayTasks() {
+    this.containerElement.innerHTML = '';
+    const todosListContainer = this.createTodosListContainer('Todays tasks');
+    const todayTasks = this.TodoManager.getTodayTasks();
+  }
 }
 
 export default TodoContentUIManager;

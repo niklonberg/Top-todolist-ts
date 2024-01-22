@@ -39,6 +39,7 @@ export interface TodoManagerInterface {
   parentTodo: Todo | null;
   getTopLevelTodos(): Todo[];
   getTodo(todoID: number, todoArray: Todo[]): Todo;
+  getTodayTasks(): Todo[];
   setSelectedTodo(todoID: number): void;
   resetSelectedTodo(): void;
   addTodo(todo: Todo, parentTodo?: Todo): void;

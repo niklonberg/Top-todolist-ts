@@ -8,4 +8,8 @@ function emptyListFallbackItem() {
   return li;
 }
 
-export default emptyListFallbackItem;
+function insertEmptyListFallbackItem(ul: HTMLUListElement) {
+  if (ul.childNodes.length === 0) ul.append(emptyListFallbackItem());
+}
+
+export default insertEmptyListFallbackItem;

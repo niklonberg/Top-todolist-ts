@@ -2,7 +2,7 @@ import createListItemFromObject, {
   createDateCompleted,
 } from './utils/createListItemFromObject';
 import UIManager from './abstract/UIManager';
-import emptyListFallbackItem from './utils/emptyListFallbackItem';
+import insertEmptyListFallbackItem from './utils/insertEmptyListFallbackItem';
 import addDragFunctionality from './utils/addDragFunctionality';
 import TodoFormUIManager from './TodoFormUIManager';
 import createDeleteWarningContainer from './utils/createWarningContainer';
@@ -149,7 +149,7 @@ class TodoContentUIManager extends UIManager {
         targetParentLi.classList.add('selected-list-item');
       ul.append(targetParentLi);
     });
-    if (ul.childNodes.length === 0) ul.append(emptyListFallbackItem());
+    insertEmptyListFallbackItem(ul);
     const addNewTodoBtn = this.createNewTodoBtn('add-top-level-todo-btn');
     todosListContainer.append(ul, addNewTodoBtn);
     addDragFunctionality(ul, this.TodoManager);
@@ -170,7 +170,7 @@ class TodoContentUIManager extends UIManager {
       ul.append(createListItemFromObject(childTodo, 'todo-list'));
     });
 
-    if (ul.childNodes.length === 0) ul.append(emptyListFallbackItem());
+    insertEmptyListFallbackItem(ul);
     const addNewTodoBtn = this.createNewTodoBtn('add-child-level-todo-btn');
     addNewTodoBtn.textContent = '+ Add Subtask';
     todosListContainer.append(ul, addNewTodoBtn);
@@ -191,7 +191,13 @@ class TodoContentUIManager extends UIManager {
   renderTodayTasks() {
     this.containerElement.innerHTML = '';
     const todosListContainer = this.createTodosListContainer('Todays tasks');
-    const todayTasks = this.TodoManager.getTodayTasks();
+    const ul = this.createElement<HTMLUListElement>('ul');
+    this.TodoManager.getTodayTasks().forEach((childTodo) =>
+      ul.append(createListItemFromObject(childTodo, 'todo-list')),
+    );
+    insertEmptyListFallbackItem(ul);
+    todosListContainer.append(ul);
+    this.containerElement.append(todosListContainer);
   }
 }
 

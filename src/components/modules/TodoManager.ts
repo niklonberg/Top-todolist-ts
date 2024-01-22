@@ -1,3 +1,4 @@
+import { isToday } from 'date-fns';
 import {
   User,
   Todo,
@@ -60,13 +61,7 @@ class TodoManager implements TodoManagerInterface {
     return todos.reduce(
       (acc, curr) => [
         ...acc,
-        ...curr.children.filter((childTodo) => {
-          const todaysDate = new Date();
-          todaysDate.setHours(0, 0, 0, 0);
-          const childTodoDueDate = childTodo.dueDate;
-          childTodoDueDate?.setHours(0, 0, 0, 0);
-          return childTodoDueDate?.getTime() === todaysDate.getTime();
-        }),
+        ...curr.children.filter((childTodo) => isToday(childTodo.dueDate)),
       ],
       [],
     );

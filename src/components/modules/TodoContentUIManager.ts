@@ -172,6 +172,7 @@ class TodoContentUIManager extends UIManager {
 
     if (ul.childNodes.length === 0) ul.append(emptyListFallbackItem());
     const addNewTodoBtn = this.createNewTodoBtn('add-child-level-todo-btn');
+    addNewTodoBtn.textContent = '+ Add Subtask';
     todosListContainer.append(ul, addNewTodoBtn);
     return todosListContainer;
   }

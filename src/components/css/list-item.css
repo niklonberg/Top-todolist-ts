@@ -4,7 +4,9 @@
     cursor: pointer;
     padding-inline: var(--m-gap);
     margin: var(--l-gap);
-    transition: background-color 0.5s;
+    transition:
+      background-color,
+      opacity 0.5s;
   }
 
   .list-item:not(:last-child)::after {

@@ -32,6 +32,7 @@ function addDragFunctionality(
     const target = e.target as HTMLElement;
     if (target.classList.contains('draggable'))
       target.classList.add('dragging');
+    ul.classList.add('highlight-drag-area');
   });
 
   ul.addEventListener('dragend', (e) => {
@@ -45,6 +46,7 @@ function addDragFunctionality(
       todoItems.indexOf(target),
       target as TodoListItemWithDataset,
     );
+    ul.classList.remove('highlight-drag-area');
   });
 
   ul.addEventListener('dragover', (e) => {

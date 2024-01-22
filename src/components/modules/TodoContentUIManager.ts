@@ -199,6 +199,19 @@ class TodoContentUIManager extends UIManager {
     todosListContainer.append(ul);
     this.containerElement.append(todosListContainer);
   }
+
+  renderNext7DaysTasks() {
+    this.containerElement.innerHTML = '';
+    const todosListContainer =
+      this.createTodosListContainer('Next 7 days tasks');
+    const ul = this.createElement<HTMLUListElement>('ul');
+    this.TodoManager.getNext7DaysTasks().forEach((childTodo) =>
+      ul.append(createListItemFromObject(childTodo, 'todo-list')),
+    );
+    insertEmptyListFallbackItem(ul);
+    todosListContainer.append(ul);
+    this.containerElement.append(todosListContainer);
+  }
 }
 
 export default TodoContentUIManager;

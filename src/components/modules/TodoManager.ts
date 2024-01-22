@@ -1,4 +1,4 @@
-import { isToday } from 'date-fns';
+import { isToday, addDays, isWithinInterval } from 'date-fns';
 import {
   User,
   Todo,
@@ -62,6 +62,25 @@ class TodoManager implements TodoManagerInterface {
       (acc, curr) => [
         ...acc,
         ...curr.children.filter((childTodo) => isToday(childTodo.dueDate)),
+      ],
+      [],
+    );
+  }
+
+  getNext7DaysTasks() {
+    const todos = this.getTopLevelTodos();
+    const today = new Date();
+    today.setHours(0, 0, 0);
+    const sevenDaysLater = addDays(today, 7);
+    return todos.reduce(
+      (acc, curr) => [
+        ...acc,
+        ...curr.children.filter((childTodo) =>
+          isWithinInterval(childTodo.dueDate, {
+            start: today,
+            end: sevenDaysLater,
+          }),
+        ),
       ],
       [],
     );

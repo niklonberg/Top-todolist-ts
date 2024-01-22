@@ -40,6 +40,7 @@ export interface TodoManagerInterface {
   getTopLevelTodos(): Todo[];
   getTodo(todoID: number, todoArray: Todo[]): Todo;
   getTodayTasks(): Todo[];
+  getNext7DaysTasks(): Todo[];
   setSelectedTodo(todoID: number): void;
   resetSelectedTodo(): void;
   addTodo(todo: Todo, parentTodo?: Todo): void;

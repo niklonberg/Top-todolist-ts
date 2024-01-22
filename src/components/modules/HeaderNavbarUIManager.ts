@@ -40,6 +40,10 @@ class HeaderNavbarUIManager extends UIManager {
       if (navListItem.id === 'today-tasks') {
         this.todoContentUIManager.renderTodayTasks();
       }
+
+      if (navListItem.id === 'week-tasks') {
+        this.todoContentUIManager.renderNext7DaysTasks();
+      }
     }
   }
 }

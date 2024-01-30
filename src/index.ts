@@ -67,14 +67,14 @@ function init() {
   MyTodoManager.setSelectedTodo(6);
   MyTodoManager.addTodo(childTodoFour);
   MyTodoManager.addTodo(childTodoFive);
-  MyTodoManager.setSelectedTodo(MyTodoManager.getTopLevelTodos()[0].todoID);
+  MyTodoManager.setSelectedTodo(MyTodoManager.getTopLevelTodos()[2].todoID);
   console.log(MyTodoManager);
 }
 
 init();
 
-async function getUsersData() {
-  const url = 'http://localhost:3000/users';
+async function getTasks() {
+  const url = 'http://localhost:3000/tasks';
   try {
     const response = await fetch(url);
     console.log(response);
@@ -88,7 +88,7 @@ async function getUsersData() {
   }
 }
 
-const getUsersDataBtn = document.querySelector('#get-users-data');
-getUsersDataBtn.addEventListener('click', () => {
-  getUsersData();
+const getUsersTasksBtn = document.querySelector('#get-users-tasks');
+getUsersTasksBtn.addEventListener('click', () => {
+  getTasks();
 });

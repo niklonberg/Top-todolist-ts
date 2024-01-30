@@ -115,10 +115,8 @@ class TodoManager implements TodoManagerInterface {
     return todo;
   }
 
-  // make static, as it does not use this?
+  /* eslint-disable no-param-reassign, class-methods-use-this */
   toggleCompletedDate(todo: Todo): void {
-    // avoid param-reassign, get todo inside here instead
-    // have argument be todoID
     if (!todo.dateCompleted) {
       todo.dateCompleted = new Date();
     } else {
@@ -126,6 +124,7 @@ class TodoManager implements TodoManagerInterface {
     }
     console.log(todo.dateCompleted);
   }
+  /* eslint-enable no-param-reassign */
 
   reorderTodo(
     indexToReorderTodoTo: number,

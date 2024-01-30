@@ -32,6 +32,7 @@ class TodoFormUIManager extends UIManager {
     return this.form;
   }
 
+  // needs either post or put method, depending on todoToEdit
   submitForm(
     e: Event,
     ListUIManager: TodoContentUIManager,
@@ -49,7 +50,7 @@ class TodoFormUIManager extends UIManager {
     });
     const FormTemplateObject: FormTemplateObj = tempObj;
     const newTodo = TodoFactory(FormTemplateObject);
-    this.form = null;
+    // this.form = null;
     if (todoToEdit) {
       DataManager.editTodo(todoToEdit, newTodo);
     } else {

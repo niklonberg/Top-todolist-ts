@@ -92,3 +92,23 @@ const getUsersTasksBtn = document.querySelector('#get-users-tasks');
 getUsersTasksBtn.addEventListener('click', () => {
   getTasks();
 });
+
+async function getTask(id: string) {
+  const url = `http://localhost:3000/tasks/${id}`;
+  try {
+    const response = await fetch(url);
+    console.log(response);
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    const users = await response.json();
+    console.log(users);
+  } catch (error) {
+    console.error(error.message);
+  }
+}
+
+const getUsersTaskBtn = document.querySelector('#get-users-task');
+getUsersTaskBtn.addEventListener('click', () => {
+  getTask('65b8ca220ef08592b35d3f2a');
+});

@@ -8,6 +8,12 @@ import {
 import TodoFactory from './TodoFactory';
 import TodoContentUIManager from './TodoContentUIManager';
 
+/* 
+Remove any use of Todo and TodoFactory. This must 
+just send formdata to backend, which will use todofactory 
+REFACTOR ME, SIMPLIFY AS MUCH AS POSSIBLE
+*/
+
 // think on how this could become a general FormManager
 class TodoFormUIManager extends UIManager {
   private form: HTMLFormElement | null;

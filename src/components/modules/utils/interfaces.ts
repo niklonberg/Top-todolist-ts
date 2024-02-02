@@ -1,10 +1,30 @@
-type PriorityLevel = 'Low' | 'Medium' | 'High'; // convert to enum?
+export type PriorityLevel = 'Low' | 'Medium' | 'High'; // convert to enum?
+
+export interface newTaskFormData {
+  title: string;
+  priority: PriorityLevel;
+  dueDate: string;
+  description: string;
+}
 
 export interface FormTemplateObj {
   title: string;
   priority?: PriorityLevel;
   dueDate?: null | Date;
   description?: string;
+}
+
+// will replace Todo
+export interface Task {
+  _id?: string;
+  sortOrder?: number;
+  title: string;
+  priority: PriorityLevel;
+  isCompleted: boolean;
+  dateCompleted: null | Date;
+  dueDate: null | Date;
+  description: string;
+  subtasks: Task[];
 }
 
 export interface Todo {

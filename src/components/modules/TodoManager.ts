@@ -1,6 +1,5 @@
 import { isToday, addDays, isWithinInterval } from 'date-fns';
 import {
-  User,
   Todo,
   TodoManagerInterface,
   TodoListItemWithDataset,

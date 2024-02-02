@@ -1,16 +1,15 @@
 import UIManager from './abstract/UIManager';
 import createTodoForm from './utils/createTodoForm';
 import {
-  FormTemplateObj,
   Todo,
+  newTaskFormData,
+  Task,
   TodoManagerInterface,
 } from './utils/interfaces';
-import TodoFactory from './TodoFactory';
+import TaskFactory from './TaskFactory';
 import TodoContentUIManager from './TodoContentUIManager';
 
 /* 
-Remove any use of Todo and TodoFactory. This must 
-just send formdata to backend, which will use todofactory 
 REFACTOR ME, SIMPLIFY AS MUCH AS POSSIBLE
 */
 
@@ -47,21 +46,18 @@ class TodoFormUIManager extends UIManager {
   ) {
     e.preventDefault();
     const formData = new FormData(this.form);
-    const tempObj: any = {};
-    formData.forEach((value, key) => {
-      if (key === 'dueDate') {
-        tempObj[key] = new Date(value as string);
-      }
-      tempObj[key] = value;
-    });
-    const FormTemplateObject: FormTemplateObj = tempObj;
-    const newTodo = TodoFactory(FormTemplateObject);
-    // this.form = null;
-    if (todoToEdit) {
-      DataManager.editTodo(todoToEdit, newTodo);
-    } else {
-      DataManager.addTodo(newTodo);
-    }
+    const formDataObject: Record<keyof newTaskFormData, string> =
+      Object.fromEntries(formData.entries()) as Record<
+        keyof newTaskFormData,
+        string
+      >;
+    const newTask = TaskFactory(formDataObject);
+
+    // if (todoToEdit) {
+    //   DataManager.editTodo(todoToEdit, newTodo);
+    // } else {
+    //   DataManager.addTodo(newTodo);
+    // }
     ListUIManager.renderTodosSection();
   }
 }

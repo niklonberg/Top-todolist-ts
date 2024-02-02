@@ -1,15 +1,11 @@
 import './index.css';
 import { addDays } from 'date-fns';
-import TodoFactory from './components/modules/TodoFactory';
 import TodoManager from './components/modules/TodoManager';
 import TodoContentUIManager from './components/modules/TodoContentUIManager';
 import HeaderNavbarUIManager from './components/modules/HeaderNavbarUIManager';
 import TodoFormUIManager from './components/modules/TodoFormUIManager';
 // to be removed later - here for testing
-import {
-  newTaskFormData,
-  PriorityLevel,
-} from './components/modules/utils/interfaces';
+import { newTaskFormData } from './components/modules/utils/interfaces';
 import TaskFactory from './components/modules/TaskFactory';
 
 function init() {
@@ -23,58 +19,58 @@ function init() {
     MyTodoContentUIManager,
   );
 
-  const childTodoOne = TodoFactory({
-    title: 'Paint Walls',
-    priority: 'High',
-    dueDate: addDays(new Date(), 3),
-  });
-  childTodoOne.isCompleted = true;
-  childTodoOne.dateCompleted = new Date();
-  const childTodoTwo = TodoFactory({
-    title: 'Paint Bedroom',
-    priority: 'Medium',
-    description: 'Hi mom',
-    dueDate: new Date(),
-  });
-  const childTodoThree = TodoFactory({
-    title: 'Move Bed',
-    priority: 'Low',
-    description: 'lift it properly',
-  });
-  const childTodoFour = TodoFactory({
-    title: 'Move closet',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    dueDate: new Date(),
-  });
-  const childTodoFive = TodoFactory({
-    title: 'Move bed',
-    description: 'lift gently',
-  });
-  const topLevelTodoOne = TodoFactory({
-    title: 'Paint house',
-    priority: 'Low',
-  });
-  const topLevelTodoTwo = TodoFactory({
-    title: 'Refurnish Bedroomdkfsksdfkjsdfksdkfksdfdskf',
-    priority: 'Medium',
-  });
-  const topLevelTodoThree = TodoFactory({
-    title: 'Clean Laboratory',
-    priority: 'High',
-  });
-  MyTodoManager.addTodo(topLevelTodoOne);
-  MyTodoManager.addTodo(topLevelTodoTwo);
-  MyTodoManager.addTodo(topLevelTodoThree);
-  MyTodoManager.setSelectedTodo(5);
-  MyTodoManager.addTodo(childTodoOne);
-  MyTodoManager.addTodo(childTodoTwo);
-  MyTodoManager.addTodo(childTodoThree);
-  MyTodoManager.setSelectedTodo(6);
-  MyTodoManager.addTodo(childTodoFour);
-  MyTodoManager.addTodo(childTodoFive);
-  MyTodoManager.setSelectedTodo(MyTodoManager.getTopLevelTodos()[2].todoID);
-  console.log(MyTodoManager);
+  // const childTodoOne = TodoFactory({
+  //   title: 'Paint Walls',
+  //   priority: 'High',
+  //   dueDate: addDays(new Date(), 3),
+  // });
+  // childTodoOne.isCompleted = true;
+  // childTodoOne.dateCompleted = new Date();
+  // const childTodoTwo = TodoFactory({
+  //   title: 'Paint Bedroom',
+  //   priority: 'Medium',
+  //   description: 'Hi mom',
+  //   dueDate: new Date(),
+  // });
+  // const childTodoThree = TodoFactory({
+  //   title: 'Move Bed',
+  //   priority: 'Low',
+  //   description: 'lift it properly',
+  // });
+  // const childTodoFour = TodoFactory({
+  //   title: 'Move closet',
+  //   description:
+  //     'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+  //   dueDate: new Date(),
+  // });
+  // const childTodoFive = TodoFactory({
+  //   title: 'Move bed',
+  //   description: 'lift gently',
+  // });
+  // const topLevelTodoOne = TodoFactory({
+  //   title: 'Paint house',
+  //   priority: 'Low',
+  // });
+  // const topLevelTodoTwo = TodoFactory({
+  //   title: 'Refurnish Bedroomdkfsksdfkjsdfksdkfksdfdskf',
+  //   priority: 'Medium',
+  // });
+  // const topLevelTodoThree = TodoFactory({
+  //   title: 'Clean Laboratory',
+  //   priority: 'High',
+  // });
+  // MyTodoManager.addTodo(topLevelTodoOne);
+  // MyTodoManager.addTodo(topLevelTodoTwo);
+  // MyTodoManager.addTodo(topLevelTodoThree);
+  // MyTodoManager.setSelectedTodo(5);
+  // MyTodoManager.addTodo(childTodoOne);
+  // MyTodoManager.addTodo(childTodoTwo);
+  // MyTodoManager.addTodo(childTodoThree);
+  // MyTodoManager.setSelectedTodo(6);
+  // MyTodoManager.addTodo(childTodoFour);
+  // MyTodoManager.addTodo(childTodoFive);
+  // MyTodoManager.setSelectedTodo(MyTodoManager.getTopLevelTodos()[2].todoID);
+  // console.log(MyTodoManager);
 }
 
 init();
@@ -133,14 +129,8 @@ testForm.addEventListener('submit', async (e) => {
       string
     >;
   const newTask = TaskFactory(formDataObject);
-  // const formObj: newTaskFormData = {
-  //   title: formData.get('title') as string,
-  //   priority: formData.get('priority') as PriorityLevel,
-  //   dueDate: formData.get('dueDate') as string,
-  //   description: formData.get('description') as string,
-  // };
   try {
-    const response = await fetch('http://localhost:3000/tasks', {
+    const response = await fetch('http://localhost:3000/tasks/createTask', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

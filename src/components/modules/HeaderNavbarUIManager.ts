@@ -38,11 +38,11 @@ class HeaderNavbarUIManager extends UIManager {
         this.todoContentUIManager.renderTodosSection();
 
       if (navListItem.id === 'today-tasks') {
-        this.todoContentUIManager.renderTodayTasks();
+        // this.todoContentUIManager.renderTodayTasks();
       }
 
       if (navListItem.id === 'week-tasks') {
-        this.todoContentUIManager.renderNext7DaysTasks();
+        // this.todoContentUIManager.renderNext7DaysTasks();
       }
     }
   }

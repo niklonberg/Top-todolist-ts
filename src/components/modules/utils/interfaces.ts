@@ -47,18 +47,18 @@ export interface TodoManagerInterface {
   currSelectedTask: Task;
   parentTask: Task | null;
   getTopLevelTasks(): Task[];
-  getTask(taskID: number, tasks: Task[]): Task;
-  getTodayTasks(): Task[];
-  getNext7DaysTasks(): Task[];
-  setSelectedTask(taskID: number): void;
-  resetSelectedTask(): void;
-  addTask(task: Task, parentTask?: Task): void;
-  deleteTopLevelTask(taskID: number): void;
-  deleteChildTask(taskID: number): void;
-  editTask(TaskToEdit: Task, newTask: Task): void;
-  toggleIsCompleted(taskID: number): Task;
-  toggleCompletedDate(task: Task): void;
-  reorderTask(index: number, TaskListItem: TodoListItemWithDataset): void;
+  // getTask(taskID: number, tasks: Task[]): Task;
+  // getTodayTasks(): Task[];
+  // getNext7DaysTasks(): Task[];
+  // setSelectedTask(taskID: number): void;
+  // resetSelectedTask(): void;
+  // addTask(task: Task, parentTask?: Task): void;
+  // deleteTopLevelTask(taskID: number): void;
+  // deleteChildTask(taskID: number): void;
+  // editTask(TaskToEdit: Task, newTask: Task): void;
+  // toggleIsCompleted(taskID: number): Task;
+  // toggleCompletedDate(task: Task): void;
+  // reorderTask(index: number, TaskListItem: TodoListItemWithDataset): void;
 }
 /* eslint-disable no-unused-vars */
 

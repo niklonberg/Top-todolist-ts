@@ -7,7 +7,7 @@ function createListContainer(todo: Task) {
   li.setAttribute('draggable', 'true');
   li.classList.add('draggable');
   if (todo.isCompleted) li.classList.add('todo-complete');
-  li.dataset.todo = todo.todoID.toString();
+  li.dataset.todo = todo._id.toString(); // eslint-disable-line no-underscore-dangle
   return li;
 }
 

@@ -1,9 +1,8 @@
 import UIManager from './abstract/UIManager';
 import createTodoForm from './utils/createTodoForm';
 import {
-  Todo,
-  newTaskFormData,
   Task,
+  newTaskFormData,
   TodoManagerInterface,
 } from './utils/interfaces';
 import TaskFactory from './TaskFactory';
@@ -20,7 +19,7 @@ class TodoFormUIManager extends UIManager {
   insertTodoForm(
     ListUIManager: TodoContentUIManager,
     DataManager: TodoManagerInterface,
-    todoToEdit: Todo = null,
+    todoToEdit: Task = null,
   ) {
     if (todoToEdit) {
       this.form = createTodoForm(todoToEdit);
@@ -42,7 +41,7 @@ class TodoFormUIManager extends UIManager {
     e: Event,
     ListUIManager: TodoContentUIManager,
     DataManager: TodoManagerInterface,
-    todoToEdit: Todo | null,
+    todoToEdit: Task | null,
   ) {
     e.preventDefault();
     const formData = new FormData(this.form);
@@ -52,7 +51,6 @@ class TodoFormUIManager extends UIManager {
         string
       >;
     const newTask = TaskFactory(formDataObject);
-
     // if (todoToEdit) {
     //   DataManager.editTodo(todoToEdit, newTodo);
     // } else {

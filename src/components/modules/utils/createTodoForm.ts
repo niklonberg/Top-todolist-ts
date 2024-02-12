@@ -1,8 +1,8 @@
 import { format } from 'date-fns';
 import createElement from './createElement';
-import { Todo } from './interfaces';
+import { Task } from './interfaces';
 
-function createTodoForm(todoToEdit?: Todo) {
+function createTodoForm(todoToEdit?: Task) {
   const form = createElement<HTMLFormElement>('form', 'todo-form');
   const templateStr = `
   <div class="input-container">

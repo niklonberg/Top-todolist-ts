@@ -8,6 +8,101 @@ import TodoFormUIManager from './components/modules/TodoFormUIManager';
 import { newTaskFormData } from './components/modules/utils/interfaces';
 import TaskFactory from './components/modules/TaskFactory';
 
+async function init() {
+  const tasks = await getTasks();
+  const MyTodoManager = new TodoManager(tasks);
+  const MyTodoContentUIManager = new TodoContentUIManager(
+    MyTodoManager,
+    'main-content',
+    new TodoFormUIManager(),
+  );
+  const MyHeaderNavbarManager = new HeaderNavbarUIManager(
+    MyTodoContentUIManager,
+  );
+}
+
+init();
+
+async function getTasks() {
+  const url = 'http://localhost:3000/tasks';
+  try {
+    const response = await fetch(url);
+    console.log(response);
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    const users = await response.json();
+    return users;
+  } catch (error) {
+    console.error(error.message);
+  }
+  return [];
+}
+
+const getUsersTasksBtn = document.querySelector('#get-users-tasks');
+getUsersTasksBtn.addEventListener('click', () => {
+  getTasks();
+});
+
+async function getTask(id: string) {
+  const url = `http://localhost:3000/tasks/${id}`;
+  try {
+    const response = await fetch(url);
+    console.log(response);
+    if (!response.ok) {
+      const serverErrorMessage = await response.text();
+      throw new Error(
+        `HTTP error! Status: ${response.status}, message: ${serverErrorMessage}`,
+      );
+    }
+    const user = await response.json();
+    console.log(user);
+  } catch (error) {
+    console.error('Error:', error.message);
+  }
+}
+
+const getUsersTaskBtn = document.querySelector('#get-users-task');
+getUsersTaskBtn.addEventListener('click', () => {
+  getTask('65b8ca220ef08592b35d3f2a');
+});
+
+const testForm = document.querySelector('#test-create-form') as HTMLFormElement;
+testForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const formData = new FormData(testForm);
+  const formDataObject: Record<keyof newTaskFormData, string> =
+    Object.fromEntries(formData.entries()) as Record<
+      keyof newTaskFormData,
+      string
+    >;
+  const newTask = TaskFactory(formDataObject);
+  try {
+    const response = await fetch('http://localhost:3000/tasks/createTask', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newTask),
+    });
+
+    if (!response.ok) {
+      const errorMessage = await response.text();
+      throw new Error(
+        `HTTP error! Status: ${response.status}, Message: ${errorMessage}`,
+      );
+    }
+
+    const result = await response.text();
+    console.log(result);
+  } catch (error) {
+    console.error('Error:', error.message);
+  }
+});
+
+/* ***Ignore***
+
 function init() {
   const MyTodoManager = new TodoManager();
   const MyTodoContentUIManager = new TodoContentUIManager(
@@ -73,81 +168,4 @@ function init() {
   // console.log(MyTodoManager);
 }
 
-init();
-
-async function getTasks() {
-  const url = 'http://localhost:3000/tasks';
-  try {
-    const response = await fetch(url);
-    console.log(response);
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-    const users = await response.json();
-    console.log(users);
-  } catch (error) {
-    console.error(error.message);
-  }
-}
-
-const getUsersTasksBtn = document.querySelector('#get-users-tasks');
-getUsersTasksBtn.addEventListener('click', () => {
-  getTasks();
-});
-
-async function getTask(id: string) {
-  const url = `http://localhost:3000/tasks/${id}`;
-  try {
-    const response = await fetch(url);
-    console.log(response);
-    if (!response.ok) {
-      const serverErrorMessage = await response.text();
-      throw new Error(
-        `HTTP error! Status: ${response.status}, message: ${serverErrorMessage}`,
-      );
-    }
-    const user = await response.json();
-    console.log(user);
-  } catch (error) {
-    console.error('Error:', error.message);
-  }
-}
-
-const getUsersTaskBtn = document.querySelector('#get-users-task');
-getUsersTaskBtn.addEventListener('click', () => {
-  getTask('65b8ca220ef08592b35d3f2a');
-});
-
-const testForm = document.querySelector('#test-create-form') as HTMLFormElement;
-testForm.addEventListener('submit', async (e) => {
-  e.preventDefault();
-
-  const formData = new FormData(testForm);
-  const formDataObject: Record<keyof newTaskFormData, string> =
-    Object.fromEntries(formData.entries()) as Record<
-      keyof newTaskFormData,
-      string
-    >;
-  const newTask = TaskFactory(formDataObject);
-  try {
-    const response = await fetch('http://localhost:3000/tasks/createTask', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(newTask),
-    });
-
-    if (!response.ok) {
-      const errorMessage = await response.text();
-      throw new Error(
-        `HTTP error! Status: ${response.status}, Message: ${errorMessage}`,
-      );
-    }
-
-    const result = await response.text();
-    console.log(result);
-  } catch (error) {
-    console.error('Error:', error.message);
-  }
-});
+*/

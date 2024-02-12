@@ -1,6 +1,6 @@
 import { isToday, addDays, isWithinInterval } from 'date-fns';
 import {
-  Todo,
+  Task,
   TodoManagerInterface,
   TodoListItemWithDataset,
 } from './utils/interfaces';
@@ -18,25 +18,26 @@ import {
 class TodoManager implements TodoManagerInterface {
   // private user: User;
 
-  private topLevelTodos: Todo[];
+  private topLevelTodos: Task[];
 
-  currSelectedTodo: null | Todo; // Should we bother with this?
+  currSelectedTodo: null | Task; // Should we bother with this?
   // could just split addTodo into two functions.
 
-  parentTodo: Todo | null; // we need me?
+  parentTodo: Task | null; // we need me?
 
-  constructor() {
+  constructor(tasksFromDB: Task[]) {
     // this.user = user;
-    this.topLevelTodos = [];
+    this.topLevelTodos = tasksFromDB;
+    console.log(this.topLevelTodos);
   }
 
   /* Get methods */
-  getTopLevelTodos(): Todo[] {
+  getTopLevelTodos(): Task[] {
     return this.topLevelTodos;
   }
 
-  getTodo(todoID: number, todoArray: Todo[] = this.topLevelTodos): Todo {
-    let todoWeAreSearchingFor: Todo = null;
+  getTodo(todoID: number, todoArray: Task[] = this.topLevelTodos): Task {
+    let todoWeAreSearchingFor: Task = null;
     todoArray.forEach((childTodo) => {
       if (childTodo.todoID === todoID) {
         todoWeAreSearchingFor = childTodo;
@@ -55,7 +56,7 @@ class TodoManager implements TodoManagerInterface {
     return todoWeAreSearchingFor;
   }
 
-  getTodayTasks(): Todo[] {
+  getTodayTasks(): Task[] {
     const todos = this.getTopLevelTodos();
     return todos.reduce(
       (acc, curr) => [
@@ -87,9 +88,9 @@ class TodoManager implements TodoManagerInterface {
 
   /* Edit methods */
   editTodo(
-    todoToEdit: Todo,
-    newTodo: Todo,
-    todoArray: Todo[] = this.topLevelTodos,
+    todoToEdit: Task,
+    newTodo: Task,
+    todoArray: Task[] = this.topLevelTodos,
   ): void {
     const foundTodo = todoArray.find(
       (currTodo) => currTodo.todoID === todoToEdit.todoID,
@@ -103,7 +104,7 @@ class TodoManager implements TodoManagerInterface {
     }
   }
 
-  toggleIsCompleted(todoID: number): Todo {
+  toggleIsCompleted(todoID: number): Task {
     const todo = this.getTodo(todoID);
     todo.isCompleted = !todo.isCompleted;
     console.log('Todo complete: ', todo.isCompleted);
@@ -115,7 +116,7 @@ class TodoManager implements TodoManagerInterface {
   }
 
   /* eslint-disable no-param-reassign, class-methods-use-this */
-  toggleCompletedDate(todo: Todo): void {
+  toggleCompletedDate(todo: Task): void {
     if (!todo.dateCompleted) {
       todo.dateCompleted = new Date();
     } else {
@@ -153,7 +154,7 @@ class TodoManager implements TodoManagerInterface {
   }
 
   /* Add methods */
-  addTodo(todo: Todo): void {
+  addTodo(todo: Task): void {
     if (this.currSelectedTodo) {
       this.currSelectedTodo.children.push(todo);
     } else {

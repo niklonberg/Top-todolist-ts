@@ -1,8 +1,8 @@
 import { format, formatISO, differenceInDays, addDays } from 'date-fns';
 import createElement from './createElement';
-import { Todo } from './interfaces';
+import { Task } from './interfaces';
 
-function createListContainer(todo: Todo) {
+function createListContainer(todo: Task) {
   const li = createElement<HTMLLIElement>('LI', 'list-item');
   li.setAttribute('draggable', 'true');
   li.classList.add('draggable');
@@ -11,7 +11,7 @@ function createListContainer(todo: Todo) {
   return li;
 }
 
-function createPriorityContainer(todo: Todo) {
+function createPriorityContainer(todo: Task) {
   const priorityContainer = createElement('div', 'list-item-priority');
   const img = createElement('div', 'list-item-priority-icon');
   const text = createElement('span');
@@ -20,7 +20,7 @@ function createPriorityContainer(todo: Todo) {
   return priorityContainer;
 }
 
-function createListDetailsContainer(todo: Todo) {
+function createListDetailsContainer(todo: Task) {
   const listDetails = createElement<HTMLDivElement>('DIV', 'list-item-details');
   const title = createElement<HTMLHeadingElement>('H3', 'list-item-title');
   title.textContent = todo.title;
@@ -49,7 +49,7 @@ function createEditActionsContainer() {
   return container;
 }
 
-function createCheckCompleteBtn(todo: Todo) {
+function createCheckCompleteBtn(todo: Task) {
   const checkCompleteBtn = createElement('button', 'toggle-complete-btn');
   checkCompleteBtn.setAttribute('aria-label', 'Toggle complete');
   if (todo.isCompleted) {
@@ -58,7 +58,7 @@ function createCheckCompleteBtn(todo: Todo) {
   return checkCompleteBtn;
 }
 
-export function createDateCompleted(todo: Todo) {
+export function createDateCompleted(todo: Task) {
   const dateCompleted = createElement<HTMLTimeElement>(
     'time',
     'completion-date',
@@ -84,7 +84,7 @@ export function createDateCompleted(todo: Todo) {
 }
 
 function createListItemFromObject(
-  todo: Todo,
+  todo: Task,
   destination: 'top-level' | 'todo-list',
 ) {
   const li = createListContainer(todo);

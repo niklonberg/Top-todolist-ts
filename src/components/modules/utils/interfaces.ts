@@ -1,5 +1,6 @@
 export type PriorityLevel = 'Low' | 'Medium' | 'High'; // convert to enum?
 
+// will replace FormTemplateObj
 export interface newTaskFormData {
   title: string;
   priority: PriorityLevel;
@@ -14,7 +15,6 @@ export interface FormTemplateObj {
   description?: string;
 }
 
-// will replace Todo
 export interface Task {
   _id?: string;
   sortOrder?: number;
@@ -25,17 +25,6 @@ export interface Task {
   dueDate: null | Date;
   description: string;
   subtasks: Task[];
-}
-
-export interface Todo {
-  todoID: number;
-  title: string;
-  priority: PriorityLevel;
-  isCompleted: boolean;
-  dateCompleted: null | Date;
-  dueDate: null | Date;
-  description?: string;
-  children: Todo[];
 }
 
 export interface DataManagerInterface<T> {
@@ -55,21 +44,21 @@ export interface TodoListItemWithDataset extends HTMLElement {
 // this could extend DataManagerInterface?
 export interface TodoManagerInterface {
   // topLevelTodos: Todo[];
-  currSelectedTodo: Todo;
-  parentTodo: Todo | null;
-  getTopLevelTodos(): Todo[];
-  getTodo(todoID: number, todoArray: Todo[]): Todo;
-  getTodayTasks(): Todo[];
-  getNext7DaysTasks(): Todo[];
-  setSelectedTodo(todoID: number): void;
-  resetSelectedTodo(): void;
-  addTodo(todo: Todo, parentTodo?: Todo): void;
-  deleteTopLevelTodo(todoID: number): void;
-  deleteChildTodo(todoID: number): void;
-  editTodo(todoToEdit: Todo, newTodo: Todo): void;
-  toggleIsCompleted(todoID: number): Todo;
-  toggleCompletedDate(todo: Todo): void;
-  reorderTodo(index: number, todoListItem: TodoListItemWithDataset): void;
+  currSelectedTask: Task;
+  parentTask: Task | null;
+  getTopLevelTasks(): Task[];
+  getTask(taskID: number, tasks: Task[]): Task;
+  getTodayTasks(): Task[];
+  getNext7DaysTasks(): Task[];
+  setSelectedTask(taskID: number): void;
+  resetSelectedTask(): void;
+  addTask(task: Task, parentTask?: Task): void;
+  deleteTopLevelTask(taskID: number): void;
+  deleteChildTask(taskID: number): void;
+  editTask(TaskToEdit: Task, newTask: Task): void;
+  toggleIsCompleted(taskID: number): Task;
+  toggleCompletedDate(task: Task): void;
+  reorderTask(index: number, TaskListItem: TodoListItemWithDataset): void;
 }
 /* eslint-disable no-unused-vars */
 

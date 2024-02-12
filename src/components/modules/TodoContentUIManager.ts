@@ -7,7 +7,7 @@ import addDragFunctionality from './utils/addDragFunctionality';
 import TodoFormUIManager from './TodoFormUIManager';
 import createDeleteWarningContainer from './utils/createWarningContainer';
 import {
-  Todo,
+  Task,
   TodoManagerInterface,
   TodoListItemWithDataset,
 } from './utils/interfaces';
@@ -156,7 +156,7 @@ class TodoContentUIManager extends UIManager {
     return todosListContainer;
   }
 
-  renderSelectedSubTodosList(todo: Todo) {
+  renderSelectedSubTodosList(todo: Task) {
     const todosListContainer = this.createTodosListContainer(
       `Subtasks - ${todo ? todo.title : 'No todo selected'}`,
     );

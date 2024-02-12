@@ -2,29 +2,29 @@ import { format, formatISO, differenceInDays, addDays } from 'date-fns';
 import createElement from './createElement';
 import { Task } from './interfaces';
 
-function createListContainer(todo: Task) {
+function createListContainer(task: Task) {
   const li = createElement<HTMLLIElement>('LI', 'list-item');
   li.setAttribute('draggable', 'true');
   li.classList.add('draggable');
-  if (todo.isCompleted) li.classList.add('todo-complete');
-  li.dataset.todo = todo._id.toString(); // eslint-disable-line no-underscore-dangle
+  if (task.isCompleted) li.classList.add('task-complete');
+  li.dataset.task = task._id.toString(); // eslint-disable-line no-underscore-dangle
   return li;
 }
 
-function createPriorityContainer(todo: Task) {
+function createPriorityContainer(task: Task) {
   const priorityContainer = createElement('div', 'list-item-priority');
   const img = createElement('div', 'list-item-priority-icon');
   const text = createElement('span');
-  text.textContent = `${todo.priority} Priority`;
+  text.textContent = `${task.priority} Priority`;
   priorityContainer.append(img, text);
   return priorityContainer;
 }
 
-function createListDetailsContainer(todo: Task) {
+function createListDetailsContainer(task: Task) {
   const listDetails = createElement<HTMLDivElement>('DIV', 'list-item-details');
   const title = createElement<HTMLHeadingElement>('H3', 'list-item-title');
-  title.textContent = todo.title;
-  const priority = createPriorityContainer(todo);
+  title.textContent = task.title;
+  const priority = createPriorityContainer(task);
   listDetails.append(title, priority);
   return listDetails;
 }
@@ -49,22 +49,22 @@ function createEditActionsContainer() {
   return container;
 }
 
-function createCheckCompleteBtn(todo: Task) {
+function createCheckCompleteBtn(task: Task) {
   const checkCompleteBtn = createElement('button', 'toggle-complete-btn');
   checkCompleteBtn.setAttribute('aria-label', 'Toggle complete');
-  if (todo.isCompleted) {
+  if (task.isCompleted) {
     checkCompleteBtn.classList.add('checked');
   }
   return checkCompleteBtn;
 }
 
-export function createDateCompleted(todo: Task) {
+export function createDateCompleted(task: Task) {
   const dateCompleted = createElement<HTMLTimeElement>(
     'time',
     'completion-date',
   );
   const now = new Date();
-  const dayDifference = differenceInDays(todo.dateCompleted, now);
+  const dayDifference = differenceInDays(task.dateCompleted, now);
   let dateText = 'Completed: ';
   if (dayDifference < 1) {
     dateText += 'Today';
@@ -78,39 +78,39 @@ export function createDateCompleted(todo: Task) {
   dateCompleted.textContent = dateText;
   dateCompleted.setAttribute(
     'datetime',
-    formatISO(todo.dateCompleted, { representation: 'date' }),
+    formatISO(task.dateCompleted, { representation: 'date' }),
   );
   return dateCompleted;
 }
 
 function createListItemFromObject(
-  todo: Task,
-  destination: 'top-level' | 'todo-list',
+  task: Task,
+  destination: 'top-level' | 'task-list',
 ) {
-  const li = createListContainer(todo);
-  const listDetails = createListDetailsContainer(todo);
+  const li = createListContainer(task);
+  const listDetails = createListDetailsContainer(task);
   const editActions = createEditActionsContainer();
 
   if (destination === 'top-level') {
     li.append(listDetails);
   }
 
-  if (destination === 'todo-list') {
-    if (todo.description) {
+  if (destination === 'task-list') {
+    if (task.description) {
       const p = createElement<HTMLParagraphElement>('p');
       p.setAttribute('aria-label', 'item description');
-      p.textContent = todo.description;
+      p.textContent = task.description;
       listDetails.append(p);
     }
 
     let timeEle: HTMLTimeElement | HTMLParagraphElement;
-    if (todo.dueDate) {
+    if (task.dueDate) {
       timeEle = createElement<HTMLTimeElement>('time');
       timeEle.setAttribute(
         'datetime',
-        formatISO(todo.dueDate, { representation: 'date' }),
+        formatISO(task.dueDate, { representation: 'date' }),
       );
-      timeEle.textContent = format(todo.dueDate, "MMM do, ccc - ''yy");
+      timeEle.textContent = format(task.dueDate, "MMM do, ccc - ''yy");
     } else {
       timeEle = createElement<HTMLParagraphElement>('p');
       timeEle.textContent = 'No Due Date';
@@ -119,11 +119,11 @@ function createListItemFromObject(
     timeEle.setAttribute('aria-label', 'deadline date');
     editActions.prepend(timeEle);
 
-    if (todo.dateCompleted) {
-      li.append(createDateCompleted(todo));
+    if (task.dateCompleted) {
+      li.append(createDateCompleted(task));
     }
 
-    editActions.lastElementChild.prepend(createCheckCompleteBtn(todo));
+    editActions.lastElementChild.prepend(createCheckCompleteBtn(task));
 
     li.append(listDetails);
   }

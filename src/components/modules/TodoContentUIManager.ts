@@ -126,10 +126,10 @@ class TodoContentUIManager extends UIManager {
     return todosListContainer;
   }
 
-  createNewTodoBtn(btnID: string) {
+  createNewTaskBtn(btnID: string) {
     const btn = this.createElement<HTMLButtonElement>(
       'button',
-      'add-todo-btn',
+      'add-task-btn',
       btnID,
     );
     btn.textContent = '+ Add Task';
@@ -150,7 +150,7 @@ class TodoContentUIManager extends UIManager {
       ul.append(parentLi);
     });
     insertEmptyListFallbackItem(ul);
-    const addNewTaskBtn = this.createNewTodoBtn('add-task-btn');
+    const addNewTaskBtn = this.createNewTaskBtn('add-task-btn');
     tasksListContainer.append(ul, addNewTaskBtn);
     addDragFunctionality(ul, this.TodoManager);
     return tasksListContainer;
@@ -171,7 +171,7 @@ class TodoContentUIManager extends UIManager {
     });
 
     insertEmptyListFallbackItem(ul);
-    const addNewTodoBtn = this.createNewTodoBtn('add-child-level-todo-btn');
+    const addNewTodoBtn = this.createNewTaskBtn('add-child-level-todo-btn');
     addNewTodoBtn.textContent = '+ Add Subtask';
     todosListContainer.append(ul, addNewTodoBtn);
     return todosListContainer;

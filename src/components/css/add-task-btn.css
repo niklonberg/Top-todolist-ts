@@ -1,5 +1,5 @@
 @layer component {
-  .add-todo-btn {
+  .add-task-btn {
     border-radius: 25px;
     border: 0;
     padding-block: var(--m-gap);

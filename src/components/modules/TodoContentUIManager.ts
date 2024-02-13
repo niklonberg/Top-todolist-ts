@@ -156,32 +156,30 @@ class TodoContentUIManager extends UIManager {
     return tasksListContainer;
   }
 
-  renderSelectedSubTodosList(todo: Task) {
-    const todosListContainer = this.createTasksContainer(
-      `Subtasks - ${todo ? todo.title : 'No todo selected'}`,
+  renderSelectedSubtasksList(task: Task) {
+    const subtasksListContainer = this.createTasksContainer(
+      `Subtasks - ${task ? task.title : 'No task selected'}`,
     );
     const ul = this.createElement<HTMLUListElement>(
       'ul',
       '',
-      'selected-sub-todos',
+      'selected-subtasks',
     );
-
-    todo?.subtasks.forEach((childTodo) => {
-      ul.append(createListItemFromObject(childTodo, 'subtask'));
+    task?.subtasks.forEach((subtask) => {
+      ul.append(createListItemFromObject(subtask, 'subtask'));
     });
-
     insertEmptyListFallbackItem(ul);
-    const addNewTodoBtn = this.createNewTaskBtn('add-child-level-todo-btn');
-    addNewTodoBtn.textContent = '+ Add Subtask';
-    todosListContainer.append(ul, addNewTodoBtn);
-    return todosListContainer;
+    const addNewSubtaskBtn = this.createNewTaskBtn('add-child-level-todo-btn');
+    addNewSubtaskBtn.textContent = '+ Add Subtask';
+    subtasksListContainer.append(ul, addNewSubtaskBtn);
+    return subtasksListContainer;
   }
 
   renderTodosSection() {
     this.containerElement.innerHTML = '';
     const todosLayoutContainer = this.createElement('div', '', 'todos-layout');
     const topLevelTodosList = this.renderTasksList();
-    const selectedSubTodosList = this.renderSelectedSubTodosList(
+    const selectedSubTodosList = this.renderSelectedSubtasksList(
       this.TodoManager.currSelectedTask,
     );
     todosLayoutContainer.append(topLevelTodosList);

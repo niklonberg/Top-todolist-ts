@@ -115,15 +115,15 @@ class TodoContentUIManager extends UIManager {
   //   );
   // }
 
-  createTodosListContainer(headingTitle: string) {
-    const todosListContainer = this.createElement<HTMLDivElement>(
+  createTasksContainer(headingTitle: string) {
+    const taskContainer = this.createElement<HTMLDivElement>(
       'div',
-      'todos-list-container',
+      'tasks-container',
     );
     const h2 = this.createElement<HTMLHeadingElement>('H2', 'list-item-title');
     h2.textContent = headingTitle;
-    todosListContainer.append(h2);
-    return todosListContainer;
+    taskContainer.append(h2);
+    return taskContainer;
   }
 
   createNewTaskBtn(btnID: string) {
@@ -137,7 +137,7 @@ class TodoContentUIManager extends UIManager {
   }
 
   renderTasksList() {
-    const tasksListContainer = this.createTodosListContainer('Tasks');
+    const tasksListContainer = this.createTasksContainer('Tasks');
     const ul = this.createElement<HTMLUListElement>(
       'ul',
       '',
@@ -157,7 +157,7 @@ class TodoContentUIManager extends UIManager {
   }
 
   renderSelectedSubTodosList(todo: Task) {
-    const todosListContainer = this.createTodosListContainer(
+    const todosListContainer = this.createTasksContainer(
       `Subtasks - ${todo ? todo.title : 'No todo selected'}`,
     );
     const ul = this.createElement<HTMLUListElement>(

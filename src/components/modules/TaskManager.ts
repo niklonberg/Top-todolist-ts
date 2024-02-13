@@ -117,6 +117,10 @@ class TaskManager implements TaskManagerInterface {
     this.tasks.push(task);
   }
 
+  addSubtask(task: Task): void {
+    this.currSelectedTask.subtasks.push(task);
+  }
+
   // /* Delete methods */
   // deleteTopLevelTodo(todoID: number): void {
   //   this.topLevelTodos = this.topLevelTodos.filter(

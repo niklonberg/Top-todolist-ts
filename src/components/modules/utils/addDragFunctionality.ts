@@ -1,4 +1,4 @@
-import { TodoManagerInterface, TodoListItemWithDataset } from './interfaces';
+import { TaskManagerInterface, TodoListItemWithDataset } from './interfaces';
 
 function getDragAfterElement(container: HTMLElement, y: number) {
   const draggableElements = [
@@ -26,7 +26,7 @@ function getDragAfterElement(container: HTMLElement, y: number) {
 
 function addDragFunctionality(
   ul: HTMLUListElement,
-  dataManager?: TodoManagerInterface,
+  dataManager?: TaskManagerInterface,
 ) {
   // ul.addEventListener('dragstart', (e) => {
   //   const target = e.target as HTMLElement;

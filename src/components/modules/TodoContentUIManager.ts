@@ -8,7 +8,7 @@ import TodoFormUIManager from './TodoFormUIManager';
 import createDeleteWarningContainer from './utils/createWarningContainer';
 import {
   Task,
-  TodoManagerInterface,
+  TaskManagerInterface,
   TodoListItemWithDataset,
 } from './utils/interfaces';
 
@@ -18,7 +18,7 @@ class TodoContentUIManager extends UIManager {
   containerElement: HTMLElement;
 
   constructor(
-    private TodoManager: TodoManagerInterface,
+    private TodoManager: TaskManagerInterface,
     containerElementID: string,
     private FormManager?: TodoFormUIManager,
   ) {
@@ -74,7 +74,7 @@ class TodoContentUIManager extends UIManager {
     parentLi.classList.add('selected-list-item');
     this.TodoManager.setSelectedTask(parentLi.dataset.task);
     this.containerElement
-      .querySelector('#selected-sub-todos')
+      .querySelector('#selected-subtasks')
       .parentElement.replaceWith(
         this.renderSelectedSubtasksList(this.TodoManager.currSelectedTask),
       );

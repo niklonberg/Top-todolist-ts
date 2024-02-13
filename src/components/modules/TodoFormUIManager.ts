@@ -3,7 +3,7 @@ import createTodoForm from './utils/createTodoForm';
 import {
   Task,
   newTaskFormData,
-  TodoManagerInterface,
+  TaskManagerInterface,
 } from './utils/interfaces';
 import TaskFactory from './TaskFactory';
 import TodoContentUIManager from './TodoContentUIManager';
@@ -18,7 +18,7 @@ class TodoFormUIManager extends UIManager {
 
   insertTodoForm(
     ListUIManager: TodoContentUIManager,
-    DataManager: TodoManagerInterface,
+    DataManager: TaskManagerInterface,
     todoToEdit: Task = null,
   ) {
     if (todoToEdit) {
@@ -40,7 +40,7 @@ class TodoFormUIManager extends UIManager {
   submitForm(
     e: Event,
     ListUIManager: TodoContentUIManager,
-    DataManager: TodoManagerInterface,
+    DataManager: TaskManagerInterface,
     todoToEdit: Task | null,
   ) {
     e.preventDefault();

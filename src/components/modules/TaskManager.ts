@@ -113,13 +113,40 @@ class TaskManager implements TaskManagerInterface {
   // }
 
   /* Add methods */
-  addTask(task: Task): void {
-    this.tasks.push(task);
+  // push task sent back from database
+  async addTask(newTask: Task): Promise<void> {
+    try {
+      const response = await fetch('http://localhost:3000/tasks/createTask', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newTask),
+      });
+
+      console.log(response);
+
+      if (!response.ok) {
+        const errorMessage = await response.text();
+        throw new Error(
+          `HTTP error! Status: ${response.status}, Message: ${errorMessage}`,
+        );
+      } else {
+        const result = await response.json();
+        this.tasks.push(result);
+        // update todo DOM
+        console.log(this.tasks);
+      }
+    } catch (error) {
+      console.error('Error:', error.message);
+    }
   }
 
-  addSubtask(task: Task): void {
-    this.currSelectedTask.subtasks.push(task);
-  }
+  // addSubtask(task: Task): void {
+  //   // push task sent back from database into subtasks of currSelected
+  //   this.currSelectedTask.subtasks.push(task);
+  //   console.log(this.currSelectedTask.subtasks);
+  // }
 
   // /* Delete methods */
   // deleteTopLevelTodo(todoID: number): void {

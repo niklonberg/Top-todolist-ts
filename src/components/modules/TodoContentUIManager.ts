@@ -33,7 +33,7 @@ class TodoContentUIManager extends UIManager {
       if (targetParentLi?.parentElement.id === 'top-level-tasks')
         this.selectItem(targetParentLi);
 
-      // if (target.classList.contains('add-todo-btn')) this.addItem(target);
+      if (target.classList.contains('add-task-btn')) this.addTodoForm(target);
 
       // if (target.closest('button')?.classList.contains('edit-item-btn'))
       //   this.editItem(targetParentLi);
@@ -90,16 +90,16 @@ class TodoContentUIManager extends UIManager {
   //   this.renderTodosSection();
   // }
 
-  // addItem(target: Element) {
-  //   if (target.id === 'add-top-level-todo-btn') {
-  //     this.TodoManager.resetSelectedTodo();
-  //     // reset currSelected to null, so addTodo inserts into topLevelTodos
-  //   }
-  //   this.containerElement.innerHTML = '';
-  //   this.containerElement.append(
-  //     this.FormManager?.insertTodoForm(this, this.TodoManager),
-  //   );
-  // }
+  addTodoForm(target: Element) {
+    // if (target.id === 'add-top-level-todo-btn') {
+    //   this.TodoManager.resetSelectedTask();
+    //   // reset currSelected to null, so addTodo inserts into topLevelTodos
+    // }
+    this.containerElement.innerHTML = '';
+    this.containerElement.append(
+      this.FormManager.insertTodoForm(this, this.TodoManager),
+    );
+  }
 
   // editItem(parentLi: TodoListItemWithDataset) {
   //   this.containerElement.innerHTML = '';
@@ -176,6 +176,7 @@ class TodoContentUIManager extends UIManager {
   }
 
   renderTodosSection() {
+    console.log('todos section update ran');
     this.containerElement.innerHTML = '';
     const todosLayoutContainer = this.createElement('div', '', 'todos-layout');
     const topLevelTodosList = this.renderTasksList();

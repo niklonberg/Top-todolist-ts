@@ -18,7 +18,7 @@ import {
 class TodoManager implements TodoManagerInterface {
   // private user: User;
 
-  private topLevelTasks: Task[];
+  private tasks: Task[];
 
   currSelectedTask: null | Task; // Should we bother with this?
   // could just split addTodo into two functions.
@@ -27,19 +27,21 @@ class TodoManager implements TodoManagerInterface {
 
   constructor(tasksFromDB: Task[]) {
     // this.user = user;
-    this.topLevelTasks = tasksFromDB;
-    [this.currSelectedTask] = this.topLevelTasks;
-    console.log(this.topLevelTasks);
-    console.log(this.currSelectedTask);
+    this.tasks = tasksFromDB;
+    [this.currSelectedTask] = this.tasks;
   }
 
   /* Get methods */
-  getTopLevelTasks(): Task[] {
-    return this.topLevelTasks;
+  getTasks(): Task[] {
+    return this.tasks;
+  }
+
+  getTask(taskID: string): Task {
+    return this.tasks.find((task) => task._id === taskID);
   }
 
   getSubtasks(taskID: string): Task[] {
-    return this.topLevelTasks.find((task) => task._id === taskID).subtasks;
+    return this.getTask(taskID).subtasks;
   }
 
   // getTodayTasks(): Task[] {
@@ -129,11 +131,11 @@ class TodoManager implements TodoManagerInterface {
   // }
 
   /* Set methods */
-  // setSelectedTask(todoID: number): void {
-  //   console.log('todoID is: ', todoID);
-  //   this.currSelectedTask = this.getTodo(todoID);
-  //   console.log('curr selected todo: ', this.currSelectedTodo);
-  // }
+  setSelectedTask(todoID: string): void {
+    console.log('todoID is: ', todoID);
+    this.currSelectedTask = this.getTask(todoID);
+    console.log('curr selected todo: ', this.currSelectedTask);
+  }
 
   // resetSelectedTodo(): void {
   //   this.currSelectedTodo = null;

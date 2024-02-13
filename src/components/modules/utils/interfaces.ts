@@ -36,7 +36,7 @@ export interface DataManagerInterface<T> {
 
 export interface TodoListItemWithDataset extends HTMLElement {
   dataset: {
-    todo: string;
+    task: string;
   };
 }
 
@@ -46,11 +46,12 @@ export interface TodoManagerInterface {
   // topLevelTodos: Todo[];
   currSelectedTask: Task | null;
   parentTask: Task | null;
-  getTopLevelTasks(): Task[];
+  getTasks(): Task[];
+  getTask(taskID: string): Task;
   getSubtasks(taskID: string): Task[];
   // getTodayTasks(): Task[];
   // getNext7DaysTasks(): Task[];
-  // setSelectedTask(taskID: number): void;
+  setSelectedTask(taskID: string): void;
   // resetSelectedTask(): void;
   // addTask(task: Task, parentTask?: Task): void;
   // deleteTopLevelTask(taskID: number): void;

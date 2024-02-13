@@ -30,8 +30,8 @@ class TodoContentUIManager extends UIManager {
     this.containerElement.addEventListener('click', (e) => {
       const target = e.target as Element;
       const targetParentLi = target.closest('LI') as TodoListItemWithDataset;
-      // if (targetParentLi?.parentElement.id === 'top-level-todos')
-      //   this.selectItem(targetParentLi);
+      if (targetParentLi?.parentElement.id === 'top-level-tasks')
+        this.selectItem(targetParentLi);
 
       // if (target.classList.contains('add-todo-btn')) this.addItem(target);
 
@@ -67,18 +67,18 @@ class TodoContentUIManager extends UIManager {
   //   }
   // }
 
-  // selectItem(parentLi: TodoListItemWithDataset) {
-  //   [...parentLi.parentElement.children].forEach((child) =>
-  //     child.classList.remove('selected-list-item'),
-  //   );
-  //   parentLi.classList.add('selected-list-item');
-  //   this.TodoManager.setSelectedTodo(Number(parentLi.dataset.todo));
-  //   this.containerElement
-  //     .querySelector('#selected-sub-todos')
-  //     .parentElement.replaceWith(
-  //       this.renderSelectedSubTodosList(this.TodoManager.currSelectedTodo),
-  //     );
-  // }
+  selectItem(parentLi: TodoListItemWithDataset) {
+    [...parentLi.parentElement.children].forEach((child) =>
+      child.classList.remove('selected-list-item'),
+    );
+    parentLi.classList.add('selected-list-item');
+    this.TodoManager.setSelectedTask(parentLi.dataset.task);
+    this.containerElement
+      .querySelector('#selected-sub-todos')
+      .parentElement.replaceWith(
+        this.renderSelectedSubtasksList(this.TodoManager.currSelectedTask),
+      );
+  }
 
   // deleteItem(parentLi: TodoListItemWithDataset) {
   //   if (parentLi?.parentElement.id === 'top-level-todos') {
@@ -143,7 +143,7 @@ class TodoContentUIManager extends UIManager {
       '',
       'top-level-tasks',
     );
-    this.TodoManager.getTopLevelTasks().forEach((task) => {
+    this.TodoManager.getTasks().forEach((task) => {
       const parentLi = createListItemFromObject(task, 'top-level');
       if (this.TodoManager.currSelectedTask === task)
         parentLi.classList.add('selected-list-item');

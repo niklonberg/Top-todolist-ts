@@ -53,7 +53,7 @@ export interface TaskManagerInterface {
   // getNext7DaysTasks(): Task[];
   setSelectedTask(taskID: string): void;
   // resetSelectedTask(): void;
-  // addTask(task: Task, parentTask?: Task): void;
+  addTask(task: Task): void;
   // deleteTopLevelTask(taskID: number): void;
   // deleteChildTask(taskID: number): void;
   // editTask(TaskToEdit: Task, newTask: Task): void;

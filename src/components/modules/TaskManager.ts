@@ -112,15 +112,10 @@ class TaskManager implements TaskManagerInterface {
   //   this.currSelectedTodo = null;
   // }
 
-  // /* Add methods */
-  // addTodo(todo: Task): void {
-  //   if (this.currSelectedTodo) {
-  //     this.currSelectedTodo.children.push(todo);
-  //   } else {
-  //     this.topLevelTodos.push(todo);
-  //   }
-  //   console.log(this.topLevelTodos);
-  // }
+  /* Add methods */
+  addTask(task: Task): void {
+    this.tasks.push(task);
+  }
 
   // /* Delete methods */
   // deleteTopLevelTodo(todoID: number): void {

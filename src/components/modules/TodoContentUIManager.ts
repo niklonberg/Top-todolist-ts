@@ -156,36 +156,36 @@ class TodoContentUIManager extends UIManager {
     return todosListContainer;
   }
 
-  // renderSelectedSubTodosList(todo: Task) {
-  //   const todosListContainer = this.createTodosListContainer(
-  //     `Subtasks - ${todo ? todo.title : 'No todo selected'}`,
-  //   );
-  //   const ul = this.createElement<HTMLUListElement>(
-  //     'ul',
-  //     '',
-  //     'selected-sub-todos',
-  //   );
+  renderSelectedSubTodosList(todo: Task) {
+    const todosListContainer = this.createTodosListContainer(
+      `Subtasks - ${todo ? todo.title : 'No todo selected'}`,
+    );
+    const ul = this.createElement<HTMLUListElement>(
+      'ul',
+      '',
+      'selected-sub-todos',
+    );
 
-  //   todo?.children.forEach((childTodo) => {
-  //     ul.append(createListItemFromObject(childTodo, 'todo-list'));
-  //   });
+    todo?.subtasks.forEach((childTodo) => {
+      ul.append(createListItemFromObject(childTodo, 'subtask'));
+    });
 
-  //   insertEmptyListFallbackItem(ul);
-  //   const addNewTodoBtn = this.createNewTodoBtn('add-child-level-todo-btn');
-  //   addNewTodoBtn.textContent = '+ Add Subtask';
-  //   todosListContainer.append(ul, addNewTodoBtn);
-  //   return todosListContainer;
-  // }
+    insertEmptyListFallbackItem(ul);
+    const addNewTodoBtn = this.createNewTodoBtn('add-child-level-todo-btn');
+    addNewTodoBtn.textContent = '+ Add Subtask';
+    todosListContainer.append(ul, addNewTodoBtn);
+    return todosListContainer;
+  }
 
   renderTodosSection() {
     this.containerElement.innerHTML = '';
     const todosLayoutContainer = this.createElement('div', '', 'todos-layout');
     const topLevelTodosList = this.renderTopLevelTodosList();
-    // const selectedSubTodosList = this.renderSelectedSubTodosList(
-    //   this.TodoManager.currSelectedTodo,
-    // );
+    const selectedSubTodosList = this.renderSelectedSubTodosList(
+      this.TodoManager.currSelectedTask,
+    );
     todosLayoutContainer.append(topLevelTodosList);
-    // todosLayoutContainer.append(selectedSubTodosList);
+    todosLayoutContainer.append(selectedSubTodosList);
     this.containerElement.append(todosLayoutContainer);
   }
 

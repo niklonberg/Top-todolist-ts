@@ -7,7 +7,9 @@ function createListContainer(task: Task) {
   li.setAttribute('draggable', 'true');
   li.classList.add('draggable');
   if (task.isCompleted) li.classList.add('task-complete');
-  li.dataset.task = task._id.toString(); // eslint-disable-line no-underscore-dangle
+  if (task._id) {
+    li.dataset.task = task._id.toString();
+  }
   return li;
 }
 
@@ -85,7 +87,7 @@ export function createDateCompleted(task: Task) {
 
 function createListItemFromObject(
   task: Task,
-  destination: 'top-level' | 'task-list',
+  destination: 'top-level' | 'subtask',
 ) {
   const li = createListContainer(task);
   const listDetails = createListDetailsContainer(task);
@@ -95,7 +97,7 @@ function createListItemFromObject(
     li.append(listDetails);
   }
 
-  if (destination === 'task-list') {
+  if (destination === 'subtask') {
     if (task.description) {
       const p = createElement<HTMLParagraphElement>('p');
       p.setAttribute('aria-label', 'item description');

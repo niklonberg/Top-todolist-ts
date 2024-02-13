@@ -18,7 +18,7 @@ import {
 class TodoManager implements TodoManagerInterface {
   // private user: User;
 
-  private topLevelTodos: Task[];
+  private topLevelTasks: Task[];
 
   currSelectedTask: null | Task; // Should we bother with this?
   // could just split addTodo into two functions.
@@ -27,33 +27,20 @@ class TodoManager implements TodoManagerInterface {
 
   constructor(tasksFromDB: Task[]) {
     // this.user = user;
-    this.topLevelTodos = tasksFromDB;
-    console.log(this.topLevelTodos);
+    this.topLevelTasks = tasksFromDB;
+    [this.currSelectedTask] = this.topLevelTasks;
+    console.log(this.topLevelTasks);
+    console.log(this.currSelectedTask);
   }
 
   /* Get methods */
   getTopLevelTasks(): Task[] {
-    return this.topLevelTodos;
+    return this.topLevelTasks;
   }
 
-  // getTask(taskID: number, tasks: Task[] = this.topLevelTodos): Task {
-  // let todoWeAreSearchingFor: Task = null;
-  // todoArray.forEach((childTodo) => {
-  //   if (childTodo.todoID === todoID) {
-  //     todoWeAreSearchingFor = childTodo;
-  //     this.parentTodo = null;
-  //   } else {
-  //     const foundTodo = this.getTodo(todoID, childTodo.children);
-  //     if (foundTodo) {
-  //       todoWeAreSearchingFor = foundTodo;
-  //       this.parentTodo = childTodo;
-  //       console.log('parent todo is: ', this.parentTodo);
-  //       console.log('todo we searched for is: ', todoWeAreSearchingFor);
-  //     }
-  //   }
-  // });
-  // return todoWeAreSearchingFor;
-  // }
+  getSubtasks(taskID: string): Task[] {
+    return this.topLevelTasks.find((task) => task._id === taskID).subtasks;
+  }
 
   // getTodayTasks(): Task[] {
   //   const todos = this.getTopLevelTasks();
@@ -141,10 +128,10 @@ class TodoManager implements TodoManagerInterface {
   //   );
   // }
 
-  // /* Set methods */
-  // setSelectedTodo(todoID: number): void {
+  /* Set methods */
+  // setSelectedTask(todoID: number): void {
   //   console.log('todoID is: ', todoID);
-  //   this.currSelectedTodo = this.getTodo(todoID);
+  //   this.currSelectedTask = this.getTodo(todoID);
   //   console.log('curr selected todo: ', this.currSelectedTodo);
   // }
 

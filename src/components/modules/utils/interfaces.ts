@@ -44,10 +44,10 @@ export interface TodoListItemWithDataset extends HTMLElement {
 // this could extend DataManagerInterface?
 export interface TodoManagerInterface {
   // topLevelTodos: Todo[];
-  currSelectedTask: Task;
+  currSelectedTask: Task | null;
   parentTask: Task | null;
   getTopLevelTasks(): Task[];
-  // getTask(taskID: number, tasks: Task[]): Task;
+  getSubtasks(taskID: string): Task[];
   // getTodayTasks(): Task[];
   // getNext7DaysTasks(): Task[];
   // setSelectedTask(taskID: number): void;

@@ -136,24 +136,24 @@ class TodoContentUIManager extends UIManager {
     return btn;
   }
 
-  renderTopLevelTodosList() {
-    const todosListContainer = this.createTodosListContainer('To Do');
+  renderTasksList() {
+    const tasksListContainer = this.createTodosListContainer('Tasks');
     const ul = this.createElement<HTMLUListElement>(
       'ul',
       '',
-      'top-level-todos',
+      'top-level-tasks',
     );
-    this.TodoManager.getTopLevelTasks().forEach((todo) => {
-      const targetParentLi = createListItemFromObject(todo, 'top-level');
-      if (this.TodoManager.currSelectedTask === todo)
-        targetParentLi.classList.add('selected-list-item');
-      ul.append(targetParentLi);
+    this.TodoManager.getTopLevelTasks().forEach((task) => {
+      const parentLi = createListItemFromObject(task, 'top-level');
+      if (this.TodoManager.currSelectedTask === task)
+        parentLi.classList.add('selected-list-item');
+      ul.append(parentLi);
     });
     insertEmptyListFallbackItem(ul);
-    const addNewTodoBtn = this.createNewTodoBtn('add-top-level-todo-btn');
-    todosListContainer.append(ul, addNewTodoBtn);
+    const addNewTaskBtn = this.createNewTodoBtn('add-task-btn');
+    tasksListContainer.append(ul, addNewTaskBtn);
     addDragFunctionality(ul, this.TodoManager);
-    return todosListContainer;
+    return tasksListContainer;
   }
 
   renderSelectedSubTodosList(todo: Task) {
@@ -180,7 +180,7 @@ class TodoContentUIManager extends UIManager {
   renderTodosSection() {
     this.containerElement.innerHTML = '';
     const todosLayoutContainer = this.createElement('div', '', 'todos-layout');
-    const topLevelTodosList = this.renderTopLevelTodosList();
+    const topLevelTodosList = this.renderTasksList();
     const selectedSubTodosList = this.renderSelectedSubTodosList(
       this.TodoManager.currSelectedTask,
     );

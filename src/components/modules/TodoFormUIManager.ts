@@ -36,7 +36,6 @@ class TodoFormUIManager extends UIManager {
     DataManager: TaskManagerInterface,
     todoToEdit: Task | null,
   ) {
-    e.preventDefault();
     const formData = new FormData(this.form);
     const formDataObject: Record<keyof newTaskFormData, string> =
       Object.fromEntries(formData.entries()) as Record<

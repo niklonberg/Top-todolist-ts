@@ -1,6 +1,7 @@
 import createListItemFromObject, {
   createDateCompleted,
 } from './utils/createListItemFromObject';
+import createElement from './utils/createElement';
 import UIManager from './abstract/UIManager';
 import insertEmptyListFallbackItem from './utils/insertEmptyListFallbackItem';
 import addDragFunctionality from './utils/addDragFunctionality';
@@ -12,7 +13,7 @@ import {
   TodoListItemWithDataset,
 } from './utils/interfaces';
 
-class TaskUIManager extends UIManager {
+export default class TaskUIManager extends UIManager {
   containerElement: HTMLElement;
 
   constructor(
@@ -113,76 +114,17 @@ class TaskUIManager extends UIManager {
   //   );
   // }
 
-  createTasksContainer(headingTitle: string) {
-    const taskContainer = this.createElement<HTMLDivElement>(
-      'div',
-      'tasks-container',
-    );
-    const h2 = this.createElement<HTMLHeadingElement>('H2', 'list-item-title');
-    h2.textContent = headingTitle;
-    taskContainer.append(h2);
-    return taskContainer;
-  }
-
-  createNewTaskBtn(btnID: string) {
-    const btn = this.createElement<HTMLButtonElement>(
-      'button',
-      'add-task-btn',
-      btnID,
-    );
-    btn.textContent = '+ Add Task';
-    return btn;
-  }
-
   renderTasksList() {
-    const tasksListContainer = this.createTasksContainer('Tasks');
-    const ul = this.createElement<HTMLUListElement>(
-      'ul',
-      '',
-      'top-level-tasks',
-    );
-    this.TaskManager.getTasks().forEach((task) => {
-      const parentLi = createListItemFromObject(task, 'top-level');
-      if (this.TaskManager.currSelectedTask === task)
-        parentLi.classList.add('selected-list-item');
-      ul.append(parentLi);
-    });
-    insertEmptyListFallbackItem(ul);
-    const addNewTaskBtn = this.createNewTaskBtn('add-task-btn');
-    tasksListContainer.append(ul, addNewTaskBtn);
-    addDragFunctionality(ul, this.TaskManager);
-    return tasksListContainer;
+    return createTasksList();
   }
 
   renderSelectedSubtasksList(task: Task) {
-    const subtasksListContainer = this.createTasksContainer(
-      `Subtasks - ${task ? task.title : 'No task selected'}`,
-    );
-    const ul = this.createElement<HTMLUListElement>(
-      'ul',
-      '',
-      'selected-subtasks',
-    );
-    task?.subtasks.forEach((subtask) => {
-      ul.append(createListItemFromObject(subtask, 'subtask'));
-    });
-    insertEmptyListFallbackItem(ul);
-    const addNewSubtaskBtn = this.createNewTaskBtn('add-child-level-todo-btn');
-    addNewSubtaskBtn.textContent = '+ Add Subtask';
-    subtasksListContainer.append(ul, addNewSubtaskBtn);
-    return subtasksListContainer;
+    return createSelectedSubtasksList(task);
   }
 
   renderTodosSection() {
     this.containerElement.innerHTML = '';
-    const todosLayoutContainer = this.createElement('div', '', 'todos-layout');
-    const topLevelTodosList = this.renderTasksList();
-    const selectedSubTodosList = this.renderSelectedSubtasksList(
-      this.TaskManager.currSelectedTask,
-    );
-    todosLayoutContainer.append(topLevelTodosList);
-    todosLayoutContainer.append(selectedSubTodosList);
-    this.containerElement.append(todosLayoutContainer);
+    this.containerElement.append(createTodosSection());
   }
 
   // renderTodayTasks() {
@@ -211,4 +153,60 @@ class TaskUIManager extends UIManager {
   // }
 }
 
-export default TaskUIManager;
+function createNewTaskBtn(btnID: string) {
+  const btn = createElement<HTMLButtonElement>('button', 'add-task-btn', btnID);
+  btn.textContent = '+ Add Task';
+  return btn;
+}
+
+function createTasksContainer(headingTitle: string) {
+  const taskContainer = createElement<HTMLDivElement>('div', 'tasks-container');
+  const h2 = createElement<HTMLHeadingElement>('H2', 'list-item-title');
+  h2.textContent = headingTitle;
+  taskContainer.append(h2);
+  return taskContainer;
+}
+
+function createTasksList() {
+  const tasksListContainer = this.createTasksContainer('Tasks');
+  const ul = createElement<HTMLUListElement>('ul', '', 'top-level-tasks');
+  this.TaskManager.getTasks().forEach((task) => {
+    const parentLi = createListItemFromObject(task, 'top-level');
+    if (this.TaskManager.currSelectedTask === task)
+      parentLi.classList.add('selected-list-item');
+    ul.append(parentLi);
+  });
+  insertEmptyListFallbackItem(ul);
+  const addNewTaskBtn = createNewTaskBtn('add-task-btn');
+  tasksListContainer.append(ul, addNewTaskBtn);
+  // addDragFunctionality(ul, this.TaskManager);
+  return tasksListContainer;
+}
+
+function createSelectedSubtasksList(selectedTask: Task) {
+  const subtasksListContainer = createTasksContainer(
+    `Subtasks - ${selectedTask ? selectedTask.title : 'No task selected'}`,
+  );
+  const ul = createElement<HTMLUListElement>('ul', '', 'selected-subtasks');
+  selectedTask?.subtasks.forEach((subtask) => {
+    ul.append(createListItemFromObject(subtask, 'subtask'));
+  });
+  insertEmptyListFallbackItem(ul);
+  const addNewSubtaskBtn = createNewTaskBtn('add-child-level-todo-btn');
+  addNewSubtaskBtn.textContent = '+ Add Subtask';
+  subtasksListContainer.append(ul, addNewSubtaskBtn);
+  return subtasksListContainer;
+}
+
+export function createTodosSection(task: Task) {
+  const todosLayoutContainer = createElement<HTMLDivElement>(
+    'div',
+    '',
+    'todos-layout',
+  );
+  const topLevelTodosList = createTasksList();
+  const selectedSubTodosList = createSelectedSubtasksList(task);
+  todosLayoutContainer.append(topLevelTodosList);
+  todosLayoutContainer.append(selectedSubTodosList);
+  return todosLayoutContainer;
+}

@@ -45,7 +45,7 @@ class TaskUIManager extends UIManager {
       // if (target.id === 'cancel-delete-btn')
       //   targetParentLi.querySelector('.warning-container').remove();
 
-      // if (target.id === 'cancel-form-btn') this.renderTodosSection();
+      if (target.id === 'cancel-form-btn') this.renderTodosSection();
 
       // if (target.classList.contains('toggle-complete-btn'))
       //   this.toggleItemComplete(target, targetParentLi);
@@ -95,7 +95,7 @@ class TaskUIManager extends UIManager {
     // }
     this.containerElement.innerHTML = '';
     this.containerElement.append(
-      this.FormManager.insertTodoForm(this, this.TaskManager),
+      this.FormManager.insertTodoForm(this.TaskManager),
     );
   }
 
@@ -174,7 +174,6 @@ class TaskUIManager extends UIManager {
   }
 
   renderTodosSection() {
-    console.log('todos section update ran');
     this.containerElement.innerHTML = '';
     const todosLayoutContainer = this.createElement('div', '', 'todos-layout');
     const topLevelTodosList = this.renderTasksList();

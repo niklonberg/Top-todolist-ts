@@ -5,10 +5,7 @@ import {
   TodoListItemWithDataset,
 } from './utils/interfaces';
 
-// refactor TodoManager into an entity that can be duplicated,
-// so each user could have an instance of TodoManager to manage their todos
-
-// add documentation to below class like this:
+// TODO add documentation to below class like this:
 /**
  * Get a specific Todo from the project.
  * @param projects - The project containing the Todos.
@@ -113,7 +110,6 @@ class TaskManager implements TaskManagerInterface {
   // }
 
   /* Add methods */
-  // push task sent back from database
   async addTask(newTask: Task): Promise<void> {
     try {
       const response = await fetch('http://localhost:3000/tasks/createTask', {
@@ -132,7 +128,7 @@ class TaskManager implements TaskManagerInterface {
           `HTTP error! Status: ${response.status}, Message: ${errorMessage}`,
         );
       } else {
-        const result = await response.json();
+        const result = (await response.json()) as Task;
         this.tasks.push(result);
         // update todo DOM
         console.log(this.tasks);

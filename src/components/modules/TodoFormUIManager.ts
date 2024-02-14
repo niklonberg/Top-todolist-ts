@@ -6,7 +6,6 @@ import {
   TaskManagerInterface,
 } from './utils/interfaces';
 import TaskFactory from './TaskFactory';
-import TodoContentUIManager from './TaskUIManager';
 
 /* 
 REFACTOR ME, SIMPLIFY AS MUCH AS POSSIBLE
@@ -16,11 +15,7 @@ REFACTOR ME, SIMPLIFY AS MUCH AS POSSIBLE
 class TodoFormUIManager extends UIManager {
   private form: HTMLFormElement | null;
 
-  insertTodoForm(
-    ListUIManager: TodoContentUIManager,
-    DataManager: TaskManagerInterface,
-    todoToEdit: Task = null,
-  ) {
+  insertTodoForm(DataManager: TaskManagerInterface, todoToEdit: Task = null) {
     if (todoToEdit) {
       this.form = createTodoForm(todoToEdit);
     } else {
@@ -28,7 +23,7 @@ class TodoFormUIManager extends UIManager {
     }
     this.form.addEventListener(
       'submit',
-      (e) => this.submitForm(e, ListUIManager, DataManager, todoToEdit),
+      (e) => this.submitForm(e, DataManager, todoToEdit),
       {
         once: true,
       },
@@ -38,7 +33,6 @@ class TodoFormUIManager extends UIManager {
 
   submitForm(
     e: Event,
-    ListUIManager: TodoContentUIManager,
     DataManager: TaskManagerInterface,
     todoToEdit: Task | null,
   ) {
@@ -55,7 +49,6 @@ class TodoFormUIManager extends UIManager {
     } else {
       DataManager.addTask(newTask);
     }
-    ListUIManager.renderTodosSection();
   }
 }
 

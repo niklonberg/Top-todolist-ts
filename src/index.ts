@@ -1,5 +1,4 @@
 import './index.css';
-import { addDays } from 'date-fns';
 import TaskManager from './components/modules/TaskManager';
 import TaskUIManager from './components/modules/TaskUIManager';
 import HeaderNavbarUIManager from './components/modules/HeaderNavbarUIManager';
@@ -10,9 +9,9 @@ import TaskFactory from './components/modules/TaskFactory';
 
 async function init() {
   const tasks = await getTasks();
-  const MyTodoManager = new TaskManager(tasks);
+  const MyTaskManager = new TaskManager(tasks);
   const MyTaskUIManager = new TaskUIManager(
-    MyTodoManager,
+    MyTaskManager,
     'main-content',
     new TodoFormUIManager(),
   );
@@ -20,6 +19,8 @@ async function init() {
 }
 
 init();
+
+/* TESTING */
 
 async function getTasks() {
   const url = 'http://localhost:3000/tasks';

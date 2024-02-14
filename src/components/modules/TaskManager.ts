@@ -1,4 +1,5 @@
 import { isToday, addDays, isWithinInterval } from 'date-fns';
+import { EventEmitter } from 'events';
 import {
   Task,
   TaskManagerInterface,
@@ -13,6 +14,7 @@ import {
  * @returns The Todo with the specified ID.
  */
 class TaskManager implements TaskManagerInterface {
+  private eventEmitter: EventEmitter;
   // private user: User;
 
   private tasks: Task[];
@@ -26,6 +28,7 @@ class TaskManager implements TaskManagerInterface {
     // this.user = user;
     this.tasks = tasksFromDB;
     [this.currSelectedTask] = this.tasks;
+    this.eventEmitter = new EventEmitter();
   }
 
   /* Get methods */
@@ -130,7 +133,7 @@ class TaskManager implements TaskManagerInterface {
       } else {
         const result = (await response.json()) as Task;
         this.tasks.push(result);
-        // update todo DOM
+        this.eventEmitter.emit('taskAdded');
         console.log(this.tasks);
       }
     } catch (error) {
@@ -158,6 +161,10 @@ class TaskManager implements TaskManagerInterface {
   //     (childTodo) => childTodo !== todo,
   //   );
   // }
+
+  onTaskAdded(callback: () => void) {
+    this.eventEmitter.on('taskAdded', callback);
+  }
 }
 
 export default TaskManager;

@@ -16,6 +16,10 @@ async function init() {
     new TodoFormUIManager(),
   );
   const MyHeaderNavbarManager = new HeaderNavbarUIManager(MyTaskUIManager);
+
+  MyTaskManager.onTaskAdded(() => {
+    MyTaskUIManager.renderTodosSection();
+  });
 }
 
 init();

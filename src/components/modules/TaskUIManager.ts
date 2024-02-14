@@ -78,16 +78,42 @@ class TaskUIManager extends UIManager {
       );
   }
 
-  deleteItem(parentLi: TodoListItemWithDataset) {
+  async deleteItem(parentLi: TodoListItemWithDataset) {
     if (parentLi?.parentElement.id === 'top-level-tasks') {
       this.TaskManager.deleteTask(parentLi.dataset.task);
       // this.TaskManager.resetSelectedTodo();
+      // re render tasks list
     }
     // } else {
     //   this.TaskManager.deleteChildTodo(Number(parentLi.dataset.todo));
+    //   re render subtasks list
     // }
-    this.renderTodosSection(); // dont rerender entire todos section?
   }
+
+  /* using await
+  async deleteItem(parentLi: TodoListItemWithDataset) {
+    if (parentLi?.parentElement.id === 'top-level-tasks') {
+        await this.TaskManager.deleteTask(parentLi.dataset.task);
+        // await for the task deletion to complete before rendering todos section
+        this.renderTodosSection();
+    }
+  }
+
+  using then
+  deleteItem(parentLi: TodoListItemWithDataset) {
+    if (parentLi?.parentElement.id === 'top-level-tasks') {
+        this.TaskManager.deleteTask(parentLi.dataset.task)
+            .then(() => {
+                // Perform actions after the task deletion is complete
+                this.renderTodosSection();
+            })
+            .catch((error) => {
+                // Handle errors if the task deletion fails
+                console.error('Error deleting task:', error);
+            });
+    }
+  }
+  */
 
   addTodoForm(target: Element) {
     // if (target.id === 'add-top-level-todo-btn') {

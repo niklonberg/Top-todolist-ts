@@ -14,20 +14,21 @@ import {
  * @returns The Todo with the specified ID.
  */
 class TaskManager implements TaskManagerInterface {
-  private eventEmitter: EventEmitter;
   // private user: User;
-
-  private tasks: Task[];
 
   currSelectedTask: null | Task; // Should we bother with this?
   // could just split addTodo into two functions.
 
-  parentTask: Task | null; // we need me?
+  private eventEmitter: EventEmitter;
 
-  constructor(tasksFromDB: Task[]) {
+  constructor(
+    private tasks: Task[],
+    public url: string,
+  ) {
     // this.user = user;
-    this.tasks = tasksFromDB;
+    this.tasks = tasks;
     [this.currSelectedTask] = this.tasks;
+    this.url = url;
     this.eventEmitter = new EventEmitter();
   }
 
@@ -115,7 +116,7 @@ class TaskManager implements TaskManagerInterface {
   /* Add methods */
   async addTask(newTask: Task): Promise<void> {
     try {
-      const response = await fetch('http://localhost:3000/tasks/createTask', {
+      const response = await fetch(`${this.url}/createTask`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -148,7 +149,12 @@ class TaskManager implements TaskManagerInterface {
   // }
 
   /* Delete methods */
-  deleteTask(todoID: string): void {
+  async deleteTask(todoID: string): Promise<void> {
+    // try {
+    //   const response = await fetch();
+    // } catch (error) {
+    //   console.error('Error:', error.message);
+    // }
     // this.tasks = this.tasks.filter(
     //   (task) => task._id !== todoID,
     // );

@@ -9,7 +9,8 @@ import TaskFactory from './components/modules/TaskFactory';
 
 async function init() {
   const tasks = await getTasks();
-  const MyTaskManager = new TaskManager(tasks);
+  const tasksUrl = 'http://localhost:3000/tasks';
+  const MyTaskManager = new TaskManager(tasks, tasksUrl);
   const MyTaskUIManager = new TaskUIManager(
     MyTaskManager,
     'main-content',

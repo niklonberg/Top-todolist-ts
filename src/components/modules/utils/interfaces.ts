@@ -45,9 +45,7 @@ export interface TodoListItemWithDataset extends HTMLElement {
 /* eslint-disable no-unused-vars */
 // this could extend DataManagerInterface?
 export interface TaskManagerInterface {
-  // topLevelTodos: Todo[];
   currSelectedTask: Task | null;
-  parentTask: Task | null;
   getTasks(): Task[];
   getTask(taskID: string): Task;
   getSubtasks(taskID: string): Task[];

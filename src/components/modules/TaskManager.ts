@@ -23,12 +23,12 @@ class TaskManager implements TaskManagerInterface {
 
   constructor(
     private tasks: Task[],
-    public url: string,
+    public baseURL: string,
   ) {
     // this.user = user;
     this.tasks = tasks;
     [this.currSelectedTask] = this.tasks;
-    this.url = url;
+    this.baseURL = baseURL;
     this.eventEmitter = new EventEmitter();
   }
 
@@ -79,7 +79,7 @@ class TaskManager implements TaskManagerInterface {
   // editTodo(
   //   todoToEdit: Task,
   //   newTodo: Task,
-  //   todoArray: Task[] = this.topLevelTodos,
+  //   todoArray: Task[] = thiimport express from "express";
   // ): void {
   //   const foundTodo = todoArray.find(
   //     (currTodo) => currTodo.todoID === todoToEdit.todoID,
@@ -116,7 +116,7 @@ class TaskManager implements TaskManagerInterface {
   /* Add methods */
   async addTask(newTask: Task): Promise<void> {
     try {
-      const response = await fetch(`${this.url}/createTask`, {
+      const response = await fetch(`${this.baseURL}/createTask`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -150,16 +150,31 @@ class TaskManager implements TaskManagerInterface {
 
   /* Delete methods */
   async deleteTask(todoID: string): Promise<void> {
-    // try {
-    //   const response = await fetch();
-    // } catch (error) {
-    //   console.error('Error:', error.message);
-    // }
-    // this.tasks = this.tasks.filter(
-    //   (task) => task._id !== todoID,
-    // );
+    // const taskToDelete = this.getTask(todoID);
+    try {
+      const response = await fetch(`${this.baseURL}/deleteTask/${todoID}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      if (!response.ok) {
+        const errorMessage = await response.text();
+        throw new Error(
+          `HTTP error! Status: ${response.status}, Message: ${errorMessage}`,
+        );
+      } else {
+        // this.tasks = this.tasks.filter(
+        //   (task) => task._id !== todoID,
+        // );
+      }
+    } catch (error) {
+      console.error('Error:', error.message);
+    }
   }
 
+  // deleteSubtask is actually just an update of the task that contains it, with
+  // the subtask removed from its .subtasks array right?
   // deleteChildTodo(todoID: number): void {
   //   const todo = this.getTodo(todoID);
   //   console.log('todo to delete: ', todo);

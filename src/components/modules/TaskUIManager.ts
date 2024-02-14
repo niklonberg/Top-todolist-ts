@@ -36,14 +36,14 @@ class TaskUIManager extends UIManager {
       // if (target.closest('button')?.classList.contains('edit-item-btn'))
       //   this.editItem(targetParentLi);
 
-      // if (target.closest('button')?.classList.contains('delete-item-btn'))
-      //   if (!this.cUIManagerontainerElement.querySelector('.warning-container'))
-      //     targetParentLi.append(createDeleteWarningContainer());
+      if (target.closest('button')?.classList.contains('delete-item-btn'))
+        if (!this.containerElement.querySelector('.warning-container'))
+          targetParentLi.append(createDeleteWarningContainer());
 
-      // if (target.id === 'confirm-delete-btn') this.deleteItem(targetParentLi);
+      if (target.id === 'confirm-delete-btn') this.deleteItem(targetParentLi);
 
-      // if (target.id === 'cancel-delete-btn')
-      //   targetParentLi.querySelector('.warning-container').remove();
+      if (target.id === 'cancel-delete-btn')
+        targetParentLi.querySelector('.warning-container').remove();
 
       if (target.id === 'cancel-form-btn') this.renderTodosSection();
 
@@ -78,15 +78,16 @@ class TaskUIManager extends UIManager {
       );
   }
 
-  // deleteItem(parentLi: TodoListItemWithDataset) {
-  //   if (parentLi?.parentElement.id === 'top-level-todos') {
-  //     this.TaskManager.deleteTopLevelTodo(Number(parentLi.dataset.todo));
-  //     this.TaskManager.resetSelectedTodo();
-  //   } else {
-  //     this.TaskManager.deleteChildTodo(Number(parentLi.dataset.todo));
-  //   }
-  //   this.renderTodosSection();
-  // }
+  deleteItem(parentLi: TodoListItemWithDataset) {
+    if (parentLi?.parentElement.id === 'top-level-tasks') {
+      this.TaskManager.deleteTask(parentLi.dataset.task);
+      // this.TaskManager.resetSelectedTodo();
+    }
+    // } else {
+    //   this.TaskManager.deleteChildTodo(Number(parentLi.dataset.todo));
+    // }
+    this.renderTodosSection(); // dont rerender entire todos section?
+  }
 
   addTodoForm(target: Element) {
     // if (target.id === 'add-top-level-todo-btn') {

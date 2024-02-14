@@ -34,6 +34,8 @@ export interface DataManagerInterface<T> {
   deleteItem(): void;
 }
 
+// TODO: strongly consider removing this, you have arrays already
+// just use indexs
 export interface TodoListItemWithDataset extends HTMLElement {
   dataset: {
     task: string;
@@ -55,7 +57,7 @@ export interface TaskManagerInterface {
   // resetSelectedTask(): void;
   addTask(task: Task): void;
   // addSubtask(task: Task): void;
-  // deleteTopLevelTask(taskID: number): void;
+  deleteTask(taskID: string): void;
   // deleteChildTask(taskID: number): void;
   // editTask(TaskToEdit: Task, newTask: Task): void;
   // toggleIsCompleted(taskID: number): Task;

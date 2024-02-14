@@ -147,12 +147,12 @@ class TaskManager implements TaskManagerInterface {
   //   console.log(this.currSelectedTask.subtasks);
   // }
 
-  // /* Delete methods */
-  // deleteTopLevelTodo(todoID: number): void {
-  //   this.topLevelTodos = this.topLevelTodos.filter(
-  //     (todo) => todo.todoID !== todoID,
-  //   );
-  // }
+  /* Delete methods */
+  deleteTask(todoID: string): void {
+    // this.tasks = this.tasks.filter(
+    //   (task) => task._id !== todoID,
+    // );
+  }
 
   // deleteChildTodo(todoID: number): void {
   //   const todo = this.getTodo(todoID);

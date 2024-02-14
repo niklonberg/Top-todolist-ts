@@ -1,7 +1,7 @@
 import './index.css';
 import { addDays } from 'date-fns';
 import TaskManager from './components/modules/TaskManager';
-import TodoContentUIManager from './components/modules/TodoContentUIManager';
+import TaskUIManager from './components/modules/TaskUIManager';
 import HeaderNavbarUIManager from './components/modules/HeaderNavbarUIManager';
 import TodoFormUIManager from './components/modules/TodoFormUIManager';
 // to be removed later - here for testing
@@ -11,14 +11,12 @@ import TaskFactory from './components/modules/TaskFactory';
 async function init() {
   const tasks = await getTasks();
   const MyTodoManager = new TaskManager(tasks);
-  const MyTodoContentUIManager = new TodoContentUIManager(
+  const MyTaskUIManager = new TaskUIManager(
     MyTodoManager,
     'main-content',
     new TodoFormUIManager(),
   );
-  const MyHeaderNavbarManager = new HeaderNavbarUIManager(
-    MyTodoContentUIManager,
-  );
+  const MyHeaderNavbarManager = new HeaderNavbarUIManager(MyTaskUIManager);
 }
 
 init();

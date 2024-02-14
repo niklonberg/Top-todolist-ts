@@ -12,18 +12,16 @@ import {
   TodoListItemWithDataset,
 } from './utils/interfaces';
 
-// think on how this class could be a ListContentUIManager instead
-// then we could have different types of lists instead of only Todos!
-class TodoContentUIManager extends UIManager {
+class TaskUIManager extends UIManager {
   containerElement: HTMLElement;
 
   constructor(
-    private TodoManager: TaskManagerInterface,
+    private TaskManager: TaskManagerInterface,
     containerElementID: string,
     private FormManager?: TodoFormUIManager,
   ) {
     super();
-    this.TodoManager = TodoManager;
+    this.TaskManager = TaskManager;
     this.FormManager = FormManager;
     // add error handling for below line? what happens if dev gets id wrong
     this.containerElement = document.querySelector(`#${containerElementID}`);
@@ -39,7 +37,7 @@ class TodoContentUIManager extends UIManager {
       //   this.editItem(targetParentLi);
 
       // if (target.closest('button')?.classList.contains('delete-item-btn'))
-      //   if (!this.containerElement.querySelector('.warning-container'))
+      //   if (!this.cUIManagerontainerElement.querySelector('.warning-container'))
       //     targetParentLi.append(createDeleteWarningContainer());
 
       // if (target.id === 'confirm-delete-btn') this.deleteItem(targetParentLi);
@@ -57,7 +55,7 @@ class TodoContentUIManager extends UIManager {
   // toggleItemComplete(target: Element, parentLi: TodoListItemWithDataset) {
   //   target.classList.toggle('checked');
   //   parentLi.classList.toggle('todo-complete');
-  //   const todo = this.TodoManager.toggleIsCompleted(
+  //   const todo = this.TaskManager.toggleIsCompleted(
   //     Number(parentLi.dataset.todo),
   //   );
   //   if (todo.isCompleted) {
@@ -72,32 +70,32 @@ class TodoContentUIManager extends UIManager {
       child.classList.remove('selected-list-item'),
     );
     parentLi.classList.add('selected-list-item');
-    this.TodoManager.setSelectedTask(parentLi.dataset.task);
+    this.TaskManager.setSelectedTask(parentLi.dataset.task);
     this.containerElement
       .querySelector('#selected-subtasks')
       .parentElement.replaceWith(
-        this.renderSelectedSubtasksList(this.TodoManager.currSelectedTask),
+        this.renderSelectedSubtasksList(this.TaskManager.currSelectedTask),
       );
   }
 
   // deleteItem(parentLi: TodoListItemWithDataset) {
   //   if (parentLi?.parentElement.id === 'top-level-todos') {
-  //     this.TodoManager.deleteTopLevelTodo(Number(parentLi.dataset.todo));
-  //     this.TodoManager.resetSelectedTodo();
+  //     this.TaskManager.deleteTopLevelTodo(Number(parentLi.dataset.todo));
+  //     this.TaskManager.resetSelectedTodo();
   //   } else {
-  //     this.TodoManager.deleteChildTodo(Number(parentLi.dataset.todo));
+  //     this.TaskManager.deleteChildTodo(Number(parentLi.dataset.todo));
   //   }
   //   this.renderTodosSection();
   // }
 
   addTodoForm(target: Element) {
     // if (target.id === 'add-top-level-todo-btn') {
-    //   this.TodoManager.resetSelectedTask();
+    //   this.TaskManager.resetSelectedTask();
     //   // reset currSelected to null, so addTodo inserts into topLevelTodos
     // }
     this.containerElement.innerHTML = '';
     this.containerElement.append(
-      this.FormManager.insertTodoForm(this, this.TodoManager),
+      this.FormManager.insertTodoForm(this, this.TaskManager),
     );
   }
 
@@ -106,10 +104,10 @@ class TodoContentUIManager extends UIManager {
   //   this.containerElement.append(
   //     this.FormManager?.insertTodoForm(
   //       this,
-  //       this.TodoManager,
-  //       this.TodoManager.getTodo(
+  //       this.TaskManager,
+  //       this.TaskManager.getTodo(
   //         Number(parentLi.dataset.todo),
-  //         this.TodoManager.getTopLevelTodos(),
+  //         this.TaskManager.getTopLevelTodos(),
   //       ),
   //     ),
   //   );
@@ -143,16 +141,16 @@ class TodoContentUIManager extends UIManager {
       '',
       'top-level-tasks',
     );
-    this.TodoManager.getTasks().forEach((task) => {
+    this.TaskManager.getTasks().forEach((task) => {
       const parentLi = createListItemFromObject(task, 'top-level');
-      if (this.TodoManager.currSelectedTask === task)
+      if (this.TaskManager.currSelectedTask === task)
         parentLi.classList.add('selected-list-item');
       ul.append(parentLi);
     });
     insertEmptyListFallbackItem(ul);
     const addNewTaskBtn = this.createNewTaskBtn('add-task-btn');
     tasksListContainer.append(ul, addNewTaskBtn);
-    addDragFunctionality(ul, this.TodoManager);
+    addDragFunctionality(ul, this.TaskManager);
     return tasksListContainer;
   }
 
@@ -181,7 +179,7 @@ class TodoContentUIManager extends UIManager {
     const todosLayoutContainer = this.createElement('div', '', 'todos-layout');
     const topLevelTodosList = this.renderTasksList();
     const selectedSubTodosList = this.renderSelectedSubtasksList(
-      this.TodoManager.currSelectedTask,
+      this.TaskManager.currSelectedTask,
     );
     todosLayoutContainer.append(topLevelTodosList);
     todosLayoutContainer.append(selectedSubTodosList);
@@ -192,7 +190,7 @@ class TodoContentUIManager extends UIManager {
   //   this.containerElement.innerHTML = '';
   //   const todosListContainer = this.createTodosListContainer('Todays tasks');
   //   const ul = this.createElement<HTMLUListElement>('ul');
-  //   this.TodoManager.getTodayTasks().forEach((childTodo) =>
+  //   this.TaskManager.getTodayTasks().forEach((childTodo) =>
   //     ul.append(createListItemFromObject(childTodo, 'todo-list')),
   //   );
   //   insertEmptyListFallbackItem(ul);
@@ -205,7 +203,7 @@ class TodoContentUIManager extends UIManager {
   //   const todosListContainer =
   //     this.createTodosListContainer('Next 7 days tasks');
   //   const ul = this.createElement<HTMLUListElement>('ul');
-  //   this.TodoManager.getNext7DaysTasks().forEach((childTodo) =>
+  //   this.TaskManager.getNext7DaysTasks().forEach((childTodo) =>
   //     ul.append(createListItemFromObject(childTodo, 'todo-list')),
   //   );
   //   insertEmptyListFallbackItem(ul);
@@ -214,4 +212,4 @@ class TodoContentUIManager extends UIManager {
   // }
 }
 
-export default TodoContentUIManager;
+export default TaskUIManager;

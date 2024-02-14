@@ -1,5 +1,5 @@
 import UIManager from './abstract/UIManager';
-import TodoContentUIManager from './TodoContentUIManager';
+import TodoContentUIManager from './TaskUIManager';
 
 class HeaderNavbarUIManager extends UIManager {
   navBar: HTMLElement;

@@ -6,7 +6,7 @@ import {
   TaskManagerInterface,
 } from './utils/interfaces';
 import TaskFactory from './TaskFactory';
-import TodoContentUIManager from './TodoContentUIManager';
+import TodoContentUIManager from './TaskUIManager';
 
 /* 
 REFACTOR ME, SIMPLIFY AS MUCH AS POSSIBLE

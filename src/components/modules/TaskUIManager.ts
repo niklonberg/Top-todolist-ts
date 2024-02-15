@@ -54,7 +54,7 @@ class TaskUIManager extends UIManager {
 
   // toggleItemComplete(target: Element, parentLi: TodoListItemWithDataset) {
   //   target.classList.toggle('checked');
-  //   parentLi.classList.toggle('todo-complete');
+  //   parentLi.classList.toasyncggle('todo-complete');
   //   const todo = this.TaskManager.toggleIsCompleted(
   //     Number(parentLi.dataset.todo),
   //   );
@@ -79,10 +79,15 @@ class TaskUIManager extends UIManager {
   }
 
   async deleteItem(parentLi: TodoListItemWithDataset) {
-    if (parentLi?.parentElement.id === 'top-level-tasks') {
-      this.TaskManager.deleteTask(parentLi.dataset.task);
-      // this.TaskManager.resetSelectedTodo();
-      // re render tasks list
+    if (parentLi.parentElement.id === 'top-level-tasks') {
+      const response = await this.TaskManager.deleteTask(parentLi.dataset.task);
+      if (!response.ok) {
+        // TODO: render error dialog popup for user?
+        console.log('Apologies, an error occured. Please try again');
+      } else {
+        this.TaskManager.resetSelectedTask();
+        this.renderTodosSection();
+      }
     }
     // } else {
     //   this.TaskManager.deleteChildTodo(Number(parentLi.dataset.todo));

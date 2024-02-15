@@ -1,10 +1,6 @@
 import { isToday, addDays, isWithinInterval } from 'date-fns';
 import { EventEmitter } from 'events';
-import {
-  Task,
-  TaskManagerInterface,
-  TodoListItemWithDataset,
-} from './utils/interfaces';
+import { Task, TaskManagerInterface } from './utils/interfaces';
 
 // TODO add documentation to below class like this:
 /**
@@ -109,9 +105,9 @@ class TaskManager implements TaskManagerInterface {
     console.log('curr selected todo: ', this.currSelectedTask);
   }
 
-  // resetSelectedTodo(): void {
-  //   this.currSelectedTodo = null;
-  // }
+  resetSelectedTask(): void {
+    this.currSelectedTask = null;
+  }
 
   /* Add methods */
   async addTask(newTask: Task): Promise<void> {
@@ -149,10 +145,9 @@ class TaskManager implements TaskManagerInterface {
   // }
 
   /* Delete methods */
-  async deleteTask(todoID: string): Promise<void> {
-    // const taskToDelete = this.getTask(todoID);
+  async deleteTask(taskID: string): Promise<Response> {
     try {
-      const response = await fetch(`${this.baseURL}/deleteTask/${todoID}`, {
+      const response = await fetch(`${this.baseURL}/deleteTask/${taskID}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -160,16 +155,16 @@ class TaskManager implements TaskManagerInterface {
       });
       if (!response.ok) {
         const errorMessage = await response.text();
-        throw new Error(
+        console.error(
           `HTTP error! Status: ${response.status}, Message: ${errorMessage}`,
         );
-      } else {
-        // this.tasks = this.tasks.filter(
-        //   (task) => task._id !== todoID,
-        // );
+        return response;
       }
+      this.tasks = this.tasks.filter((task) => task._id !== taskID);
+      return response;
     } catch (error) {
       console.error('Error:', error.message);
+      throw error;
     }
   }
 

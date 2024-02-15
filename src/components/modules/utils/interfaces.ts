@@ -52,10 +52,10 @@ export interface TaskManagerInterface {
   // getTodayTasks(): Task[];
   // getNext7DaysTasks(): Task[];
   setSelectedTask(taskID: string): void;
-  // resetSelectedTask(): void;
+  resetSelectedTask(): void;
   addTask(task: Task): void;
   // addSubtask(task: Task): void;
-  deleteTask(taskID: string): void;
+  deleteTask(taskID: string): Promise<Response>;
   // deleteChildTask(taskID: number): void;
   // editTask(TaskToEdit: Task, newTask: Task): void;
   // toggleIsCompleted(taskID: number): Task;

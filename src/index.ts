@@ -18,7 +18,7 @@ async function init() {
   );
   const MyHeaderNavbarManager = new HeaderNavbarUIManager(MyTaskUIManager);
 
-  MyTaskManager.onTaskAdded(() => {
+  MyTaskManager.onTaskFormSubmitSuccess(() => {
     MyTaskUIManager.renderTasksSection();
   });
 }

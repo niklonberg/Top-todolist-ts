@@ -114,7 +114,7 @@ class TaskManager implements TaskManagerInterface {
       } else {
         const result = (await response.json()) as Task;
         this.tasks.push(result);
-        this.eventEmitter.emit('taskAdded');
+        this.eventEmitter.emit('taskFormSubmit');
         console.log(this.tasks);
       }
     } catch (error) {
@@ -162,8 +162,8 @@ class TaskManager implements TaskManagerInterface {
   //   );
   // }
 
-  onTaskAdded(callback: () => void) {
-    this.eventEmitter.on('taskAdded', callback);
+  onTaskFormSubmitSuccess(callback: () => void) {
+    this.eventEmitter.on('taskFormSubmit', callback);
   }
 }
 

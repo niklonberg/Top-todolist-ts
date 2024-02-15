@@ -34,7 +34,7 @@ class TaskUIManager extends UIManager {
       if (target.classList.contains('add-task-btn')) this.addTaskForm(target);
 
       if (target.closest('button')?.classList.contains('edit-item-btn'))
-        this.editItem(targetParentLi);
+        this.editTaskForm(targetParentLi);
 
       if (target.closest('button')?.classList.contains('delete-item-btn'))
         if (!this.containerElement.querySelector('.warning-container'))
@@ -106,7 +106,7 @@ class TaskUIManager extends UIManager {
     );
   }
 
-  editItem(parentLi: TodoListItemWithDataset) {
+  editTaskForm(parentLi: TodoListItemWithDataset) {
     this.containerElement.innerHTML = '';
     this.containerElement.append(
       this.FormManager?.insertTaskForm(

@@ -31,7 +31,7 @@ class TaskUIManager extends UIManager {
       if (targetParentLi?.parentElement.id === 'top-level-tasks')
         this.selectItem(targetParentLi);
 
-      if (target.classList.contains('add-task-btn')) this.addTodoForm(target);
+      if (target.classList.contains('add-task-btn')) this.addTaskForm(target);
 
       // if (target.closest('button')?.classList.contains('edit-item-btn'))
       //   this.editItem(targetParentLi);
@@ -95,32 +95,7 @@ class TaskUIManager extends UIManager {
     // }
   }
 
-  /* using await
-  async deleteItem(parentLi: TodoListItemWithDataset) {
-    if (parentLi?.parentElement.id === 'top-level-tasks') {
-        await this.TaskManager.deleteTask(parentLi.dataset.task);
-        // await for the task deletion to complete before rendering todos section
-        this.renderTodosSection();
-    }
-  }
-
-  using then
-  deleteItem(parentLi: TodoListItemWithDataset) {
-    if (parentLi?.parentElement.id === 'top-level-tasks') {
-        this.TaskManager.deleteTask(parentLi.dataset.task)
-            .then(() => {
-                // Perform actions after the task deletion is complete
-                this.renderTodosSection();
-            })
-            .catch((error) => {
-                // Handle errors if the task deletion fails
-                console.error('Error deleting task:', error);
-            });
-    }
-  }
-  */
-
-  addTodoForm(target: Element) {
+  addTaskForm(target: Element) {
     // if (target.id === 'add-top-level-todo-btn') {
     //   this.TaskManager.resetSelectedTask();
     //   // reset currSelected to null, so addTodo inserts into topLevelTodos

@@ -29,19 +29,19 @@ class TaskManager implements TaskManagerInterface {
   }
 
   /* Get methods */
-  getTasks(): Task[] {
+  getTasks() {
     return this.tasks;
   }
 
-  getTask(taskID: string): Task {
+  getTask(taskID: string) {
     return this.tasks.find((task) => task._id === taskID);
   }
 
-  getSubtasks(taskID: string): Task[] {
+  getSubtasks(taskID: string) {
     return this.getTask(taskID).subtasks;
   }
 
-  // getTodayTasks(): Task[] {
+  // getTodayTasks() {
   //   const todos = this.getTopLevelTasks();
   //   return todos.reduce(
   //     (acc, curr) => [
@@ -76,7 +76,7 @@ class TaskManager implements TaskManagerInterface {
   //   todoToEdit: Task,
   //   newTodo: Task,
   //   todoArray: Task[] = thiimport express from "express";
-  // ): void {
+  // ) {
   //   const foundTodo = todoArray.find(
   //     (currTodo) => currTodo.todoID === todoToEdit.todoID,
   //   );
@@ -89,28 +89,27 @@ class TaskManager implements TaskManagerInterface {
   //   }
   // }
 
-  // toggleIsCompleted(todoID: number): Task {
-  //   const todo = this.getTodo(todoID);
+  // toggleIsCompleted(taskID: number) {
+  //   const todo = this.getTask(taskID);
   //   todo.isCompleted = !todo.isCompleted;
   //   console.log('Todo complete: ', todo.isCompleted);
   //   this.toggleCompletedDate(todo);
   //   if (this.parentTodo.children.every((childTodo) => childTodo.isCompleted)) {
   //     // toggle parent complete
-  //   }TodoManager
+  //   }
+  // }
 
   /* Set methods */
-  setSelectedTask(todoID: string): void {
-    console.log('todoID is: ', todoID);
+  setSelectedTask(todoID: string) {
     this.currSelectedTask = this.getTask(todoID);
-    console.log('curr selected todo: ', this.currSelectedTask);
   }
 
-  resetSelectedTask(): void {
+  resetSelectedTask() {
     this.currSelectedTask = null;
   }
 
   /* Add methods */
-  async addTask(newTask: Task): Promise<void> {
+  async addTask(newTask: Task) {
     try {
       const response = await fetch(`${this.baseURL}/createTask`, {
         method: 'POST',
@@ -138,14 +137,14 @@ class TaskManager implements TaskManagerInterface {
     }
   }
 
-  // addSubtask(task: Task): void {
+  // addSubtask(task: Task) {
   //   // push task sent back from database into subtasks of currSelected
   //   this.currSelectedTask.subtasks.push(task);
   //   console.log(this.currSelectedTask.subtasks);
   // }
 
   /* Delete methods */
-  async deleteTask(taskID: string): Promise<Response> {
+  async deleteTask(taskID: string) {
     try {
       const response = await fetch(`${this.baseURL}/deleteTask/${taskID}`, {
         method: 'DELETE',
@@ -170,7 +169,7 @@ class TaskManager implements TaskManagerInterface {
 
   // deleteSubtask is actually just an update of the task that contains it, with
   // the subtask removed from its .subtasks array right?
-  // deleteChildTodo(todoID: number): void {
+  // deleteChildTodo(todoID: number) {
   //   const todo = this.getTodo(todoID);
   //   console.log('todo to delete: ', todo);
   //   this.parentTodo.children = this.parentTodo.children.filter(

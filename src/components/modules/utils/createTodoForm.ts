@@ -2,6 +2,7 @@ import { format } from 'date-fns';
 import createElement from './createElement';
 import { Task } from './interfaces';
 
+// TODO: REFACTOR ME
 function createTodoForm(todoToEdit?: Task) {
   const form = createElement<HTMLFormElement>('form', 'todo-form');
   const templateStr = `

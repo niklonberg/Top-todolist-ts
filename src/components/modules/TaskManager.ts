@@ -71,23 +71,8 @@ class TaskManager implements TaskManagerInterface {
   //   );
   // }
 
-  // /* Edit methods */
-  // editTodo(
-  //   todoToEdit: Task,
-  //   newTodo: Task,
-  //   todoArray: Task[] = thiimport express from "express";
-  // ) {
-  //   const foundTodo = todoArray.find(
-  //     (currTodo) => currTodo.todoID === todoToEdit.todoID,
-  //   );
-  //   if (foundTodo) {
-  //     Object.assign(foundTodo, { ...newTodo, children: foundTodo.children });
-  //   } else {
-  //     todoArray.forEach((childTodo) =>
-  //       this.editTodo(todoToEdit, newTodo, childTodo.children),
-  //     );
-  //   }
-  // }
+  /* Edit methods */
+  editTask(taskToEdit: Task, newTask: Task) {}
 
   // toggleIsCompleted(taskID: number) {
   //   const todo = this.getTask(taskID);

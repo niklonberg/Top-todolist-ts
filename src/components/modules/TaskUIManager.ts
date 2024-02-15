@@ -33,8 +33,8 @@ class TaskUIManager extends UIManager {
 
       if (target.classList.contains('add-task-btn')) this.addTaskForm(target);
 
-      // if (target.closest('button')?.classList.contains('edit-item-btn'))
-      //   this.editItem(targetParentLi);
+      if (target.closest('button')?.classList.contains('edit-item-btn'))
+        this.editItem(targetParentLi);
 
       if (target.closest('button')?.classList.contains('delete-item-btn'))
         if (!this.containerElement.querySelector('.warning-container'))
@@ -102,23 +102,19 @@ class TaskUIManager extends UIManager {
     // }
     this.containerElement.innerHTML = '';
     this.containerElement.append(
-      this.FormManager.insertTodoForm(this.TaskManager),
+      this.FormManager?.insertTaskForm(this.TaskManager),
     );
   }
 
-  // editItem(parentLi: TodoListItemWithDataset) {
-  //   this.containerElement.innerHTML = '';
-  //   this.containerElement.append(
-  //     this.FormManager?.insertTodoForm(
-  //       this,
-  //       this.TaskManager,
-  //       this.TaskManager.getTodo(
-  //         Number(parentLi.dataset.todo),
-  //         this.TaskManager.getTopLevelTodos(),
-  //       ),
-  //     ),
-  //   );
-  // }
+  editItem(parentLi: TodoListItemWithDataset) {
+    this.containerElement.innerHTML = '';
+    this.containerElement.append(
+      this.FormManager?.insertTaskForm(
+        this.TaskManager,
+        this.TaskManager.getTask(parentLi.dataset.task),
+      ),
+    );
+  }
 
   createTasksContainer(headingTitle: string) {
     const taskContainer = this.createElement<HTMLDivElement>(

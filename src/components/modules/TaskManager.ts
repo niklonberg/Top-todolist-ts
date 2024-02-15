@@ -72,7 +72,24 @@ class TaskManager implements TaskManagerInterface {
   // }
 
   /* Edit methods */
-  editTask(taskToEdit: Task, newTask: Task) {}
+  async editTask(taskToEdit: Task, newTask: Task) {
+    try {
+      const response = await fetch(
+        `${this.baseURL}/editTask/${taskToEdit._id}`,
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(newTask),
+        },
+      );
+      console.log(response);
+      // renderTasksSection
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   // toggleIsCompleted(taskID: number) {
   //   const todo = this.getTask(taskID);
@@ -87,6 +104,7 @@ class TaskManager implements TaskManagerInterface {
   /* Set methods */
   setSelectedTask(todoID: string) {
     this.currSelectedTask = this.getTask(todoID);
+    console.log(this.currSelectedTask);
   }
 
   resetSelectedTask() {

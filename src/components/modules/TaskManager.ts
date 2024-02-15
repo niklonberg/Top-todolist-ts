@@ -41,16 +41,16 @@ class TaskManager implements TaskManagerInterface {
     return this.getTask(taskID).subtasks;
   }
 
-  // getTodayTasks() {
-  //   const todos = this.getTopLevelTasks();
-  //   return todos.reduce(
-  //     (acc, curr) => [
-  //       ...acc,
-  //       ...curr.children.filter((childTodo) => isToday(childTodo.dueDate)),
-  //     ],
-  //     [],
-  //   );
-  // }
+  getTodayTasks() {
+    const tasks = this.getTasks();
+    return tasks.reduce(
+      (acc, curr) => [
+        ...acc,
+        ...curr.subtasks.filter((subtask) => isToday(subtask.dueDate)),
+      ],
+      [],
+    );
+  }
 
   // getNext7DaysTasks() {
   //   const todos = this.getTopLevelTasks();

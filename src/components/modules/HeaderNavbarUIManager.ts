@@ -1,5 +1,5 @@
 import UIManager from './abstract/UIManager';
-import TodoContentUIManager from './TaskUIManager';
+import TaskUIManager from './TaskUIManager';
 
 class HeaderNavbarUIManager extends UIManager {
   navBar: HTMLElement;
@@ -8,9 +8,9 @@ class HeaderNavbarUIManager extends UIManager {
 
   toggleThemeBtn: HTMLButtonElement;
 
-  constructor(public todoContentUIManager: TodoContentUIManager) {
+  constructor(public taskUIManager: TaskUIManager) {
     super();
-    this.todoContentUIManager = todoContentUIManager;
+    this.taskUIManager = taskUIManager;
     this.previousListSelection = null;
     this.navBar = document.querySelector('#nav-bar');
     this.navBar.addEventListener('click', (e) => this.selectNavListItem(e));
@@ -35,14 +35,14 @@ class HeaderNavbarUIManager extends UIManager {
       navListItem.classList.add('selected-nav-item');
       this.previousListSelection = navListItem;
       if (navListItem.id === 'all-tasks')
-        this.todoContentUIManager.renderTodosSection();
+        this.taskUIManager.renderTasksSection();
 
       if (navListItem.id === 'today-tasks') {
-        // this.todoContentUIManager.renderTodayTasks();
+        this.taskUIManager.renderTodayTasks();
       }
 
       if (navListItem.id === 'week-tasks') {
-        // this.todoContentUIManager.renderNext7DaysTasks();
+        // this.taskUIManager.renderNext7DaysTasks();
       }
     }
   }

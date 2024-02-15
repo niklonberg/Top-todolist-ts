@@ -45,7 +45,7 @@ class TaskUIManager extends UIManager {
       if (target.id === 'cancel-delete-btn')
         targetParentLi.querySelector('.warning-container').remove();
 
-      if (target.id === 'cancel-form-btn') this.renderTodosSection();
+      if (target.id === 'cancel-form-btn') this.renderTasksSection();
 
       // if (target.classList.contains('toggle-complete-btn'))
       //   this.toggleItemComplete(target, targetParentLi);
@@ -86,7 +86,7 @@ class TaskUIManager extends UIManager {
         console.log('Apologies, an error occured. Please try again');
       } else {
         this.TaskManager.resetSelectedTask();
-        this.renderTodosSection();
+        this.renderTasksSection();
       }
     }
     // } else {
@@ -180,7 +180,7 @@ class TaskUIManager extends UIManager {
     return subtasksListContainer;
   }
 
-  renderTodosSection() {
+  renderTasksSection() {
     this.containerElement.innerHTML = '';
     const todosLayoutContainer = this.createElement('div', '', 'todos-layout');
     const topLevelTodosList = this.renderTasksList();
@@ -192,17 +192,17 @@ class TaskUIManager extends UIManager {
     this.containerElement.append(todosLayoutContainer);
   }
 
-  // renderTodayTasks() {
-  //   this.containerElement.innerHTML = '';
-  //   const todosListContainer = this.createTodosListContainer('Todays tasks');
-  //   const ul = this.createElement<HTMLUListElement>('ul');
-  //   this.TaskManager.getTodayTasks().forEach((childTodo) =>
-  //     ul.append(createListItemFromObject(childTodo, 'todo-list')),
-  //   );
-  //   insertEmptyListFallbackItem(ul);
-  //   todosListContainer.append(ul);
-  //   this.containerElement.append(todosListContainer);
-  // }
+  renderTodayTasks() {
+    this.containerElement.innerHTML = '';
+    const todosListContainer = this.createTasksContainer('Todays tasks');
+    const ul = this.createElement<HTMLUListElement>('ul');
+    this.TaskManager.getTodayTasks().forEach((subtask) =>
+      ul.append(createListItemFromObject(subtask, 'subtask')),
+    );
+    insertEmptyListFallbackItem(ul);
+    todosListContainer.append(ul);
+    this.containerElement.append(todosListContainer);
+  }
 
   // renderNext7DaysTasks() {
   //   this.containerElement.innerHTML = '';

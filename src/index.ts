@@ -19,7 +19,7 @@ async function init() {
   const MyHeaderNavbarManager = new HeaderNavbarUIManager(MyTaskUIManager);
 
   MyTaskManager.onTaskAdded(() => {
-    MyTaskUIManager.renderTodosSection();
+    MyTaskUIManager.renderTasksSection();
   });
 }
 

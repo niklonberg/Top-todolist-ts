@@ -1,5 +1,5 @@
 import UIManager from './abstract/UIManager';
-import createTodoForm from './utils/createTodoForm';
+import createTaskForm from './utils/createTaskForm';
 import {
   Task,
   newTaskFormData,
@@ -13,9 +13,9 @@ class TodoFormUIManager extends UIManager {
   insertTaskForm(DataManager: TaskManagerInterface, taskToEdit: Task = null) {
     if (taskToEdit) {
       console.log(taskToEdit);
-      this.form = createTodoForm(taskToEdit);
+      this.form = createTaskForm(taskToEdit);
     } else {
-      this.form = createTodoForm();
+      this.form = createTaskForm();
     }
     this.form.addEventListener(
       'submit',
@@ -40,6 +40,8 @@ class TodoFormUIManager extends UIManager {
         string
       >;
     const newTask = TaskFactory(formDataObject);
+    console.log('type of dueDate from factory: ', typeof newTask.dueDate);
+    console.log('newTask.dueDate: ', newTask.dueDate);
     if (taskToEdit) {
       DataManager.editTask(taskToEdit, newTask);
     } else {

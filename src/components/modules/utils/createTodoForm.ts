@@ -2,10 +2,8 @@ import { format } from 'date-fns';
 import createElement from './createElement';
 import { Task } from './interfaces';
 
-// TODO: REFACTOR ME
-function createTodoForm(todoToEdit?: Task) {
-  console.log('task to edit: ', todoToEdit);
-  const form = createElement<HTMLFormElement>('form', 'todo-form');
+function createTaskForm(taskToEdit?: Task) {
+  const form = createElement<HTMLFormElement>('form', 'task-form');
   const templateStr = `
   <div class="input-container">
     <label for="title" class="text-input-label">Title</label>
@@ -15,7 +13,7 @@ function createTodoForm(todoToEdit?: Task) {
       type="text"
       name="title"
       id="title"
-      value="${todoToEdit?.title || ''}"
+      value="${taskToEdit?.title || ''}"
       required
     />
   </div>
@@ -28,28 +26,28 @@ function createTodoForm(todoToEdit?: Task) {
       name="description"
       id="description"
       class="text-input"
-      value="${todoToEdit?.description || ''}"
+      value="${taskToEdit?.description || ''}"
     />
   </div>
   <div class="input-container">
     <label for="priority">Priority</label>
     <select id="priority" name="priority">
       <option value="Low" ${
-        todoToEdit?.priority === 'Low' ? 'selected' : ''
+        taskToEdit?.priority === 'Low' ? 'selected' : ''
       } >Low</option>
       <option value="Medium" ${
-        todoToEdit?.priority === 'Medium' ? 'selected' : ''
+        taskToEdit?.priority === 'Medium' ? 'selected' : ''
       }>Medium</option>
       <option value="High" ${
-        todoToEdit?.priority === 'High' ? 'selected' : ''
+        taskToEdit?.priority === 'High' ? 'selected' : ''
       }>High</option>
     </select>
   </div>
   <div class="input-container">
     <label for="dueDate">Duedate</label>
     <input type="date" name="dueDate" id="dueDate" ${
-      todoToEdit?.dueDate instanceof Date
-        ? `value=${format(todoToEdit.dueDate, 'yyyy-MM-dd')}`
+      taskToEdit?.dueDate instanceof Date
+        ? `value=${format(taskToEdit.dueDate, 'yyyy-MM-dd')}`
         : `value=''`
     } />
   </div>
@@ -60,4 +58,4 @@ function createTodoForm(todoToEdit?: Task) {
   return form;
 }
 
-export default createTodoForm;
+export default createTaskForm;

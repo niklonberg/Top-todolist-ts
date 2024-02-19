@@ -84,8 +84,22 @@ class TaskManager implements TaskManagerInterface {
           body: JSON.stringify(newTask),
         },
       );
-      console.log(response);
-      // renderTasksSection
+      if (!response.ok) {
+        const errorMessage = await response.text();
+        throw new Error(
+          `HTTP error! Status: ${response.status}, Message: ${errorMessage}`,
+        );
+      } else {
+        const responseBody = await response.json();
+        const updatedTask = responseBody.updatedTask as Task;
+        console.log(updatedTask);
+        const index = this.tasks.findIndex(
+          (task) => task.sortOrder === updatedTask.sortOrder,
+        );
+        this.tasks[index] = updatedTask;
+        console.log(this.tasks);
+        this.eventEmitter.emit('taskFormSubmit');
+      }
     } catch (error) {
       console.error(error);
     }

@@ -4,6 +4,7 @@ import { Task } from './interfaces';
 
 // TODO: REFACTOR ME
 function createTodoForm(todoToEdit?: Task) {
+  console.log('task to edit: ', todoToEdit);
   const form = createElement<HTMLFormElement>('form', 'todo-form');
   const templateStr = `
   <div class="input-container">
@@ -48,7 +49,7 @@ function createTodoForm(todoToEdit?: Task) {
     <label for="dueDate">Duedate</label>
     <input type="date" name="dueDate" id="dueDate" ${
       todoToEdit?.dueDate instanceof Date
-        ? `value=${format(todoToEdit.dueDate, 'yyyy-MM-dd')}`
+        ? `value=${todoToEdit?.dueDate.toISOString().slice(0, 10)}`
         : `value=''`
     } />
   </div>
@@ -56,6 +57,7 @@ function createTodoForm(todoToEdit?: Task) {
   <button type="button" class="filled-btn" id="cancel-form-btn">Cancel</button>
   `;
   form.innerHTML = templateStr;
+  console.log(typeof todoToEdit?.dueDate);
   return form;
 }
 

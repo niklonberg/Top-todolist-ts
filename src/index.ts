@@ -4,6 +4,7 @@ import TaskUIManager from './components/modules/TaskUIManager';
 import HeaderNavbarUIManager from './components/modules/HeaderNavbarUIManager';
 import TodoFormUIManager from './components/modules/TodoFormUIManager';
 import tasksUrl from './components/modules/utils/tasksUrl';
+import getTasksFromDB from './components/modules/utils/getTasksFromDB';
 
 async function init() {
   const tasks = await getTasksFromDB();
@@ -21,20 +22,3 @@ async function init() {
 }
 
 init();
-
-/* TESTING */
-
-async function getTasksFromDB() {
-  try {
-    const response = await fetch(tasksUrl);
-    console.log(response);
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-    const tasks = await response.json();
-    return tasks;
-  } catch (error) {
-    console.error(error.message);
-  }
-  return [];
-}

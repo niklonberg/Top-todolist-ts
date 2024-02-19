@@ -36,9 +36,10 @@ class TaskUIManager extends UIManager {
       if (target.closest('button')?.classList.contains('edit-item-btn'))
         this.editTaskForm(targetParentLi);
 
-      if (target.closest('button')?.classList.contains('delete-item-btn'))
-        if (!this.containerElement.querySelector('.warning-container'))
-          targetParentLi.append(createDeleteWarningContainer());
+      if (target.closest('button')?.classList.contains('delete-item-btn')) {
+        this.containerElement.querySelector('.warning-container')?.remove();
+        targetParentLi.append(createDeleteWarningContainer());
+      }
 
       if (target.id === 'confirm-delete-btn') this.deleteItem(targetParentLi);
 

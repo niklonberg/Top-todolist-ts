@@ -92,7 +92,8 @@ class TaskManager implements TaskManagerInterface {
         );
       } else {
         const responseBody = await response.json();
-        const updatedTask = responseBody.updatedTask as Task;
+        let updatedTask = responseBody.updatedTask as Task;
+        updatedTask = formatTaskDueDate(updatedTask);
         const index = this.tasks.findIndex(
           (task) => task.sortOrder === updatedTask.sortOrder,
         );

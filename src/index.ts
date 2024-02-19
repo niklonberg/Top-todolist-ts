@@ -3,9 +3,6 @@ import TaskManager from './components/modules/TaskManager';
 import TaskUIManager from './components/modules/TaskUIManager';
 import HeaderNavbarUIManager from './components/modules/HeaderNavbarUIManager';
 import TodoFormUIManager from './components/modules/TodoFormUIManager';
-// to be removed later - here for testing
-import { newTaskFormData } from './components/modules/utils/interfaces';
-import TaskFactory from './components/modules/TaskFactory';
 
 async function init() {
   const tasks = await getTasks();

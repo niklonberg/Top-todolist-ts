@@ -92,12 +92,10 @@ class TaskManager implements TaskManagerInterface {
       } else {
         const responseBody = await response.json();
         const updatedTask = responseBody.updatedTask as Task;
-        console.log(updatedTask);
         const index = this.tasks.findIndex(
           (task) => task.sortOrder === updatedTask.sortOrder,
         );
         this.tasks[index] = updatedTask;
-        console.log(this.tasks);
         this.eventEmitter.emit('taskFormSubmit');
       }
     } catch (error) {
@@ -135,9 +133,6 @@ class TaskManager implements TaskManagerInterface {
         },
         body: JSON.stringify(newTask),
       });
-
-      console.log(response);
-
       if (!response.ok) {
         const errorMessage = await response.text();
         throw new Error(
@@ -147,7 +142,6 @@ class TaskManager implements TaskManagerInterface {
         const result = (await response.json()) as Task;
         this.tasks.push(result);
         this.eventEmitter.emit('taskFormSubmit');
-        console.log(this.tasks);
       }
     } catch (error) {
       console.error('Error:', error.message);

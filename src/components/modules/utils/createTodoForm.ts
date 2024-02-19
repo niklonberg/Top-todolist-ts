@@ -49,7 +49,7 @@ function createTodoForm(todoToEdit?: Task) {
     <label for="dueDate">Duedate</label>
     <input type="date" name="dueDate" id="dueDate" ${
       todoToEdit?.dueDate instanceof Date
-        ? `value=${todoToEdit?.dueDate.toISOString().slice(0, 10)}`
+        ? `value=${format(todoToEdit.dueDate, 'yyyy-MM-dd')}`
         : `value=''`
     } />
   </div>
@@ -57,7 +57,6 @@ function createTodoForm(todoToEdit?: Task) {
   <button type="button" class="filled-btn" id="cancel-form-btn">Cancel</button>
   `;
   form.innerHTML = templateStr;
-  console.log(typeof todoToEdit?.dueDate);
   return form;
 }
 

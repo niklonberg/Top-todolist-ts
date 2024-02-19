@@ -1,6 +1,7 @@
 import { isToday, addDays, isWithinInterval } from 'date-fns';
 import { EventEmitter } from 'events';
 import { Task, TaskManagerInterface } from './utils/interfaces';
+import formatTaskDueDate from './utils/formatTaskDueDate';
 
 // TODO add documentation to below class like this:
 /**
@@ -116,7 +117,12 @@ class TaskManager implements TaskManagerInterface {
   /* Set methods */
   setSelectedTask(todoID: string) {
     this.currSelectedTask = this.getTask(todoID);
-    console.log(this.currSelectedTask);
+    console.log('curr task: ', this.currSelectedTask);
+    console.log(
+      'curr typeof task.dueDate: ',
+      typeof this.currSelectedTask.dueDate,
+    );
+    console.log('curr task.dueDate val: ', this.currSelectedTask.dueDate);
   }
 
   resetSelectedTask() {
@@ -139,8 +145,9 @@ class TaskManager implements TaskManagerInterface {
           `HTTP error! Status: ${response.status}, Message: ${errorMessage}`,
         );
       } else {
-        const result = (await response.json()) as Task;
-        this.tasks.push(result);
+        let newTaskFromDB = (await response.json()) as Task;
+        newTaskFromDB = formatTaskDueDate(newTaskFromDB);
+        this.tasks.push(newTaskFromDB);
         this.eventEmitter.emit('taskFormSubmit');
       }
     } catch (error) {

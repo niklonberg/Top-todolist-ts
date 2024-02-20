@@ -10,6 +10,8 @@ import TaskFactory from './TaskFactory';
 class TodoFormUIManager extends UIManager {
   private form: HTMLFormElement | null;
 
+  private inputs: NodeListOf<HTMLInputElement> | null;
+
   insertTaskForm(DataManager: TaskManagerInterface, taskToEdit: Task = null) {
     if (taskToEdit) {
       console.log(taskToEdit);
@@ -24,6 +26,8 @@ class TodoFormUIManager extends UIManager {
         once: true,
       },
     );
+    this.inputs = this.form.querySelectorAll('.text-input');
+
     return this.form;
   }
 

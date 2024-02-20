@@ -68,5 +68,9 @@
   content: '*';
 }
 
-.submit-form-btn {
+.move-label {
+  top: -2px;
+  left: 5px;
+  scale: 0.8;
+  background-color: var(--primary-lighter);
 }

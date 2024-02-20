@@ -14,7 +14,6 @@ class TodoFormUIManager extends UIManager {
 
   insertTaskForm(DataManager: TaskManagerInterface, taskToEdit: Task = null) {
     this.form = createTaskForm(taskToEdit);
-
     this.form.addEventListener(
       'submit',
       (e) => this.submitForm(e, DataManager, taskToEdit),
@@ -22,7 +21,20 @@ class TodoFormUIManager extends UIManager {
         once: true,
       },
     );
+
     this.inputs = this.form.querySelectorAll('.text-input');
+    this.inputs.forEach((input) => {
+      const label = input.parentElement.querySelector('.text-input-label');
+      if (input.value.trim() !== '') label.classList.add('move-label');
+
+      input.addEventListener('input', (e) => {
+        if (input.value.trim() !== '') {
+          label.classList.add('move-label');
+        } else {
+          label.classList.remove('move-label');
+        }
+      });
+    });
 
     return this.form;
   }

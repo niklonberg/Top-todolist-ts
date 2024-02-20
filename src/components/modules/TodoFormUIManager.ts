@@ -13,12 +13,8 @@ class TodoFormUIManager extends UIManager {
   private inputs: NodeListOf<HTMLInputElement> | null;
 
   insertTaskForm(DataManager: TaskManagerInterface, taskToEdit: Task = null) {
-    if (taskToEdit) {
-      console.log(taskToEdit);
-      this.form = createTaskForm(taskToEdit);
-    } else {
-      this.form = createTaskForm();
-    }
+    this.form = createTaskForm(taskToEdit);
+
     this.form.addEventListener(
       'submit',
       (e) => this.submitForm(e, DataManager, taskToEdit),

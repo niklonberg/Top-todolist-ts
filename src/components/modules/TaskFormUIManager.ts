@@ -7,9 +7,10 @@ import {
 } from './utils/interfaces';
 import TaskFactory from './TaskFactory';
 
-class TodoFormUIManager extends UIManager {
+class TaskFormUIManager extends UIManager {
   private form: HTMLFormElement | null;
 
+  // eslint-disable-next-line
   private inputs: NodeListOf<HTMLInputElement> | null;
 
   insertTaskForm(DataManager: TaskManagerInterface, taskToEdit: Task = null) {
@@ -27,7 +28,7 @@ class TodoFormUIManager extends UIManager {
       const label = input.parentElement.querySelector('.text-input-label');
       if (input.value.trim() !== '') label.classList.add('move-label');
 
-      input.addEventListener('input', (e) => {
+      input.addEventListener('input', () => {
         if (input.value.trim() !== '') {
           label.classList.add('move-label');
         } else {
@@ -52,8 +53,6 @@ class TodoFormUIManager extends UIManager {
         string
       >;
     const newTask = TaskFactory(formDataObject);
-    console.log('type of dueDate from factory: ', typeof newTask.dueDate);
-    console.log('newTask.dueDate: ', newTask.dueDate);
     if (taskToEdit) {
       DataManager.editTask(taskToEdit, newTask);
     } else {
@@ -62,4 +61,4 @@ class TodoFormUIManager extends UIManager {
   }
 }
 
-export default TodoFormUIManager;
+export default TaskFormUIManager;

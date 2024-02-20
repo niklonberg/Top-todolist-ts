@@ -4,7 +4,7 @@ import createListItemFromObject, {
 import UIManager from './abstract/UIManager';
 import insertEmptyListFallbackItem from './utils/insertEmptyListFallbackItem';
 import addDragFunctionality from './utils/addDragFunctionality';
-import TodoFormUIManager from './TodoFormUIManager';
+import TodoFormUIManager from './TaskFormUIManager';
 import createDeleteWarningContainer from './utils/createWarningContainer';
 import {
   Task,

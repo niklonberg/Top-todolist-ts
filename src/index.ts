@@ -2,7 +2,7 @@ import './index.css';
 import TaskManager from './components/modules/TaskManager';
 import TaskUIManager from './components/modules/TaskUIManager';
 import HeaderNavbarUIManager from './components/modules/HeaderNavbarUIManager';
-import TodoFormUIManager from './components/modules/TodoFormUIManager';
+import TaskFormUIManager from './components/modules/TaskFormUIManager';
 import tasksUrl from './components/modules/utils/tasksUrl';
 import getTasksFromDB from './components/modules/utils/getTasksFromDB';
 
@@ -12,7 +12,7 @@ async function init() {
   const MyTaskUIManager = new TaskUIManager(
     MyTaskManager,
     'main-content',
-    new TodoFormUIManager(),
+    new TaskFormUIManager(),
   );
   const MyHeaderNavbarManager = new HeaderNavbarUIManager(MyTaskUIManager);
 

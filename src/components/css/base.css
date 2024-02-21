@@ -32,7 +32,8 @@
     --primary: #e4e4e4;
     --primary-lighter: #c5c5c5;
     --primary-contrast: #111111;
-    --secondary: #a742ff;
+    --secondary: #b96aff;
+    --tertiary: #ff8a2b;
     --complementary: #02a768;
   }
 
@@ -48,11 +49,6 @@
     list-style: none;
     padding: 0;
     margin: 0;
-  }
-
-  button {
-    cursor: pointer;
-    transition: opacity 0.2s ease;
   }
 
   button:hover {

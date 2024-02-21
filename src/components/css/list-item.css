@@ -20,7 +20,7 @@
     transform: translateX(-50%);
   }
 
-  .list-item.todo-complete {
+  .list-item.task-complete {
     background-color: var(--complementary) !important;
   }
 
@@ -60,6 +60,7 @@
 
   .edit-actions {
     display: flex;
+    flex-direction: column;
     gap: var(--sm-gap);
     justify-content: end;
     align-items: center;

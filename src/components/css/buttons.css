@@ -23,3 +23,30 @@ button {
 .outlined-btn {
   border: 1px solid var(--primary-contrast);
 }
+
+.icon-btn {
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--tertiary);
+  border-radius: 100%;
+  border: 0;
+  fill: var(--primary-contrast);
+}
+
+#cancel-delete-btn {
+  background-color: red;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+#cancel-delete-btn svg {
+  width: 70%;
+}
+
+.icon-btn:hover {
+  opacity: 0.6;
+}

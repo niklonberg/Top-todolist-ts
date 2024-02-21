@@ -22,12 +22,6 @@
     transform: rotate(45deg);
   }
 
-  #cancel-delete-btn {
-    position: absolute;
-    top: 0;
-    right: 0;
-  }
-
   @keyframes slide-up {
     0% {
       bottom: 60px;

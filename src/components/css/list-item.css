@@ -66,11 +66,12 @@
   }
 
   .deadline-date {
+    display: inline-block;
     font-size: 0.85rem;
     font-weight: bold;
     letter-spacing: 0.4px;
     padding: calc(var(--sm-gap) / 2);
-    margin-block: 0;
+    margin-block: 20px 0;
     border: 2px solid var(--primary-contrast);
     border-radius: 10px;
   }

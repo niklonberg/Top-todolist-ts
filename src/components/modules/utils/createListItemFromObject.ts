@@ -58,14 +58,15 @@ function createCheckCompleteBtn(task: Task) {
   return checkCompleteBtn;
 }
 
-export function createDateCompleted(task: Task) {
+function createDateCompleted(task: Task) {
   const dateCompleted = createElement<HTMLTimeElement>(
     'time',
     'completion-date',
   );
   const now = new Date();
   const dayDifference = differenceInDays(now, task.dateCompleted);
-  console.log(dayDifference);
+  console.log(`task: ${task}, dateComp: ${task.dateCompleted}`);
+  console.log('daydiff: ', dayDifference);
   let dateText = 'Completed: ';
   if (dayDifference < 1) {
     dateText += 'Today';

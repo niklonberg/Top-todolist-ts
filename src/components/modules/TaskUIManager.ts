@@ -1,6 +1,4 @@
-import createListItemFromObject, {
-  createDateCompleted,
-} from './utils/createListItemFromObject';
+import createListItemFromObject from './utils/createListItemFromObject';
 import UIManager from './abstract/UIManager';
 import insertEmptyListFallbackItem from './utils/insertEmptyListFallbackItem';
 import addDragFunctionality from './utils/addDragFunctionality';

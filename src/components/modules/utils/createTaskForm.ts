@@ -51,8 +51,10 @@ function createTaskForm(taskToEdit?: Task) {
         : `value=''`
     } />
   </div>
-  <button type="submit" class="filled-btn">Confirm</button>
-  <button type="button" class="filled-btn" id="cancel-form-btn">Cancel</button>
+  <div class="task-form-actions">
+    <button type="button" class="filled-btn" id="cancel-form-btn">Cancel</button>
+    <button type="submit" class="filled-btn">Confirm</button>
+  </div>
   `;
   form.innerHTML = templateStr;
   return form;

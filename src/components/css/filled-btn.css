@@ -1,15 +1,8 @@
-.filled-btn-container {
-  display: flex;
-  justify-content: center;
-  margin-block: var(--m-gap);
-}
-
 .filled-btn {
   border: none;
   background-color: var(--secondary);
   color: white;
   padding: 0.5rem 1.5rem;
   border-radius: 1000px;
-  margin: auto;
   cursor: pointer;
 }

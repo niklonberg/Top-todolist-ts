@@ -4,7 +4,7 @@
   flex-direction: column;
   align-items: center;
   gap: var(--m-gap);
-  max-width: 300px;
+  max-width: 350px;
   margin-inline: auto;
   padding: var(--l-gap);
   border-radius: 20px;
@@ -73,4 +73,11 @@
   left: 5px;
   scale: 0.8;
   background-color: var(--primary-lighter);
+}
+
+.task-form-actions {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: var(--m-gap);
 }

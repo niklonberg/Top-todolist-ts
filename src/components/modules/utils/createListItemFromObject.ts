@@ -1,4 +1,4 @@
-import { format, formatISO, differenceInDays, addDays } from 'date-fns';
+import { format, formatISO, differenceInDays } from 'date-fns';
 import createElement from './createElement';
 import { Task } from './interfaces';
 
@@ -65,8 +65,6 @@ function createDateCompleted(task: Task) {
   );
   const now = new Date();
   const dayDifference = differenceInDays(now, task.dateCompleted);
-  console.log(`task: ${task}, dateComp: ${task.dateCompleted}`);
-  console.log('daydiff: ', dayDifference);
   let dateText = 'Completed: ';
   if (dayDifference < 1) {
     dateText += 'Today';

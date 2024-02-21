@@ -4,7 +4,8 @@
     --primary-lighter: #26292a;
     --primary-contrast: #e4e4e4;
     --secondary: #871fe3;
-    --complementary: #009800;
+    --tertiary: #e87e27;
+    --complementary: #04905a;
 
     --sm-gap: 10px;
     --m-gap: 20px;
@@ -32,7 +33,7 @@
     --primary-lighter: #c5c5c5;
     --primary-contrast: #111111;
     --secondary: #a742ff;
-    --complementary: #00b300;
+    --complementary: #02a768;
   }
 
   input,

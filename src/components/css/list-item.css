@@ -51,19 +51,11 @@
   }
 
   .list-item-edits {
-    align-self: stretch;
+    align-self: flex-start;
     display: flex;
     gap: var(--m-gap);
     flex-direction: column;
     justify-content: space-between;
-  }
-
-  .edit-actions {
-    display: flex;
-    flex-direction: column;
-    gap: var(--sm-gap);
-    justify-content: end;
-    align-items: center;
   }
 
   .deadline-date {

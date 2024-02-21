@@ -22,7 +22,7 @@ class HeaderNavbarUIManager extends UIManager {
 
   toggleColorTheme() {
     document.body.classList.toggle('light-theme');
-    this.toggleThemeBtn.classList.toggle('dark-bg');
+    this.toggleThemeBtn.classList.toggle('dark-fill');
   }
 
   selectNavListItem(e: Event) {

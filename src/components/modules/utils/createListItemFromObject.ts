@@ -66,7 +66,8 @@ export function createDateCompleted(task: Task) {
     'completion-date',
   );
   const now = new Date();
-  const dayDifference = differenceInDays(task.dateCompleted, now);
+  const dayDifference = differenceInDays(now, task.dateCompleted);
+  console.log(dayDifference);
   let dateText = 'Completed: ';
   if (dayDifference < 1) {
     dateText += 'Today';
@@ -119,7 +120,7 @@ function createListItemFromObject(
     }
     timeEle.classList.add('deadline-date');
     timeEle.setAttribute('aria-label', 'deadline date');
-    editActions.prepend(timeEle);
+    listDetails.append(timeEle);
 
     if (task.dateCompleted) {
       li.append(createDateCompleted(task));

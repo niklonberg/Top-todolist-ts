@@ -52,6 +52,9 @@ function createEditActionsContainer() {
 function createCheckCompleteBtn(task: Task) {
   const checkCompleteBtn = createElement('button', 'toggle-complete-btn');
   checkCompleteBtn.setAttribute('aria-label', 'Toggle complete');
+  checkCompleteBtn.classList.add('icon-btn');
+  checkCompleteBtn.innerHTML =
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 450"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/></svg>';
   if (task.isCompleted) {
     checkCompleteBtn.classList.add('checked');
   }

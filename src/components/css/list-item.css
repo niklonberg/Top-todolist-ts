@@ -81,9 +81,6 @@
   }
 
   .toggle-complete-btn.checked {
-    /* background-image: url(/src/images/check-mark.png); */
-    background-size: 100%;
-    background-repeat: no-repeat;
-    border-radius: 50%;
+    fill: var(--secondary);
   }
 }

@@ -149,6 +149,7 @@ class TaskManager implements TaskManagerInterface {
         let newTaskFromDB = (await response.json()) as Task;
         newTaskFromDB = formatTaskDueDate(newTaskFromDB);
         this.tasks.push(newTaskFromDB);
+        this.currSelectedTask = this.tasks[this.tasks.length - 1];
         this.eventEmitter.emit('taskFormSubmit');
       }
     } catch (error) {

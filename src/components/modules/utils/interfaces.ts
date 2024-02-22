@@ -57,7 +57,7 @@ export interface TaskManagerInterface {
   setSelectedTask(taskID: string): void;
   resetSelectedTask(): void;
   addTask(task: Task): void;
-  // addSubtask(task: Task): void;
+  addSubtask(task: Task): void;
   deleteTask(taskID: string): Promise<Response>;
   // deleteChildTask(taskID: number): void;
   // toggleIsCompleted(taskID: number): Task;

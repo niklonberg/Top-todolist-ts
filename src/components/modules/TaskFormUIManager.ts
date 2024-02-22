@@ -70,8 +70,7 @@ class TaskFormUIManager extends UIManager {
         console.log('edit submit form subtask ran');
         // DataManager.ed
       } else {
-        console.log('submit form subtask ran');
-        // DataManager.addSubtask(newTask)
+        DataManager.addSubtask(newTask);
       }
     }
   }

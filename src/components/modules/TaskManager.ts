@@ -157,11 +157,32 @@ class TaskManager implements TaskManagerInterface {
     }
   }
 
-  // addSubtask(task: Task) {
-  //   // push task sent back from database into subtasks of currSelected
-  //   this.currSelectedTask.subtasks.push(task);
-  //   console.log(this.currSelectedTask.subtasks);
-  // }
+  async addSubtask(newSubtask: Task) {
+    try {
+      const response = await fetch(`${this.baseURL}/createSubtask`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newSubtask),
+      });
+      if (!response.ok) {
+        const errorMessage = await response.text();
+        throw new Error(
+          `HTTP error! Status: ${response.status}, Message: ${errorMessage}`,
+        );
+      } else {
+        console.log('submit subtask succes from backend');
+        // const
+        // this.eventEmitter.emit('taskFormSubmit');
+      }
+    } catch (error) {
+      console.error('Error:', error.message);
+    }
+    // push task sent back from database into subtasks of currSelected
+    // this.currSelectedTask.subtasks.push(task);
+    // console.log(this.currSelectedTask.subtasks);
+  }
 
   /* Delete methods */
   async deleteTask(taskID: string) {

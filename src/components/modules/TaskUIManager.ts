@@ -6,6 +6,7 @@ import TodoFormUIManager from './TaskFormUIManager';
 import createDeleteWarningContainer from './utils/createWarningContainer';
 import {
   Task,
+  TaskLevel,
   TaskManagerInterface,
   TodoListItemWithDataset,
 } from './utils/interfaces';
@@ -29,7 +30,9 @@ class TaskUIManager extends UIManager {
       if (targetParentLi?.parentElement.id === 'top-level-tasks')
         this.selectItem(targetParentLi);
 
-      if (target.id === 'add-task-btn') this.addTaskForm();
+      if (target.id === 'add-task-btn') this.addTaskForm('task');
+
+      if (target.id === 'add-subtask-btn') this.addTaskForm('subtask');
 
       if (target.closest('button')?.classList.contains('edit-item-btn'))
         this.editTaskForm(targetParentLi);
@@ -94,10 +97,10 @@ class TaskUIManager extends UIManager {
     // }
   }
 
-  addTaskForm() {
+  addTaskForm(taskLevel: TaskLevel) {
     this.containerElement.innerHTML = '';
     this.containerElement.append(
-      this.FormManager?.insertTaskForm(this.TaskManager),
+      this.FormManager?.insertTaskForm(this.TaskManager, taskLevel),
     );
   }
 
@@ -106,6 +109,7 @@ class TaskUIManager extends UIManager {
     this.containerElement.append(
       this.FormManager?.insertTaskForm(
         this.TaskManager,
+        'task',
         this.TaskManager.getTask(parentLi.dataset.task),
       ),
     );
@@ -140,7 +144,7 @@ class TaskUIManager extends UIManager {
       'top-level-tasks',
     );
     this.TaskManager.getTasks().forEach((task) => {
-      const parentLi = createListItemFromObject(task, 'top-level');
+      const parentLi = createListItemFromObject(task, 'task');
       if (this.TaskManager.currSelectedTask === task)
         parentLi.classList.add('selected-list-item');
       ul.append(parentLi);

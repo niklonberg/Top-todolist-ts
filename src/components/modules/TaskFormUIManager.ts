@@ -19,7 +19,7 @@ class TaskFormUIManager extends UIManager {
     this.form = createTaskForm(taskToEdit);
     this.form.addEventListener(
       'submit',
-      (e) => this.submitForm(e, DataManager, taskToEdit),
+      (e) => this.submitForm(e, DataManager, taskLevel, taskToEdit),
       {
         once: true,
       },
@@ -47,6 +47,7 @@ class TaskFormUIManager extends UIManager {
   submitForm(
     e: Event,
     DataManager: TaskManagerInterface,
+    taskLevel: TaskLevel,
     taskToEdit: Task | null,
   ) {
     e.preventDefault();
@@ -57,10 +58,21 @@ class TaskFormUIManager extends UIManager {
         string
       >;
     const newTask = TaskFactory(formDataObject);
-    if (taskToEdit) {
-      DataManager.editTask(taskToEdit, newTask);
-    } else {
-      DataManager.addTask(newTask);
+    if (taskLevel === 'task') {
+      if (taskToEdit) {
+        DataManager.editTask(taskToEdit, newTask);
+      } else {
+        DataManager.addTask(newTask);
+      }
+    }
+    if (taskLevel === 'subtask') {
+      if (taskToEdit) {
+        console.log('edit submit form subtask ran');
+        // DataManager.ed
+      } else {
+        console.log('submit form subtask ran');
+        // DataManager.addSubtask(newTask)
+      }
     }
   }
 }

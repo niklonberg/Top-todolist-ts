@@ -159,13 +159,16 @@ class TaskManager implements TaskManagerInterface {
 
   async addSubtask(newSubtask: Task) {
     try {
-      const response = await fetch(`${this.baseURL}/createSubtask`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
+      const response = await fetch(
+        `${this.baseURL}/createSubtask/${this.currSelectedTask._id}`,
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(newSubtask),
         },
-        body: JSON.stringify(newSubtask),
-      });
+      );
       if (!response.ok) {
         const errorMessage = await response.text();
         throw new Error(

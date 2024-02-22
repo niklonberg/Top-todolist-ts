@@ -29,7 +29,7 @@ class TaskUIManager extends UIManager {
       if (targetParentLi?.parentElement.id === 'top-level-tasks')
         this.selectItem(targetParentLi);
 
-      if (target.id === '') this.addTaskForm(target);
+      if (target.id === 'add-task-btn') this.addTaskForm(target);
 
       if (target.closest('button')?.classList.contains('edit-item-btn'))
         this.editTaskForm(targetParentLi);

@@ -2,6 +2,7 @@ import UIManager from './abstract/UIManager';
 import createTaskForm from './utils/createTaskForm';
 import {
   Task,
+  TaskLevel,
   newTaskFormData,
   TaskManagerInterface,
 } from './utils/interfaces';
@@ -10,7 +11,11 @@ import TaskFactory from './TaskFactory';
 class TaskFormUIManager extends UIManager {
   private form: HTMLFormElement | null;
 
-  insertTaskForm(DataManager: TaskManagerInterface, taskToEdit: Task = null) {
+  insertTaskForm(
+    DataManager: TaskManagerInterface,
+    taskLevel: TaskLevel,
+    taskToEdit: Task = null,
+  ) {
     this.form = createTaskForm(taskToEdit);
     this.form.addEventListener(
       'submit',

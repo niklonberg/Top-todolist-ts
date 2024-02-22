@@ -1,6 +1,6 @@
 import { format, formatISO, differenceInDays } from 'date-fns';
 import createElement from './createElement';
-import { Task } from './interfaces';
+import { Task, TaskLevel } from './interfaces';
 
 function createListContainer(task: Task) {
   const li = createElement<HTMLLIElement>('LI', 'list-item');
@@ -88,15 +88,12 @@ function createDateCompleted(task: Task) {
   return dateCompleted;
 }
 
-function createListItemFromObject(
-  task: Task,
-  destination: 'top-level' | 'subtask',
-) {
+function createListItemFromObject(task: Task, destination: TaskLevel) {
   const li = createListContainer(task);
   const listDetails = createListDetailsContainer(task);
   const editActions = createEditActionsContainer();
 
-  if (destination === 'top-level') {
+  if (destination === 'task') {
     li.append(listDetails);
   }
 

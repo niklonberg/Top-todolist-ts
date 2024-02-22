@@ -1,6 +1,6 @@
 export type PriorityLevel = 'Low' | 'Medium' | 'High'; // convert to enum?
 
-export type taskLevel = 'task' | 'subtask';
+export type TaskLevel = 'task' | 'subtask';
 
 // will replace FormTemplateObj
 export interface newTaskFormData {

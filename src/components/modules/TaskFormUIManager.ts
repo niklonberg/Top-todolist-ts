@@ -10,9 +10,6 @@ import TaskFactory from './TaskFactory';
 class TaskFormUIManager extends UIManager {
   private form: HTMLFormElement | null;
 
-  // eslint-disable-next-line
-  private inputs: NodeListOf<HTMLInputElement> | null;
-
   insertTaskForm(DataManager: TaskManagerInterface, taskToEdit: Task = null) {
     this.form = createTaskForm(taskToEdit);
     this.form.addEventListener(
@@ -23,8 +20,10 @@ class TaskFormUIManager extends UIManager {
       },
     );
 
-    this.inputs = this.form.querySelectorAll('.text-input');
-    this.inputs.forEach((input) => {
+    const inputs = this.form.querySelectorAll(
+      '.text-input',
+    ) as NodeListOf<HTMLInputElement>;
+    inputs.forEach((input) => {
       const label = input.parentElement.querySelector('.text-input-label');
       if (input.value.trim() !== '') label.classList.add('move-label');
 

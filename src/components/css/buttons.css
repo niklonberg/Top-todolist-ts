@@ -52,3 +52,9 @@ button {
 .icon-btn:hover {
   opacity: 0.6;
 }
+
+.create-task-btn {
+  border-radius: 25px;
+  border: 0;
+  padding-block: var(--m-gap);
+}

@@ -29,7 +29,7 @@ class TaskUIManager extends UIManager {
       if (targetParentLi?.parentElement.id === 'top-level-tasks')
         this.selectItem(targetParentLi);
 
-      if (target.classList.contains('add-task-btn')) this.addTaskForm(target);
+      if (target.id === '') this.addTaskForm(target);
 
       if (target.closest('button')?.classList.contains('edit-item-btn'))
         this.editTaskForm(targetParentLi);
@@ -129,7 +129,7 @@ class TaskUIManager extends UIManager {
   createNewTaskBtn(btnID: string) {
     const btn = this.createElement<HTMLButtonElement>(
       'button',
-      'add-task-btn',
+      'create-task-btn',
       btnID,
     );
     btn.textContent = '+ Add Task';
@@ -169,7 +169,7 @@ class TaskUIManager extends UIManager {
       ul.append(createListItemFromObject(subtask, 'subtask'));
     });
     insertEmptyListFallbackItem(ul);
-    const addNewSubtaskBtn = this.createNewTaskBtn('add-child-level-todo-btn');
+    const addNewSubtaskBtn = this.createNewTaskBtn('add-subtask-btn');
     addNewSubtaskBtn.textContent = '+ Add Subtask';
     subtasksListContainer.append(ul, addNewSubtaskBtn);
     return subtasksListContainer;

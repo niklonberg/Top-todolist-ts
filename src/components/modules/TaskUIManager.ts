@@ -29,7 +29,7 @@ class TaskUIManager extends UIManager {
       if (targetParentLi?.parentElement.id === 'top-level-tasks')
         this.selectItem(targetParentLi);
 
-      if (target.id === 'add-task-btn') this.addTaskForm(target);
+      if (target.id === 'add-task-btn') this.addTaskForm();
 
       if (target.closest('button')?.classList.contains('edit-item-btn'))
         this.editTaskForm(targetParentLi);
@@ -94,11 +94,7 @@ class TaskUIManager extends UIManager {
     // }
   }
 
-  addTaskForm(target: Element) {
-    // if (target.id === 'add-top-level-todo-btn') {
-    //   this.TaskManager.resetSelectedTask();
-    //   // reset currSelected to null, so addTodo inserts into topLevelTodos
-    // }
+  addTaskForm() {
     this.containerElement.innerHTML = '';
     this.containerElement.append(
       this.FormManager?.insertTaskForm(this.TaskManager),

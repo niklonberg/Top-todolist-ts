@@ -32,7 +32,8 @@ class TaskUIManager extends UIManager {
 
       if (target.id === 'add-task-btn') this.addTaskForm('task');
 
-      if (target.id === 'add-subtask-btn') this.addTaskForm('subtask');
+      if (target.id === 'add-subtask-btn' && TaskManager.currSelectedTask)
+        this.addTaskForm('subtask');
 
       if (target.closest('button')?.classList.contains('edit-item-btn'))
         this.editTaskForm(targetParentLi);
@@ -104,6 +105,7 @@ class TaskUIManager extends UIManager {
     );
   }
 
+  // TODO: add taskLevel as arg like in addTaskForm
   editTaskForm(parentLi: TodoListItemWithDataset) {
     this.containerElement.innerHTML = '';
     this.containerElement.append(

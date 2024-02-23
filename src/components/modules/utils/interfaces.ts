@@ -49,7 +49,7 @@ export interface TaskManagerInterface {
   addTask(task: Task): void;
   addSubtask(task: Task): void;
   deleteTask(taskID: string): Promise<Response>;
-  deleteSubtask(subtaskIndex: number): void;
+  deleteSubtask(subtaskIndex: number): Promise<Response>;
   // toggleIsCompleted(taskID: number): Task;
   // toggleCompletedDate(task: Task): void;
   // reorderTask(index: number, TaskListItem: TodoListItemWithDataset): void;

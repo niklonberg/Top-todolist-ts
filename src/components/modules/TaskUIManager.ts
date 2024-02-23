@@ -92,8 +92,10 @@ class TaskUIManager extends UIManager {
         this.renderTasksSection();
       }
     } else {
-      const index = [...parentLi.parentElement.children].indexOf(parentLi);
-      this.TaskManager.deleteSubtask(index);
+      const subtaskIndex = [...parentLi.parentElement.children].indexOf(
+        parentLi,
+      );
+      this.TaskManager.deleteSubtask(subtaskIndex);
     }
   }
 

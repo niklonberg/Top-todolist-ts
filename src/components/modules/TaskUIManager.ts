@@ -81,6 +81,7 @@ class TaskUIManager extends UIManager {
       );
   }
 
+  // TODO: reduce nesting of this.renderTasksSection?
   async deleteItem(parentLi: TodoListItemWithDataset) {
     if (parentLi.dataset.task) {
       const response = await this.TaskManager.deleteTask(parentLi.dataset.task);
@@ -88,7 +89,6 @@ class TaskUIManager extends UIManager {
         // TODO: render error dialog popup for user?
         console.log('Apologies, an error occured. Please try again');
       } else {
-        this.TaskManager.resetSelectedTask();
         this.renderTasksSection();
       }
     } else {

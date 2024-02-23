@@ -90,16 +90,15 @@ class TaskManager implements TaskManagerInterface {
         throw new Error(
           `HTTP error! Status: ${response.status}, Message: ${errorMessage}`,
         );
-      } else {
-        const responseBody = await response.json();
-        let updatedTask = responseBody.updatedTask as Task;
-        updatedTask = formatTaskDueDate(updatedTask);
-        const index = this.tasks.findIndex(
-          (task) => task.sortOrder === updatedTask.sortOrder,
-        );
-        this.tasks[index] = updatedTask;
-        this.eventEmitter.emit('taskFormSubmit');
       }
+      const responseBody = await response.json();
+      let updatedTask = responseBody.updatedTask as Task;
+      updatedTask = formatTaskDueDate(updatedTask);
+      const index = this.tasks.findIndex(
+        (task) => task.sortOrder === updatedTask.sortOrder,
+      );
+      this.tasks[index] = updatedTask;
+      this.eventEmitter.emit('taskFormSubmit');
     } catch (error) {
       console.error(error);
     }
@@ -145,13 +144,12 @@ class TaskManager implements TaskManagerInterface {
         throw new Error(
           `HTTP error! Status: ${response.status}, Message: ${errorMessage}`,
         );
-      } else {
-        let newTaskFromDB = (await response.json()) as Task;
-        newTaskFromDB = formatTaskDueDate(newTaskFromDB);
-        this.tasks.push(newTaskFromDB);
-        this.currSelectedTask = this.tasks[this.tasks.length - 1];
-        this.eventEmitter.emit('taskFormSubmit');
       }
+      let newTaskFromDB = (await response.json()) as Task;
+      newTaskFromDB = formatTaskDueDate(newTaskFromDB);
+      this.tasks.push(newTaskFromDB);
+      this.currSelectedTask = this.tasks[this.tasks.length - 1];
+      this.eventEmitter.emit('taskFormSubmit');
     } catch (error) {
       console.error('Error:', error.message);
     }
@@ -174,15 +172,14 @@ class TaskManager implements TaskManagerInterface {
         throw new Error(
           `HTTP error! Status: ${response.status}, Message: ${errorMessage}`,
         );
-      } else {
-        const updatedTask = (await response.json()) as Task;
-        const updatedTaskIndex = this.tasks.findIndex(
-          (task) => task._id === updatedTask._id,
-        );
-        this.tasks[updatedTaskIndex] = updatedTask;
-        this.currSelectedTask = this.tasks[updatedTaskIndex];
-        this.eventEmitter.emit('taskFormSubmit');
       }
+      const updatedTask = (await response.json()) as Task;
+      const updatedTaskIndex = this.tasks.findIndex(
+        (task) => task._id === updatedTask._id,
+      );
+      this.tasks[updatedTaskIndex] = updatedTask;
+      this.currSelectedTask = this.tasks[updatedTaskIndex];
+      this.eventEmitter.emit('taskFormSubmit');
     } catch (error) {
       console.error('Error:', error.message);
     }
@@ -212,15 +209,26 @@ class TaskManager implements TaskManagerInterface {
     }
   }
 
-  // deleteSubtask is actually just an update of the task that contains it, with
-  // the subtask removed from its .subtasks array right?
-  // deleteChildTodo(todoID: number) {
-  //   const todo = this.getTodo(todoID);
-  //   console.log('todo to delete: ', todo);
-  //   this.parentTodo.children = this.parentTodo.children.filter(
-  //     (childTodo) => childTodo !== todo,
-  //   );
-  // }
+  async deleteSubtask(subtaskIndex: number) {
+    try {
+      const taskID = this.currSelectedTask._id;
+      const response = await fetch(`${this.baseURL}/deleteSubtask/${taskID}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      if (!response.ok) {
+        const errorMessage = await response.text();
+        console.error(
+          `HTTP error! Status: ${response.status}, Message: ${errorMessage}`,
+        );
+        return response;
+      }
+    } catch (error) {
+      console.error('Error:', error.message);
+    }
+  }
 
   onTaskFormSubmitSuccess(callback: () => void) {
     this.eventEmitter.on('taskFormSubmit', callback);

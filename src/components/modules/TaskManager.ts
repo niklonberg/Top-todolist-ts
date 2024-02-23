@@ -175,9 +175,12 @@ class TaskManager implements TaskManagerInterface {
           `HTTP error! Status: ${response.status}, Message: ${errorMessage}`,
         );
       } else {
-        console.log('submit subtask succes from backend');
-        // const
-        // this.eventEmitter.emit('taskFormSubmit');
+        const updatedTask = (await response.json()) as Task;
+        const updatedTaskIndex = this.tasks.findIndex(
+          (task) => task._id === updatedTask._id,
+        );
+        this.tasks[updatedTaskIndex] = updatedTask;
+        this.eventEmitter.emit('taskFormSubmit');
       }
     } catch (error) {
       console.error('Error:', error.message);

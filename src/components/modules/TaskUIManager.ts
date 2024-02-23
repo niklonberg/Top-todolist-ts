@@ -95,7 +95,13 @@ class TaskUIManager extends UIManager {
       const subtaskIndex = [...parentLi.parentElement.children].indexOf(
         parentLi,
       );
-      this.TaskManager.deleteSubtask(subtaskIndex);
+      const response = await this.TaskManager.deleteSubtask(subtaskIndex);
+      if (!response.ok) {
+        // TODO: render error dialog popup for user?
+        console.log('Apologies, an error occured. Please try again');
+      } else {
+        this.renderTasksSection();
+      }
     }
   }
 

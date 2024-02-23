@@ -216,7 +216,7 @@ class TaskManager implements TaskManagerInterface {
       const response = await fetch(
         `${this.baseURL}/deleteSubtask/${subtaskIndex}/${taskID}`,
         {
-          method: 'DELETE',
+          method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
           },

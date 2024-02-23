@@ -180,14 +180,12 @@ class TaskManager implements TaskManagerInterface {
           (task) => task._id === updatedTask._id,
         );
         this.tasks[updatedTaskIndex] = updatedTask;
+        this.currSelectedTask = this.tasks[updatedTaskIndex];
         this.eventEmitter.emit('taskFormSubmit');
       }
     } catch (error) {
       console.error('Error:', error.message);
     }
-    // push task sent back from database into subtasks of currSelected
-    // this.currSelectedTask.subtasks.push(task);
-    // console.log(this.currSelectedTask.subtasks);
   }
 
   /* Delete methods */

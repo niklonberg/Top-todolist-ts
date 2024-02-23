@@ -2,19 +2,11 @@ export type PriorityLevel = 'Low' | 'Medium' | 'High'; // convert to enum?
 
 export type TaskLevel = 'task' | 'subtask';
 
-// will replace FormTemplateObj
 export interface newTaskFormData {
   title: string;
   priority: PriorityLevel;
   dueDate: string;
   description: string;
-}
-
-export interface FormTemplateObj {
-  title: string;
-  priority?: PriorityLevel;
-  dueDate?: null | Date;
-  description?: string;
 }
 
 export interface Task {
@@ -36,8 +28,6 @@ export interface DataManagerInterface<T> {
   deleteItem(): void;
 }
 
-// TODO: strongly consider removing this, you have arrays already
-// just use indexs
 export interface TodoListItemWithDataset extends HTMLElement {
   dataset: {
     task: string;
@@ -59,7 +49,7 @@ export interface TaskManagerInterface {
   addTask(task: Task): void;
   addSubtask(task: Task): void;
   deleteTask(taskID: string): Promise<Response>;
-  // deleteChildTask(taskID: number): void;
+  deleteSubtask(subtaskIndex: number): void;
   // toggleIsCompleted(taskID: number): Task;
   // toggleCompletedDate(task: Task): void;
   // reorderTask(index: number, TaskListItem: TodoListItemWithDataset): void;

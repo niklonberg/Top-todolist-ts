@@ -57,7 +57,7 @@ class TaskManager implements TaskManagerInterface {
   //   const todos = this.getTopLevelTasks();
   //   const today = new Date();
   //   today.setHours(0, 0, 0);
-  //   const sevenDaysLater = addDays(today, 7);
+  //   const sevenDaysLater = addDays(today, 7);else {
   //   return todos.reduce(
   //     (acc, curr) => [
   //       ...acc,
@@ -202,6 +202,7 @@ class TaskManager implements TaskManagerInterface {
         return response;
       }
       this.tasks = this.tasks.filter((task) => task._id !== taskID);
+      this.resetSelectedTask();
       return response;
     } catch (error) {
       console.error('Error:', error.message);
@@ -212,12 +213,15 @@ class TaskManager implements TaskManagerInterface {
   async deleteSubtask(subtaskIndex: number) {
     try {
       const taskID = this.currSelectedTask._id;
-      const response = await fetch(`${this.baseURL}/deleteSubtask/${taskID}`, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
+      const response = await fetch(
+        `${this.baseURL}/deleteSubtask/${subtaskIndex}/${taskID}`,
+        {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+          },
         },
-      });
+      );
       if (!response.ok) {
         const errorMessage = await response.text();
         console.error(
@@ -225,8 +229,13 @@ class TaskManager implements TaskManagerInterface {
         );
         return response;
       }
+      console.log('delete subtask came back from db');
+      // get updated task back from db
+      // replace it with old task in this.tasks
+      return response; // ui manager updates ui
     } catch (error) {
       console.error('Error:', error.message);
+      throw error;
     }
   }
 

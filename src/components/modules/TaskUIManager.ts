@@ -45,7 +45,7 @@ class TaskUIManager extends UIManager {
 
       if (target.id === 'confirm-delete-btn') this.deleteItem(targetParentLi);
 
-      if (target.id === 'cancel-delete-btn')
+      if (target.closest('button')?.id === 'cancel-delete-btn')
         targetParentLi.querySelector('.warning-container').remove();
 
       if (target.id === 'cancel-form-btn') this.renderTasksSection();
@@ -82,7 +82,7 @@ class TaskUIManager extends UIManager {
   }
 
   async deleteItem(parentLi: TodoListItemWithDataset) {
-    if (parentLi.parentElement.id === 'top-level-tasks') {
+    if (parentLi.dataset.task) {
       const response = await this.TaskManager.deleteTask(parentLi.dataset.task);
       if (!response.ok) {
         // TODO: render error dialog popup for user?
@@ -91,11 +91,11 @@ class TaskUIManager extends UIManager {
         this.TaskManager.resetSelectedTask();
         this.renderTasksSection();
       }
+    } else {
+      console.log(parentLi);
+      this.TaskManager.deleteSubtask(1);
+      // re render subtasks list
     }
-    // } else {
-    //   this.TaskManager.deleteChildTodo(Number(parentLi.dataset.todo));
-    //   re render subtasks list
-    // }
   }
 
   addTaskForm(taskLevel: TaskLevel) {
@@ -147,8 +147,9 @@ class TaskUIManager extends UIManager {
     );
     this.TaskManager.getTasks().forEach((task) => {
       const parentLi = createListItemFromObject(task, 'task');
-      if (this.TaskManager.currSelectedTask === task)
+      if (this.TaskManager.currSelectedTask === task) {
         parentLi.classList.add('selected-list-item');
+      }
       ul.append(parentLi);
     });
     insertEmptyListFallbackItem(ul);

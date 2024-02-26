@@ -104,8 +104,8 @@ class TaskManager implements TaskManagerInterface {
     }
   }
 
-  // toggleIsCompleted(taskID: number) {
-  //   const todo = this.getTask(taskID);
+  // toggleSubtaskCompleted(subtaskIndex: number) {
+  //   const subtask = this.getSubtasks(taskID);
   //   todo.isCompleted = !todo.isCompleted;
   //   console.log('Todo complete: ', todo.isCompleted);
   //   this.toggleCompletedDate(todo);
@@ -207,9 +207,8 @@ class TaskManager implements TaskManagerInterface {
 
   async deleteSubtask(subtaskIndex: number) {
     try {
-      const taskID = this.currSelectedTask._id;
       const response = await fetch(
-        `${this.baseURL}/deleteSubtask/${subtaskIndex}/${taskID}`,
+        `${this.baseURL}/deleteSubtask/${subtaskIndex}/${this.currSelectedTask._id}`,
         {
           method: 'PUT',
           headers: {

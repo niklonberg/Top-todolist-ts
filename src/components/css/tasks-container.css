@@ -18,8 +18,7 @@
   .tasks-container .list-item {
     cursor: move;
     display: flex;
-    align-items: center;
-    gap: var(--sm-gap);
+    gap: var(--m-gap);
     background-color: var(--primary);
     border-radius: 20px;
     padding: var(--m-gap);

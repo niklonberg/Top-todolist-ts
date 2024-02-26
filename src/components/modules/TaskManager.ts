@@ -229,9 +229,12 @@ class TaskManager implements TaskManagerInterface {
         );
         return response;
       }
-      console.log('delete subtask came back from db');
-      // get updated task back from db
-      // replace it with old task in this.tasks
+      const updatedTask = (await response.json()) as Task;
+      const updatedTaskIndex = this.tasks.findIndex(
+        (task) => task._id === updatedTask._id,
+      );
+      this.tasks[updatedTaskIndex] = updatedTask;
+      this.currSelectedTask = this.tasks[updatedTaskIndex];
       return response; // ui manager updates ui
     } catch (error) {
       console.error('Error:', error.message);

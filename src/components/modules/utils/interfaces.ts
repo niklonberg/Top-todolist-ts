@@ -44,13 +44,13 @@ export interface TaskManagerInterface {
   getTodayTasks(): Task[];
   // getNext7DaysTasks(): Task[];
   editTask(taskToEdit: Task, newTask: Task): void;
+  toggleTaskCompleted(task: Task): void;
   setSelectedTask(taskID: string): void;
   resetSelectedTask(): void;
   addTask(task: Task): void;
   addSubtask(task: Task): void;
   deleteTask(taskID: string): Promise<Response>;
   deleteSubtask(subtaskIndex: number): Promise<Response>;
-  // toggleIsCompleted(taskID: number): Task;
   // toggleCompletedDate(task: Task): void;
   // reorderTask(index: number, TaskListItem: TodoListItemWithDataset): void;
 }

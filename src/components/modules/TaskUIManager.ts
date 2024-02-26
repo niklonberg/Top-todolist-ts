@@ -81,7 +81,6 @@ class TaskUIManager extends UIManager {
       );
   }
 
-  // TODO: reduce nesting of this.renderTasksSection?
   async deleteItem(parentLi: TodoListItemWithDataset) {
     if (parentLi.dataset.task) {
       const response = await this.TaskManager.deleteTask(parentLi.dataset.task);

@@ -60,6 +60,7 @@ class TaskFormUIManager extends UIManager {
     const newTask = TaskFactory(formDataObject);
     if (taskLevel === 'task') {
       if (taskToEdit) {
+        newTask.subtasks = taskToEdit.subtasks; // ensure old subtasks arent lost
         DataManager.editTask(taskToEdit, newTask);
       } else {
         DataManager.addTask(newTask);

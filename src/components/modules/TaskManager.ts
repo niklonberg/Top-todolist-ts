@@ -94,25 +94,26 @@ class TaskManager implements TaskManagerInterface {
       const responseBody = await response.json();
       let updatedTask = responseBody.updatedTask as Task;
       updatedTask = formatTaskDueDate(updatedTask);
-      const index = this.tasks.findIndex(
+      const taskIndex = this.tasks.findIndex(
         (task) => task.sortOrder === updatedTask.sortOrder,
       );
-      this.tasks[index] = updatedTask;
+      this.tasks[taskIndex] = updatedTask;
+      this.currSelectedTask = this.tasks[taskIndex];
       this.eventEmitter.emit('taskFormSubmit');
     } catch (error) {
       console.error(error);
     }
   }
 
-  // toggleSubtaskCompleted(subtaskIndex: number) {
-  //   const subtask = this.getSubtasks(taskID);
-  //   todo.isCompleted = !todo.isCompleted;
-  //   console.log('Todo complete: ', todo.isCompleted);
-  //   this.toggleCompletedDate(todo);
-  //   if (this.parentTodo.children.every((childTodo) => childTodo.isCompleted)) {
-  //     // toggle parent complete
-  //   }
-  // }
+  async toggleTaskCompleted(task: Task) {
+    // const subtask = this.getSubtasks(taskID);
+    // todo.isCompleted = !todo.isCompleted;
+    // console.log('Todo complete: ', todo.isCompleted);
+    // this.toggleCompletedDate(todo);
+    // if (this.parentTodo.children.every((childTodo) => childTodo.isCompleted)) {
+    //   // toggle parent complete
+    // }
+  }
 
   /* Set methods */
   setSelectedTask(taskID: string) {

@@ -115,14 +115,9 @@ class TaskManager implements TaskManagerInterface {
   // }
 
   /* Set methods */
-  setSelectedTask(todoID: string) {
-    this.currSelectedTask = this.getTask(todoID);
+  setSelectedTask(taskID: string) {
+    this.currSelectedTask = this.getTask(taskID);
     console.log('curr task: ', this.currSelectedTask);
-    console.log(
-      'curr typeof task.dueDate: ',
-      typeof this.currSelectedTask.dueDate,
-    );
-    console.log('curr task.dueDate val: ', this.currSelectedTask.dueDate);
   }
 
   resetSelectedTask() {
@@ -235,7 +230,7 @@ class TaskManager implements TaskManagerInterface {
       );
       this.tasks[updatedTaskIndex] = updatedTask;
       this.currSelectedTask = this.tasks[updatedTaskIndex];
-      return response; // ui manager updates ui
+      return response;
     } catch (error) {
       console.error('Error:', error.message);
       throw error;

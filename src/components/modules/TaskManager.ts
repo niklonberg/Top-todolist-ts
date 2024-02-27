@@ -113,14 +113,36 @@ class TaskManager implements TaskManagerInterface {
     }
   }
 
-  async toggleTaskCompleted(task: Task) {
-    // const subtask = this.getSubtasks(taskID);
-    // todo.isCompleted = !todo.isCompleted;
-    // console.log('Todo complete: ', todo.isCompleted);
-    // this.toggleCompletedDate(todo);
-    // if (this.parentTodo.children.every((childTodo) => childTodo.isCompleted)) {
-    //   // toggle parent complete
-    // }
+  async toggleSubtaskCompleted(subtaskIndex: number) {
+    try {
+      const response = await fetch(
+        `${this.baseURL}/editSubtask/${subtaskIndex}/${this.currSelectedTask}`,
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        },
+      );
+      if (!response.ok) {
+        const errorMessage = await response.text();
+        console.error(
+          `HTTP error! Status: ${response.status}, Message: ${errorMessage}`,
+        );
+        return response;
+      }
+      const updatedTask = (await response.json()) as Task;
+      const updatedTaskIndex = this.tasks.findIndex(
+        (task) => task._id === updatedTask._id,
+      );
+      this.tasks[updatedTaskIndex] = updatedTask;
+      this.currSelectedTask = this.tasks[updatedTaskIndex];
+      console.log(this.currSelectedTask);
+      return response;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
   }
 
   /* Add methods */
@@ -228,6 +250,7 @@ class TaskManager implements TaskManagerInterface {
       );
       this.tasks[updatedTaskIndex] = updatedTask;
       this.currSelectedTask = this.tasks[updatedTaskIndex];
+      console.log(this.currSelectedTask);
       return response;
     } catch (error) {
       console.error('Error:', error.message);

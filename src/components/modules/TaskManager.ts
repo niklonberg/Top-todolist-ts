@@ -13,8 +13,7 @@ import formatTaskDueDate from './utils/formatTaskDueDate';
 class TaskManager implements TaskManagerInterface {
   // private user: User;
 
-  currSelectedTask: null | Task; // Should we bother with this?
-  // could just split addTodo into two functions.
+  currSelectedTask: null | Task;
 
   private eventEmitter: EventEmitter;
 
@@ -72,6 +71,16 @@ class TaskManager implements TaskManagerInterface {
     );
   }
 
+  /* Set methods */
+  setSelectedTask(taskID: string) {
+    this.currSelectedTask = this.getTask(taskID);
+    console.log('curr task: ', this.currSelectedTask);
+  }
+
+  resetSelectedTask() {
+    this.currSelectedTask = null;
+  }
+
   /* Edit methods */
   async editTask(taskToEdit: Task, newTask: Task) {
     try {
@@ -113,16 +122,6 @@ class TaskManager implements TaskManagerInterface {
     // if (this.parentTodo.children.every((childTodo) => childTodo.isCompleted)) {
     //   // toggle parent complete
     // }
-  }
-
-  /* Set methods */
-  setSelectedTask(taskID: string) {
-    this.currSelectedTask = this.getTask(taskID);
-    console.log('curr task: ', this.currSelectedTask);
-  }
-
-  resetSelectedTask() {
-    this.currSelectedTask = null;
   }
 
   /* Add methods */

@@ -69,7 +69,7 @@ class TaskFormUIManager extends UIManager {
     if (taskLevel === 'subtask') {
       if (taskToEdit) {
         console.log('edit submit form subtask ran');
-        // DataManager.ed
+        // DataManager.editSubtask(newTask)
       } else {
         DataManager.addSubtask(newTask);
       }

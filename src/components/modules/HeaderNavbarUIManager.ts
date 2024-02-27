@@ -42,7 +42,7 @@ class HeaderNavbarUIManager extends UIManager {
       }
 
       if (navListItem.id === 'week-tasks') {
-        // this.taskUIManager.renderNext7DaysTasks();
+        this.taskUIManager.renderNext7DaysTasks();
       }
     }
   }

@@ -208,18 +208,17 @@ class TaskUIManager extends UIManager {
     this.containerElement.append(todosListContainer);
   }
 
-  // renderNext7DaysTasks() {
-  //   this.containerElement.innerHTML = '';
-  //   const todosListContainer =
-  //     this.createTodosListContainer('Next 7 days tasks');
-  //   const ul = this.createElement<HTMLUListElement>('ul');
-  //   this.TaskManager.getNext7DaysTasks().forEach((childTodo) =>
-  //     ul.append(createListItemFromObject(childTodo, 'todo-list')),
-  //   );
-  //   insertEmptyListFallbackItem(ul);
-  //   todosListContainer.append(ul);
-  //   this.containerElement.append(todosListContainer);
-  // }
+  renderNext7DaysTasks() {
+    this.containerElement.innerHTML = '';
+    const todosListContainer = this.createTasksContainer('Next 7 days tasks');
+    const ul = this.createElement<HTMLUListElement>('ul');
+    this.TaskManager.getNext7DaysTasks().forEach((subtask) =>
+      ul.append(createListItemFromObject(subtask, 'subtask')),
+    );
+    insertEmptyListFallbackItem(ul);
+    todosListContainer.append(ul);
+    this.containerElement.append(todosListContainer);
+  }
 }
 
 export default TaskUIManager;

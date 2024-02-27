@@ -7,7 +7,7 @@ function parseTaskDueDate(task: Task): Task {
   }));
   return {
     ...task,
-    dueDate: new Date(task.dueDate),
+    dueDate: task.dueDate ? new Date(task.dueDate) : null,
     subtasks: parsedSubtasksDuedate,
   };
 }

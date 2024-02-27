@@ -1,4 +1,6 @@
-import createListItemFromObject from './utils/createListItemFromObject';
+import createListItemFromObject, {
+  createDateCompleted,
+} from './utils/createListItemFromObject';
 import UIManager from './abstract/UIManager';
 import insertEmptyListFallbackItem from './utils/insertEmptyListFallbackItem';
 import addDragFunctionality from './utils/addDragFunctionality';
@@ -50,23 +52,25 @@ class TaskUIManager extends UIManager {
 
       if (target.id === 'cancel-form-btn') this.renderTasksSection();
 
-      // if (target.classList.contains('toggle-complete-btn'))
-      //   this.toggleItemComplete(target, targetParentLi);
+      if (target.closest('button')?.classList.contains('toggle-complete-btn'))
+        this.toggleItemComplete(target, targetParentLi);
     });
   }
 
-  // toggleItemComplete(target: Element, parentLi: TodoListItemWithDataset) {
-  //   target.classList.toggle('checked');
-  //   parentLi.classList.toasyncggle('todo-complete');
-  //   const todo = this.TaskManager.toggleIsCompleted(
-  //     Number(parentLi.dataset.todo),
-  //   );
-  //   if (todo.isCompleted) {
-  //     parentLi.append(createDateCompleted(todo));
-  //   } else {
-  //     parentLi.querySelector('.completion-date').remove();
-  //   }
-  // }
+  toggleItemComplete(target: Element, parentLi: TodoListItemWithDataset) {
+    target.classList.toggle('checked');
+    parentLi.classList.toggle('task-complete');
+    const subtaskIndex = [...parentLi.parentElement.children].indexOf(parentLi);
+    console.log('subtask index: ', subtaskIndex);
+    // const task = this.TaskManager.toggleSubtaskCompleted(
+    //   parentLi.dataset.task,
+    // );
+    // if (task.isCompleted) {
+    //   parentLi.append(createDateCompleted(task));
+    // } else {
+    //   parentLi.querySelector('.completion-date').remove();
+    // }
+  }
 
   selectItem(parentLi: TodoListItemWithDataset) {
     [...parentLi.parentElement.children].forEach((child) =>

@@ -6,7 +6,7 @@ function TaskFactory(formData: Record<keyof newTaskFormData, string>): Task {
     priority: formData.priority as PriorityLevel,
     isCompleted: false,
     dateCompleted: null,
-    dueDate: formData.dueDate === '' ? null : new Date(formData.dueDate),
+    dueDate: formData.dueDate ? new Date(formData.dueDate) : null,
     description: formData.description,
     subtasks: [],
   };

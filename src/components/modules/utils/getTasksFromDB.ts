@@ -1,6 +1,6 @@
 import { Task } from './interfaces';
 import tasksUrl from './tasksUrl';
-import formatTaskDueDate from './formatTaskDueDate';
+import formatTaskDueDate from './parseTaskDueDate';
 
 async function getTasksFromDB() {
   try {

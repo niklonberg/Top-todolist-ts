@@ -1,10 +1,10 @@
 import { Task } from './interfaces';
 
-function formatTaskDueDate(task: Task): Task {
+function parseTaskDueDate(task: Task): Task {
   return {
     ...task,
     dueDate: new Date(task.dueDate),
   };
 }
 
-export default formatTaskDueDate;
+export default parseTaskDueDate;

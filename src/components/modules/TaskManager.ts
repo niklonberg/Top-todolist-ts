@@ -1,7 +1,7 @@
 import { isToday, addDays, isWithinInterval } from 'date-fns';
 import { EventEmitter } from 'events';
 import { Task, TaskManagerInterface } from './utils/interfaces';
-import formatTaskDueDate from './utils/formatTaskDueDate';
+import parseTaskDueDate from './utils/parseTaskDueDate';
 
 // TODO add documentation to below class like this:
 /**
@@ -101,7 +101,7 @@ class TaskManager implements TaskManagerInterface {
       }
       const responseBody = await response.json();
       let updatedTask = responseBody.updatedTask as Task;
-      updatedTask = formatTaskDueDate(updatedTask);
+      updatedTask = parseTaskDueDate(updatedTask);
       const taskIndex = this.tasks.findIndex(
         (task) => task.sortOrder === updatedTask.sortOrder,
       );
@@ -140,7 +140,7 @@ class TaskManager implements TaskManagerInterface {
         );
       }
       let newTaskFromDB = (await response.json()) as Task;
-      newTaskFromDB = formatTaskDueDate(newTaskFromDB);
+      newTaskFromDB = parseTaskDueDate(newTaskFromDB);
       this.tasks.push(newTaskFromDB);
       this.currSelectedTask = this.tasks[this.tasks.length - 1];
       this.eventEmitter.emit('taskFormSubmit');

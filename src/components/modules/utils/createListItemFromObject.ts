@@ -63,7 +63,7 @@ function createCheckCompleteBtn(task: Task) {
   return checkCompleteBtn;
 }
 
-function createDateCompleted(task: Task) {
+export function createDateCompleted(task: Task) {
   const dateCompleted = createElement<HTMLTimeElement>(
     'time',
     'completion-date',

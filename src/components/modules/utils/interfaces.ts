@@ -42,7 +42,7 @@ export interface TaskManagerInterface {
   getTask(taskID: string): Task;
   getSubtasks(taskID: string): Task[];
   getTodayTasks(): Task[];
-  // getNext7DaysTasks(): Task[];
+  getNext7DaysTasks(): Task[];
   editTask(taskToEdit: Task, newTask: Task): void;
   toggleTaskCompleted(task: Task): void;
   setSelectedTask(taskID: string): void;

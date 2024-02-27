@@ -53,24 +53,24 @@ class TaskManager implements TaskManagerInterface {
     );
   }
 
-  // getNext7DaysTasks() {
-  //   const todos = this.getTopLevelTasks();
-  //   const today = new Date();
-  //   today.setHours(0, 0, 0);
-  //   const sevenDaysLater = addDays(today, 7);else {
-  //   return todos.reduce(
-  //     (acc, curr) => [
-  //       ...acc,
-  //       ...curr.children.filter((childTodo) =>
-  //         isWithinInterval(childTodo.dueDate, {
-  //           start: today,
-  //           end: sevenDaysLater,
-  //         }),
-  //       ),
-  //     ],
-  //     [],
-  //   );
-  // }
+  getNext7DaysTasks() {
+    const tasks = this.getTasks();
+    const today = new Date();
+    today.setHours(0, 0, 0);
+    const sevenDaysLater = addDays(today, 7);
+    return tasks.reduce(
+      (acc, curr) => [
+        ...acc,
+        ...curr.subtasks.filter((subtask) =>
+          isWithinInterval(subtask.dueDate, {
+            start: today,
+            end: sevenDaysLater,
+          }),
+        ),
+      ],
+      [],
+    );
+  }
 
   /* Edit methods */
   async editTask(taskToEdit: Task, newTask: Task) {

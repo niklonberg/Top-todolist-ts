@@ -85,7 +85,7 @@ export function createDateCompleted(task: Task) {
   return dateCompleted;
 }
 
-function createDueDate(task: Task) {
+export function createDueDate(task: Task) {
   const dueDate = createElement<HTMLTimeElement>('time', 'task-date');
   dueDate.setAttribute(
     'datetime',
@@ -95,7 +95,7 @@ function createDueDate(task: Task) {
   return dueDate;
 }
 
-function createListItemFromObject(task: Task, destination: TaskLevel) {
+function createListItemFromTask(task: Task, destination: TaskLevel) {
   const li = createListContainer(task);
   const listDetails = createListDetailsContainer(task);
   const editActions = createEditActionsContainer();
@@ -128,4 +128,4 @@ function createListItemFromObject(task: Task, destination: TaskLevel) {
   return li;
 }
 
-export default createListItemFromObject;
+export default createListItemFromTask;

@@ -1,6 +1,6 @@
-import createListItemFromObject, {
+import createTaskListItem, {
   createDateCompleted,
-} from './utils/createListItemFromObject';
+} from './utils/createTaskListItem';
 import UIManager from './abstract/UIManager';
 import insertEmptyListFallbackItem from './utils/insertEmptyListFallbackItem';
 import addDragFunctionality from './utils/addDragFunctionality';
@@ -153,7 +153,7 @@ class TaskUIManager extends UIManager {
       'top-level-tasks',
     );
     this.TaskManager.getTasks().forEach((task) => {
-      const parentLi = createListItemFromObject(task, 'task');
+      const parentLi = createTaskListItem(task, 'task');
       if (this.TaskManager.currSelectedTask === task) {
         parentLi.classList.add('selected-list-item');
       }
@@ -176,7 +176,7 @@ class TaskUIManager extends UIManager {
       'selected-subtasks',
     );
     task?.subtasks.forEach((subtask) => {
-      ul.append(createListItemFromObject(subtask, 'subtask'));
+      ul.append(createTaskListItem(subtask, 'subtask'));
     });
     insertEmptyListFallbackItem(ul);
     const addNewSubtaskBtn = this.createNewTaskBtn('add-subtask-btn');
@@ -202,7 +202,7 @@ class TaskUIManager extends UIManager {
     const todosListContainer = this.createTasksContainer('Todays tasks');
     const ul = this.createElement<HTMLUListElement>('ul');
     this.TaskManager.getTodayTasks().forEach((subtask) =>
-      ul.append(createListItemFromObject(subtask, 'subtask')),
+      ul.append(createTaskListItem(subtask, 'subtask')),
     );
     insertEmptyListFallbackItem(ul);
     todosListContainer.append(ul);
@@ -214,7 +214,7 @@ class TaskUIManager extends UIManager {
     const todosListContainer = this.createTasksContainer('Next 7 days tasks');
     const ul = this.createElement<HTMLUListElement>('ul');
     this.TaskManager.getNext7DaysTasks().forEach((subtask) =>
-      ul.append(createListItemFromObject(subtask, 'subtask')),
+      ul.append(createTaskListItem(subtask, 'subtask')),
     );
     insertEmptyListFallbackItem(ul);
     todosListContainer.append(ul);

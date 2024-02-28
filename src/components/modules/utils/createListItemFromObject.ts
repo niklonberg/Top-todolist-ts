@@ -85,6 +85,16 @@ export function createDateCompleted(task: Task) {
   return dateCompleted;
 }
 
+function createDueDate(task: Task) {
+  const dueDate = createElement<HTMLTimeElement>('time');
+  dueDate.setAttribute(
+    'datetime',
+    formatISO(task.dueDate, { representation: 'date' }),
+  );
+  dueDate.textContent = `Due: ${format(task.dueDate, "MMM do, ccc - ''yy")}`;
+  return dueDate;
+}
+
 function createListItemFromObject(task: Task, destination: TaskLevel) {
   const li = createListContainer(task);
   const listDetails = createListDetailsContainer(task);
@@ -106,15 +116,7 @@ function createListItemFromObject(task: Task, destination: TaskLevel) {
     if (task.isCompleted) {
       timeEle = createDateCompleted(task);
     } else if (task.dueDate) {
-      timeEle = createElement<HTMLTimeElement>('time');
-      timeEle.setAttribute(
-        'datetime',
-        formatISO(task.dueDate, { representation: 'date' }),
-      );
-      timeEle.textContent = `Due: ${format(
-        task.dueDate,
-        "MMM do, ccc - ''yy",
-      )}`;
+      timeEle = createDueDate(task);
     } else {
       timeEle = createElement<HTMLParagraphElement>('p');
       timeEle.textContent = 'No Due Date';

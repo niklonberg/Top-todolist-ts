@@ -64,7 +64,7 @@ function createCheckCompleteBtn(task: Task) {
 }
 
 export function createDateCompleted(task: Task) {
-  const dateCompleted = createElement<HTMLTimeElement>('time');
+  const dateCompleted = createElement<HTMLTimeElement>('time', 'task-date');
   const now = new Date();
   const dayDifference = differenceInDays(now, task.dateCompleted);
   let dateText = 'Completed: ';
@@ -86,7 +86,7 @@ export function createDateCompleted(task: Task) {
 }
 
 function createDueDate(task: Task) {
-  const dueDate = createElement<HTMLTimeElement>('time');
+  const dueDate = createElement<HTMLTimeElement>('time', 'task-date');
   dueDate.setAttribute(
     'datetime',
     formatISO(task.dueDate, { representation: 'date' }),
@@ -112,17 +112,12 @@ function createListItemFromObject(task: Task, destination: TaskLevel) {
       listDetails.append(p);
     }
 
-    let timeEle: HTMLTimeElement | HTMLParagraphElement;
-    if (task.isCompleted) {
-      timeEle = createDateCompleted(task);
-    } else if (task.dueDate) {
-      timeEle = createDueDate(task);
-    } else {
-      timeEle = createElement<HTMLParagraphElement>('p');
-      timeEle.textContent = 'No Due Date';
-    }
-    timeEle.classList.add('task-date');
-    listDetails.append(timeEle);
+    let taskDate: HTMLTimeElement | HTMLParagraphElement =
+      createElement<HTMLParagraphElement>('p', 'task-date');
+    taskDate.textContent = 'No Due Date';
+    if (task.isCompleted) taskDate = createDateCompleted(task);
+    if (task.dueDate) taskDate = createDueDate(task);
+    listDetails.append(taskDate);
 
     editActions.prepend(createCheckCompleteBtn(task));
 

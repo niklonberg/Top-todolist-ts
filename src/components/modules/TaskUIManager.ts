@@ -1,5 +1,6 @@
 import createTaskListItem, {
   createDateCompleted,
+  createDueDate,
 } from './utils/createTaskListItem';
 import UIManager from './abstract/UIManager';
 import insertEmptyListFallbackItem from './utils/insertEmptyListFallbackItem';
@@ -112,7 +113,6 @@ class TaskUIManager extends UIManager {
     );
   }
 
-  // TODO: add taskLevel as arg like in addTaskForm
   editTaskForm(parentLi: TodoListItemWithDataset) {
     this.containerElement.innerHTML = '';
     this.containerElement.append(

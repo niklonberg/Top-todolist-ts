@@ -30,8 +30,8 @@ function createTaskForm(taskToEdit?: Task) {
     />
   </div>
   <div class="input-container">
-    <label for="priority">Priority</label>
-    <select id="priority" name="priority">
+    <label for="priority">Priority:</label>
+    <select id="priority" class="priority-select" name="priority">
       <option value="Low" ${
         taskToEdit?.priority === 'Low' ? 'selected' : ''
       } >Low</option>
@@ -44,8 +44,8 @@ function createTaskForm(taskToEdit?: Task) {
     </select>
   </div>
   <div class="input-container">
-    <label for="dueDate">Duedate</label>
-    <input type="date" name="dueDate" id="dueDate" ${
+    <label for="dueDate">Duedate:</label>
+    <input type="date" class="date-select" name="dueDate" id="dueDate" ${
       taskToEdit?.dueDate instanceof Date
         ? `value=${format(taskToEdit.dueDate, 'yyyy-MM-dd')}`
         : `value=''`

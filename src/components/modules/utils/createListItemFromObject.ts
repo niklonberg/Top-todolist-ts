@@ -106,7 +106,9 @@ function createListItemFromObject(task: Task, destination: TaskLevel) {
     }
 
     let timeEle: HTMLTimeElement | HTMLParagraphElement;
-    if (task.dueDate) {
+    if (task.isCompleted) {
+      timeEle = createDateCompleted(task);
+    } else if (task.dueDate) {
       timeEle = createElement<HTMLTimeElement>('time');
       timeEle.setAttribute(
         'datetime',
@@ -123,10 +125,6 @@ function createListItemFromObject(task: Task, destination: TaskLevel) {
     timeEle.classList.add('deadline-date');
     timeEle.setAttribute('aria-label', 'deadline date');
     listDetails.append(timeEle);
-
-    if (task.isCompleted) {
-      li.append(createDateCompleted(task));
-    }
 
     editActions.prepend(createCheckCompleteBtn(task));
 

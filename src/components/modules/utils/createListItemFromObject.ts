@@ -64,10 +64,7 @@ function createCheckCompleteBtn(task: Task) {
 }
 
 export function createDateCompleted(task: Task) {
-  const dateCompleted = createElement<HTMLTimeElement>(
-    'time',
-    'completion-date',
-  );
+  const dateCompleted = createElement<HTMLTimeElement>('time');
   const now = new Date();
   const dayDifference = differenceInDays(now, task.dateCompleted);
   let dateText = 'Completed: ';
@@ -122,8 +119,7 @@ function createListItemFromObject(task: Task, destination: TaskLevel) {
       timeEle = createElement<HTMLParagraphElement>('p');
       timeEle.textContent = 'No Due Date';
     }
-    timeEle.classList.add('deadline-date');
-    timeEle.setAttribute('aria-label', 'deadline date');
+    timeEle.classList.add('task-date');
     listDetails.append(timeEle);
 
     editActions.prepend(createCheckCompleteBtn(task));

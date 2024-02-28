@@ -57,14 +57,11 @@ class TaskUIManager extends UIManager {
     });
   }
 
-  toggleItemComplete(target: Element, parentLi: TodoListItemWithDataset) {
+  async toggleItemComplete(target: Element, parentLi: TodoListItemWithDataset) {
+    const subtaskIndex = [...parentLi.parentElement.children].indexOf(parentLi);
+    const response = this.TaskManager.toggleSubtaskCompleted(subtaskIndex);
     target.classList.toggle('checked');
     parentLi.classList.toggle('task-complete');
-    const subtaskIndex = [...parentLi.parentElement.children].indexOf(parentLi);
-    console.log('subtask index: ', subtaskIndex);
-    // const task = this.TaskManager.toggleSubtaskCompleted(
-    //   parentLi.dataset.task,
-    // );
     // if (task.isCompleted) {
     //   parentLi.append(createDateCompleted(task));
     // } else {

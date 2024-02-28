@@ -112,7 +112,10 @@ function createListItemFromObject(task: Task, destination: TaskLevel) {
         'datetime',
         formatISO(task.dueDate, { representation: 'date' }),
       );
-      timeEle.textContent = format(task.dueDate, "MMM do, ccc - ''yy");
+      timeEle.textContent = `Due: ${format(
+        task.dueDate,
+        "MMM do, ccc - ''yy",
+      )}`;
     } else {
       timeEle = createElement<HTMLParagraphElement>('p');
       timeEle.textContent = 'No Due Date';
@@ -121,7 +124,7 @@ function createListItemFromObject(task: Task, destination: TaskLevel) {
     timeEle.setAttribute('aria-label', 'deadline date');
     listDetails.append(timeEle);
 
-    if (task.dateCompleted) {
+    if (task.isCompleted) {
       li.append(createDateCompleted(task));
     }
 

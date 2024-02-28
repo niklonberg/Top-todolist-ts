@@ -83,16 +83,13 @@ class TaskManager implements TaskManagerInterface {
   /* Edit methods */
   async editTask(taskToEdit: Task, newTask: Task) {
     try {
-      const response = await fetch(
-        `${this.baseURL}/editTask/${taskToEdit._id}`,
-        {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(newTask),
+      const response = await fetch(`${this.baseURL}/${taskToEdit._id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
         },
-      );
+        body: JSON.stringify(newTask),
+      });
       if (!response.ok) {
         const errorMessage = await response.text();
         throw new Error(
@@ -151,7 +148,7 @@ class TaskManager implements TaskManagerInterface {
   /* Add methods */
   async addTask(newTask: Task) {
     try {
-      const response = await fetch(`${this.baseURL}/createTask`, {
+      const response = await fetch(`${this.baseURL}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -177,7 +174,7 @@ class TaskManager implements TaskManagerInterface {
   async addSubtask(newSubtask: Task) {
     try {
       const response = await fetch(
-        `${this.baseURL}/createSubtask/${this.currSelectedTask._id}`,
+        `${this.baseURL}/${this.currSelectedTask._id}/createSubtask`,
         {
           method: 'PUT',
           headers: {
@@ -207,7 +204,7 @@ class TaskManager implements TaskManagerInterface {
   /* Delete methods */
   async deleteTask(taskID: string) {
     try {
-      const response = await fetch(`${this.baseURL}/deleteTask/${taskID}`, {
+      const response = await fetch(`${this.baseURL}/${taskID}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -232,7 +229,7 @@ class TaskManager implements TaskManagerInterface {
   async deleteSubtask(subtaskIndex: number) {
     try {
       const response = await fetch(
-        `${this.baseURL}/deleteSubtask/${subtaskIndex}/${this.currSelectedTask._id}`,
+        `${this.baseURL}/${this.currSelectedTask._id}/deleteSubtask/${subtaskIndex}/`,
         {
           method: 'PUT',
           headers: {

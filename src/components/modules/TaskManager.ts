@@ -112,15 +112,14 @@ class TaskManager implements TaskManagerInterface {
 
   async toggleSubtaskCompleted(subtaskIndex: number) {
     try {
-      console.log(this.currSelectedTask);
       const response = await fetch(
-        `${this.baseURL}/editSubtask/${subtaskIndex}/${this.currSelectedTask._id}`,
+        `${this.baseURL}/${this.currSelectedTask._id}/editSubtask/${subtaskIndex}/`,
         {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
           },
-          // body: JSON.stringify(new Date()),
+          body: JSON.stringify({ dateCompleted: new Date() }),
         },
       );
       if (!response.ok) {
@@ -137,7 +136,6 @@ class TaskManager implements TaskManagerInterface {
       );
       this.tasks[updatedTaskIndex] = updatedTask;
       this.currSelectedTask = this.tasks[updatedTaskIndex];
-      console.log(this.currSelectedTask);
       return response;
     } catch (error) {
       console.error(error);

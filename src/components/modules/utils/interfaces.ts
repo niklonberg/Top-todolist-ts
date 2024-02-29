@@ -28,9 +28,9 @@ export interface DataManagerInterface<T> {
   deleteItem(): void;
 }
 
-export interface TodoListItemWithDataset extends HTMLElement {
+export interface TaskListItem extends HTMLLIElement {
   dataset: {
-    task: string;
+    task?: string;
   };
 }
 

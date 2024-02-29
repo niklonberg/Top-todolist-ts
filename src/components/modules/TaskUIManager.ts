@@ -59,17 +59,25 @@ class TaskUIManager extends UIManager {
   }
 
   async toggleItemComplete(parentLi: TaskListItem) {
-    console.log(parentLi);
     const subtaskIndex = [...parentLi.parentElement.children].indexOf(parentLi);
     const response =
       await this.TaskManager.toggleSubtaskCompleted(subtaskIndex);
-    parentLi.classList.toggle('task-complete');
-    console.log(response);
-    // if (task.isCompleted) {
-    //   parentLi.append(createDateCompleted(task));
-    // } else {
-    //   parentLi.querySelector('.completion-date').remove();
-    // }
+    if (!response.ok) {
+      console.error('An error occured, could not toggle task completion');
+    } else {
+      parentLi.classList.toggle('task-complete');
+      const subtask = this.TaskManager.currSelectedTask.subtasks[subtaskIndex];
+      // TODO: get rid of .isCompleted property, use .dateCompleted instead?
+      if (subtask.isCompleted) {
+        parentLi
+          .querySelector('.task-date')
+          .replaceWith(createDateCompleted(subtask));
+      } else {
+        parentLi
+          .querySelector('.task-date')
+          .replaceWith(createDueDate(subtask));
+      }
+    }
   }
 
   selectItem(parentLi: TaskListItem) {

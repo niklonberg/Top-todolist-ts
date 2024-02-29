@@ -86,13 +86,18 @@ export function createDateCompleted(task: Task) {
 }
 
 export function createDueDate(task: Task) {
-  const dueDate = createElement<HTMLTimeElement>('time', 'task-date');
-  dueDate.setAttribute(
-    'datetime',
-    formatISO(task.dueDate, { representation: 'date' }),
-  );
-  dueDate.textContent = `Due: ${format(task.dueDate, "MMM do, ccc - ''yy")}`;
-  return dueDate;
+  let taskDate: HTMLTimeElement | HTMLParagraphElement =
+    createElement<HTMLParagraphElement>('p', 'task-date');
+  taskDate.textContent = 'No Due Date';
+  if (task.dueDate) {
+    taskDate = createElement<HTMLTimeElement>('time', 'task-date');
+    taskDate.setAttribute(
+      'datetime',
+      formatISO(task.dueDate, { representation: 'date' }),
+    );
+    taskDate.textContent = `Due: ${format(task.dueDate, "MMM do, ccc - ''yy")}`;
+  }
+  return taskDate;
 }
 
 function createListItemFromTask(task: Task, destination: TaskLevel) {
@@ -111,12 +116,9 @@ function createListItemFromTask(task: Task, destination: TaskLevel) {
       p.textContent = task.description;
       listDetails.append(p);
     }
-
-    let taskDate: HTMLTimeElement | HTMLParagraphElement =
-      createElement<HTMLParagraphElement>('p', 'task-date');
-    taskDate.textContent = 'No Due Date';
-    if (task.isCompleted) taskDate = createDateCompleted(task);
-    if (task.dueDate && !task.isCompleted) taskDate = createDueDate(task);
+    const taskDate = task.isCompleted
+      ? createDateCompleted(task)
+      : createDueDate(task);
     listDetails.append(taskDate);
 
     editActions.prepend(createCheckCompleteBtn(task));

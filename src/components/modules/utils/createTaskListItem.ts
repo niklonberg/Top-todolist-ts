@@ -116,7 +116,7 @@ function createListItemFromTask(task: Task, destination: TaskLevel) {
       createElement<HTMLParagraphElement>('p', 'task-date');
     taskDate.textContent = 'No Due Date';
     if (task.isCompleted) taskDate = createDateCompleted(task);
-    if (task.dueDate) taskDate = createDueDate(task);
+    if (task.dueDate && !task.isCompleted) taskDate = createDueDate(task);
     listDetails.append(taskDate);
 
     editActions.prepend(createCheckCompleteBtn(task));

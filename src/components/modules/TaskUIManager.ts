@@ -11,7 +11,7 @@ import {
   Task,
   TaskLevel,
   TaskManagerInterface,
-  TodoListItemWithDataset,
+  TaskListItem,
 } from './utils/interfaces';
 
 class TaskUIManager extends UIManager {
@@ -29,7 +29,7 @@ class TaskUIManager extends UIManager {
     this.containerElement = document.querySelector(`#${containerElementID}`);
     this.containerElement.addEventListener('click', (e) => {
       const target = e.target as Element;
-      const targetParentLi = target.closest('LI') as TodoListItemWithDataset;
+      const targetParentLi = target.closest('LI') as TaskListItem;
       if (targetParentLi?.parentElement.id === 'top-level-tasks')
         this.selectItem(targetParentLi);
 
@@ -58,11 +58,13 @@ class TaskUIManager extends UIManager {
     });
   }
 
-  async toggleItemComplete(target: Element, parentLi: TodoListItemWithDataset) {
+  async toggleItemComplete(target: Element, parentLi: TaskListItem) {
+    console.log(parentLi);
     const subtaskIndex = [...parentLi.parentElement.children].indexOf(parentLi);
-    const response = this.TaskManager.toggleSubtaskCompleted(subtaskIndex);
-    target.classList.toggle('checked');
+    const response =
+      await this.TaskManager.toggleSubtaskCompleted(subtaskIndex);
     parentLi.classList.toggle('task-complete');
+    console.log(response);
     // if (task.isCompleted) {
     //   parentLi.append(createDateCompleted(task));
     // } else {
@@ -70,7 +72,7 @@ class TaskUIManager extends UIManager {
     // }
   }
 
-  selectItem(parentLi: TodoListItemWithDataset) {
+  selectItem(parentLi: TaskListItem) {
     [...parentLi.parentElement.children].forEach((child) =>
       child.classList.remove('selected-list-item'),
     );
@@ -83,7 +85,7 @@ class TaskUIManager extends UIManager {
       );
   }
 
-  async deleteItem(parentLi: TodoListItemWithDataset) {
+  async deleteItem(parentLi: TaskListItem) {
     if (parentLi.dataset.task) {
       const response = await this.TaskManager.deleteTask(parentLi.dataset.task);
       if (!response.ok) {
@@ -113,7 +115,7 @@ class TaskUIManager extends UIManager {
     );
   }
 
-  editTaskForm(parentLi: TodoListItemWithDataset) {
+  editTaskForm(parentLi: TaskListItem) {
     this.containerElement.innerHTML = '';
     this.containerElement.append(
       this.FormManager?.insertTaskForm(

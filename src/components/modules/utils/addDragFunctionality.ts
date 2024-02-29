@@ -1,4 +1,4 @@
-import { TaskManagerInterface, TodoListItemWithDataset } from './interfaces';
+import { TaskManagerInterface, TaskListItem } from './interfaces';
 
 function getDragAfterElement(container: HTMLElement, y: number) {
   const draggableElements = [
@@ -43,7 +43,7 @@ function addDragFunctionality(
   //   console.log(todoItems.indexOf(target));
   //   dataManager?.reorderTodo(
   //     todoItems.indexOf(target),
-  //     target as TodoListItemWithDataset,
+  //     target as TaskListItem,
   //   );
   //   ul.classList.remove('highlight-drag-area');
   // });

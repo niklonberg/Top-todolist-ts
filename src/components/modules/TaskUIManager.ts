@@ -54,11 +54,11 @@ class TaskUIManager extends UIManager {
       if (target.id === 'cancel-form-btn') this.renderTasksSection();
 
       if (target.closest('button')?.classList.contains('toggle-complete-btn'))
-        this.toggleItemComplete(target, targetParentLi);
+        this.toggleItemComplete(targetParentLi);
     });
   }
 
-  async toggleItemComplete(target: Element, parentLi: TaskListItem) {
+  async toggleItemComplete(parentLi: TaskListItem) {
     console.log(parentLi);
     const subtaskIndex = [...parentLi.parentElement.children].indexOf(parentLi);
     const response =

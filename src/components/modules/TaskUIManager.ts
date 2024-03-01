@@ -68,7 +68,7 @@ class TaskUIManager extends UIManager {
       parentLi.classList.toggle('task-complete');
       const subtask = this.TaskManager.currSelectedTask.subtasks[subtaskIndex];
       // TODO: get rid of .isCompleted property, use .dateCompleted instead?
-      if (subtask.isCompleted) {
+      if (subtask.dateCompleted) {
         parentLi
           .querySelector('.task-date')
           .replaceWith(createDateCompleted(subtask));

@@ -110,6 +110,8 @@ class TaskManager implements TaskManagerInterface {
     }
   }
 
+  async editSubtask(taskToEdit: Task, subtaskToEdit: Task, newSubtask: Task) {}
+
   async toggleSubtaskCompleted(subtaskIndex: number) {
     try {
       const response = await fetch(

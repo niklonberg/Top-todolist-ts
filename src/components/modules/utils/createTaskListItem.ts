@@ -6,7 +6,7 @@ function createListContainer(task: Task) {
   const li = createElement<HTMLLIElement>('LI', 'list-item');
   li.setAttribute('draggable', 'true');
   li.classList.add('draggable');
-  if (task.isCompleted) li.classList.add('task-complete');
+  if (task.dateCompleted) li.classList.add('task-complete');
   if (task._id) {
     li.dataset.task = task._id.toString();
   }
@@ -57,7 +57,7 @@ function createCheckCompleteBtn(task: Task) {
   checkCompleteBtn.classList.add('icon-btn');
   checkCompleteBtn.innerHTML =
     '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 450"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/></svg>';
-  if (task.isCompleted) {
+  if (task.dateCompleted) {
     checkCompleteBtn.classList.add('checked');
   }
   return checkCompleteBtn;
@@ -116,7 +116,7 @@ function createListItemFromTask(task: Task, destination: TaskLevel) {
       p.textContent = task.description;
       listDetails.append(p);
     }
-    const taskDate = task.isCompleted
+    const taskDate = task.dateCompleted
       ? createDateCompleted(task)
       : createDueDate(task);
     listDetails.append(taskDate);

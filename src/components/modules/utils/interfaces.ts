@@ -14,7 +14,6 @@ export interface Task {
   sortOrder?: number;
   title: string;
   priority: PriorityLevel;
-  isCompleted: boolean;
   dateCompleted: null | Date;
   dueDate: null | Date;
   description: string;
@@ -46,6 +45,7 @@ export interface TaskManagerInterface {
   setSelectedTask(taskID: string): void;
   resetSelectedTask(): void;
   editTask(taskToEdit: Task, newTask: Task): void;
+  editSubtask(taskToEdit: Task, subtaskToEdit: Task, newSubtask: Task): void;
   toggleSubtaskCompleted(subtaskIndex: number): Promise<Response>;
   addTask(task: Task): void;
   addSubtask(task: Task): void;

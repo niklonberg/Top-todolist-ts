@@ -39,7 +39,7 @@ class TaskUIManager extends UIManager {
         this.addTaskForm('subtask');
 
       if (target.closest('button')?.classList.contains('edit-item-btn'))
-        this.editTaskForm(targetParentLi);
+        this.editTaskForm('task', targetParentLi);
 
       if (target.closest('button')?.classList.contains('delete-item-btn')) {
         this.containerElement.querySelector('.warning-container')?.remove();
@@ -58,26 +58,16 @@ class TaskUIManager extends UIManager {
     });
   }
 
-  async toggleItemComplete(parentLi: TaskListItem) {
-    const subtaskIndex = [...parentLi.parentElement.children].indexOf(parentLi);
-    const response =
-      await this.TaskManager.toggleSubtaskCompleted(subtaskIndex);
-    if (!response.ok) {
-      console.error('An error occured, could not toggle task completion');
-    } else {
-      parentLi.classList.toggle('task-complete');
-      const subtask = this.TaskManager.currSelectedTask.subtasks[subtaskIndex];
-      // TODO: get rid of .isCompleted property, use .dateCompleted instead?
-      if (subtask.dateCompleted) {
-        parentLi
-          .querySelector('.task-date')
-          .replaceWith(createDateCompleted(subtask));
-      } else {
-        parentLi
-          .querySelector('.task-date')
-          .replaceWith(createDueDate(subtask));
-      }
-    }
+  editTaskForm(taskLevel: TaskLevel, parentLi: TaskListItem) {
+    this.containerElement.innerHTML = '';
+    // based on taskLevel
+    this.containerElement.append(
+      this.FormManager?.insertTaskForm(
+        this.TaskManager,
+        taskLevel,
+        this.TaskManager.getTask(parentLi.dataset.task),
+      ),
+    );
   }
 
   selectItem(parentLi: TaskListItem) {
@@ -91,6 +81,27 @@ class TaskUIManager extends UIManager {
       .parentElement.replaceWith(
         this.renderSelectedSubtasksList(this.TaskManager.currSelectedTask),
       );
+  }
+
+  async toggleItemComplete(parentLi: TaskListItem) {
+    const subtaskIndex = [...parentLi.parentElement.children].indexOf(parentLi);
+    const response =
+      await this.TaskManager.toggleSubtaskCompleted(subtaskIndex);
+    if (!response.ok) {
+      console.error('An error occured, could not toggle task completion');
+    } else {
+      parentLi.classList.toggle('task-complete');
+      const subtask = this.TaskManager.currSelectedTask.subtasks[subtaskIndex];
+      if (subtask.dateCompleted) {
+        parentLi
+          .querySelector('.task-date')
+          .replaceWith(createDateCompleted(subtask));
+      } else {
+        parentLi
+          .querySelector('.task-date')
+          .replaceWith(createDueDate(subtask));
+      }
+    }
   }
 
   async deleteItem(parentLi: TaskListItem) {
@@ -120,17 +131,6 @@ class TaskUIManager extends UIManager {
     this.containerElement.innerHTML = '';
     this.containerElement.append(
       this.FormManager?.insertTaskForm(this.TaskManager, taskLevel),
-    );
-  }
-
-  editTaskForm(parentLi: TaskListItem) {
-    this.containerElement.innerHTML = '';
-    this.containerElement.append(
-      this.FormManager?.insertTaskForm(
-        this.TaskManager,
-        'task',
-        this.TaskManager.getTask(parentLi.dataset.task),
-      ),
     );
   }
 

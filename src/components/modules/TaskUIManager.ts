@@ -60,13 +60,15 @@ class TaskUIManager extends UIManager {
 
   editTaskForm(parentLi: TaskListItem) {
     const taskLevel: TaskLevel = parentLi.dataset.task ? 'task' : 'subtask';
+    const taskToEdit =
+      taskLevel === 'task'
+        ? this.TaskManager.getTask(parentLi.dataset.task)
+        : this.TaskManager.getSubtask(
+            [...parentLi.parentElement.children].indexOf(parentLi),
+          );
     this.containerElement.innerHTML = '';
     this.containerElement.append(
-      this.FormManager?.insertTaskForm(
-        this.TaskManager,
-        taskLevel,
-        this.TaskManager.getTask(parentLi.dataset.task),
-      ),
+      this.FormManager?.insertTaskForm(this.TaskManager, taskLevel, taskToEdit),
     );
   }
 

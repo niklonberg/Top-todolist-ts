@@ -39,7 +39,7 @@ class TaskUIManager extends UIManager {
         this.addTaskForm('subtask');
 
       if (target.closest('button')?.classList.contains('edit-item-btn'))
-        this.editTaskForm('task', targetParentLi);
+        this.editTaskForm(targetParentLi);
 
       if (target.closest('button')?.classList.contains('delete-item-btn')) {
         this.containerElement.querySelector('.warning-container')?.remove();
@@ -58,9 +58,9 @@ class TaskUIManager extends UIManager {
     });
   }
 
-  editTaskForm(taskLevel: TaskLevel, parentLi: TaskListItem) {
+  editTaskForm(parentLi: TaskListItem) {
+    const taskLevel: TaskLevel = parentLi.dataset.task ? 'task' : 'subtask';
     this.containerElement.innerHTML = '';
-    // based on taskLevel
     this.containerElement.append(
       this.FormManager?.insertTaskForm(
         this.TaskManager,

@@ -143,8 +143,7 @@ class TaskManager implements TaskManagerInterface {
         );
         return response;
       }
-      let updatedTask = (await response.json()) as Task;
-      updatedTask = parseTaskDueDate(updatedTask);
+      const updatedTask = parseTaskDueDate((await response.json()) as Task);
       this.tasks[subtaskIndex] = updatedTask;
       this.currSelectedTask = this.tasks[subtaskIndex];
       return response;
@@ -235,10 +234,10 @@ class TaskManager implements TaskManagerInterface {
     }
   }
 
-  async deleteSubtask(subtaskIndex: number) {
+  async deleteSubtask(subtaskIndex: number, taskID: string) {
     try {
       const response = await fetch(
-        `${this.baseURL}/${this.currSelectedTask._id}/deleteSubtask/${subtaskIndex}/`,
+        `${this.baseURL}/${taskID}/deleteSubtask/${subtaskIndex}/`,
         {
           method: 'PUT',
           headers: {

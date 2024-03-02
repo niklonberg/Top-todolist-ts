@@ -146,11 +146,8 @@ class TaskManager implements TaskManagerInterface {
       }
       let updatedTask = (await response.json()) as Task;
       updatedTask = parseTaskDueDate(updatedTask);
-      const updatedTaskIndex = this.tasks.findIndex(
-        (task) => task._id === updatedTask._id,
-      );
-      this.tasks[updatedTaskIndex] = updatedTask;
-      this.currSelectedTask = this.tasks[updatedTaskIndex];
+      this.tasks[subtaskIndex] = updatedTask;
+      this.currSelectedTask = this.tasks[subtaskIndex];
       return response;
     } catch (error) {
       console.error(error);

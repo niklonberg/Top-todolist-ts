@@ -166,9 +166,8 @@ class TaskUIManager extends UIManager {
     );
     this.TaskManager.getTasks().forEach((task) => {
       const parentLi = createListItemFromTask(task, 'task');
-      if (this.TaskManager.currSelectedTask === task) {
+      if (this.TaskManager.currSelectedTask === task)
         parentLi.classList.add('selected-list-item');
-      }
       ul.append(parentLi);
     });
     insertEmptyListFallbackItem(ul);

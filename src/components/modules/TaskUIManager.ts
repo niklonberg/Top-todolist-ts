@@ -88,8 +88,10 @@ class TaskUIManager extends UIManager {
 
   async toggleItemComplete(parentLi: TaskListItem) {
     const subtaskIndex = [...parentLi.parentElement.children].indexOf(parentLi);
-    const response =
-      await this.TaskManager.toggleSubtaskCompleted(subtaskIndex);
+    const response = await this.TaskManager.toggleSubtaskCompleted(
+      subtaskIndex,
+      parentLi.dataset.task,
+    );
     if (!response.ok) {
       console.error('An error occured, could not toggle task completion');
     } else {

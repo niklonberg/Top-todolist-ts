@@ -125,10 +125,10 @@ class TaskManager implements TaskManagerInterface {
     // }
   }
 
-  async toggleSubtaskCompleted(subtaskIndex: number) {
+  async toggleSubtaskCompleted(subtaskIndex: number, taskID: string) {
     try {
       const response = await fetch(
-        `${this.baseURL}/${this.currSelectedTask._id}/editSubtask/${subtaskIndex}/`,
+        `${this.baseURL}/${taskID}/editSubtask/${subtaskIndex}/`,
         {
           method: 'PUT',
           headers: {

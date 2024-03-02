@@ -39,15 +39,18 @@ export interface TaskManagerInterface {
   currSelectedTask: Task | null;
   getTasks(): Task[];
   getTask(taskID: string): Task;
-  getSubtasks(taskID: string): Task[];
+  // getSubtasks(taskID: string): Task[];
   getSubtask(subtaskIndex: number): Task;
   getTodayTasks(): Task[];
   getNext7DaysTasks(): Task[];
   setSelectedTask(taskID: string): void;
   resetSelectedTask(): void;
   editTask(taskToEdit: Task, newTask: Task): void;
-  editSubtask(taskToEdit: Task, subtaskToEdit: Task, newSubtask: Task): void;
-  toggleSubtaskCompleted(subtaskIndex: number): Promise<Response>;
+  editSubtask(subtaskIndex: number, newSubtask: Task): void;
+  toggleSubtaskCompleted(
+    subtaskIndex: number,
+    taskID: string,
+  ): Promise<Response>;
   addTask(task: Task): void;
   addSubtask(task: Task): void;
   deleteTask(taskID: string): Promise<Response>;

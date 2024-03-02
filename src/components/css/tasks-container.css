@@ -15,26 +15,8 @@
     margin-top: auto;
   }
 
-  .tasks-container .list-item {
-    display: flex;
-    gap: var(--m-gap);
-    background-color: var(--primary);
-    border-radius: 20px;
-    padding: var(--m-gap);
-    opacity: 0.9;
-  }
-
-  .tasks-container .list-item-title {
-    margin-top: 0;
-    cursor: pointer;
-  }
-
-  .tasks-container .list-item:hover {
-    opacity: 1;
-  }
-
-  .tasks-container .selected-list-item {
-    background-color: var(--secondary);
+  .draggable {
+    cursor: move;
   }
 
   .dragging {

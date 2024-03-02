@@ -1,12 +1,21 @@
 @layer component {
   .list-item {
     position: relative;
-    cursor: pointer;
-    padding-inline: var(--m-gap);
+    display: flex;
+    gap: var(--m-gap);
+    background-color: var(--primary);
+    border-radius: 20px;
+    padding: var(--m-gap);
     margin: var(--l-gap);
+    opacity: 0.9;
+    cursor: pointer;
     transition:
       background-color,
       opacity 0.5s;
+  }
+
+  .list-item:hover {
+    opacity: 1;
   }
 
   .list-item:not(:last-child)::after {
@@ -25,9 +34,11 @@
   }
 
   .list-item-title {
+    margin-top: 0;
+    margin-bottom: calc(var(--sm-gap) / 2);
+    cursor: pointer;
     word-break: break-all;
     letter-spacing: 1.5px;
-    margin-bottom: calc(var(--sm-gap) / 2);
   }
 
   .list-item-details {
@@ -60,6 +71,10 @@
     justify-content: space-between;
   }
 
+  .selected-list-item {
+    background-color: var(--secondary);
+  }
+
   .task-date {
     font-size: 0.85rem;
     font-weight: bold;
@@ -77,9 +92,5 @@
 
   .toggle-complete-btn.checked {
     fill: var(--secondary);
-  }
-
-  .draggable {
-    cursor: move;
   }
 }

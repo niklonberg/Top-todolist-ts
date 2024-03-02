@@ -37,9 +37,13 @@ class TaskManager implements TaskManagerInterface {
     return this.tasks.find((task) => task._id === taskID);
   }
 
-  getSubtasks(taskID: string) {
-    return this.getTask(taskID).subtasks;
+  getSubtask(subtaskIndex: number) {
+    return this.currSelectedTask.subtasks[subtaskIndex];
   }
+
+  // getSubtasks(taskID: string) {
+  //   return this.getTask(taskID).subtasks;
+  // }
 
   getTodayTasks() {
     const tasks = this.getTasks();
@@ -110,7 +114,16 @@ class TaskManager implements TaskManagerInterface {
     }
   }
 
-  async editSubtask(taskToEdit: Task, subtaskToEdit: Task, newSubtask: Task) {}
+  async editSubtask(subtaskIndex: number, newSubtask: Task) {
+    // try {
+    //   const response = await fetch(
+    //     `${this.baseURL}${this.currSelectedTask._id}/editSubtask/${subtaskIndex}/,`,
+    //   );
+    // } catch (error) {
+    //   console.error(error);
+    //   throw error;
+    // }
+  }
 
   async toggleSubtaskCompleted(subtaskIndex: number) {
     try {

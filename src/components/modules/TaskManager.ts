@@ -144,8 +144,11 @@ class TaskManager implements TaskManagerInterface {
         return response;
       }
       const updatedTask = parseTaskDueDate((await response.json()) as Task);
-      this.tasks[subtaskIndex] = updatedTask;
-      this.currSelectedTask = this.tasks[subtaskIndex];
+      const updatedTaskIndex = this.tasks.findIndex(
+        (task) => task._id === updatedTask._id,
+      );
+      this.tasks[updatedTaskIndex] = updatedTask;
+      this.currSelectedTask = this.tasks[updatedTaskIndex];
       return response;
     } catch (error) {
       console.error(error);
@@ -253,9 +256,11 @@ class TaskManager implements TaskManagerInterface {
         return response;
       }
       const updatedTask = parseTaskDueDate((await response.json()) as Task);
-      this.tasks[subtaskIndex] = updatedTask;
-      this.currSelectedTask = this.tasks[subtaskIndex];
-      console.log(this.currSelectedTask);
+      const updatedTaskIndex = this.tasks.findIndex(
+        (task) => task._id === updatedTask._id,
+      );
+      this.tasks[updatedTaskIndex] = updatedTask;
+      this.currSelectedTask = this.tasks[updatedTaskIndex];
       return response;
     } catch (error) {
       console.error('Error:', error.message);

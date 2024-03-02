@@ -218,9 +218,13 @@ class TaskUIManager extends UIManager {
     this.containerElement.innerHTML = '';
     const todosListContainer = this.createTasksContainer('Todays tasks');
     const ul = this.createElement<HTMLUListElement>('ul');
-    this.TaskManager.getTodayTasks().forEach((subtask) =>
-      ul.append(createListItemFromTask(subtask, 'subtask')),
-    );
+    this.TaskManager.getTodayTasks().forEach((subtask) => {
+      const li = createListItemFromTask(subtask, 'subtask');
+      const parentTaskTitleEle = this.createElement('h2');
+      parentTaskTitleEle.textContent = subtask.parentTaskTitle;
+      li.prepend(parentTaskTitleEle);
+      ul.append(li);
+    });
     insertEmptyListFallbackItem(ul);
     todosListContainer.append(ul);
     this.containerElement.append(todosListContainer);

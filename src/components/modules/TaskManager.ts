@@ -1,6 +1,10 @@
 import { isToday, addDays, isWithinInterval } from 'date-fns';
 import { EventEmitter } from 'events';
-import { Task, TaskManagerInterface } from './utils/interfaces';
+import {
+  Task,
+  TaskWithParentTitle,
+  TaskManagerInterface,
+} from './utils/interfaces';
 import parseTaskDueDate from './utils/parseTaskDueDate';
 
 // TODO add documentation to below class like this:
@@ -47,10 +51,15 @@ class TaskManager implements TaskManagerInterface {
 
   getTodayTasks() {
     const tasks = this.getTasks();
-    return tasks.reduce(
+    return tasks.reduce<TaskWithParentTitle[]>(
       (acc, curr) => [
         ...acc,
-        ...curr.subtasks.filter((subtask) => isToday(subtask.dueDate)),
+        ...curr.subtasks
+          .filter((subtask) => isToday(subtask.dueDate))
+          .map((subtask) => ({
+            ...subtask,
+            parentTaskTitle: curr.title,
+          })),
       ],
       [],
     );

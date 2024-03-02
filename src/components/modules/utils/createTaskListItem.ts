@@ -4,8 +4,6 @@ import { Task, TaskLevel } from './interfaces';
 
 function createTaskListContainer(task: Task, parentTaskID?: string) {
   const li = createElement<HTMLLIElement>('LI', 'list-item');
-  li.setAttribute('draggable', 'true');
-  li.classList.add('draggable');
   if (task.dateCompleted) li.classList.add('task-complete');
   if (parentTaskID) li.classList.add('subtask');
   li.dataset.task = task._id || parentTaskID;

@@ -78,4 +78,8 @@
   .toggle-complete-btn.checked {
     fill: var(--secondary);
   }
+
+  .draggable {
+    cursor: move;
+  }
 }

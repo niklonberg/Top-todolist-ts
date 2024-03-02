@@ -16,7 +16,6 @@
   }
 
   .tasks-container .list-item {
-    cursor: move;
     display: flex;
     gap: var(--m-gap);
     background-color: var(--primary);

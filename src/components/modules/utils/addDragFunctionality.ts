@@ -28,6 +28,11 @@ function addDragFunctionality(
   ul: HTMLUListElement,
   dataManager?: TaskManagerInterface,
 ) {
+  const listItems = [...ul.children];
+  listItems.forEach((li) => {
+    li.setAttribute('draggable', 'true');
+    li.classList.add('draggable');
+  });
   // ul.addEventListener('dragstart', (e) => {
   //   const target = e.target as HTMLElement;
   //   if (target.classList.contains('draggable'))

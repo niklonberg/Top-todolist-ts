@@ -2,11 +2,12 @@ import { format, formatISO, differenceInDays } from 'date-fns';
 import createElement from './createElement';
 import { Task, TaskLevel } from './interfaces';
 
-function createListContainer(task: Task, parentTaskID?: string) {
+function createTaskListContainer(task: Task, parentTaskID?: string) {
   const li = createElement<HTMLLIElement>('LI', 'list-item');
   li.setAttribute('draggable', 'true');
   li.classList.add('draggable');
   if (task.dateCompleted) li.classList.add('task-complete');
+  if (parentTaskID) li.classList.add('subtask');
   li.dataset.task = task._id || parentTaskID;
 
   return li;
@@ -104,7 +105,7 @@ function createListItemFromTask(
   destination: TaskLevel,
   parentTaskID?: string,
 ) {
-  const li = createListContainer(task, parentTaskID);
+  const li = createTaskListContainer(task, parentTaskID);
   const listDetails = createListDetailsContainer(task);
   const editActions = createEditActionsContainer();
 

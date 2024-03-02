@@ -59,6 +59,7 @@ class TaskUIManager extends UIManager {
   }
 
   editTaskForm(parentLi: TaskListItem) {
+    // problematic below line
     const taskLevel: TaskLevel = parentLi.dataset.task ? 'task' : 'subtask';
     const taskToEdit =
       taskLevel === 'task'
@@ -107,8 +108,11 @@ class TaskUIManager extends UIManager {
   }
 
   async deleteItem(parentLi: TaskListItem) {
-    if (parentLi.dataset.task) {
-      const response = await this.TaskManager.deleteTask(parentLi.dataset.task);
+    if (parentLi.classList.contains('subtask')) {
+      const subtaskIndex = [...parentLi.parentElement.children].indexOf(
+        parentLi,
+      );
+      const response = await this.TaskManager.deleteSubtask(subtaskIndex);
       if (!response.ok) {
         // TODO: render error dialog popup for user?
         console.log('Apologies, an error occured. Please try again');
@@ -116,10 +120,7 @@ class TaskUIManager extends UIManager {
         this.renderTasksSection();
       }
     } else {
-      const subtaskIndex = [...parentLi.parentElement.children].indexOf(
-        parentLi,
-      );
-      const response = await this.TaskManager.deleteSubtask(subtaskIndex);
+      const response = await this.TaskManager.deleteTask(parentLi.dataset.task);
       if (!response.ok) {
         // TODO: render error dialog popup for user?
         console.log('Apologies, an error occured. Please try again');
@@ -186,7 +187,7 @@ class TaskUIManager extends UIManager {
       '',
       'selected-subtasks',
     );
-    task.subtasks.forEach((subtask) => {
+    task?.subtasks.forEach((subtask) => {
       ul.append(createListItemFromTask(subtask, 'subtask', task._id));
     });
     insertEmptyListFallbackItem(ul);

@@ -150,13 +150,12 @@ class TaskUIManager extends UIManager {
     return taskContainer;
   }
 
-  createNewTaskBtn(btnID: string) {
+  createNewTaskBtn(taskLevel: TaskLevel) {
     const btn = this.createElement<HTMLButtonElement>(
       'button',
       'create-task-btn',
-      btnID,
     );
-    btn.textContent = '+ Add Task';
+    btn.textContent = `+ Add ${taskLevel}`;
     return btn;
   }
 
@@ -174,7 +173,7 @@ class TaskUIManager extends UIManager {
       ul.append(parentLi);
     });
     insertEmptyListFallbackItem(ul);
-    const addNewTaskBtn = this.createNewTaskBtn('add-task-btn');
+    const addNewTaskBtn = this.createNewTaskBtn('task');
     tasksListContainer.append(ul, addNewTaskBtn);
     addDragFunctionality(ul, this.TaskManager);
     return tasksListContainer;
@@ -193,8 +192,7 @@ class TaskUIManager extends UIManager {
       ul.append(createListItemFromTask(subtask, 'subtask', task._id));
     });
     insertEmptyListFallbackItem(ul);
-    const addNewSubtaskBtn = this.createNewTaskBtn('add-subtask-btn');
-    addNewSubtaskBtn.textContent = '+ Add Subtask';
+    const addNewSubtaskBtn = this.createNewTaskBtn('subtask');
     subtasksListContainer.append(ul, addNewSubtaskBtn);
     return subtasksListContainer;
   }

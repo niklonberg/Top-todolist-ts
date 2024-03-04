@@ -58,18 +58,22 @@ class TaskUIManager extends UIManager {
     });
   }
 
-  editTaskForm(parentLi: TaskListItem) {
-    // problematic below line
-    const taskLevel: TaskLevel = parentLi.dataset.task ? 'task' : 'subtask';
-    const taskToEdit =
-      taskLevel === 'task'
-        ? this.TaskManager.getTask(parentLi.dataset.task)
-        : this.TaskManager.getSubtask(
-            [...parentLi.parentElement.children].indexOf(parentLi),
-          );
+  addTaskForm(taskLevel: TaskLevel) {
     this.containerElement.innerHTML = '';
     this.containerElement.append(
-      this.FormManager?.insertTaskForm(this.TaskManager, taskLevel, taskToEdit),
+      this.FormManager?.insertTaskForm(this.TaskManager, taskLevel),
+    );
+  }
+
+  editTaskForm(parentLi: TaskListItem) {
+    const taskLevel: TaskLevel = parentLi.classList.contains('subtask')
+      ? 'subtask'
+      : 'task';
+    const taskToEdit = this.TaskManager.getTask(parentLi.dataset.task);
+
+    this.containerElement.innerHTML = '';
+    this.containerElement.append(
+      this.FormManager.insertTaskForm(this.TaskManager, taskLevel, taskToEdit),
     );
   }
 
@@ -133,13 +137,6 @@ class TaskUIManager extends UIManager {
         this.renderTasksSection();
       }
     }
-  }
-
-  addTaskForm(taskLevel: TaskLevel) {
-    this.containerElement.innerHTML = '';
-    this.containerElement.append(
-      this.FormManager?.insertTaskForm(this.TaskManager, taskLevel),
-    );
   }
 
   createTasksContainer(headingTitle: string) {

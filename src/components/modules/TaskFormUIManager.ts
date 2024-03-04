@@ -13,7 +13,11 @@ class TaskFormUIManager extends UIManager {
     taskToEdit: Task = null,
     subtaskIndex: number | null = null,
   ) {
-    this.form = createTaskForm(taskToEdit);
+    if (typeof subtaskIndex === 'number') {
+      this.form = createTaskForm(taskToEdit.subtasks[subtaskIndex]);
+    } else {
+      this.form = createTaskForm(taskToEdit);
+    }
     applyInputLabelBehavior(this.form);
     this.form.addEventListener(
       'submit',
@@ -45,8 +49,7 @@ class TaskFormUIManager extends UIManager {
     }
     if (taskLevel === 'subtask') {
       if (taskToEdit) {
-        // ensure this is the subtask, not parent task
-        // newTask.subtasks = taskToEdit.subtasks; // ensure old subtasks arent lost
+        newTask.subtasks = taskToEdit.subtasks[subtaskIndex].subtasks; // ensure old subtasks arent lost
         TaskManager.editSubtask(subtaskIndex, newTask, taskToEdit._id);
       } else {
         TaskManager.addSubtask(newTask);

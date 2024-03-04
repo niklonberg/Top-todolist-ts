@@ -10,6 +10,7 @@
 
   #nav-bar .list-item-title {
     padding-inline: var(--sm-gap);
+    margin: 0;
   }
 
   #nav-bar .list-item:hover {

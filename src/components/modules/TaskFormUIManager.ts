@@ -1,11 +1,7 @@
 import UIManager from './abstract/UIManager';
 import createTaskForm from './utils/createTaskForm';
-import {
-  Task,
-  TaskLevel,
-  newTaskFormData,
-  TaskManagerInterface,
-} from './utils/interfaces';
+import createTaskFromFormData from './utils/createTaskFromFormData';
+import { Task, TaskLevel, TaskManagerInterface } from './utils/interfaces';
 import TaskFactory from './TaskFactory';
 
 class TaskFormUIManager extends UIManager {
@@ -51,13 +47,7 @@ class TaskFormUIManager extends UIManager {
     taskToEdit: Task | null,
   ) {
     e.preventDefault();
-    const formData = new FormData(this.form);
-    const formDataObject: Record<keyof newTaskFormData, string> =
-      Object.fromEntries(formData.entries()) as Record<
-        keyof newTaskFormData,
-        string
-      >;
-    const newTask = TaskFactory(formDataObject);
+    const newTask = createTaskFromFormData(this.form);
     if (taskLevel === 'task') {
       if (taskToEdit) {
         newTask.subtasks = taskToEdit.subtasks; // ensure old subtasks arent lost

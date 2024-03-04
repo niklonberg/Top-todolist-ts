@@ -33,10 +33,8 @@ class TaskUIManager extends UIManager {
       if (targetParentLi?.parentElement.id === 'top-level-tasks')
         this.selectItem(targetParentLi);
 
-      if (target.id === 'add-task-btn') this.addTaskForm('task');
-
-      if (target.id === 'add-subtask-btn' && TaskManager.currSelectedTask)
-        this.addTaskForm('subtask');
+      if (target.classList.contains('create-task-btn'))
+        this.addTaskForm(target);
 
       if (target.closest('button')?.classList.contains('edit-item-btn'))
         this.editTaskForm(targetParentLi);
@@ -58,7 +56,10 @@ class TaskUIManager extends UIManager {
     });
   }
 
-  addTaskForm(taskLevel: TaskLevel) {
+  addTaskForm(target: Element) {
+    const taskContainer = target.parentElement.querySelector('ul');
+    const taskLevel: TaskLevel =
+      taskContainer.id === 'selected-subtasks' ? 'subtask' : 'task';
     this.containerElement.innerHTML = '';
     this.containerElement.append(
       this.FormManager?.insertTaskForm(this.TaskManager, taskLevel),

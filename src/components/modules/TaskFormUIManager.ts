@@ -2,7 +2,6 @@ import UIManager from './abstract/UIManager';
 import createTaskForm from './utils/createTaskForm';
 import createTaskFromFormData from './utils/createTaskFromFormData';
 import { Task, TaskLevel, TaskManagerInterface } from './utils/interfaces';
-import TaskFactory from './TaskFactory';
 
 class TaskFormUIManager extends UIManager {
   private form: HTMLFormElement | null;

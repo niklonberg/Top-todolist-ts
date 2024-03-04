@@ -123,14 +123,36 @@ class TaskManager implements TaskManagerInterface {
   }
 
   async editSubtask(subtaskIndex: number, newSubtask: Task, taskID: string) {
-    // try {
-    //   const response = await fetch(
-    //     `${this.baseURL}${this.currSelectedTask._id}/editSubtask/${subtaskIndex}/,`,
-    //   );
-    // } catch (error) {
-    //   console.error(error);
-    //   throw error;
-    // }
+    try {
+      const response = await fetch(
+        `${this.baseURL}/${taskID}/editSubtask/${subtaskIndex}`,
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(newSubtask),
+        },
+      );
+      if (!response.ok) {
+        const errorMessage = await response.text();
+        console.error(
+          `HTTP error! Status: ${response.status}, Message: ${errorMessage}`,
+        );
+        return response;
+      }
+      const updatedTask = parseTaskDueDate((await response.json()) as Task);
+      const updatedTaskIndex = this.tasks.findIndex(
+        (task) => task._id === updatedTask._id,
+      );
+      this.tasks[updatedTaskIndex] = updatedTask;
+      this.currSelectedTask = this.tasks[updatedTaskIndex];
+      this.eventEmitter.emit('taskFormSubmit');
+      return response;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
   }
 
   async toggleSubtaskCompleted(subtaskIndex: number, taskID: string) {

@@ -50,7 +50,7 @@ export interface TaskManagerInterface {
   setSelectedTask(taskID: string): void;
   resetSelectedTask(): void;
   editTask(taskToEdit: Task, newTask: Task): void;
-  editSubtask(subtaskIndex: number, newSubtask: Task): void;
+  editSubtask(subtaskIndex: number, newSubtask: Task, taskID: string): void;
   toggleSubtaskCompleted(
     subtaskIndex: number,
     taskID: string,

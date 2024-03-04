@@ -10,11 +10,13 @@ class TaskFormUIManager extends UIManager {
     TaskManager: TaskManagerInterface,
     taskLevel: TaskLevel,
     taskToEdit: Task = null,
+    subtaskIndex: number | null = null,
   ) {
     this.form = createTaskForm(taskToEdit);
     this.form.addEventListener(
       'submit',
-      (e) => this.submitForm(e, TaskManager, taskLevel, taskToEdit),
+      (e) =>
+        this.submitForm(e, TaskManager, taskLevel, taskToEdit, subtaskIndex),
       {
         once: true,
       },
@@ -44,6 +46,7 @@ class TaskFormUIManager extends UIManager {
     TaskManager: TaskManagerInterface,
     taskLevel: TaskLevel,
     taskToEdit: Task | null,
+    subtaskIndex: number | null,
   ) {
     e.preventDefault();
     const newTask = createTaskFromFormData(this.form);
@@ -57,8 +60,9 @@ class TaskFormUIManager extends UIManager {
     }
     if (taskLevel === 'subtask') {
       if (taskToEdit) {
-        newTask.subtasks = taskToEdit.subtasks;
-        // TaskManager.editSubtask(newTask);
+        // ensure this is the subtask, not parent task
+        // newTask.subtasks = taskToEdit.subtasks; // ensure old subtasks arent lost
+        TaskManager.editSubtask(subtaskIndex, newTask, taskToEdit._id);
       } else {
         TaskManager.addSubtask(newTask);
       }

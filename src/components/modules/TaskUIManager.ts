@@ -67,14 +67,22 @@ class TaskUIManager extends UIManager {
   }
 
   editTaskForm(parentLi: TaskListItem) {
-    const taskLevel: TaskLevel = parentLi.classList.contains('subtask')
-      ? 'subtask'
-      : 'task';
+    let taskLevel: TaskLevel = 'task';
+    let subtaskIndex: number | null = null;
+    if (parentLi.classList.contains('subtask')) {
+      taskLevel = 'subtask';
+      subtaskIndex = [...parentLi.parentElement.children].indexOf(parentLi);
+    }
     const taskToEdit = this.TaskManager.getTask(parentLi.dataset.task);
 
     this.containerElement.innerHTML = '';
     this.containerElement.append(
-      this.FormManager.insertTaskForm(this.TaskManager, taskLevel, taskToEdit),
+      this.FormManager.insertTaskForm(
+        this.TaskManager,
+        taskLevel,
+        taskToEdit,
+        subtaskIndex,
+      ),
     );
   }
 

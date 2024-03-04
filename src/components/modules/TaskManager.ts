@@ -122,7 +122,7 @@ class TaskManager implements TaskManagerInterface {
     }
   }
 
-  async editSubtask(subtaskIndex: number, newSubtask: Task) {
+  async editSubtask(subtaskIndex: number, newSubtask: Task, taskID: string) {
     // try {
     //   const response = await fetch(
     //     `${this.baseURL}${this.currSelectedTask._id}/editSubtask/${subtaskIndex}/,`,

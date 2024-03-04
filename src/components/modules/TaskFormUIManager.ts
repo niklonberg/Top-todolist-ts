@@ -1,6 +1,7 @@
 import UIManager from './abstract/UIManager';
 import createTaskForm from './utils/createTaskForm';
 import createTaskFromFormData from './utils/createTaskFromFormData';
+import applyInputLabelBehavior from './utils/applyInputLabelBehavior';
 import { Task, TaskLevel, TaskManagerInterface } from './utils/interfaces';
 
 class TaskFormUIManager extends UIManager {
@@ -13,6 +14,7 @@ class TaskFormUIManager extends UIManager {
     subtaskIndex: number | null = null,
   ) {
     this.form = createTaskForm(taskToEdit);
+    applyInputLabelBehavior(this.form);
     this.form.addEventListener(
       'submit',
       (e) =>
@@ -21,23 +23,6 @@ class TaskFormUIManager extends UIManager {
         once: true,
       },
     );
-
-    const inputs = this.form.querySelectorAll(
-      '.text-input',
-    ) as NodeListOf<HTMLInputElement>;
-    inputs.forEach((input) => {
-      const label = input.parentElement.querySelector('.text-input-label');
-      if (input.value.trim() !== '') label.classList.add('move-label');
-
-      input.addEventListener('input', () => {
-        if (input.value.trim() !== '') {
-          label.classList.add('move-label');
-        } else {
-          label.classList.remove('move-label');
-        }
-      });
-    });
-
     return this.form;
   }
 

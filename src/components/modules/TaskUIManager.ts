@@ -223,7 +223,11 @@ class TaskUIManager extends UIManager {
     const todosListContainer = this.createTasksContainer('Todays tasks');
     const ul = this.createElement<HTMLUListElement>('ul');
     this.TaskManager.getTodayTasks().forEach((subtask) => {
-      const li = createListItemFromTask(subtask, 'subtask');
+      const li = createListItemFromTask(
+        subtask,
+        'subtask',
+        subtask.parentTaskID,
+      );
       const parentTaskTitleEle = this.createElement('h2');
       parentTaskTitleEle.textContent = subtask.parentTaskTitle;
       li.prepend(parentTaskTitleEle);

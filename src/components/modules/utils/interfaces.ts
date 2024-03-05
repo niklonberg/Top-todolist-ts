@@ -20,8 +20,9 @@ export interface Task {
   subtasks: Task[];
 }
 
-export interface TaskWithParentTitle extends Task {
+export interface SubtaskWithImpParentInfo extends Task {
   parentTaskTitle: string;
+  parentTaskID: string;
 }
 
 export interface DataManagerInterface<T> {
@@ -45,7 +46,7 @@ export interface TaskManagerInterface {
   getTask(taskID: string): Task;
   // getSubtasks(taskID: string): Task[];
   getSubtask(subtaskIndex: number): Task;
-  getTodayTasks(): TaskWithParentTitle[];
+  getTodayTasks(): SubtaskWithImpParentInfo[];
   getNext7DaysTasks(): Task[];
   setSelectedTask(taskID: string): void;
   resetSelectedTask(): void;

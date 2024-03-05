@@ -72,10 +72,14 @@ export function createDueDate(task: Task) {
   return taskDate;
 }
 
-function createTaskListContainer(task: Task, parentTaskID?: string) {
+function createTaskListContainer(
+  task: Task,
+  parentTaskID?: string,
+  subtaskIndex?: number,
+) {
   const li = createElement<HTMLLIElement>('LI', 'list-item');
   if (task.dateCompleted) li.classList.add('task-complete');
-  if (parentTaskID) li.classList.add('subtask');
+  if (subtaskIndex) li.dataset.subtaskIndex = subtaskIndex.toString();
   li.dataset.task = task._id || parentTaskID;
   return li;
 }
@@ -110,8 +114,9 @@ function createListItemFromTask(
   task: Task,
   destination: TaskLevel,
   parentTaskID?: string,
+  subtaskIndex?: number,
 ) {
-  const li = createTaskListContainer(task, parentTaskID);
+  const li = createTaskListContainer(task, parentTaskID, subtaskIndex);
   const listDetails = createListDetailsContainer(task);
   const editActions = createEditActionsContainer();
 

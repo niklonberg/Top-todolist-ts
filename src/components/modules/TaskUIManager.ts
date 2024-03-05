@@ -197,8 +197,10 @@ class TaskUIManager extends UIManager {
       '',
       'selected-subtasks',
     );
-    task?.subtasks.forEach((subtask) => {
-      ul.append(createListItemFromTask(subtask, 'subtask', task._id));
+    task?.subtasks.forEach((subtask, subtaskIndex) => {
+      ul.append(
+        createListItemFromTask(subtask, 'subtask', task._id, subtaskIndex),
+      );
     });
     insertEmptyListFallbackItem(ul);
     const addNewSubtaskBtn = this.createNewTaskBtn('subtask');

@@ -13,11 +13,8 @@
     margin: 0;
   }
 
-  #nav-bar .list-item:hover {
-    background-color: var(--primary);
-  }
-
-  .selected-nav-item {
-    background-color: var(--primary);
+  #nav-bar .selected-nav-item {
+    background-color: var(--primary-contrast);
+    color: var(--primary);
   }
 }

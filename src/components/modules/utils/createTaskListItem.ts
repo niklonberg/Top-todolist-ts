@@ -79,7 +79,8 @@ function createTaskListContainer(
 ) {
   const li = createElement<HTMLLIElement>('LI', 'list-item');
   if (task.dateCompleted) li.classList.add('task-complete');
-  if (subtaskIndex) li.dataset.subtaskIndex = subtaskIndex.toString();
+  if (typeof subtaskIndex === 'number')
+    li.dataset.subtaskIndex = subtaskIndex.toString();
   li.dataset.task = task._id || parentTaskID;
   return li;
 }

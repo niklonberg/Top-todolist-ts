@@ -51,19 +51,20 @@ class TaskManager implements TaskManagerInterface {
 
   getTodayTasks() {
     const tasks = this.getTasks();
-    return tasks.reduce<SubtaskWithImpParentInfo[]>(
-      (acc, curr) => [
-        ...acc,
-        ...curr.subtasks
-          .filter((subtask) => isToday(subtask.dueDate))
-          .map((subtask) => ({
+    const todayTasks: SubtaskWithImpParentInfo[] = [];
+    tasks.forEach((task) => {
+      task.subtasks.forEach((subtask, subtaskIndex) => {
+        if (isToday(subtask.dueDate)) {
+          todayTasks.push({
             ...subtask,
-            parentTaskTitle: curr.title,
-            parentTaskID: curr._id,
-          })),
-      ],
-      [],
-    );
+            parentTaskTitle: task.title,
+            parentTaskID: task._id,
+            subtaskIndex,
+          });
+        }
+      });
+    });
+    return todayTasks;
   }
 
   getNext7DaysTasks() {

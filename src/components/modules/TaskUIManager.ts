@@ -229,6 +229,7 @@ class TaskUIManager extends UIManager {
         subtask,
         'subtask',
         subtask.parentTaskID,
+        subtask.subtaskIndex,
       );
       const parentTaskTitleEle = this.createElement('h2');
       parentTaskTitleEle.textContent = subtask.parentTaskTitle;

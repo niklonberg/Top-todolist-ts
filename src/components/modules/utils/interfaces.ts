@@ -23,6 +23,7 @@ export interface Task {
 export interface SubtaskWithImpParentInfo extends Task {
   parentTaskTitle: string;
   parentTaskID: string;
+  subtaskIndex: number;
 }
 
 export interface DataManagerInterface<T> {

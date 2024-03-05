@@ -93,4 +93,23 @@
   .toggle-complete-btn.checked {
     fill: var(--secondary);
   }
+
+  .parent-task {
+    align-self: center;
+    display: flex;
+    align-items: center;
+    min-width: 100px;
+    /* word-break: break-all; */
+  }
+
+  .parent-task span {
+    height: 50px;
+    width: 50px;
+    fill: var(--primary-contrast);
+  }
+
+  .parent-task span svg {
+    width: 100%;
+    height: 100%;
+  }
 }

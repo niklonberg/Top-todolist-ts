@@ -37,13 +37,11 @@ class HeaderNavbarUIManager extends UIManager {
       if (navListItem.id === 'all-tasks')
         this.taskUIManager.renderTasksSection();
 
-      if (navListItem.id === 'today-tasks') {
+      if (navListItem.id === 'today-tasks')
         this.taskUIManager.renderTodayTasks();
-      }
 
-      if (navListItem.id === 'week-tasks') {
+      if (navListItem.id === 'week-tasks')
         this.taskUIManager.renderNext7DaysTasks();
-      }
     }
   }
 }

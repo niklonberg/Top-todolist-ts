@@ -36,6 +36,7 @@ export interface DataManagerInterface<T> {
 export interface TaskListItem extends HTMLLIElement {
   dataset: {
     task: string;
+    subtaskIndex?: string;
   };
 }
 

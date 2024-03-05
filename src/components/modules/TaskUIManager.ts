@@ -69,9 +69,9 @@ class TaskUIManager extends UIManager {
   editTaskForm(parentLi: TaskListItem) {
     let taskLevel: TaskLevel = 'task';
     let subtaskIndex: number | null = null;
-    if (parentLi.classList.contains('subtask')) {
+    if (parentLi.dataset.subtaskIndex) {
       taskLevel = 'subtask';
-      subtaskIndex = [...parentLi.parentElement.children].indexOf(parentLi);
+      subtaskIndex = Number(parentLi.dataset.subtaskIndex);
     }
     const taskToEdit = this.TaskManager.getTask(parentLi.dataset.task);
 
@@ -100,7 +100,7 @@ class TaskUIManager extends UIManager {
   }
 
   async toggleItemComplete(parentLi: TaskListItem) {
-    const subtaskIndex = [...parentLi.parentElement.children].indexOf(parentLi);
+    const subtaskIndex = Number(parentLi.dataset.subtaskIndex);
     const response = await this.TaskManager.toggleSubtaskCompleted(
       subtaskIndex,
       parentLi.dataset.task,
@@ -123,10 +123,8 @@ class TaskUIManager extends UIManager {
   }
 
   async deleteItem(parentLi: TaskListItem) {
-    if (parentLi.classList.contains('subtask')) {
-      const subtaskIndex = [...parentLi.parentElement.children].indexOf(
-        parentLi,
-      );
+    if (parentLi.dataset.subtaskIndex) {
+      const subtaskIndex = Number(parentLi.dataset.subtaskIndex);
       const response = await this.TaskManager.deleteSubtask(
         subtaskIndex,
         parentLi.dataset.task,

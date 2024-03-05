@@ -1,6 +1,7 @@
 import createListItemFromTask, {
   createDateCompleted,
   createDueDate,
+  createParentTaskInfoContainer,
 } from './utils/createTaskListItem';
 import UIManager from './abstract/UIManager';
 import insertEmptyListFallbackItem from './utils/insertEmptyListFallbackItem';
@@ -229,9 +230,10 @@ class TaskUIManager extends UIManager {
         subtask.parentTaskID,
         subtask.subtaskIndex,
       );
-      const parentTaskTitleEle = this.createElement('h2');
-      parentTaskTitleEle.textContent = subtask.parentTaskTitle;
-      li.prepend(parentTaskTitleEle);
+      const parentTaskInfoContainer = createParentTaskInfoContainer(
+        subtask.parentTaskTitle,
+      );
+      li.prepend(parentTaskInfoContainer);
       ul.append(li);
     });
     insertEmptyListFallbackItem(ul);

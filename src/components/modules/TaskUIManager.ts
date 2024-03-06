@@ -247,9 +247,19 @@ class TaskUIManager extends UIManager {
       'Subtasks due following 7 days',
     );
     const ul = this.createElement<HTMLUListElement>('ul');
-    this.TaskManager.getSubtasksDueWeek().forEach((subtask) =>
-      ul.append(createListItemFromTask(subtask, 'subtask')),
-    );
+    this.TaskManager.getSubtasksDueWeek().forEach((subtask) => {
+      const li = createListItemFromTask(
+        subtask,
+        'subtask',
+        subtask.parentTaskID,
+        subtask.subtaskIndex,
+      );
+      const parentTaskInfoContainer = createParentTaskInfoContainer(
+        subtask.parentTaskTitle,
+      );
+      li.prepend(parentTaskInfoContainer);
+      ul.append(li);
+    });
     insertEmptyListFallbackItem(ul);
     todosListContainer.append(ul);
     this.containerElement.append(todosListContainer);

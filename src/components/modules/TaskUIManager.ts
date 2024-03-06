@@ -223,7 +223,7 @@ class TaskUIManager extends UIManager {
     this.containerElement.innerHTML = '';
     const todosListContainer = this.createTasksContainer('Subtasks due today');
     const ul = this.createElement<HTMLUListElement>('ul');
-    this.TaskManager.getTodayTasks().forEach((subtask) => {
+    this.TaskManager.getSubtasksDueToday().forEach((subtask) => {
       const li = createListItemFromTask(
         subtask,
         'subtask',
@@ -247,7 +247,7 @@ class TaskUIManager extends UIManager {
       'Subtasks due within 7 days',
     );
     const ul = this.createElement<HTMLUListElement>('ul');
-    this.TaskManager.getNext7DaysTasks().forEach((subtask) =>
+    this.TaskManager.getSubtasksDueWeek().forEach((subtask) =>
       ul.append(createListItemFromTask(subtask, 'subtask')),
     );
     insertEmptyListFallbackItem(ul);

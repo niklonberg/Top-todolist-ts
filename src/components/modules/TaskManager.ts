@@ -41,15 +41,15 @@ class TaskManager implements TaskManagerInterface {
     return this.tasks.find((task) => task._id === taskID);
   }
 
-  getSubtask(subtaskIndex: number) {
-    return this.currSelectedTask.subtasks[subtaskIndex];
-  }
+  // getSubtask(subtaskIndex: number) {
+  //   return this.currSelectedTask.subtasks[subtaskIndex];
+  // }
 
   // getSubtasks(taskID: string) {
   //   return this.getTask(taskID).subtasks;
   // }
 
-  getTodayTasks() {
+  getSubtasksDueToday() {
     const tasks = this.getTasks();
     const todayTasks: SubtaskWithImpParentInfo[] = [];
     tasks.forEach((task) => {
@@ -67,16 +67,17 @@ class TaskManager implements TaskManagerInterface {
     return todayTasks;
   }
 
-  getNext7DaysTasks() {
+  getSubtasksDueWeek() {
     const tasks = this.getTasks();
     const today = new Date().setHours(0, 0, 0, 0);
-    const sevenDaysLater = addDays(today, 7);
+    const tomorrow = addDays(today, 1);
+    const sevenDaysLater = addDays(tomorrow, 7);
     return tasks.reduce(
       (acc, curr) => [
         ...acc,
         ...curr.subtasks.filter((subtask) =>
           isWithinInterval(subtask.dueDate, {
-            start: today,
+            start: tomorrow,
             end: sevenDaysLater,
           }),
         ),

@@ -134,7 +134,7 @@ class TaskUIManager extends UIManager {
         // TODO: render error dialog popup for user?
         console.log('Apologies, an error occured. Please try again');
       } else {
-        this.renderTasksSection();
+        this.renderTasksSection(); // render localStorage view
       }
     } else {
       const response = await this.TaskManager.deleteTask(parentLi.dataset.task);
@@ -251,6 +251,14 @@ class TaskUIManager extends UIManager {
     insertEmptyListFallbackItem(ul);
     todosListContainer.append(ul);
     this.containerElement.append(todosListContainer);
+  }
+
+  renderCurrentView() {
+    const currentView = localStorage.getItem('currentView');
+
+    if (currentView === 'allTasks') this.renderTasksSection();
+    if (currentView === 'todayTasks') this.renderTodayTasks();
+    if (currentView === 'weekTasks') this.renderNext7DaysTasks();
   }
 }
 

@@ -221,7 +221,7 @@ class TaskUIManager extends UIManager {
 
   renderTodayTasks() {
     this.containerElement.innerHTML = '';
-    const todosListContainer = this.createTasksContainer('Todays tasks');
+    const todosListContainer = this.createTasksContainer('Subtasks due today');
     const ul = this.createElement<HTMLUListElement>('ul');
     this.TaskManager.getTodayTasks().forEach((subtask) => {
       const li = createListItemFromTask(
@@ -243,7 +243,9 @@ class TaskUIManager extends UIManager {
 
   renderNext7DaysTasks() {
     this.containerElement.innerHTML = '';
-    const todosListContainer = this.createTasksContainer('Next 7 days tasks');
+    const todosListContainer = this.createTasksContainer(
+      'Subtasks due within 7 days',
+    );
     const ul = this.createElement<HTMLUListElement>('ul');
     this.TaskManager.getNext7DaysTasks().forEach((subtask) =>
       ul.append(createListItemFromTask(subtask, 'subtask')),
@@ -255,7 +257,6 @@ class TaskUIManager extends UIManager {
 
   renderCurrentView() {
     const currentView = localStorage.getItem('currentView');
-    console.log('currView: ', currentView);
     if (currentView === 'all-tasks') this.renderTasksSection();
     if (currentView === 'today-tasks') this.renderTodayTasks();
     if (currentView === 'week-tasks') this.renderNext7DaysTasks();

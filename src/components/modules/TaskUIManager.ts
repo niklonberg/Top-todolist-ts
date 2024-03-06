@@ -13,6 +13,7 @@ import {
   TaskLevel,
   TaskManagerInterface,
   TaskListItem,
+  SubtaskWithImpParentInfo,
 } from './utils/interfaces';
 
 class TaskUIManager extends UIManager {
@@ -219,11 +220,14 @@ class TaskUIManager extends UIManager {
     this.containerElement.append(todosLayoutContainer);
   }
 
-  renderTodayTasks() {
+  renderFilteredSubtasks(
+    title: string,
+    filteredSubtasks: SubtaskWithImpParentInfo[],
+  ) {
     this.containerElement.innerHTML = '';
-    const todosListContainer = this.createTasksContainer('Subtasks due today');
+    const tasksListContainer = this.createTasksContainer(title);
     const ul = this.createElement<HTMLUListElement>('ul');
-    this.TaskManager.getSubtasksDueToday().forEach((subtask) => {
+    filteredSubtasks.forEach((subtask) => {
       const li = createListItemFromTask(
         subtask,
         'subtask',
@@ -237,39 +241,23 @@ class TaskUIManager extends UIManager {
       ul.append(li);
     });
     insertEmptyListFallbackItem(ul);
-    todosListContainer.append(ul);
-    this.containerElement.append(todosListContainer);
-  }
-
-  renderNext7DaysTasks() {
-    this.containerElement.innerHTML = '';
-    const todosListContainer = this.createTasksContainer(
-      'Subtasks due following 7 days',
-    );
-    const ul = this.createElement<HTMLUListElement>('ul');
-    this.TaskManager.getSubtasksDueWeek().forEach((subtask) => {
-      const li = createListItemFromTask(
-        subtask,
-        'subtask',
-        subtask.parentTaskID,
-        subtask.subtaskIndex,
-      );
-      const parentTaskInfoContainer = createParentTaskInfoContainer(
-        subtask.parentTaskTitle,
-      );
-      li.prepend(parentTaskInfoContainer);
-      ul.append(li);
-    });
-    insertEmptyListFallbackItem(ul);
-    todosListContainer.append(ul);
-    this.containerElement.append(todosListContainer);
+    tasksListContainer.append(ul);
+    this.containerElement.append(tasksListContainer);
   }
 
   renderCurrentView() {
     const currentView = localStorage.getItem('currentView');
     if (currentView === 'all-tasks') this.renderTasksSection();
-    if (currentView === 'today-tasks') this.renderTodayTasks();
-    if (currentView === 'week-tasks') this.renderNext7DaysTasks();
+    if (currentView === 'today-tasks')
+      this.renderFilteredSubtasks(
+        'Subtasks due today',
+        this.TaskManager.getSubtasksDueToday(),
+      ); //
+    if (currentView === 'week-tasks')
+      this.renderFilteredSubtasks(
+        'Subtasks due following 7 days',
+        this.TaskManager.getSubtasksDueWeek(),
+      );
   }
 }
 

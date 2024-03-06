@@ -1,15 +1,19 @@
 import { Task } from './interfaces';
 
-function parseTaskDueDate(task: Task): Task {
-  const parsedSubtasksDuedate = task.subtasks.map((subtask) => ({
+function parseTaskDateProps(task: Task): Task {
+  const parsedSubtasksDateProps = task.subtasks.map((subtask) => ({
     ...subtask,
     dueDate: subtask.dueDate ? new Date(subtask.dueDate) : null,
+    dateCompleted: subtask.dateCompleted
+      ? new Date(subtask.dateCompleted)
+      : null,
   }));
   return {
     ...task,
     dueDate: task.dueDate ? new Date(task.dueDate) : null,
-    subtasks: parsedSubtasksDuedate,
+    dateCompleted: task.dateCompleted ? new Date(task.dateCompleted) : null,
+    subtasks: parsedSubtasksDateProps,
   };
 }
 
-export default parseTaskDueDate;
+export default parseTaskDateProps;

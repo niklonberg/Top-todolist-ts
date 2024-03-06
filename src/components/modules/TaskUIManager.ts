@@ -244,7 +244,7 @@ class TaskUIManager extends UIManager {
   renderNext7DaysTasks() {
     this.containerElement.innerHTML = '';
     const todosListContainer = this.createTasksContainer(
-      'Subtasks due within 7 days',
+      'Subtasks due following 7 days',
     );
     const ul = this.createElement<HTMLUListElement>('ul');
     this.TaskManager.getSubtasksDueWeek().forEach((subtask) =>

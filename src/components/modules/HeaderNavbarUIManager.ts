@@ -4,14 +4,14 @@ import TaskUIManager from './TaskUIManager';
 class HeaderNavbarUIManager extends UIManager {
   navBar: HTMLElement;
 
-  previousListSelection: null | HTMLLIElement;
+  // previousListSelection: null | HTMLLIElement;
 
   toggleThemeBtn: HTMLButtonElement;
 
   constructor(public taskUIManager: TaskUIManager) {
     super();
     this.taskUIManager = taskUIManager;
-    this.previousListSelection = null;
+    // this.previousListSelection = null;
     this.navBar = document.querySelector('#nav-bar');
     this.navBar.addEventListener('click', (e) => this.selectNavListItem(e));
     this.toggleThemeBtn = document.querySelector('#toggle-theme-btn');
@@ -28,20 +28,29 @@ class HeaderNavbarUIManager extends UIManager {
   selectNavListItem(e: Event) {
     const navListItem = (e.target as Element).closest('LI') as HTMLLIElement;
 
-    if (navListItem !== this.previousListSelection && navListItem) {
+    if (navListItem) {
       this.navBar
         .querySelectorAll('li')
         .forEach((li) => li.classList.remove('selected-nav-item'));
       navListItem.classList.add('selected-nav-item');
-      this.previousListSelection = navListItem;
-      if (navListItem.id === 'all-tasks')
+      // this.previousListSelection = navListItem;
+
+      let currentView = '';
+      if (navListItem.id === 'all-tasks') {
+        currentView = 'allTasks';
         this.taskUIManager.renderTasksSection();
-
-      if (navListItem.id === 'today-tasks')
+      }
+      if (navListItem.id === 'today-tasks') {
+        currentView = 'todayTasks';
         this.taskUIManager.renderTodayTasks();
-
-      if (navListItem.id === 'week-tasks')
+      }
+      if (navListItem.id === 'week-tasks') {
+        currentView = 'weekTasks';
         this.taskUIManager.renderNext7DaysTasks();
+      }
+
+      localStorage.setItem('currentView', currentView);
+      // this.taskUIManager.renderCurrentView()
     }
   }
 }

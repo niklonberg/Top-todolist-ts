@@ -1,6 +1,6 @@
 import { Task } from './interfaces';
 import tasksUrl from './tasksUrl';
-import formatTaskDueDate from './parseTaskDueDate';
+import parseTaskDateProps from './parseTaskDateProps';
 
 async function getTasksFromDB() {
   try {
@@ -10,10 +10,8 @@ async function getTasksFromDB() {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     const tasks = (await response.json()) as Task[];
-    const tasksDueDateFormatted = tasks.map((task) =>
-      task.dueDate ? formatTaskDueDate(task) : task,
-    );
-    return tasksDueDateFormatted;
+    const tasksDatePropsParsed = tasks.map((task) => parseTaskDateProps(task));
+    return tasksDatePropsParsed;
   } catch (error) {
     console.error(error.message);
   }

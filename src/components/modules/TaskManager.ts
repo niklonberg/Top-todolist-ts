@@ -5,7 +5,7 @@ import {
   SubtaskWithImpParentInfo,
   TaskManagerInterface,
 } from './utils/interfaces';
-import parseTaskDueDate from './utils/parseTaskDueDate';
+import parseTaskDateProps from './utils/parseTaskDateProps';
 
 // TODO add documentation to below class like this:
 /**
@@ -112,7 +112,7 @@ class TaskManager implements TaskManagerInterface {
         );
       }
       const responseBody = await response.json();
-      const updatedTask = parseTaskDueDate(responseBody.updatedTask as Task);
+      const updatedTask = parseTaskDateProps(responseBody.updatedTask as Task);
       const taskIndex = this.tasks.findIndex(
         (task) => task.sortOrder === updatedTask.sortOrder,
       );
@@ -143,7 +143,7 @@ class TaskManager implements TaskManagerInterface {
         );
         return response;
       }
-      const updatedTask = parseTaskDueDate((await response.json()) as Task);
+      const updatedTask = parseTaskDateProps((await response.json()) as Task);
       const updatedTaskIndex = this.tasks.findIndex(
         (task) => task._id === updatedTask._id,
       );
@@ -176,7 +176,7 @@ class TaskManager implements TaskManagerInterface {
         );
         return response;
       }
-      const updatedTask = parseTaskDueDate((await response.json()) as Task);
+      const updatedTask = parseTaskDateProps((await response.json()) as Task);
       const updatedTaskIndex = this.tasks.findIndex(
         (task) => task._id === updatedTask._id,
       );
@@ -206,7 +206,7 @@ class TaskManager implements TaskManagerInterface {
         );
       }
       let newTaskFromDB = (await response.json()) as Task;
-      newTaskFromDB = parseTaskDueDate(newTaskFromDB);
+      newTaskFromDB = parseTaskDateProps(newTaskFromDB);
       this.tasks.push(newTaskFromDB);
       this.currSelectedTask = this.tasks[this.tasks.length - 1];
       this.eventEmitter.emit('taskFormSubmit');
@@ -288,7 +288,7 @@ class TaskManager implements TaskManagerInterface {
         );
         return response;
       }
-      const updatedTask = parseTaskDueDate((await response.json()) as Task);
+      const updatedTask = parseTaskDateProps((await response.json()) as Task);
       const updatedTaskIndex = this.tasks.findIndex(
         (task) => task._id === updatedTask._id,
       );

@@ -35,22 +35,9 @@ class HeaderNavbarUIManager extends UIManager {
       navListItem.classList.add('selected-nav-item');
       // this.previousListSelection = navListItem;
 
-      let currentView = '';
-      if (navListItem.id === 'all-tasks') {
-        currentView = 'allTasks';
-        this.taskUIManager.renderTasksSection();
-      }
-      if (navListItem.id === 'today-tasks') {
-        currentView = 'todayTasks';
-        this.taskUIManager.renderTodayTasks();
-      }
-      if (navListItem.id === 'week-tasks') {
-        currentView = 'weekTasks';
-        this.taskUIManager.renderNext7DaysTasks();
-      }
-
+      const currentView = navListItem.id;
       localStorage.setItem('currentView', currentView);
-      // this.taskUIManager.renderCurrentView()
+      this.taskUIManager.renderCurrentView();
     }
   }
 }

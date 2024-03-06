@@ -255,10 +255,10 @@ class TaskUIManager extends UIManager {
 
   renderCurrentView() {
     const currentView = localStorage.getItem('currentView');
-
-    if (currentView === 'allTasks') this.renderTasksSection();
-    if (currentView === 'todayTasks') this.renderTodayTasks();
-    if (currentView === 'weekTasks') this.renderNext7DaysTasks();
+    console.log('currView: ', currentView);
+    if (currentView === 'all-tasks') this.renderTasksSection();
+    if (currentView === 'today-tasks') this.renderTodayTasks();
+    if (currentView === 'week-tasks') this.renderNext7DaysTasks();
   }
 }
 

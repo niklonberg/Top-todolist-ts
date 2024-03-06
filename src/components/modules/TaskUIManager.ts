@@ -96,7 +96,7 @@ class TaskUIManager extends UIManager {
     this.containerElement
       .querySelector('#selected-subtasks')
       .parentElement.replaceWith(
-        this.renderSelectedSubtasksList(this.TaskManager.currSelectedTask),
+        this.createSelectedSubtasksList(this.TaskManager.currSelectedTask),
       );
   }
 
@@ -167,7 +167,7 @@ class TaskUIManager extends UIManager {
     return btn;
   }
 
-  renderTasksList() {
+  createTasksList() {
     const tasksListContainer = this.createTasksContainer('Tasks');
     const ul = this.createElement<HTMLUListElement>(
       'ul',
@@ -187,7 +187,7 @@ class TaskUIManager extends UIManager {
     return tasksListContainer;
   }
 
-  renderSelectedSubtasksList(task: Task) {
+  createSelectedSubtasksList(task: Task) {
     const subtasksListContainer = this.createTasksContainer(
       `Subtasks - ${task ? task.title : 'No task selected'}`,
     );
@@ -210,8 +210,8 @@ class TaskUIManager extends UIManager {
   renderTasksSection() {
     this.containerElement.innerHTML = '';
     const todosLayoutContainer = this.createElement('div', '', 'todos-layout');
-    const topLevelTodosList = this.renderTasksList();
-    const selectedSubTodosList = this.renderSelectedSubtasksList(
+    const topLevelTodosList = this.createTasksList();
+    const selectedSubTodosList = this.createSelectedSubtasksList(
       this.TaskManager.currSelectedTask,
     );
     todosLayoutContainer.append(topLevelTodosList);

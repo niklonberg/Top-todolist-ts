@@ -92,6 +92,19 @@
 }
 
 .priority-select {
+  -webkit-appearance: none;
+  appearance: none;
+  /* background-image: url('/src/images/icons/angle-down-solid.svg');
+  background-size: 16px;
+  background-repeat: no-repeat;
+  background-position: calc(100% - 12px) center; */
+}
+
+.priority-select::after {
+  content: 'hello';
+  color: red;
+  z-index: 1000;
+  position: absolute;
 }
 
 .date-select::-webkit-calendar-picker-indicator {

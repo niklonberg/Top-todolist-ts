@@ -252,7 +252,7 @@ class TaskUIManager extends UIManager {
       this.renderFilteredSubtasks(
         'Subtasks due today',
         this.TaskManager.getSubtasksDueToday(),
-      ); //
+      );
     if (currentView === 'week-tasks')
       this.renderFilteredSubtasks(
         'Subtasks due following 7 days',

@@ -72,18 +72,27 @@ class TaskManager implements TaskManagerInterface {
     const today = new Date().setHours(0, 0, 0, 0);
     const tomorrow = addDays(today, 1);
     const sevenDaysLater = addDays(tomorrow, 7);
-    return tasks.reduce(
-      (acc, curr) => [
-        ...acc,
-        ...curr.subtasks.filter((subtask) =>
+    const weekTasks: SubtaskWithImpParentInfo[] = [];
+
+    tasks.forEach((task) => {
+      task.subtasks.forEach((subtask, subtaskIndex) => {
+        if (
           isWithinInterval(subtask.dueDate, {
             start: tomorrow,
             end: sevenDaysLater,
-          }),
-        ),
-      ],
-      [],
-    );
+          })
+        ) {
+          weekTasks.push({
+            ...subtask,
+            parentTaskTitle: task.title,
+            parentTaskID: task._id,
+            subtaskIndex,
+          });
+        }
+      });
+    });
+
+    return weekTasks;
   }
 
   /* Set methods */

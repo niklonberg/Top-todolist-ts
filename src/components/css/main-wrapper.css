@@ -3,4 +3,10 @@
     display: flex;
     min-height: 100vh;
   }
+
+  @media (max-width: 1220px) {
+    #main-wrapper {
+      flex-direction: column;
+    }
+  }
 }

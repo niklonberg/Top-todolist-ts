@@ -96,6 +96,7 @@
   }
 
   .parent-task-container {
+    gap: var(--m-gap);
     align-self: center;
     display: flex;
     align-items: center;
@@ -116,19 +117,21 @@
 
   .parent-task-title {
     word-break: break-all;
+    min-width: 150px;
   }
 
-  @media (max-width: 950px) {
-    .list-item {
+  @media (max-width: 750px) {
+    .filtered-tasks .list-item {
       flex-direction: column;
     }
 
-    .list-item-edits {
-      flex-direction: row;
-      align-self: center;
+    .filtered-tasks .parent-task-container {
+      width: 100%;
     }
 
-    .parent-task-container {
+    .filtered-tasks .list-item-edits {
+      flex-direction: row;
+      align-self: center;
     }
 
     .parent-task-container span {

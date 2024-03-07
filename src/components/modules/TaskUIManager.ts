@@ -226,7 +226,7 @@ class TaskUIManager extends UIManager {
   ) {
     this.containerElement.innerHTML = '';
     const tasksListContainer = this.createTasksContainer(title);
-    const ul = this.createElement<HTMLUListElement>('ul');
+    const ul = this.createElement<HTMLUListElement>('ul', 'filtered-tasks');
     filteredSubtasks.forEach((subtask) => {
       const li = createListItemFromTask(
         subtask,

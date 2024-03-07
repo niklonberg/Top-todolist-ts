@@ -29,7 +29,7 @@
 
     #nav-bar .list-item {
       margin-block: var(--sm-gap);
-      justify-content: center;
+      align-items: center;
       text-align: center;
     }
 

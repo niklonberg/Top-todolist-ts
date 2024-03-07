@@ -4,3 +4,14 @@
   grid-auto-columns: 1fr;
   gap: var(--l-gap);
 }
+
+@media (max-width: 950px) {
+  #tasks-layout .list-item {
+    flex-direction: column;
+  }
+
+  #tasks-layout .list-item-edits {
+    flex-direction: row;
+    align-self: center;
+  }
+}

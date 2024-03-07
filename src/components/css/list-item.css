@@ -116,6 +116,7 @@
 
     .filtered-tasks .parent-task-container {
       flex-basis: 0px;
+      width: 100%;
     }
 
     .filtered-tasks .list-item-edits {

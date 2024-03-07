@@ -210,7 +210,7 @@ class TaskUIManager extends UIManager {
 
   renderTasksSection() {
     this.containerElement.innerHTML = '';
-    const todosLayoutContainer = this.createElement('div', '', 'todos-layout');
+    const todosLayoutContainer = this.createElement('div', '', 'tasks-layout');
     const topLevelTodosList = this.createTasksList();
     const selectedSubTodosList = this.createSelectedSubtasksList(
       this.TaskManager.currSelectedTask,

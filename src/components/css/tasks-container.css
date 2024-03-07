@@ -27,4 +27,7 @@
     outline: 2px solid var(--primary-contrast);
     border-radius: 20px;
   }
+
+  @media() {
+  }
 }

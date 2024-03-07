@@ -12,6 +12,7 @@
   #nav-bar .list-item-title {
     padding-inline: var(--sm-gap);
     margin: 0;
+    word-break: normal;
   }
 
   #nav-bar .selected-nav-item {
@@ -23,6 +24,21 @@
     #nav-bar {
       position: sticky;
       top: 0;
+    }
+
+    #nav-bar .list-item {
+      margin-block: var(--sm-gap);
+    }
+
+    #nav-bar .list-item::after {
+      display: none;
+    }
+
+    #nav-bar .list-item-title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
     }
 
     #home {

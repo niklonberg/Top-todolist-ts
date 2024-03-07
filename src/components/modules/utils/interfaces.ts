@@ -41,6 +41,7 @@ export interface TaskManagerInterface {
   getTask(taskID: string): Task;
   getSubtasksDueToday(): SubtaskWithImpParentInfo[];
   getSubtasksDueWeek(): SubtaskWithImpParentInfo[];
+  getSubtasksByPriority(): SubtaskWithImpParentInfo[];
   setSelectedTask(taskID: string): void;
   resetSelectedTask(): void;
   editTask(taskToEdit: Task, newTask: Task): void;

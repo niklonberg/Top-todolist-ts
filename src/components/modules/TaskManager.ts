@@ -41,14 +41,6 @@ class TaskManager implements TaskManagerInterface {
     return this.tasks.find((task) => task._id === taskID);
   }
 
-  // getSubtask(subtaskIndex: number) {
-  //   return this.currSelectedTask.subtasks[subtaskIndex];
-  // }
-
-  // getSubtasks(taskID: string) {
-  //   return this.getTask(taskID).subtasks;
-  // }
-
   getSubtasksDueToday() {
     const tasks = this.getTasks();
     const todayTasks: SubtaskWithImpParentInfo[] = [];
@@ -93,6 +85,23 @@ class TaskManager implements TaskManagerInterface {
     });
 
     return weekTasks;
+  }
+
+  getSubtasksByPriority() {
+    const subtasks: SubtaskWithImpParentInfo[] = this.getTasks()
+      .flatMap((currTask) =>
+        currTask.subtasks.map((subtask, subtaskIndex) => ({
+          ...subtask,
+          parentTaskTitle: currTask.title,
+          parentTaskID: currTask._id,
+          subtaskIndex,
+        })),
+      )
+      .sort((a, b) => {
+        const priorityOrder = { High: 3, Medium: 2, Low: 1 };
+        return priorityOrder[b.priority] - priorityOrder[a.priority];
+      });
+    return subtasks;
   }
 
   /* Set methods */

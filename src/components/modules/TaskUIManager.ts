@@ -258,6 +258,11 @@ class TaskUIManager extends UIManager {
         'Subtasks due following 7 days',
         this.TaskManager.getSubtasksDueWeek(),
       );
+    if (currentView === 'priority-tasks')
+      this.renderFilteredSubtasks(
+        'Subtasks by priority level',
+        this.TaskManager.getSubtasksByPriority(),
+      );
   }
 }
 

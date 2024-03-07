@@ -75,9 +75,12 @@ export function createDueDate(task: Task) {
 export function createParentTaskInfoContainer(parentTaskTitle: string) {
   const parentTaskInfoContainer = createElement<HTMLDivElement>(
     'div',
-    'parent-task',
+    'parent-task-container',
   );
-  const parentTaskTitleEle = createElement<HTMLHeadingElement>('h2');
+  const parentTaskTitleEle = createElement<HTMLHeadingElement>(
+    'h2',
+    'parent-task-title',
+  );
   parentTaskTitleEle.textContent = parentTaskTitle;
   const arrowSpan = createElement<HTMLSpanElement>('span');
   arrowSpan.innerHTML =

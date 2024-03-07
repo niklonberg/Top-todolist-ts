@@ -24,21 +24,17 @@
     #nav-bar {
       position: sticky;
       top: 0;
+      z-index: 1;
     }
 
     #nav-bar .list-item {
       margin-block: var(--sm-gap);
+      justify-content: center;
+      text-align: center;
     }
 
     #nav-bar .list-item::after {
       display: none;
-    }
-
-    #nav-bar .list-item-title {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
     }
 
     #home {

@@ -29,7 +29,7 @@ function createTaskForm(taskToEdit?: Task) {
       value="${taskToEdit?.description || ''}"
     />
   </div>
-  <div class="input-container">
+  <div class="input-container select-container">
     <label for="priority">Priority:</label>
     <select id="priority" class="priority-select" name="priority">
       <option value="Low" ${

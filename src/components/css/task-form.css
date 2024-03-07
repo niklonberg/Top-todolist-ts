@@ -91,20 +91,27 @@
   padding: 10px;
 }
 
-.priority-select {
+select {
   -webkit-appearance: none;
   appearance: none;
-  /* background-image: url('/src/images/icons/angle-down-solid.svg');
-  background-size: 16px;
-  background-repeat: no-repeat;
-  background-position: calc(100% - 12px) center; */
 }
 
-.priority-select::after {
-  content: 'hello';
-  color: red;
-  z-index: 1000;
+.select-container {
+  position: relative;
+}
+
+.select-container::after {
+  content: '>';
+  font-size: 1.5rem;
+  font-weight: bold;
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
+  color: var(--primary-contrast);
   position: absolute;
+  right: 12px;
+  pointer-events: none;
 }
 
 .date-select::-webkit-calendar-picker-indicator {

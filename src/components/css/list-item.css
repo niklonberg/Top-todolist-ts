@@ -8,7 +8,6 @@
     padding: var(--m-gap);
     margin-block: var(--l-gap);
     opacity: 0.9;
-    cursor: pointer;
     transition:
       background-color,
       opacity 0.5s;
@@ -36,7 +35,6 @@
   .list-item-title {
     margin-top: 0;
     margin-bottom: calc(var(--sm-gap) / 2);
-    cursor: pointer;
     word-break: break-all;
     letter-spacing: 1.5px;
   }

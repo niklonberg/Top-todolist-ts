@@ -5,6 +5,10 @@
   gap: var(--l-gap);
 }
 
+#tasks-layout .list-item-title {
+  cursor: pointer;
+}
+
 @media (max-width: 950px) {
   #tasks-layout .list-item {
     flex-direction: column;

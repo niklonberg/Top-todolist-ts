@@ -26,13 +26,6 @@ export interface SubtaskWithImpParentInfo extends Task {
   subtaskIndex: number;
 }
 
-export interface DataManagerInterface<T> {
-  addItem(): void;
-  getItem(): T;
-  editItem(): T;
-  deleteItem(): void;
-}
-
 export interface TaskListItem extends HTMLLIElement {
   dataset: {
     task: string;
@@ -46,8 +39,6 @@ export interface TaskManagerInterface {
   currSelectedTask: Task | null;
   getTasks(): Task[];
   getTask(taskID: string): Task;
-  // getSubtasks(taskID: string): Task[];
-  // getSubtask(subtaskIndex: number): Task;
   getSubtasksDueToday(): SubtaskWithImpParentInfo[];
   getSubtasksDueWeek(): SubtaskWithImpParentInfo[];
   setSelectedTask(taskID: string): void;
@@ -62,7 +53,6 @@ export interface TaskManagerInterface {
   addSubtask(task: Task): void;
   deleteTask(taskID: string): Promise<Response>;
   deleteSubtask(subtaskIndex: number, taskID: string): Promise<Response>;
-  // toggleCompletedDate(task: Task): void;
   // reorderTask(index: number, TaskListItem: TodoListItemWithDataset): void;
 }
 /* eslint-disable no-unused-vars */

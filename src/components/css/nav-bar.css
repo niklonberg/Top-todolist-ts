@@ -1,6 +1,7 @@
 @layer component {
   #nav-bar {
     background-color: var(--primary-lighter);
+    min-width: 250px;
   }
 
   #nav-bar .list-item {

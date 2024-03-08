@@ -1,4 +1,4 @@
-import './index.css';
+import './index.scss';
 import TaskManager from './components/modules/TaskManager';
 import TaskUIManager from './components/modules/TaskUIManager';
 import HeaderNavbarUIManager from './components/modules/HeaderNavbarUIManager';

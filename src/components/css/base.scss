@@ -1,18 +1,18 @@
 @layer base {
   :root {
-    --primary: #111111;
-    --primary-lighter: #26292a;
-    --primary-contrast: #e4e4e4;
-    --secondary: #871fe3;
-    --tertiary: #e87e27;
-    --complementary: #04905a;
+    $primary: #111111;
+    $primary-lighter: #26292a;
+    $primary-contrast: #e4e4e4;
+    $secondary: #871fe3;
+    $tertiary: #e87e27;
+    $complementary: #04905a;
 
-    --sm-gap: 10px;
-    --m-gap: 20px;
-    --l-gap: 30px;
+    $sm-gap: 10px;
+    $m-gap: 20px;
+    $l-gap: 30px;
 
-    --sm-br: 5px;
-    --m-br: 10px;
+    $sm-br: 5px;
+    $m-br: 10px;
   }
 
   *,
@@ -23,7 +23,7 @@
 
   body {
     font-family: system-ui, sans-serif;
-    background-color: var(--primary);
+    background-color: var($primary);
     color: var(--primary-contrast);
     margin: 0;
   }

@@ -56,10 +56,10 @@ button {
   position: absolute;
   top: 8px;
   right: 8px;
-}
 
-#cancel-delete-btn svg {
-  width: 80%;
+  svg {
+    width: 80%;
+  }
 }
 
 .icon-btn:hover {

@@ -11,25 +11,21 @@
     transition:
       background-color,
       opacity 0.5s;
-  }
 
-  .list-item:hover {
-    opacity: 1;
-  }
+    &:hover {
+      opacity: 1;
+    }
 
-  .list-item:not(:last-child)::after {
-    position: absolute;
-    content: '';
-    background-color: rgb(82, 82, 82);
-    width: 90%;
-    height: 1px;
-    bottom: calc(-1 * var(--l-gap) / 2);
-    left: 50%;
-    transform: translateX(-50%);
-  }
-
-  .list-item.task-complete {
-    background-color: var(--complementary) !important;
+    &:not(:last-child)::after {
+      position: absolute;
+      content: '';
+      background-color: rgb(82, 82, 82);
+      width: 90%;
+      height: 1px;
+      bottom: calc(-1 * var(--l-gap) / 2);
+      left: 50%;
+      transform: translateX(-50%);
+    }
   }
 
   .list-item-title {
@@ -40,7 +36,6 @@
   }
 
   .list-item-details {
-    /* min-width: 250px; */
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -74,6 +69,10 @@
     background-color: var(--secondary);
   }
 
+  .task-complete {
+    background-color: var(--complementary);
+  }
+
   .task-date {
     font-size: 0.85rem;
     font-weight: bold;
@@ -91,18 +90,18 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-  }
 
-  .parent-task-container span {
-    flex-shrink: 0;
-    height: 50px;
-    width: 50px;
-    fill: var(--primary-contrast);
-  }
+    span {
+      flex-shrink: 0;
+      height: 50px;
+      width: 50px;
+      fill: var(--primary-contrast);
 
-  .parent-task-container span svg {
-    width: 100%;
-    height: 100%;
+      svg {
+        width: 100%;
+        height: 100%;
+      }
+    }
   }
 
   .parent-task-title {
@@ -110,22 +109,24 @@
   }
 
   @media (max-width: 750px) {
-    .filtered-tasks .list-item {
-      flex-direction: column;
+    .filtered-tasks {
+      .list-item {
+        flex-direction: column;
+      }
+
+      .list-item-edits {
+        flex-direction: row;
+        align-self: center;
+      }
     }
 
-    .filtered-tasks .parent-task-container {
+    .parent-task-container {
       flex-basis: 0px;
       width: 100%;
-    }
 
-    .filtered-tasks .list-item-edits {
-      flex-direction: row;
-      align-self: center;
-    }
-
-    .parent-task-container span {
-      transform: rotate(90deg);
+      span {
+        transform: rotate(90deg);
+      }
     }
   }
 }

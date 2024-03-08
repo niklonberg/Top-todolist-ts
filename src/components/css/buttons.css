@@ -36,6 +36,19 @@ button {
   fill: var(--primary-contrast);
 }
 
+.nav-btn {
+  text-align: left;
+  width: 100%;
+  height: 100%;
+  padding-block: calc(var(--m-gap) / 1.25);
+  background-color: var(--primary);
+}
+
+.selected-nav-btn {
+  background-color: var(--primary-contrast);
+  color: var(--primary);
+}
+
 #cancel-delete-btn {
   background-color: red;
   width: 30px;
@@ -57,4 +70,10 @@ button {
   border-radius: 25px;
   border: 0;
   padding-block: var(--m-gap);
+}
+
+@media (max-width: 1220px) {
+  .nav-btn {
+    text-align: center;
+  }
 }

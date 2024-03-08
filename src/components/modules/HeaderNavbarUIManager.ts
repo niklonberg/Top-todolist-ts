@@ -26,16 +26,14 @@ class HeaderNavbarUIManager extends UIManager {
   }
 
   selectNavListItem(e: Event) {
-    const navListItem = (e.target as Element).closest('LI') as HTMLLIElement;
-
-    if (navListItem) {
+    const navBtn = (e.target as Element).closest('BUTTON') as HTMLButtonElement;
+    if (navBtn) {
       this.navBar
-        .querySelectorAll('li')
-        .forEach((li) => li.classList.remove('selected-nav-item'));
-      navListItem.classList.add('selected-nav-item');
+        .querySelectorAll('button')
+        .forEach((btn) => btn.classList.remove('selected-nav-btn'));
+      navBtn.classList.add('selected-nav-btn');
       // this.previousListSelection = navListItem;
-
-      const currentView = navListItem.id;
+      const currentView = navBtn.id;
       localStorage.setItem('currentView', currentView);
       this.taskUIManager.renderCurrentView();
     }

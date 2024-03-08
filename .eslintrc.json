@@ -28,6 +28,26 @@
         "tsx": "never"
       }
     ],
-    "no-underscore-dangle": ["error", { "allow": ["_id"] }]
+    "no-underscore-dangle": ["error", { "allow": ["_id"] }],
+    "@typescript-eslint/ban-types": [
+      "error",
+      {
+        "types": {
+          "String": {
+            "message": "Use string instead",
+            "fixWith": "string"
+          },
+          "Number": {
+            "message": "Avoid using the Number constructor. Use number literals or parseInt/parseFloat functions instead.",
+            "fixWith": "number"
+          },
+          "Object": {
+            "message": "Use {} instead",
+            "fixWith": "{}"
+          },
+          "extendDefaults": true
+        }
+      }
+    ]
   }
 }

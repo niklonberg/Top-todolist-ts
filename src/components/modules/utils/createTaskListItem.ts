@@ -1,6 +1,7 @@
 import { format, formatISO, differenceInDays } from 'date-fns';
 import createElement from './createElement';
-import { Task, TaskLevel } from './interfaces';
+import { Task } from '../definitions/interfaces';
+import { type TaskLevel } from '../definitions/types';
 
 function createCheckCompleteBtn(task: Task) {
   const checkCompleteBtn = createElement('button', 'toggle-complete-btn');

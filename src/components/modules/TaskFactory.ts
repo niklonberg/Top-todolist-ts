@@ -1,4 +1,5 @@
-import { newTaskFormData, PriorityLevel, Task } from './utils/interfaces';
+import { newTaskFormData, Task } from './definitions/interfaces';
+import { type PriorityLevel } from './definitions/types';
 
 function TaskFactory(formData: Record<keyof newTaskFormData, string>): Task {
   return {

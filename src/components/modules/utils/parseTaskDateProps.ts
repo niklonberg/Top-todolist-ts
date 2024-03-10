@@ -1,4 +1,4 @@
-import { Task } from './interfaces';
+import { Task } from '../definitions/interfaces';
 
 function parseTaskDateProps(task: Task): Task {
   const parsedSubtasksDateProps = task.subtasks.map((subtask) => ({

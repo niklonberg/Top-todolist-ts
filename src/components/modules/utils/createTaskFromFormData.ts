@@ -1,4 +1,4 @@
-import { newTaskFormData } from './interfaces';
+import { newTaskFormData } from '../definitions/interfaces';
 import TaskFactory from '../TaskFactory';
 
 function createTaskFromFormData(form: HTMLFormElement) {

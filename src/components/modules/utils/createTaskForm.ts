@@ -1,6 +1,6 @@
 import { format } from 'date-fns';
 import createElement from './createElement';
-import { Task } from './interfaces';
+import { Task } from '../definitions/interfaces';
 
 function createTaskForm(taskToEdit?: Task) {
   const form = createElement<HTMLFormElement>('form', 'task-form');

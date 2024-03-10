@@ -10,11 +10,11 @@ import TodoFormUIManager from './TaskFormUIManager';
 import createDeleteWarningContainer from './utils/createWarningContainer';
 import {
   Task,
-  TaskLevel,
   TaskManagerInterface,
   TaskListItem,
   SubtaskWithImpParentInfo,
-} from './utils/interfaces';
+} from './definitions/interfaces';
+import { type TaskLevel } from './definitions/types';
 
 class TaskUIManager extends UIManager {
   containerElement: HTMLElement;

@@ -1,4 +1,4 @@
-import { Task } from './interfaces';
+import { Task } from '../definitions/interfaces';
 import tasksUrl from './tasksUrl';
 import parseTaskDateProps from './parseTaskDateProps';
 

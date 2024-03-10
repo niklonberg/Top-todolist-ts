@@ -6,62 +6,87 @@
     <title>Todolist Typescript</title>
   </head>
   <body>
-    <div id="todo-wrapper">
-      <header id="main-header">
-        <button id="hide-sidebar">Hide Sidebar</button>
-        <h2>Task<span>Alchemy</span></h2>
-        <button id="toggle-theme">Toggle Theme</button>
-      </header>
-      <div id="app-content">
-        <nav id="side-bar">
-          <h2>Home</h2>
-          <ul id="home">
-            <li id="all-tasks" class="list-item">
-              <img
-                src="../src/images/inbox.png"
-                height="25px"
-                width="25px"
-                alt=""
-              />
-              <h3>All Tasks</h3>
-            </li>
-            <li id="today-tasks" class="list-item">
-              <img
-                src="../src/images/today.png"
-                height="25px"
-                width="25px"
-                alt=""
-              />
-              <h3>Today</h3>
-            </li>
-            <li id="week-tasks" class="list-item">
-              <img
-                src="../src/images/week.png"
-                height="25px"
-                width="25px"
-                alt=""
-              />
-              <h3>Next 7 days</h3>
-            </li>
-            <li id="important-tasks" class="list-item">
-              <img
-                src="../src/images/star.png"
-                height="25px"
-                width="25px"
-                alt=""
-              />
-              <h3>Important</h3>
-            </li>
-          </ul>
-          <h2>Projects</h2>
-          <ul id="projects-list"></ul>
-          <button id="create-new-project">Create project</button>
-        </nav>
-        <main>
-          <div id="main-content"></div>
-          <button id="create-new-todo">Create todo</button>
-        </main>
-      </div>
+    <header id="main-header">
+      <h2>Task<span>Master</span></h2>
+      <button
+        id="toggle-theme-btn"
+        class="icon-btn"
+        aria-label="Toggle light/dark theme"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          style="width: 24px; height: 24px; overflow: visible"
+          data-darkreader-inline-fill=""
+          viewBox="0 0 24 24"
+        >
+          <path d="M0 0h24v24H0V0z" fill="none"></path>
+          <path
+            d="M11 19h2v3h-2zm-9-8h3v2H2zm17 0h3v2h-3zm-3.106 6.801 1.407-1.407 2.122 2.122-1.408 1.407zm-11.31.708 2.121-2.122 1.408 1.407-2.122 2.122zM15 8.02V3H9v5.02c-1.21.92-2 2.35-2 3.98 0 2.76 2.24 5 5 5s5-2.24 5-5c0-1.63-.79-3.06-2-3.98zM11 5h2v2.1c-.32-.06-.66-.1-1-.1s-.68.04-1 .1V5z"
+          ></path>
+        </svg>
+      </button>
+    </header>
+    <div id="main-wrapper">
+      <nav id="nav-bar">
+        <ul id="home">
+          <li class="list-item">
+            <button id="all-tasks" class="btn nav-btn">Tasks</button>
+          </li>
+          <li class="list-item">
+            <button id="today-tasks" class="btn nav-btn">
+              Today's subtasks
+            </button>
+          </li>
+          <li class="list-item">
+            <button id="week-tasks" class="btn nav-btn">Weekly subtasks</button>
+          </li>
+          <li class="list-item">
+            <button id="priority-tasks" class="btn nav-btn">Priority</button>
+          </li>
+        </ul>
+      </nav>
+      <main id="main-content">
+        <!-- TEMP FORM -->
+        <form action="" id="test-create-form" class="todo-form">
+          <div class="input-container">
+            <label for="title" class="text-input-label">Title</label>
+            <span class="required-input">Required</span>
+            <input
+              class="text-input"
+              type="text"
+              name="title"
+              id="title"
+              required
+            />
+          </div>
+          <div class="input-container">
+            <label for="description" class="text-input-label"
+              >Description</label
+            >
+            <input
+              type="text"
+              name="description"
+              id="description"
+              class="text-input"
+            />
+          </div>
+          <div class="input-container">
+            <label for="priority">Priority</label>
+            <select id="priority" name="priority">
+              <option value="Low">Low</option>
+              <option value="Medium">Medium</option>
+              <option value="High">High</option>
+            </select>
+          </div>
+          <div class="input-container">
+            <label for="dueDate">Duedate</label>
+            <input type="date" name="dueDate" id="dueDate" />
+          </div>
+          <button type="submit">Confirm</button>
+          <button type="button" class="cancel-form">Cancel</button>
+        </form>
+        <!-- TEMP FORM -->
+      </main>
     </div>
   <script defer src="index.bundle.js"></script></body>
 </html>

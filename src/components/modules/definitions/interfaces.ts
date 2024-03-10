@@ -1,6 +1,4 @@
-export type PriorityLevel = 'Low' | 'Medium' | 'High'; // convert to enum?
-
-export type TaskLevel = 'task' | 'subtask';
+import type { PriorityLevel } from './types';
 
 export interface newTaskFormData {
   title: string;

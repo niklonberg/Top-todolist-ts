@@ -1,4 +1,4 @@
-import { TaskManagerInterface, TaskListItem } from './interfaces';
+import { TaskManagerInterface, TaskListItem } from '../definitions/interfaces';
 
 function getDragAfterElement(container: HTMLElement, y: number) {
   const draggableElements = [

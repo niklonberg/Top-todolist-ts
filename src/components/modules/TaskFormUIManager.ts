@@ -2,7 +2,8 @@ import UIManager from './abstract/UIManager';
 import createTaskForm from './utils/createTaskForm';
 import createTaskFromFormData from './utils/createTaskFromFormData';
 import applyInputLabelBehavior from './utils/applyInputLabelBehavior';
-import { Task, TaskLevel, TaskManagerInterface } from './utils/interfaces';
+import { Task, TaskManagerInterface } from './definitions/interfaces';
+import { type TaskLevel } from './definitions/types';
 
 class TaskFormUIManager extends UIManager {
   private form: HTMLFormElement | null;

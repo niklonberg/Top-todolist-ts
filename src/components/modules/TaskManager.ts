@@ -4,7 +4,7 @@ import {
   Task,
   SubtaskWithImpParentInfo,
   TaskManagerInterface,
-} from './utils/interfaces';
+} from './definitions/interfaces';
 import parseTaskDateProps from './utils/parseTaskDateProps';
 
 // TODO add documentation to below class like this:

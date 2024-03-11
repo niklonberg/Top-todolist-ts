@@ -51,7 +51,7 @@ class TaskUIManager extends UIManager {
       if (target.closest('button')?.id === 'cancel-delete-btn')
         targetParentLi.querySelector('.warning-container').remove();
 
-      if (target.id === 'cancel-form-btn') this.renderTasksSection();
+      if (target.id === 'cancel-form-btn') this.renderCurrentView();
 
       if (target.closest('button')?.classList.contains('toggle-complete-btn'))
         this.toggleItemComplete(targetParentLi);
@@ -135,7 +135,7 @@ class TaskUIManager extends UIManager {
         // TODO: render error dialog popup for user?
         console.log('Apologies, an error occured. Please try again');
       } else {
-        this.renderTasksSection(); // render localStorage view
+        this.renderCurrentView();
       }
     } else {
       const response = await this.TaskManager.deleteTask(parentLi.dataset.task);
@@ -143,7 +143,7 @@ class TaskUIManager extends UIManager {
         // TODO: render error dialog popup for user?
         console.log('Apologies, an error occured. Please try again');
       } else {
-        this.renderTasksSection();
+        this.renderCurrentView();
       }
     }
   }

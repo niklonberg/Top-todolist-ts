@@ -19,14 +19,16 @@
   width: 100%;
 }
 
-.input-container:focus-within .text-input-label {
-  top: -2px;
-  left: 5px;
-  scale: 0.8;
-}
+.input-container:focus-within {
+  .text-input-label {
+    top: 0px;
+    left: 15px;
+    font-size: 0.8rem;
+  }
 
-.input-container:focus-within .text-input-label::after {
-  background-color: var(--primary-lighter);
+  .text-input-label::after {
+    background-color: var(--primary-lighter);
+  }
 }
 
 .text-input-label {
@@ -35,16 +37,33 @@
   left: 15px;
   transform: translateY(-50%);
   transition: all 0.3s ease-in-out;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -5px;
+    right: -5px;
+    bottom: 0;
+    z-index: -1;
+  }
 }
 
-.text-input-label::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -5px;
-  right: -5px;
-  bottom: 0;
-  z-index: -1;
+.move-label {
+  top: 0px;
+  left: 15px;
+  font-size: 0.8rem;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -5px;
+    right: -5px;
+    bottom: 0;
+    z-index: -1;
+    background-color: var(--primary-lighter);
+  }
 }
 
 .text-input {
@@ -61,17 +80,10 @@
   top: -16px;
   right: 0;
   font-size: 0.75rem;
-}
 
-.required-input::after {
-  content: '*';
-}
-
-.move-label {
-  top: -2px;
-  left: 5px;
-  scale: 0.8;
-  background-color: var(--primary-lighter);
+  &::after {
+    content: '*';
+  }
 }
 
 .task-form-actions {
@@ -98,20 +110,20 @@ select {
 
 .select-container {
   position: relative;
-}
 
-.select-container::after {
-  content: '>';
-  font-size: 1.5rem;
-  font-weight: bold;
-  -webkit-transform: rotate(90deg);
-  -moz-transform: rotate(90deg);
-  -ms-transform: rotate(90deg);
-  transform: rotate(90deg);
-  color: var(--primary-contrast);
-  position: absolute;
-  right: 12px;
-  pointer-events: none;
+  &::after {
+    content: '>';
+    font-size: 1.5rem;
+    font-weight: bold;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+    color: var(--primary-contrast);
+    position: absolute;
+    right: 12px;
+    pointer-events: none;
+  }
 }
 
 .date-select::-webkit-calendar-picker-indicator {

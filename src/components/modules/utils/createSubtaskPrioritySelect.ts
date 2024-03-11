@@ -1,19 +1,37 @@
 import createElement from './createElement';
 import { type PriorityLevel } from '../definitions/types';
 import { TaskManagerInterface } from '../definitions/interfaces';
+import createListItemFromTask, {
+  createParentTaskInfoContainer,
+} from './createTaskListItem';
 
 function addOnPriorityChangeFunctionality(
   element: HTMLSelectElement,
   TaskManager: TaskManagerInterface,
 ) {
   element.addEventListener('change', (event) => {
-    const selectedOption = (event.target as HTMLSelectElement)
+    const selectedPriorityLevel = (event.target as HTMLSelectElement)
       .value as PriorityLevel;
     const parentTasksContainer = element.closest('.tasks-container');
     const filteredSubtasksContainer =
       parentTasksContainer.querySelector('.filtered-tasks');
-    const filteredSubtasks = TaskManager.getSubtasksByPriority(); // use selectedOption in this func
-    console.log(filteredSubtasks);
+    const filteredSubtasks = TaskManager.getSubtasksByPriority(
+      selectedPriorityLevel,
+    );
+    filteredSubtasksContainer.innerHTML = '';
+    filteredSubtasks.forEach((subtask) => {
+      const li = createListItemFromTask(
+        subtask,
+        'subtask',
+        subtask.parentTaskID,
+        subtask.subtaskIndex,
+      );
+      const parentTaskInfoContainer = createParentTaskInfoContainer(
+        subtask.parentTaskTitle,
+      );
+      li.prepend(parentTaskInfoContainer);
+      filteredSubtasksContainer.append(li);
+    });
   });
 }
 

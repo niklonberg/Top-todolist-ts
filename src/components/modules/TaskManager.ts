@@ -6,6 +6,7 @@ import {
   TaskManagerInterface,
 } from './definitions/interfaces';
 import parseTaskDateProps from './utils/parseTaskDateProps';
+import { PriorityLevel } from './definitions/types';
 
 // TODO add documentation to below class like this:
 /**
@@ -87,7 +88,7 @@ class TaskManager implements TaskManagerInterface {
     return weekTasks;
   }
 
-  getSubtasksByPriority() {
+  getSubtasksByPriority(selectedPriorityLevel?: PriorityLevel) {
     const subtasks: SubtaskWithImpParentInfo[] = this.getTasks()
       .flatMap((currTask) =>
         currTask.subtasks.map((subtask, subtaskIndex) => ({
@@ -99,6 +100,8 @@ class TaskManager implements TaskManagerInterface {
       )
       .sort((a, b) => {
         const priorityOrder = { High: 3, Medium: 2, Low: 1 };
+        if (selectedPriorityLevel === 'Low')
+          return priorityOrder[a.priority] - priorityOrder[b.priority];
         return priorityOrder[b.priority] - priorityOrder[a.priority];
       });
     return subtasks;

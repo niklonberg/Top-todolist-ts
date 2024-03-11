@@ -215,8 +215,7 @@ class TaskUIManager extends UIManager {
     const selectedSubtasksList = this.createSelectedSubtasksList(
       this.TaskManager.currSelectedTask,
     );
-    tasksListContainer.append(tasksList);
-    tasksListContainer.append(selectedSubtasksList);
+    tasksListContainer.append(tasksList, selectedSubtasksList);
     this.containerElement.append(tasksListContainer);
   }
 

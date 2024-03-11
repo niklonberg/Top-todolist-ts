@@ -210,14 +210,14 @@ class TaskUIManager extends UIManager {
 
   renderTasksSection() {
     this.containerElement.innerHTML = '';
-    const todosLayoutContainer = this.createElement('div', '', 'tasks-layout');
-    const topLevelTodosList = this.createTasksList();
-    const selectedSubTodosList = this.createSelectedSubtasksList(
+    const tasksListContainer = this.createElement('div', '', 'tasks-layout');
+    const tasksList = this.createTasksList();
+    const selectedSubtasksList = this.createSelectedSubtasksList(
       this.TaskManager.currSelectedTask,
     );
-    todosLayoutContainer.append(topLevelTodosList);
-    todosLayoutContainer.append(selectedSubTodosList);
-    this.containerElement.append(todosLayoutContainer);
+    tasksListContainer.append(tasksList);
+    tasksListContainer.append(selectedSubtasksList);
+    this.containerElement.append(tasksListContainer);
   }
 
   renderFilteredSubtasks(

@@ -264,7 +264,7 @@ class TaskUIManager extends UIManager {
       this.renderFilteredSubtasks(
         'Subtasks by priority level',
         this.TaskManager.getSubtasksByPriority(),
-        createSubtaskPrioritySelect(),
+        createSubtaskPrioritySelect(this.TaskManager),
       );
   }
 }

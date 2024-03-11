@@ -1,15 +1,24 @@
 import createElement from './createElement';
 import { type PriorityLevel } from '../definitions/types';
+import { TaskManagerInterface } from '../definitions/interfaces';
 
-function addOnPriorityChangeFunctionality(element: HTMLSelectElement) {
+function addOnPriorityChangeFunctionality(
+  element: HTMLSelectElement,
+  TaskManager: TaskManagerInterface,
+) {
   element.addEventListener('change', (event) => {
-    const selectedPriority = (event.target as HTMLSelectElement)
+    const selectedOption = (event.target as HTMLSelectElement)
       .value as PriorityLevel;
-    console.log(selectedPriority);
+    const parentTasksContainer = element.closest('.tasks-container');
+    const filteredSubtasksContainer =
+      parentTasksContainer.querySelector('.filtered-tasks');
+    const filteredSubtasks = TaskManager.getSubtasksByPriority(); // use selectedOption in this func
+    console.log(filteredSubtasks);
   });
 }
 
 function createSubtaskPrioritySelect(
+  TaskManager: TaskManagerInterface,
   prioritySortOrder: PriorityLevel = 'High',
 ) {
   const prioritySelectContainer = createElement('div');
@@ -29,6 +38,7 @@ function createSubtaskPrioritySelect(
     prioritySelectContainer.querySelector<HTMLSelectElement>(
       '#prioritySortOrder',
     ),
+    TaskManager,
   );
 
   return prioritySelectContainer;

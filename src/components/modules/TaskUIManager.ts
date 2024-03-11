@@ -222,6 +222,7 @@ class TaskUIManager extends UIManager {
   renderFilteredSubtasks(
     title: string,
     filteredSubtasks: SubtaskWithImpParentInfo[],
+    callback?: () => HTMLElement,
   ) {
     this.containerElement.innerHTML = '';
     const tasksListContainer = this.createTasksContainer(title);
@@ -241,6 +242,7 @@ class TaskUIManager extends UIManager {
     });
     insertEmptyListFallbackItem(ul);
     tasksListContainer.append(ul);
+    if (callback) tasksListContainer.append(callback());
     this.containerElement.append(tasksListContainer);
   }
 
@@ -261,6 +263,11 @@ class TaskUIManager extends UIManager {
       this.renderFilteredSubtasks(
         'Subtasks by priority level',
         this.TaskManager.getSubtasksByPriority(),
+        () => {
+          const p = this.createElement('p');
+          p.textContent = 'HI BOBBYDIZZY';
+          return p;
+        },
       );
   }
 }

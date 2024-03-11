@@ -4,7 +4,7 @@
     display: flex;
     gap: var(--m-gap);
     background-color: var(--primary);
-    border-radius: 20px;
+    border-radius: var(--m-gap);
     padding: var(--m-gap);
     margin-block: var(--l-gap);
     opacity: 0.9;
@@ -53,7 +53,7 @@
     flex-shrink: 0;
     width: 10px;
     height: 10px;
-    border-radius: 50%;
+    border-radius: 100%;
     background-color: var(--primary-contrast);
   }
 

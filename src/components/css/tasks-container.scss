@@ -3,16 +3,15 @@
     display: flex;
     flex-direction: column;
     background-color: var(--primary-lighter);
-    border-radius: 20px;
+    border-radius: var(--m-gap);
     padding: var(--l-gap);
-  }
 
-  .tasks-container > :nth-last-child(2) {
-    margin-bottom: var(--l-gap);
-  }
-
-  .tasks-container button {
-    margin-top: auto;
+    > :nth-last-child(2) {
+      margin-bottom: var(--l-gap);
+    }
+    button {
+      margin-top: auto;
+    }
   }
 
   .draggable {
@@ -25,7 +24,7 @@
 
   .highlight-drag-area {
     outline: 2px solid var(--primary-contrast);
-    border-radius: 20px;
+    border-radius: var(--m-gap);
   }
 
   @media() {

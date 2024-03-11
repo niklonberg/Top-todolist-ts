@@ -8,6 +8,7 @@ import insertEmptyListFallbackItem from './utils/insertEmptyListFallbackItem';
 import addDragFunctionality from './utils/addDragFunctionality';
 import TodoFormUIManager from './TaskFormUIManager';
 import createDeleteWarningContainer from './utils/createWarningContainer';
+import createSubtaskPrioritySelect from './utils/createSubtaskPrioritySelect';
 import {
   Task,
   TaskManagerInterface,
@@ -222,7 +223,7 @@ class TaskUIManager extends UIManager {
   renderFilteredSubtasks(
     title: string,
     filteredSubtasks: SubtaskWithImpParentInfo[],
-    callback?: () => HTMLElement,
+    sortOrderElement?: HTMLElement,
   ) {
     this.containerElement.innerHTML = '';
     const tasksListContainer = this.createTasksContainer(title);
@@ -242,7 +243,7 @@ class TaskUIManager extends UIManager {
     });
     insertEmptyListFallbackItem(ul);
     tasksListContainer.append(ul);
-    if (callback) tasksListContainer.append(callback());
+    if (sortOrderElement) tasksListContainer.prepend(sortOrderElement);
     this.containerElement.append(tasksListContainer);
   }
 
@@ -263,11 +264,7 @@ class TaskUIManager extends UIManager {
       this.renderFilteredSubtasks(
         'Subtasks by priority level',
         this.TaskManager.getSubtasksByPriority(),
-        () => {
-          const p = this.createElement('p');
-          p.textContent = 'HI BOBBYDIZZY';
-          return p;
-        },
+        createSubtaskPrioritySelect(),
       );
   }
 }

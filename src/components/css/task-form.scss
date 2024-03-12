@@ -126,6 +126,12 @@ select {
 
 .tasks-container {
   .select-container {
+    align-self: flex-start;
+    position: relative;
+
+    &::after {
+      top: 4px;
+    }
   }
 
   .priority-select {

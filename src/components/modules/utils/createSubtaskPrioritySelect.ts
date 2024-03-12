@@ -41,7 +41,7 @@ function createSubtaskPrioritySelect(
 ) {
   const prioritySelectContainer = createElement('div', 'select-container');
   const template = `
-  <label for="prioritySortOrder">Priority sort order:</label>
+  <label for="prioritySortOrder">Sort order:</label>
   <select id="prioritySortOrder" class="priority-select" name="prioritySortOrder">
     <option value="High" ${
       prioritySortOrder === 'High' ? 'selected' : ''

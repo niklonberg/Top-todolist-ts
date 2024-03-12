@@ -26,6 +26,7 @@ function createTaskForm(taskToEdit?: Task) {
       name="description"
       id="description"
       class="text-input"
+      rows="5"
     />${taskToEdit?.description || ''}</textarea>
   </div>
   <div class="input-container select-container">

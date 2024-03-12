@@ -147,7 +147,14 @@ function createListItemFromTask(
     if (task.description) {
       const p = createElement<HTMLParagraphElement>('p');
       p.setAttribute('aria-label', 'item description');
-      p.textContent = task.description;
+
+      const textSplitByNewLine = task.description.split('\n');
+      textSplitByNewLine.forEach((textPart, index) => {
+        p.appendChild(document.createTextNode(textPart));
+
+        if (index < textSplitByNewLine.length - 1)
+          p.appendChild(document.createElement('br'));
+      });
       listDetails.append(p);
     }
     const taskDate = task.dateCompleted

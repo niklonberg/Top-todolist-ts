@@ -21,13 +21,12 @@ function createTaskForm(taskToEdit?: Task) {
     <label for="description" class="text-input-label"
       >Description
     </label>
-    <input
+    <textarea
       type="text"
       name="description"
       id="description"
       class="text-input"
-      value="${taskToEdit?.description || ''}"
-    />
+    />${taskToEdit?.description || ''}</textarea>
   </div>
   <div class="input-container select-container">
     <label for="priority">Priority:</label>

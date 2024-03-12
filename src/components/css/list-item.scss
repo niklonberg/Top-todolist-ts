@@ -129,4 +129,15 @@
       }
     }
   }
+
+  @media (max-width: 425px) {
+    .parent-task-container {
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .parent-task-title {
+      margin: 0;
+    }
+  }
 }

@@ -48,6 +48,10 @@
     min-width: 50px;
   }
 
+  textarea {
+    resize: vertical;
+  }
+
   ul {
     list-style: none;
     padding: 0;

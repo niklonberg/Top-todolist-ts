@@ -39,7 +39,7 @@ function createSubtaskPrioritySelect(
   TaskManager: TaskManagerInterface,
   prioritySortOrder: PriorityLevel = 'High',
 ) {
-  const prioritySelectContainer = createElement('div');
+  const prioritySelectContainer = createElement('div', 'select-container');
   const template = `
   <label for="prioritySortOrder">Priority sort order:</label>
   <select id="prioritySortOrder" class="priority-select" name="prioritySortOrder">

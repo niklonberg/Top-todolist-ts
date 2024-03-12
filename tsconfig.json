@@ -5,7 +5,7 @@
     "target": "ES6",
     "sourceMap": true,
     "module": "es2015",
-    "moduleResolution": "node", // experimental to get date-fns to work
+    "moduleResolution": "node",
     "esModuleInterop": true,
     "noImplicitAny": true
   },

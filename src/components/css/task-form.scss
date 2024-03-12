@@ -109,8 +109,6 @@ select {
 }
 
 .select-container {
-  position: relative;
-
   &::after {
     content: '>';
     font-size: 1.5rem;
@@ -123,6 +121,21 @@ select {
     position: absolute;
     right: 12px;
     pointer-events: none;
+  }
+}
+
+.tasks-container {
+  .select-container {
+    align-self: flex-start;
+    position: relative;
+
+    &::after {
+      top: 4px;
+    }
+  }
+
+  .priority-select {
+    padding-right: 40px;
   }
 }
 
